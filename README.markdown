@@ -51,4 +51,4 @@ License
 
 Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010
 
-License: GPLv2
+See LICENSE for details.
