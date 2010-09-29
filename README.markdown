@@ -23,6 +23,8 @@ Pick up where `jira4r` left off:
 Getting Started
 ---------------
 
+`jiraSOAP` should run on Ruby 1.9.2 and MacRuby 0.7. Right now you need to build from source, it will be available from gemcutter sometime around the 0.1.0 or 0.2.0 release.
+
         git clone git://github.com/Marketcircle/jiraSOAP.git
         rake build
         rake install
