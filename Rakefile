@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/ferrous26/jiraSOAP"
     gem.authors = ["Mark Rada"]
     gem.add_development_dependency "minitest"
+	gem.files = ['lib/**/*']
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
