@@ -1,3 +1,6 @@
-require 'jiraSOAP/remoteEntities.rb'
-require 'jiraSOAP/remoteAPI.rb'
-require 'jiraSOAP/JIRAservice.rb'
+case RUBY_ENGINE
+when 'macruby' then
+  require 'macruby/JIRAservice.rb'
+else
+  require 'ruby/JIRAservice.rb'
+end

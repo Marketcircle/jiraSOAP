@@ -1,10 +1,10 @@
 require 'handsoap'
 require 'logger'
 
-require 'jiraSOAP/remoteEntities'
-require 'jiraSOAP/remoteAPI'
+require 'macruby/remoteEntities.rb'
+require 'macruby/remoteAPI.rb'
 
-Handsoap.http_driver = :net_http #curb does not build for MacRuby
+Handsoap.http_driver = :net_http  #curb does not build for MacRuby
 
 module JIRA
 class JIRAService < Handsoap::Service
