@@ -1,11 +1,3 @@
-require 'handsoap'
-require 'logger'
-
-require 'macruby/remoteEntities.rb'
-require 'macruby/remoteAPI.rb'
-
-Handsoap.http_driver = :net_http  #curb does not build for MacRuby
-
 module JIRA
 class JIRAService < Handsoap::Service
   include  RemoteAPI

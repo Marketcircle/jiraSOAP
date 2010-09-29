@@ -1,6 +1,10 @@
-case RUBY_ENGINE
-when 'macruby' then
-  require 'macruby/JIRAservice.rb'
-else
-  require 'ruby/JIRAservice.rb'
-end
+require 'handsoap'
+require 'logger'
+
+require 'jiraSOAP/remoteEntities.rb'
+require 'jiraSOAP/remoteAPI.rb'
+
+require 'jiraSOAP/JIRAservice.rb'
+
+#overrides and additions
+require 'lib/macruby_stuff.rb' if RUBY_ENGINE == 'macruby'
