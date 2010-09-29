@@ -1,3 +1,4 @@
+#TODO: set a requirement on the handsoap version
 require 'handsoap'
 require 'logger'
 
