@@ -10,6 +10,7 @@ begin
     gem.email = "mrada@marketcircle.com"
     gem.homepage = "http://github.com/ferrous26/jiraSOAP"
     gem.authors = ["Mark Rada"]
+    gem.add_dependency 'handsoap', '~> 1.1'
     gem.add_development_dependency "minitest"
 	gem.files = ['lib/**/*']
     gem.required_ruby_version = '>= 1.9.2'
