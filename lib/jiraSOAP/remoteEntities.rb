@@ -1,12 +1,12 @@
 module JIRA
 
 class Priority
-  attr_accessor :id, :name, :colour, :icon, :description
+  attr_accessor :id, :name, :color, :icon, :description
   def initialize(frag = nil)
     return if frag == nil
     @id          = frag.xpath('id').to_s
     @name        = frag.xpath('name').to_s
-    @colour      = frag.xpath('colour').to_s #PONDER: is a hex value so type is?
+    @color       = frag.xpath('color').to_s #PONDER: is a hex value so type is?
     @icon        = frag.xpath('icon').to_s #FIXME: NSURL
     @description = frag.xpath('description').to_s
   end
