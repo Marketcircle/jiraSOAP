@@ -63,6 +63,8 @@ In any case, `jiraSOAP` should always give you strings for an `id` (or `customfi
 
 4. All instance variables should use camel case in `jiraSOAP`, if it doesn't then it is a bug.
 
+5. If an API call fails with a method missing error it is because it has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
+
 
 TODO
 ----
@@ -75,6 +77,7 @@ TODO
   + Needs a mock server
 - Documentation
 - Error handling
+- Finish implementing all of the API
 
 
 Note on Patches/Pull Requests
