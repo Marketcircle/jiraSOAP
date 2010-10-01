@@ -78,17 +78,6 @@ module RemoteAPI
      JIRA::Project.new resp.document.xpath '//getProjectByKeyReturn'
    end
 
-   def getIssuesFromJqlSearch(query, maxResults)
-     resp = invoke('soap:getIssuesFromJqlSearch') { |m|
-       m.add 'soap:in0', @authToken
-       m.add 'soap:in1', query
-       m.add 'soap:in2', maxResults
-     }
-     resp.document.xpath("#{ResponseXPath}/getIssuesFromJqlSearchReturn").map { |i|
-       JIRA::Issue.new i
-     }
-   end
-
    def getUser(name)
      resp = invoke('soap:getUser') { |m|
        m.add 'soap:in0', @authToken
@@ -157,6 +146,17 @@ module RemoteAPI
       m.add 'soap:in1', key
     }
     JIRA::Avatar.new resp.document.xpath '//getProjectAvatarReturn'
+  end
+
+  def getIssuesFromJqlSearch(query, maxResults = 500)
+    resp = invoke('soap:getIssuesFromJqlSearch') { |m|
+      m.add 'soap:in0', @authToken
+      m.add 'soap:in1', query
+      m.add 'soap:in2', maxResults
+    }
+    resp.document.xpath("#{ResponseXPath}/getIssuesFromJqlSearchReturn").map { |i|
+      JIRA::Issue.new i
+    }
   end
 
 
