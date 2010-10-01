@@ -196,7 +196,7 @@ class Issue
     }
     @attachments      = frag.xpath('attachmentNames/*').map { |a|
       #PONDER: needs its own type?
-      a.xpath('attachmentNames').to_s
+      a.to_s
     }
     @customFieldValues = frag.xpath('customFieldValues/*').map { |cfv|
       CustomField.new cfv
