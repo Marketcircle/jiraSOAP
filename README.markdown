@@ -65,6 +65,10 @@ In any case, `jiraSOAP` should always give you strings for an `id` (or `customfi
 
 5. If an API call fails with a method missing error it is because it has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
 
+6. If the attribute for a singular type (e.g. JIRA::Priority) is empty, it be stored as nil. Empty arrays are simply empty arrays.
+
+7. URESOLVED issues have Resolution value of nil.
+
 
 TODO
 ----
