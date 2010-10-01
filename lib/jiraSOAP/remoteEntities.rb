@@ -152,7 +152,7 @@ class Avatar
     return if frag == nil
     @id          = frag.xpath('id').to_s
     @owner       = frag.xpath('owner').to_s
-    @system      = frag.xpath('system').to_s
+    @system      = frag.xpath('system').to_s == 'true'
     @type        = frag.xpath('type').to_s
     @contentType = frag.xpath('contentType').to_s
     @base64Data  = frag.xpath('base64Data').to_s
