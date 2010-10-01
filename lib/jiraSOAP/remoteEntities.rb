@@ -146,7 +146,7 @@ class Project
   end
 end
 
-class ProjectAvatar
+class Avatar
   attr_accessor :id, :owner, :system, :type, :contentType, :base64Data
   def initialize(frag = nil)
     return if frag == nil
@@ -157,8 +157,8 @@ class ProjectAvatar
     @contentType = frag.xpath('contentType').to_s
     @base64Data  = frag.xpath('base64Data').to_s
   end
-  def self.projectAvatarWithXMLFragment(frag)
-    ProjectAvatar.new frag
+  def self.avatarWithXMLFragment(frag)
+    Avatar.new frag
   end
 end
 
