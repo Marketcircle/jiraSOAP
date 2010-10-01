@@ -164,7 +164,7 @@ end
 
 class Issue
   attr_accessor :id, :key, :summary, :description, :type, :updated, :votes
-  attr_accessor :status, :assignee, :reporter, :priorityId, :projectKey
+  attr_accessor :status, :assignee, :reporter, :priority, :project
   attr_accessor :affectsVersions, :created, :dueDate, :fixVersions, :resolution
   attr_accessor :environment, :components, :attachments, :customFieldValues
   def initialize(frag = nil)
@@ -179,8 +179,8 @@ class Issue
     @status           = frag.xpath('status').to_s
     @assignee         = frag.xpath('assignee').to_s
     @reporter         = frag.xpath('reporter').to_s
-    @priorityId       = frag.xpath('priority').to_s
-    @projectKey       = frag.xpath('project').to_s
+    @priority         = frag.xpath('priority').to_s
+    @project          = frag.xpath('project').to_s
     @affectsVersions  = frag.xpath('affectsVersions/*').map { |v|
       Version.new v
     }
