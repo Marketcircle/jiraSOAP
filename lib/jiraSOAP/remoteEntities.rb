@@ -42,11 +42,11 @@ class Field
 end
 
 class CustomField
-  attr_accessor :customfieldId, :type, :values
+  attr_accessor :customfieldId, :key, :values
   def initialize(frag = nil)
     return if frag == nil
     @customfieldId = frag.xpath('customfieldId').to_s
-    @type          = frag.xpath('type').to_s
+    @key           = frag.xpath('key').to_s
     @values        = frag.xpath('values/*').map { |v| v.to_s }
   end
   def self.customFieldWithXMLFragment(frag)
