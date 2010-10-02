@@ -69,6 +69,14 @@ In any case, `jiraSOAP` should always give you strings for an `id` (or `customfi
 
 7. URESOLVED issues have Resolution value of nil.
 
+8. Accessors do not use get/set prefixes.
+   issue = JIRA::Issue.new
+   issue.setSummary = 'Found a BUG' #incorrect
+   issue.summary    = 'Found a BUG' #correct
+
+   issue.getSummary #incorrect
+   issue.summary    #correct
+
 
 TODO
 ----
