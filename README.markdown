@@ -56,18 +56,20 @@ There are some deviations from the JavaDoc APIs to note:
 
 1. You never need to pass the token parameter to a method, this will always be done for you. The value of your authorization token is cached when you `login`, it is stored in the `@authToken` attribute.
 
-2. `jiraSOAP` does not put the `Remote` prefix in front of each type (e.g. `RemoteIssue`). Instead, you would just use `Issue`, which is in the `JIRA` module (so technically it would be `JIRA::Issue`).
+2. `jiraSOAP` does not put the `Remote` prefix in front of each type
+   JIRA::RemoteIssue.new #incorrect
+   JIRA::Issue.new       #correct
 
 3. The type used for `id` members is not consistent in the JIRA SOAP API. In most places it is given as a string, but in some places it is a long. Custom fields also have a special prefix for their `id` field; they always start with `customfield_` and are therefore strings. There are some APIs that can take a regular `id` or a `customfield_` id (such as the `updateIssue` method) and because the API needs to work with any language (and hence any type strictness), they chose to make `id`s strings (why some are longs in some cases is beyond me (bug?)).
 In any case, `jiraSOAP` should always give you strings for an `id` (or `customfield_` id); it is a bug if it does not.
 
 4. All instance variables should use camel case in `jiraSOAP`, if it doesn't then it is a bug.
 
-5. If an API call fails with a method missing error it is because it has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
+5. If an API call fails with a method missing error it is because the method has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
 
-6. If the attribute for a singular type (e.g. JIRA::Priority) is empty, it be stored as nil. Empty arrays are simply empty arrays.
+6. If the attribute for a singular type (e.g. `JIRA::Priority`) is empty, it be stored as `nil`. Empty arrays are simply empty arrays.
 
-7. URESOLVED issues have Resolution value of nil.
+7. URESOLVED issues have a Resolution with a value of `nil`.
 
 8. Accessors do not use get/set prefixes.
    issue = JIRA::Issue.new
