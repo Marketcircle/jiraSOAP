@@ -77,6 +77,10 @@ In any case, `jiraSOAP` should always give you strings for an `id` (or `customfi
    issue.getSummary #incorrect
    issue.summary    #correct
 
+9. To empty a field (set it to nil) you can use this pattern:
+   jira.updateIssue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'description'
+   jira.updateIssue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'customfield_10060'
+
 
 TODO
 ----

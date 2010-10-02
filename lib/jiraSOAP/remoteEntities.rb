@@ -228,6 +228,12 @@ class FieldValue
   def self.fieldValueWithXMLFragment(frag)
     FieldValue.new frag
   end
+  def self.fieldValueWithNilValues(id)
+    fv = FieldValue.new
+    fv.id = id
+    fv.values = [nil]
+    fv
+  end
   def to_xml(message)
     #TODO: tidy this up
     message.add 'fieldValue' do |dude|
