@@ -118,6 +118,7 @@ class Project
     @projectUrl          = frag.xpath('projectUrl').to_s #FIXME: NSURL
     @lead                = frag.xpath('lead').to_s
     @description         = frag.xpath('description').to_s
+    #TODO: find out why the server always seems to pass nil
     @issueSecurityScheme = Scheme.new frag.xpath('issueSecurityScheme')
     @notificationScheme  = Scheme.new frag.xpath('notificationScheme')
     @permissionScheme    = Scheme.new frag.xpath('permissionScheme')
