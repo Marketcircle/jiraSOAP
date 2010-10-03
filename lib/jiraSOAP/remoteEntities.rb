@@ -205,11 +205,10 @@ class FieldValue
     fv.values = [nil]
     fv
   end
-  def to_xml(message)
-    #TODO: tidy this up
-    message.add 'fieldValue' do |dude|
-      dude.add 'id', @id
-      dude.add 'values' do |duder| @values.each { |v| duder.add 'value', v } end
+  def soapify_for(message)
+    message.add 'fieldValue' do |message|
+      message.add 'id', @id
+      message.add_simple_array 'values', @values
     end
   end
 end

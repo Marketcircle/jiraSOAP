@@ -86,19 +86,6 @@ module RemoteAPI
      JIRA::User.new resp.document.xpath '//getUserReturn'
    end
 
-   #TODO: make this look like less of a hack
-   def updateIssue(key, fields)
-     fields    = [fields] unless fields.kind_of? Array
-     resp      = invoke('soap:updateIssue') { |m|
-       m.add 'soap:in0', @authToken
-       m.add 'soap:in1', key
-       m.add 'soap:in2'  do |m|
-         fields.map { |fv| fv.to_xml m }
-       end
-     }
-     JIRA::Issue.new resp.document.xpath('//updateIssueReturn').first
-   end
-
 # #TODO: the last hurdle before a 0.1.0 release
 #   def createIssue(issue)
 #     fragment = jiraRequest :createIssue, issue
@@ -157,6 +144,19 @@ module RemoteAPI
     resp.document.xpath("#{ResponseXPath}/getIssuesFromJqlSearchReturn").map { |i|
       JIRA::Issue.new i
     }
+  end
+
+  #TODO: make this look like less of a hack
+  def updateIssue(key, fields)
+    fields    = [fields] unless fields.kind_of? Array
+    resp      = invoke('soap:updateIssue') { |m|
+      m.add 'soap:in0', @authToken
+      m.add 'soap:in1', key
+      m.add 'soap:in2'  do |m|
+        fields.map { |fv| fv.soapify_for m }
+      end
+    }
+    JIRA::Issue.new resp.document.xpath('//updateIssueReturn').first
   end
 
 
