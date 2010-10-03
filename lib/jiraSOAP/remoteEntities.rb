@@ -10,9 +10,6 @@ class Priority
     @icon        = frag.xpath('icon').to_s #FIXME: NSURL
     @description = frag.xpath('description').to_s
   end
-  def self.priorityWithXMLFragment(frag)
-    Priority.new frag
-  end
 end
 
 class Resolution
@@ -24,9 +21,6 @@ class Resolution
     @icon        = frag.xpath('icon').to_s #FIXME: NSURL
     @description = frag.xpath('description').to_s
   end
-  def self.resolutionWithXMLFragment(frag)
-    Resolution.new frag
-  end
 end
 
 class Field
@@ -35,9 +29,6 @@ class Field
     return if frag == nil
     @id   = frag.xpath('id').to_s
     @name = frag.xpath('name').to_s
-  end
-  def self.fieldWithXMLFragment(frag)
-    Field.new frag
   end
 end
 
@@ -64,9 +55,6 @@ class IssueType
     @subtask     = frag.xpath('subtask').to_s == 'true'
     @description = frag.xpath('description').to_s
   end
-  def self.issueTypeWithXMLFragment(frag)
-    IssueType.new frag
-  end
 end
 
 class Status
@@ -78,14 +66,12 @@ class Status
     @icon        = frag.xpath('icon').to_s #FIXME: NSURL
     @description = frag.xpath('description').to_s
   end
-  def self.statusWithXMLFragment(frag)
-    Status.new frag
-  end
 end
 
 class Version
   attr_accessor :id, :name, :sequence, :released, :archived, :releaseDate
   def initialize(frag = nil)
+    #TODO: find out why we don't get a description field here
     return if frag == nil
     @id          = frag.xpath('id').to_s
     @name        = frag.xpath('name').to_s
@@ -107,9 +93,6 @@ class Scheme
     @name        = frag.xpath('name').to_s
     @type        = frag.xpath('type').to_s
     @description = frag.xpath('description').to_s
-  end
-  def self.schemeWithXMLFragment(frag)
-    Scheme.new frag
   end
 end
 
@@ -141,9 +124,6 @@ class Project
     @notificationScheme  = Scheme.new frag.xpath('notificationScheme')
     @permissionScheme    = Scheme.new frag.xpath('permissionScheme')
   end
-  def self.projectWithXMLFragment(frag)
-    Project.new frag
-  end
 end
 
 class Avatar
@@ -156,9 +136,6 @@ class Avatar
     @type        = frag.xpath('type').to_s
     @contentType = frag.xpath('contentType').to_s
     @base64Data  = frag.xpath('base64Data').to_s
-  end
-  def self.avatarWithXMLFragment(frag)
-    Avatar.new frag
   end
 end
 
@@ -215,18 +192,12 @@ class User
     @fullName = frag.xpath('fullname').to_s
     @email    = frag.xpath('email').to_s
   end
-  def self.userWithXMLFragment(frag)
-    User.new frag
-  end
 end
 
 class FieldValue
   attr_accessor :id, :values
   def initialize(frag = nil)
     #PONDER: do I need to initialize this from an XML fragment?
-  end
-  def self.fieldValueWithXMLFragment(frag)
-    FieldValue.new frag
   end
   def self.fieldValueWithNilValues(id)
     fv = FieldValue.new
