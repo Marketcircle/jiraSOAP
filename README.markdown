@@ -62,6 +62,17 @@ There are some deviations from the JavaDoc APIs to note:
 
 3. The type used for `id` members is not consistent in the JIRA SOAP API. In most places it is given as a string, but in some places it is a long. Custom fields also have a special prefix for their `id` field; they always start with `customfield_` and are therefore strings. There are some APIs that can take a regular `id` or a `customfield_` id (such as the `updateIssue` method) and because the API needs to work with any language (and hence any type strictness), they chose to make `id`s strings (why some are longs in some cases is beyond me (bug?)).
 In any case, `jiraSOAP` should always give you strings for an `id` (or `customfield_` id); it is a bug if it does not.
+Also, in some cases, when a method wants an `id`, it wants the name of the type of field.  `#updateIssue` is such a case, the field value should have an id like `description` or `assignee`.
+      description = JIRA::FieldValue.new
+      description.id = 'description'
+      description.values = ['My new description']
+
+      custom_field = JIRA::FieldValue.new
+      custom_field.id = 'customfield_10060'
+      custom_field.values = ['123456']
+
+      jira.updateIssue 'PROJECT-1', [fv, custom_field]
+
 
 4. All instance variables should use camel case in `jiraSOAP`, if it doesn't then it is a bug.
 
