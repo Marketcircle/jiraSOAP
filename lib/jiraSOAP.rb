@@ -2,6 +2,7 @@
 require 'handsoap'
 require 'logger'
 
+require 'jiraSOAP/handsoap_extensions.rb'
 require 'jiraSOAP/remoteEntities.rb'
 require 'jiraSOAP/remoteAPI.rb'
 
