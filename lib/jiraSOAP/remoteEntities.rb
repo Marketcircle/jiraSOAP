@@ -40,8 +40,12 @@ class CustomField
     @key           = frag.xpath('key').to_s
     @values        = frag.xpath('values/*').map { |v| v.to_s }
   end
-  def self.customFieldWithXMLFragment(frag)
-    CustomField.new frag
+  def soapify_for(message, label = 'customFieldValues')
+    message.add label do |message|
+      message.add 'customfieldId', @customfieldId
+      message.add 'key', @key
+      message.add_simple_array 'values', @values
+    end
   end
 end
 
@@ -80,9 +84,6 @@ class Version
     @archived    = frag.xpath('archived').to_s == 'true'
     @releaseDate = frag.xpath('releaseDate').to_s #FIXME: NSDate
   end
-  def self.versionWithXMLFragment(frag)
-    Version.new frag
-  end
 end
 
 class Scheme
@@ -102,9 +103,6 @@ class Component
     return if frag == nil
     @id   = frag.xpath('id').to_s
     @name = frag.xpath('name').to_s
-  end
-  def self.componentWithXMLFragment(frag)
-    Component.new frag
   end
 end
 
@@ -179,8 +177,49 @@ class Issue
       CustomField.new cfv
     }
   end
-  def self.issueFromXMLFragment(frag)
-    Issue.new frag
+  def soapify_for(msg)
+    #can you spot the oddities and inconsistencies?
+    #we don't both including fields that are ignored
+      #I tried to only ignore fields that will never be needed at creation
+      #but I may have messed up. It should be easy to fix :)
+    #we don't wrap the whole thing in 'issue' tags
+    #-1 is the value you send to get the automatic assignee
+    msg.add 'reporter', @reporter unless @reporter.nil?
+
+    msg.add 'priority', @priority
+    msg.add 'type', @type
+    msg.add 'project', @project
+
+    msg.add 'summary', @summary
+    msg.add 'description', @description
+
+    unless @components.nil?
+      msg.add 'components' do |submsg|
+        @components.each { |c|
+          submsg.add 'components' do |id| id.add 'id', c.id end
+        }
+      end
+    end
+    unless @affectsVersions.nil?
+      msg.add 'affectsVersions' do |submsg|
+        @affectsVersions.each { |v|
+          submsg.add 'affectsVersions' do |id| id.add 'id', v.id end
+        }
+      end
+    end
+    msg.add_complex_array 'customFieldValues', @customFieldValues unless @customFieldValues.nil?
+
+    unless @fixVersions.nil?
+      msg.add 'fixVersions' do |submsg|
+        @fixVersions.each { |v|
+          submsg.add 'fixVersions' do |id| id.add 'id', v.id end
+        }
+      end
+    end
+    msg.add 'assignee', (@assignee || '-1')
+
+    msg.add 'environment', @environment unless @environment.nil?
+    msg.add 'duedate', @dueDate unless @dueDate.nil?
   end
 end
 
@@ -202,8 +241,8 @@ class FieldValue
     fv.values = [nil]
     fv
   end
-  def soapify_for(message)
-    message.add 'fieldValue' do |message|
+  def soapify_for(message, label = 'fieldValue')
+    message.add label do |message|
       message.add 'id', @id
       message.add_simple_array 'values', @values
     end

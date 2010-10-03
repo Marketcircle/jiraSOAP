@@ -86,17 +86,11 @@ module RemoteAPI
      JIRA::User.new resp.document.xpath '//getUserReturn'
    end
 
-# #TODO: the last hurdle before a 0.1.0 release
-#   def createIssue(issue)
-#     fragment = jiraRequest :createIssue, issue
-#   end
-
 #TODO: next block of useful methods
 # addBase64EncodedAttachmentsToIssue
 # addComment
 # addVersion
 # archiveVersion
-# createIssue
 # createProject
 # createProjectRole
 # createUser
@@ -159,5 +153,14 @@ module RemoteAPI
     JIRA::Issue.new resp.document.xpath('//updateIssueReturn').first
   end
 
+  def createIssue(issue)
+    resp = invoke('soap:createIssue') { |m|
+      m.add 'soap:in0', @authToken
+      m.add 'soap:in1' do |m|
+        issue.soapify_for m
+      end
+    }
+    JIRA::Issue.new resp.document.xpath('//createIssueReturn').first
+  end
 
 end
