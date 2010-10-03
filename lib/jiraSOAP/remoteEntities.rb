@@ -196,9 +196,6 @@ end
 
 class FieldValue
   attr_accessor :id, :values
-  def initialize(frag = nil)
-    #PONDER: do I need to initialize this from an XML fragment?
-  end
   def self.fieldValueWithNilValues(id)
     fv = FieldValue.new
     fv.id = id
