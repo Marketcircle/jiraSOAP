@@ -3,11 +3,9 @@ class JIRAService < Handsoap::Service
   include  RemoteAPI
 
   attr_reader   :authToken
-  attr_accessor :log
 
-  def self.instanceAtURL(url, user, password, logLevel = Logger::WARN)
+  def self.instanceAtURL(url, user, password)
     jira = JIRAService.new url
-    jira.log.level = logLevel
     jira.login user, password
     jira
   end
@@ -22,8 +20,6 @@ class JIRAService < Handsoap::Service
       :version => 2
     }
     self.class.endpoint endpoint_data
-
-    @log = Logger.new STDOUT
   end
 
   #PONDER: a finalizer that will try to logout
