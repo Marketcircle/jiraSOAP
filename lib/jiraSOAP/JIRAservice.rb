@@ -2,7 +2,7 @@ module JIRA
 class JIRAService < Handsoap::Service
   include  RemoteAPI
 
-  attr_reader   :authToken
+  attr_reader   :authToken, :user
 
   def self.instanceAtURL(url, user, password)
     jira = JIRAService.new url

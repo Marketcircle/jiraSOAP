@@ -7,6 +7,8 @@ module RemoteAPI
       m.add 'soap:in0', user
       m.add 'soap:in1', password
     }
+    #cache now that we know it is safe to do so
+    @user = user
     @authToken = resp.document.xpath('//loginReturn').first.to_s
     #TODO: error handling (catch the exception and look at the Response node?)
   end
