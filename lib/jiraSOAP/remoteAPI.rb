@@ -11,6 +11,7 @@ module RemoteAPI
     @user = user
     @authToken = resp.document.xpath('//loginReturn').first.to_s
     #TODO: error handling (catch the exception and look at the Response node?)
+    true
   end
 
   def logout
