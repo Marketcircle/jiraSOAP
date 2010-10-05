@@ -1,93 +1,156 @@
 module RemoteAPI
-  ResponseXPath = '/node()[1]/node()[1]/node()[1]/node()[2]'
+  RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
-  #TODO: these methods look generalizable because they are
   def login(user, password)
-    resp = invoke('soap:login') { |m|
-      m.add 'soap:in0', user
-      m.add 'soap:in1', password
+    response = invoke('soap:login') { |msg|
+      msg.add 'soap:in0', user
+      msg.add 'soap:in1', password
     }
-    #cache now that we know it is safe to do so
-    @user = user
-    @authToken = resp.document.xpath('//loginReturn').first.to_s
     #TODO: error handling (catch the exception and look at the Response node?)
+    #cache now that we know it is safe to do so
+    @user       = user
+    @auth_token = response.document.xpath('//loginReturn').first.to_s
     true
   end
 
   def logout
-    resp = invoke('soap:logout') { |m| m.add 'soap:in0', @authToken }
-    resp.document.xpath('//logoutReturn').first.to_s == 'true'
+    response = invoke('soap:logout') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath('//logoutReturn').first.to_s == 'true'
   end
 
-  def getPriorities
-    resp = invoke('soap:getPriorities') { |m| m.add 'soap:in0', @authToken }
-    resp.document.xpath("#{ResponseXPath}/getPrioritiesReturn").map { |p|
-      JIRA::Priority.new p
+  def get_priorities
+    response = invoke('soap:getPriorities') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getPrioritiesReturn").map {
+      |frag|
+      JIRA::Priority.priority_with_xml_fragment frag
     }
   end
 
-  def getResolutions
-    resp = invoke('soap:getResolutions') { |m| m.add 'soap:in0', @authToken }
-    resp.document.xpath("#{ResponseXPath}/getResolutionsReturn").map { |r|
-      JIRA::Resolution.new r
+  def get_resolutions
+    response = invoke('soap:getResolutions') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getResolutionsReturn").map {
+      |frag|
+      JIRA::Resolution.resolution_with_xml_fragment frag
     }
   end
 
-  def getCustomFields
-    resp = invoke('soap:getCustomFields') { |m| m.add 'soap:in0', @authToken }
-    resp.document.xpath("#{ResponseXPath}/getCustomFieldsReturn").map { |cf|
-      JIRA::Field.new cf
+  def get_custom_fields
+    response = invoke('soap:getCustomFields') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getCustomFieldsReturn").map {
+      |frag|
+      JIRA::Field.field_with_xml_fragment frag
     }
   end
 
-   def getIssueTypes
-     resp = invoke('soap:getIssueTypes') { |m| m.add 'soap:in0', @authToken }
-     resp.document.xpath("#{ResponseXPath}/getIssueTypesReturn").map { |it|
-       JIRA::IssueType.new it
-     }
-   end
+  def get_issue_types
+    response = invoke('soap:getIssueTypes') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getIssueTypesReturn").map {
+      |frag|
+      JIRA::IssueType.issue_type_with_xml_fragment frag
+    }
+  end
 
-   def getStatuses
-     resp = invoke('soap:getStatuses') { |m| m.add 'soap:in0', @authToken }
-     resp.document.xpath("#{ResponseXPath}/getStatusesReturn").map { |s|
-       JIRA::Status.new s
-     }
-   end
+  def get_statuses
+    response = invoke('soap:getStatuses') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getStatusesReturn").map {
+      |frag|
+      JIRA::Status.status_with_xml_fragment frag
+    }
+  end
 
-   def getNotificationSchemes
-     resp = invoke('soap:getNotificationSchemes') { |m|
-       m.add 'soap:in0', @authToken
-     }
-     resp.document.xpath("#{ResponseXPath}/getNotificationSchemesReturn").map { |s|
-       JIRA::Scheme.new s
-     }
-   end
+  def get_notification_schemes
+    response = invoke('soap:getNotificationSchemes') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getNotificationSchemesReturn").map {
+      |frag|
+      JIRA::Scheme.scheme_with_xml_fragment frag
+    }
+  end
 
-   def getVersions(key)
-     resp = invoke('soap:getVersions') { |m|
-       m.add 'soap:in0', @authToken
-       m.add 'soap:in1', key
-     }
-     resp.document.xpath("#{ResponseXPath}/getVersionsReturn").map { |v|
-       JIRA::Version.new v
-     }
-   end
+  def get_versions_for_project(project_key)
+    response = invoke('soap:getVersions') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getVersionsReturn").map {
+      |frag|
+      JIRA::Version.version_with_xml_fragment frag
+    }
+  end
 
-   def getProjectByKey(key)
-     resp = invoke('soap:getProjectByKey') { |m|
-       m.add 'soap:in0', @authToken
-       m.add 'soap:in1', key
-     }
-     JIRA::Project.new resp.document.xpath '//getProjectByKeyReturn'
-   end
+  def get_project_with_key(project_key)
+    response = invoke('soap:getProjectByKey') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+    }
+    frag = response.document.xpath '//getProjectByKeyReturn'
+    JIRA::Project.project_with_xml_fragment frag
+  end
 
-   def getUser(name)
-     resp = invoke('soap:getUser') { |m|
-       m.add 'soap:in0', @authToken
-       m.add 'soap:in1', name
-     }
-     JIRA::User.new resp.document.xpath '//getUserReturn'
-   end
+  def get_user_with_name(user_name)
+    response = invoke('soap:getUser') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', user_name
+    }
+    JIRA::User.user_with_xml_fragment response.document.xpath '//getUserReturn'
+  end
+
+  def get_project_avatar_for_key(project_key)
+    response = invoke('soap:getProjectAvatar') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+    }
+    JIRA::Avatar.avatar_with_xml_fragment response.document.xpath '//getProjectAvatarReturn'
+  end
+
+  def get_issues_from_jql_search(jql_query, max_results = 500)
+    response = invoke('soap:getIssuesFromJqlSearch') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', jql_query
+      msg.add 'soap:in2', max_results
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromJqlSearchReturn").map {
+      |frag|
+      JIRA::Issue.issue_with_xml_fragment frag
+    }
+  end
+
+  def update_issue(issue_key, *field_values)
+    response = invoke('soap:updateIssue') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+      msg.add 'soap:in2'  do |submsg|
+        field_values.each { |fv| fv.soapify_for submsg }
+      end
+    }
+    frag = response.document.xpath '//updateIssueReturn'
+    JIRA::Issue.issue_with_xml_fragment frag
+  end
+
+  def create_issue_with_issue(issue)
+    response = invoke('soap:createIssue') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1' do |submsg|
+        issue.soapify_for submsg
+      end
+    }
+    frag = response.document.xpath '//createIssueReturn'
+    JIRA::Issue.issue_with_xml_fragment frag
+  end
+end
 
 #TODO: next block of useful methods
 # addBase64EncodedAttachmentsToIssue
@@ -124,46 +187,3 @@ module RemoteAPI
 # setNewProjectAvatar (upload new and set it)
 # updateProject
 # progressWorkflowAction
-  def getProjectAvatar(key)
-    resp = invoke('soap:getProjectAvatar') { |m|
-      m.add 'soap:in0', @authToken
-      m.add 'soap:in1', key
-    }
-    JIRA::Avatar.new resp.document.xpath '//getProjectAvatarReturn'
-  end
-
-  def getIssuesFromJqlSearch(query, maxResults = 500)
-    resp = invoke('soap:getIssuesFromJqlSearch') { |m|
-      m.add 'soap:in0', @authToken
-      m.add 'soap:in1', query
-      m.add 'soap:in2', maxResults
-    }
-    resp.document.xpath("#{ResponseXPath}/getIssuesFromJqlSearchReturn").map { |i|
-      JIRA::Issue.new i
-    }
-  end
-
-  #TODO: make this look like less of a hack
-  def updateIssue(key, fields)
-    fields    = [fields] unless fields.kind_of? Array
-    resp      = invoke('soap:updateIssue') { |m|
-      m.add 'soap:in0', @authToken
-      m.add 'soap:in1', key
-      m.add 'soap:in2'  do |m|
-        fields.map { |fv| fv.soapify_for m }
-      end
-    }
-    JIRA::Issue.new resp.document.xpath('//updateIssueReturn').first
-  end
-
-  def createIssue(issue)
-    resp = invoke('soap:createIssue') { |m|
-      m.add 'soap:in0', @authToken
-      m.add 'soap:in1' do |m|
-        issue.soapify_for m
-      end
-    }
-    JIRA::Issue.new resp.document.xpath('//createIssueReturn').first
-  end
-
-end

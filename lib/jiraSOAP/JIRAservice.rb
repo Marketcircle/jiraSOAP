@@ -1,22 +1,21 @@
 module JIRA
 class JIRAService < Handsoap::Service
-  include  RemoteAPI
+  include RemoteAPI
 
-  attr_reader   :authToken, :user
+  attr_reader :auth_token, :user
 
-  def self.instanceAtURL(url, user, password)
+  def self.instance_at_url(url, user, password)
     jira = JIRAService.new url
     jira.login user, password
     jira
   end
 
-  def initialize(endpointURL)
-    @endpointURL = endpointURL
-
+  def initialize(endpoint_url)
     super
 
+    @endpoint_url = endpoint_url
     endpoint_data = {
-      :uri => "#{endpointURL}/rpc/soap/jirasoapservice-v2",
+      :uri => "#{endpoint_url}/rpc/soap/jirasoapservice-v2",
       :version => 2
     }
     self.class.endpoint endpoint_data
@@ -33,7 +32,7 @@ class JIRAService < Handsoap::Service
     doc.alias 'soap', 'http://soap.rpc.jira.atlassian.com'
   end
   def on_response_document(doc)
-    doc.add_namespace 'jir', @endpointURL
+    doc.add_namespace 'jir', @endpoint_url
   end
 end
 end

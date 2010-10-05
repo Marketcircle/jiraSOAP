@@ -36,7 +36,7 @@ Once that ugliness is over with, you can run a quick demo (making appropriate su
      db = JIRA::JIRAService.new 'http://jira.yourSite.com:8080'
      db.login 'user', 'password'
 
-     issues = db.getIssuesFromJqlSearch 'reporter = currentUser()', 100
+     issues = db.get_issues_from_jql_search 'reporter = currentUser()', 100
      issues.each { |issue|
        #do something...
        puts issue.key
@@ -44,7 +44,7 @@ Once that ugliness is over with, you can run a quick demo (making appropriate su
 
      db.logout
 
-Get the [Gist](http://gist.github.com/602286).
+Get the [Gist](http://gist.github.com/612186).
 
 
 Notes About Using This Gem
@@ -52,17 +52,9 @@ Notes About Using This Gem
 
 To get a reference for the API, you can look at the JavaDoc stuff provided by Atalssian [here](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 
-There are some deviations from the JavaDoc APIs to note:
+1. All method names have been made to feel more natural in a Ruby setting. Consult the documentation or use `irb` for specifics.
 
-1. You never need to pass the token parameter to a method, this will always be done for you. The value of your authorization token is cached when you `login`, it is stored in the `@authToken` attribute.
-
-2. `jiraSOAP` does not put the `Remote` prefix in front of each type
-   JIRA::RemoteIssue.new #incorrect
-   JIRA::Issue.new       #correct
-
-3. The type used for `id` members is not consistent in the JIRA SOAP API. In most places it is given as a string, but in some places it is a long. Custom fields also have a special prefix for their `id` field; they always start with `customfield_` and are therefore strings. There are some APIs that can take a regular `id` or a `customfield_` id (such as the `updateIssue` method) and because the API needs to work with any language (and hence any type strictness), they chose to make `id`s strings (why some are longs in some cases is beyond me (bug?)).
-In any case, `jiraSOAP` should always give you strings for an `id` (or `customfield_` id); it is a bug if it does not.
-Also, in some cases, when a method wants an `id`, it wants the name of the type of field.  `#updateIssue` is such a case, the field value should have an id like `description` or `assignee`.
+2. #update_issue wants an id for each field that you pass it, but it really wants the name of the field that you want to update.
       description = JIRA::FieldValue.new
       description.id = 'description'
       description.values = ['My new description']
@@ -71,28 +63,16 @@ Also, in some cases, when a method wants an `id`, it wants the name of the type 
       custom_field.id = 'customfield_10060'
       custom_field.values = ['123456']
 
-      jira.updateIssue 'PROJECT-1', [fv, custom_field]
+      jira.updateIssue 'PROJECT-1', fv, custom_field
 
+3. If an API call fails with a method missing error it is because the method has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
 
-4. All instance variables should use camel case in `jiraSOAP`, if it doesn't then it is a bug.
+4. URESOLVED issues have a Resolution with a value of `nil`.
 
-5. If an API call fails with a method missing error it is because the method has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
+5. To empty a field (set it to nil) you can use this pattern:
+   jira.update_issue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'description'
 
-6. If the attribute for a singular type (e.g. `JIRA::Priority`) is empty, it be stored as `nil`. Empty arrays are simply empty arrays.
-
-7. URESOLVED issues have a Resolution with a value of `nil`.
-
-8. Accessors do not use get/set prefixes.
-   issue = JIRA::Issue.new
-   issue.setSummary = 'Found a BUG' #incorrect
-   issue.summary    = 'Found a BUG' #correct
-
-   issue.getSummary #incorrect
-   issue.summary    #correct
-
-9. To empty a field (set it to nil) you can use this pattern:
-   jira.updateIssue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'description'
-   jira.updateIssue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'customfield_10060'
+6. Issue creation, using #create_issue_with_issue does not make use of all the fields in a JIRA::Issue. Which fields are used seems to depend on the version of JIRA you are connecting to.
 
 
 TODO
