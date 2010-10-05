@@ -52,27 +52,18 @@ Notes About Using This Gem
 
 To get a reference for the API, you can look at the JavaDoc stuff provided by Atalssian [here](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 
-1. All method names have been made to feel more natural in a Ruby setting. Consult the documentation or use `irb` for specifics.
+1. All method names have been made to feel more natural in a Ruby setting. Consult the `jiraSOAP` documentation for specifics.
 
-2. #update_issue wants an id for each field that you pass it, but it really wants the name of the field that you want to update.
-      description = JIRA::FieldValue.new
-      description.id = 'description'
-      description.values = ['My new description']
+2. If an API call fails with a method missing error it is because the method has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
 
-      custom_field = JIRA::FieldValue.new
-      custom_field.id = 'customfield_10060'
-      custom_field.values = ['123456']
+3. URESOLVED issues have a Resolution with a value of `nil`.
 
-      jira.updateIssue 'PROJECT-1', fv, custom_field
-
-3. If an API call fails with a method missing error it is because the method has not been implement, yet. I started by implementing only the methods that I needed in order to port some old scripts that ran on jira4r; other methods will be added as them gem matures (or you could add it for me :D).
-
-4. URESOLVED issues have a Resolution with a value of `nil`.
-
-5. To empty a field (set it to nil) you can use this pattern:
+4. To empty a field (set it to nil) you can use this pattern:
    jira.update_issue 'JIRA-1', JIRA::FieldValue.fieldValueWithNilValues 'description'
 
-6. Issue creation, using #create_issue_with_issue does not make use of all the fields in a JIRA::Issue. Which fields are used seems to depend on the version of JIRA you are connecting to.
+5. Issue creation, using #create_issue_with_issue does not make use of all the fields in a JIRA::Issue. Which fields are used seems to depend on the version of JIRA you are connecting to.
+
+6. RemoteAPI#update_issue wants an id for each field that you pass it, but it really wants the name of the field that you want to update. See this [Gist](http://gist.github.com/612562).
 
 
 TODO
