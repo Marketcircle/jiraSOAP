@@ -24,6 +24,10 @@ class JIRAService < Handsoap::Service
 
   #PONDER: a finalizer that will try to logout
 
+  def method_missing(method, *args)
+    $stderr.puts "#{method} is not a defined method in the API...yet"
+  end
+
   protected
   def on_create_document(doc)
     doc.alias 'soap', 'http://soap.rpc.jira.atlassian.com'
