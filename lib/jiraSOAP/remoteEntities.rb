@@ -1,21 +1,31 @@
 module JIRA
 
+# Represents a priority level. Straightforward.
 class Priority
   attr_accessor :id, :name, :color, :icon, :description
+  # Factory method that takes a fragment of a SOAP response.
+  # @todo change @color to be some kind of hex Fixnum object
+  # @todo change @icon to be a URI or NSURL object
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Priority,nil]
   def self.priority_with_xml_fragment(frag)
     return if frag.nil?
     priority             = Priority.new
     priority.id          = frag.xpath('id').to_s
     priority.name        = frag.xpath('name').to_s
-    priority.color       = frag.xpath('color').to_s #PONDER: hex
-    priority.icon        = frag.xpath('icon').to_s #FIXME: NSURL
+    priority.color       = frag.xpath('color').to_s
+    priority.icon        = frag.xpath('icon').to_s
     priority.description = frag.xpath('description').to_s
     priority
   end
 end
 
+# Represents a priority level. Straightforward.
 class Resolution
   attr_accessor :id, :name, :icon, :description
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Resolution,nil]
   def self.resolution_with_xml_fragment(frag)
     return if frag.nil?
     resolution             = Resolution.new
