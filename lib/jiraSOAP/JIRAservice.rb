@@ -8,18 +8,26 @@ module JIRA
 # like; but if you try to set a differnt endpoint for a new instance you
 # will end up messing up any other instances currently being used.
 #
-# It is best to treat this class as a singleton. There can only be one.
+# It is best to treat this class as a singleton. There should only be one.
+#
+# HTTPS is not supported in this version.
 class JIRAService < Handsoap::Service
   include RemoteAPI
 
   attr_reader :auth_token, :user
 
+  # Factory method to initialize and login.
+  #@param [String] url URL for the JIRA server
+  #@param [String] user JIRA user name to login with
+  #@param [String] password
   def self.instance_at_url(url, user, password)
     jira = JIRAService.new url
     jira.login user, password
     jira
   end
 
+  # Slightly hacky in order to set the endpoint at the initialization.
+  #@param endpoint_url URL for the JIRA server
   def initialize(endpoint_url)
     super
 
@@ -33,6 +41,7 @@ class JIRAService < Handsoap::Service
 
   #PONDER: a finalizer that will try to logout
 
+  # Something to help users out until the rest of the API is implemented.
   def method_missing(method, *args)
     message  = 'Check the documentation; the method may not be implemented yet.'
     raise NoMethodError, message, caller
