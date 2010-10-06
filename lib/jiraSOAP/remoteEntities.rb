@@ -110,7 +110,7 @@ class Version
     version.sequence     = frag.xpath('sequence').to_s.to_i
     version.released     = frag.xpath('released').to_s == 'true'
     version.archived     = frag.xpath('archived').to_s == 'true'
-    version.release_date = frag.xpath('releaseDate').to_s #FIXME: NSDate
+    version.release_date = frag.xpath('releaseDate') #FIXME: Time.rfc2822
     version
   end
 end
@@ -218,8 +218,8 @@ class Issue
     issue.reporter_name       = frag.xpath('reporter').to_s
     issue.priority_id         = frag.xpath('priority').to_s
     issue.project_name        = frag.xpath('project').to_s
-    issue.create_date         = frag.xpath('created').to_s #FIXME: NSDate
-    issue.due_date            = frag.xpath('duedate').to_s #FIXME: NSDate
+    issue.create_date         = frag.xpath('created').to_s #FIXME: Time.rfc2822
+    issue.due_date            = frag.xpath('duedate').to_s #FIXME: Time.rfc2822
     issue.resolution_id       = frag.xpath('resolution').to_s
     issue.environment         = frag.xpath('environment').to_s
     issue
