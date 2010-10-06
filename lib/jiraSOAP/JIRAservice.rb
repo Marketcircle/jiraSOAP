@@ -24,7 +24,8 @@ class JIRAService < Handsoap::Service
   #PONDER: a finalizer that will try to logout
 
   def method_missing(method, *args)
-    $stderr.puts "#{method} is not a defined method in the API...yet"
+    message  = 'Check the documentation; the method may not be implemented yet.'
+    raise NoMethodError, message, caller
   end
 
   protected
