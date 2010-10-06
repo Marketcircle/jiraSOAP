@@ -154,6 +154,21 @@ module RemoteAPI
     JIRA::Avatar.avatar_with_xml_fragment response.document.xpath '//getProjectAvatarReturn'
   end
 
+  #Gives ALL avatars for a given project use this method; if you
+  #just want the default avatar, use {#get_project_avatar_for_key}.
+  #@param [String] project_key
+  #@return [[JIRA::Avatar]]
+  def get_project_avatars_for_key(project_key)
+    response = invoke('soap:getProjectAvatars') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getProjectAvatarsReturn").map {
+      |frag|
+      JIRA::Avatar.avatar_with_xml_fragment frag
+    }
+  end
+
   #This method is the equivalent of making an advanced search from the
   #web interface.
   #@param [String] jql_query JQL query as a string
@@ -252,7 +267,6 @@ end
 # getIssuesFromFilterWithLimit
 # getIssuesFromTextSearchWithLimit
 # getIssueTypesForProject
-# getProjectAvatars
 # getProjectById
 # getServerInfo
 # getSubTaskIssueTypes
