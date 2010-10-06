@@ -11,23 +11,25 @@ module JIRA
 # It is best to treat this class as a singleton. There should only be one.
 #
 # HTTPS is not supported in this version.
+#
+# @todo consider adding a finalizer that will try to logout
 class JIRAService < Handsoap::Service
   include RemoteAPI
 
   attr_reader :auth_token, :user
 
   # Factory method to initialize and login.
-  #@param [String] url URL for the JIRA server
-  #@param [String] user JIRA user name to login with
-  #@param [String] password
   def self.instance_at_url(url, user, password)
+  # @param [String] url URL for the JIRA server
+  # @param [String] user JIRA user name to login with
+  # @param [String] password
     jira = JIRAService.new url
     jira.login user, password
     jira
   end
 
   # Slightly hacky in order to set the endpoint at the initialization.
-  #@param endpoint_url URL for the JIRA server
+  # @param endpoint_url URL for the JIRA server
   def initialize(endpoint_url)
     super
 
@@ -38,8 +40,6 @@ class JIRAService < Handsoap::Service
     }
     self.class.endpoint endpoint_data
   end
-
-  #PONDER: a finalizer that will try to logout
 
   # Something to help users out until the rest of the API is implemented.
   def method_missing(method, *args)
