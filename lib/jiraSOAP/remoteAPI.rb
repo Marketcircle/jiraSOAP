@@ -8,7 +8,7 @@ module RemoteAPI
   #cannot use a more blunt XPath expression.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
-  #The first method to call. No other method will work unless you are logged in.
+  #The first method to call; other methods will fail until you are logged in.
   #@param [String] user JIRA user name to login with
   #@param [String] password
   #@return [boolean] true if successful, otherwise false
