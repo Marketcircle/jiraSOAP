@@ -46,6 +46,8 @@ Once that ugliness is over with, you can run a quick demo (making appropriate su
 
 Get the [Gist](http://gist.github.com/612186).
 
+Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames).
+
 
 Notes About Using This Gem
 --------------------------
