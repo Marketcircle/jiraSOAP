@@ -1,3 +1,4 @@
+# All the remote entities as well as the SOAP service client.
 module JIRA
 class JIRAService < Handsoap::Service
   include RemoteAPI
