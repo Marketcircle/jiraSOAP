@@ -1,4 +1,11 @@
+# Contains the API defined by Atlassian for the JIRA SOAP service. The JavaDoc
+# for the SOAP API is located at http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html.
+#@todo exception handling
+#@todo code refactoring and de-duplication
 module RemoteAPI
+  #XPath constant to get a node containing a response array.
+  #This could be used for all responses, but is only used in cases where we
+  #cannot use a more blunt XPath expression.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
   def login(user, password)
