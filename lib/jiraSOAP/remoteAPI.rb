@@ -24,7 +24,7 @@ module RemoteAPI
   end
 
   #You only need to call this to make an exlicit logout; normally, a session
-  #willautomatically expire after a set time (configured on the server).
+  #will automatically expire after a set time (configured on the server).
   #@return [boolean] true if successful, otherwise false
   def logout
     response = invoke('soap:logout') { |msg|
