@@ -19,10 +19,10 @@ class JIRAService < Handsoap::Service
   attr_reader :auth_token, :user
 
   # Factory method to initialize and login.
-  def self.instance_at_url(url, user, password)
   # @param [String] url URL for the JIRA server
   # @param [String] user JIRA user name to login with
   # @param [String] password
+  def self.instance_for_endpoint(url, user, password)
     jira = JIRAService.new url
     jira.login user, password
     jira
