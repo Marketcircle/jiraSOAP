@@ -64,7 +64,6 @@ TODO
 - Fix type hacks;. dates should be `NSDate`s and URLs should be `NSURL`s, right now they are all strings
 - Public test suite
   + Needs a mock server
-- Documentation
 - Error handling
 - Finish implementing all of the API
 
