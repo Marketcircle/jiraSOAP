@@ -12,6 +12,7 @@ begin
     gem.authors = ["Mark Rada"]
     gem.add_dependency 'handsoap', '~> 1.1'
     gem.add_development_dependency "minitest"
+    gem.add_development_dependency "yard"
 	gem.files = ['lib/**/*']
     gem.required_ruby_version = '>= 1.9.2'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
@@ -68,18 +69,15 @@ rescue LoadError
   end
 end
 
+
+task :test => :check_dependencies
+
 task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = ""
+begin
+  require 'yard'
+  YARD::Rake::YardocTask.new
+rescue LoadError
+  task :yardoc do
+    abort "YARD is not available. In order to run yardoc, you must: sudo gem install yard"
   end
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "jiraSOAP #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
 end
