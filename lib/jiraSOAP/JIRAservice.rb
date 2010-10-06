@@ -1,5 +1,14 @@
 # All the remote entities as well as the SOAP service client.
 module JIRA
+
+# Interface to the JIRA endpoint server; set at initialization.
+#
+# Due to limitations in Handsoap::Service, there can only be one endpoint.
+# You can have multiple instances of that one endpoint if you would
+# like; but if you try to set a differnt endpoint for a new instance you
+# will end up messing up any other instances currently being used.
+#
+# It is best to treat this class as a singleton. There can only be one.
 class JIRAService < Handsoap::Service
   include RemoteAPI
 
