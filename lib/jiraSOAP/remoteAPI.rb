@@ -224,11 +224,11 @@ module RemoteAPI
 
   # Some fields will be ignored when an issue is created:
   #  - reporter - you cannot override this value at creation
-  #  - due date - I think this is a bug in jiraSOAP or JIRA
+  #  - resolution
   #  - attachments
   #  - votes
   #  - status
-  #  - resolution
+  #  - due date - I think this is a bug in jiraSOAP or JIRA
   #  - environment - I think this is a bug in jiraSOAP or JIRA
   # @param [JIRA::Issue] issue
   # @return [JIRA::Issue]
