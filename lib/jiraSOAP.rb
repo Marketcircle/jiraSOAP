@@ -1,6 +1,7 @@
 #TODO: set a requirement on the handsoap version
 require 'handsoap'
 require 'logger'
+require 'time'
 
 require 'jiraSOAP/handsoap_extensions.rb'
 require 'jiraSOAP/remoteEntities.rb'

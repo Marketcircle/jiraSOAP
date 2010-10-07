@@ -129,7 +129,6 @@ end
 
 # Represents a version for a project. Straightforward.
 # @todo find out why we don't get a description for this object
-# @todo use Time.rfc2822 to make @release_date a Time object
 class Version
   attr_accessor :id, :name, :sequence, :released, :archived, :release_date
   attr_writer   :released, :archived
@@ -151,7 +150,7 @@ class Version
     version.sequence     = frag.xpath('sequence').to_s.to_i
     version.released     = frag.xpath('released').to_s == 'true'
     version.archived     = frag.xpath('archived').to_s == 'true'
-    version.release_date = frag.xpath('releaseDate')
+    version.release_date = Time.xmlschema frag.xpath('releaseDate')
     version
   end
 end
@@ -253,8 +252,6 @@ end
 #
 # The irony of the situation is that this structure is also the most critical
 # to have in working order.
-# @todo change @create_date to use Time.rfc2822
-# @todo change @due_date to use Time.rfc2822
 class Issue
   attr_accessor :id, :key, :summary, :description, :type_id, :last_updated
   attr_accessor :votes, :status_id, :assignee_name, :reporter_name, :priority_id
@@ -288,15 +285,15 @@ class Issue
     issue.summary             = frag.xpath('summary').to_s
     issue.description         = frag.xpath('description').to_s
     issue.type_id             = frag.xpath('type').to_s
-    issue.last_updated        = frag.xpath('updated').to_s
+    issue.last_updated        = Time.xmlschema frag.xpath('updated').to_s
     issue.votes               = frag.xpath('votes').to_s.to_i
     issue.status_id           = frag.xpath('status').to_s
     issue.assignee_name       = frag.xpath('assignee').to_s
     issue.reporter_name       = frag.xpath('reporter').to_s
     issue.priority_id         = frag.xpath('priority').to_s
     issue.project_name        = frag.xpath('project').to_s
-    issue.create_date         = frag.xpath('created').to_s
-    issue.due_date            = frag.xpath('duedate').to_s
+    issue.create_date         = Time.xmlschema frag.xpath('created').to_s
+    issue.due_date            = Time.xmlschema frag.xpath('duedate').to_s
     issue.resolution_id       = frag.xpath('resolution').to_s
     issue.environment         = frag.xpath('environment').to_s
     issue
@@ -359,7 +356,7 @@ class Issue
     msg.add_complex_array 'customFieldValues', (@custom_field_values || [])
 
     msg.add 'environment', @environment unless @environment.nil?
-    msg.add 'duedate', @due_date unless @due_date.nil?
+    msg.add 'duedate', @due_date.xmlschema unless @due_date.nil?
   end
 end
 
@@ -421,7 +418,7 @@ class Attachment
     attachment             = Attachment.new
     attachment.id          = frag.xpath('id').to_s
     attachment.author      = frag.xpath('author').to_s
-    attachment.create_date = frag.xpath('created').to_s
+    attachment.create_date = Time.xmlschema frag.xpath('created').to_s
     attachment.filename    = frag.xpath('filename').to_s
     attachment.file_size   = frag.xpath('filesize').to_s.to_i
     attachment.mime_type   = frag.xpath('mimetype').to_s
