@@ -33,7 +33,6 @@ module RemoteAPI
     response.document.xpath('//logoutReturn').first.to_s == 'true'
   end
 
-  # Get the global listing for types of priorities.
   # @return [[JIRA::Priority]]
   def get_priorities
     response = invoke('soap:getPriorities') { |msg|
@@ -45,7 +44,6 @@ module RemoteAPI
     }
   end
 
-  # Get the global listing for types of resolutions.
   # @return [[JIRA::Resolution]]
   def get_resolutions
     response = invoke('soap:getResolutions') { |msg|
@@ -57,7 +55,6 @@ module RemoteAPI
     }
   end
 
-  # Get the global listing for types of custom fields.
   # @return [[JIRA::Field]]
   def get_custom_fields
     response = invoke('soap:getCustomFields') { |msg|
@@ -69,7 +66,6 @@ module RemoteAPI
     }
   end
 
-  # Get the global listing for types of issues.
   # @return [[JIRA::IssueType]]
   def get_issue_types
     response = invoke('soap:getIssueTypes') { |msg|
@@ -81,7 +77,6 @@ module RemoteAPI
     }
   end
 
-  # Get the global listing of status type.
   # @return [[JIRA::Status]]
   def get_statuses
     response = invoke('soap:getStatuses') { |msg|
@@ -93,7 +88,6 @@ module RemoteAPI
     }
   end
 
-  # Get the global listing for notification schemes.
   # @return [[JIRA::Scheme]]
   def get_notification_schemes
     response = invoke('soap:getNotificationSchemes') { |msg|
@@ -105,7 +99,6 @@ module RemoteAPI
     }
   end
 
-  # Get all the versions associated with a project.
   # @param [String] project_key
   # @return [[JIRA::Version]]
   def get_versions_for_project(project_key)
@@ -119,7 +112,6 @@ module RemoteAPI
     }
   end
 
-  # Get the information for a project with a given key.
   # @param [String] project_key
   # @return [JIRA::Project]
   def get_project_with_key(project_key)
@@ -131,7 +123,6 @@ module RemoteAPI
     JIRA::Project.project_with_xml_fragment frag
   end
 
-  # This will only give you basic information about a user.
   # @param [String] user_name
   # @return [JIRA::User]
   def get_user_with_name(user_name)
