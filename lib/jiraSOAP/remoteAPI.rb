@@ -11,7 +11,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [boolean] true if successful, otherwise false
+  # @return [true] true if successful, otherwise an exception is thrown
   def login(user, password)
     response = invoke('soap:login') { |msg|
       msg.add 'soap:in0', user
@@ -23,9 +23,9 @@ module RemoteAPI
     true
   end
 
-  # You only need to call this to make an exlicit logout; normally, a session
+  # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
-  #@return [boolean] true if successful, otherwise false
+  # @return [true] true if successful, otherwise an exception is thrown
   def logout
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
@@ -213,7 +213,7 @@ module RemoteAPI
     JIRA::Issue.issue_with_xml_fragment frag
   end
 
-  # Some fields will be ignored when an issue is created:
+  # Some fields will be ignored when an issue is created.
   #  - reporter - you cannot override this value at creation
   #  - resolution
   #  - attachments
@@ -246,7 +246,7 @@ module RemoteAPI
   end
 
   # @param [String] issue_id
-  # @return [JIRA::Issue
+  # @return [JIRA::Issue]
   def get_issue_with_id(issue_id)
     response = invoke('soap:getIssueById') { |msg|
       msg.add 'soap:in0', @auth_token
