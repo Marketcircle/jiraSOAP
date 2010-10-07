@@ -264,6 +264,19 @@ module RemoteAPI
     frag = response.document.xpath '//getIssueByIdReturn'
     JIRA::Issue.issue_with_xml_fragment frag
   end
+
+  # @param [String] issue_key
+  # @return [[JIRA::Attachment]]
+  def get_attachments_for_issue_with_key(issue_key)
+    response = invoke('soap:getAttachmentsFromIssue') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getAttachmentsFromIssueReturn").map {
+      |frag|
+      JIRA::Attachment.attachment_with_xml_fragment frag
+    }
+  end
 end
 
 #TODO: next block of useful methods
@@ -277,7 +290,6 @@ end
 # deleteProjectAvatar
 # deleteUser
 # editComment
-# getAttachmentsFromIssue
 # getAvailableActions
 # getComment
 # getComments
