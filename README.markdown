@@ -46,7 +46,7 @@ Once that ugliness is over with, you can run a quick demo (making appropriate su
 
 Get the [Gist](http://gist.github.com/612186).
 
-Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames).
+Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames). The meat of the service is in the `RemoteAPI` module.
 
 
 Notes About Using This Gem
