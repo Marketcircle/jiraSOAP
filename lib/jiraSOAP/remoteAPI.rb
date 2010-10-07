@@ -254,6 +254,16 @@ module RemoteAPI
     JIRA:Issue.issue_with_xml_fragment frag
   end
 
+  # @param [String] issue_id
+  # @return [JIRA::Issue
+  def get_issue_with_id(issue_id)
+    response = invoke('soap:getIssueById') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_id
+    }
+    frag = response.document.xpath '//getIssueByIdReturn'
+    JIRA::Issue.issue_with_xml_fragment frag
+  end
 end
 
 #TODO: next block of useful methods
@@ -273,7 +283,6 @@ end
 # getComments
 # getComponents
 # getFavouriteFilters
-# getIssueById
 # getIssueCountForFilter
 # getIssuesFromFilterWithLimit
 # getIssuesFromTextSearchWithLimit
