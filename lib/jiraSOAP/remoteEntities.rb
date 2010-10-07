@@ -407,4 +407,26 @@ class FieldValue
   end
 end
 
+# Only contains the meta-data for an attachment. The URI for an attachment
+# appears to be of the form
+# $ENDPOINT_URL/secure/attachment/$ATTACHMENT_ID/$ATTACHMENT_FILENAME
+class Attachment
+  attr_accessor :id, :author, :create_date, :filename, :file_size, :mime_type
+
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Attachment,nil]
+  def self.attachment_with_xml_fragment(frag)
+    return if frag.nil?
+    attachment             = Attachment.new
+    attachment.id          = frag.xpath('id').to_s
+    attachment.author      = frag.xpath('author').to_s
+    attachment.create_date = frag.xpath('created').to_s
+    attachment.filename    = frag.xpath('filename').to_s
+    attachment.file_size   = frag.xpath('filesize').to_s.to_i
+    attachment.mime_type   = frag.xpath('mimetype').to_s
+    attachment
+  end
+end
+
 end
