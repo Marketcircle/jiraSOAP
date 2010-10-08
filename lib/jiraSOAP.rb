@@ -2,6 +2,7 @@
 require 'handsoap'
 require 'logger'
 require 'time'
+require 'uri'
 
 require 'jiraSOAP/handsoap_extensions.rb'
 require 'jiraSOAP/remoteEntities.rb'
