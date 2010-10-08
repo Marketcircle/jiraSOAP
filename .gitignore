@@ -4,3 +4,5 @@ coverage
 pkg
 .yardoc
 doc
+jiraSOAP.gemspec
+
