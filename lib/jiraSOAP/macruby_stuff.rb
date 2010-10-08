@@ -1,5 +1,7 @@
-Handsoap.http_driver = :net_http  #curb does not build for MacRuby
 framework 'Foundation'
+
+# work around curb not building for MacRuby (ticket #941)
+Handsoap.http_driver = :net_http
 
 class URL
   def initialize(url_string)
