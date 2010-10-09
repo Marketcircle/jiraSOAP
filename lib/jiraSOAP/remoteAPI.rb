@@ -284,7 +284,6 @@ end
 # getAvailableActions
 # getComment
 # getComments
-# getComponents
 # getFavouriteFilters
 # getIssueCountForFilter
 # getIssuesFromFilterWithLimit
