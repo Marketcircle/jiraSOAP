@@ -6,7 +6,6 @@ class Priority
 
   # Factory method that takes a fragment of a SOAP response.
   # @todo change @color to be some kind of hex Fixnum object
-  # @todo change @icon to be a URI or NSURL object
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Priority,nil]
   def self.priority_with_xml_fragment(frag)
@@ -15,7 +14,7 @@ class Priority
     priority.id          = frag.xpath('id').to_s
     priority.name        = frag.xpath('name').to_s
     priority.color       = frag.xpath('color').to_s
-    priority.icon        = frag.xpath('icon').to_s
+    priority.icon        = URL.new frag.xpath('icon').to_s
     priority.description = frag.xpath('description').to_s
     priority
   end
@@ -33,7 +32,7 @@ class Resolution
     resolution             = Resolution.new
     resolution.id          = frag.xpath('id').to_s
     resolution.name        = frag.xpath('name').to_s
-    resolution.icon        = frag.xpath('icon').to_s #FIXME: NSURL
+    resolution.icon        = URL.new frag.xpath('icon').to_s
     resolution.description = frag.xpath('description').to_s
     resolution
   end
@@ -86,7 +85,6 @@ class CustomField
 end
 
 # Represents and issue type. Straightforward.
-# @todo change @icon to some kind of URI
 class IssueType
   attr_accessor :id, :name, :icon, :description
   attr_writer   :subtask
@@ -102,7 +100,7 @@ class IssueType
     issue_type             = IssueType.new
     issue_type.id          = frag.xpath('id').to_s
     issue_type.name        = frag.xpath('name').to_s
-    issue_type.icon        = frag.xpath('icon').to_s
+    issue_type.icon        = URL.new frag.xpath('icon').to_s
     issue_type.subtask     = frag.xpath('subtask').to_s == 'true'
     issue_type.description = frag.xpath('description').to_s
     issue_type
@@ -121,7 +119,7 @@ class Status
     status             = Status.new
     status.id          = frag.xpath('id').to_s
     status.name        = frag.xpath('name').to_s
-    status.icon        = frag.xpath('icon').to_s #FIXME: NSURL
+    status.icon        = URL.new frag.xpath('icon').to_s
     status.description = frag.xpath('description').to_s
     status
   end
@@ -192,8 +190,6 @@ class Component
 end
 
 # Represents a project configuration. NOT straightforward.
-# @todo change @url to some kind of URL object
-# @todo change @project_url to some kind of URL object
 # @todo find out why the server always seems to pass nil for schemes
 class Project
   attr_accessor :id, :name, :key, :url, :project_url, :lead, :description
@@ -208,8 +204,8 @@ class Project
     project.id                    = frag.xpath('id').to_s
     project.name                  = frag.xpath('name').to_s
     project.key                   = frag.xpath('key').to_s
-    project.url                   = frag.xpath('url').to_s
-    project.project_url           = frag.xpath('projectUrl').to_s
+    project.url                   = URL.new frag.xpath('url').to_s
+    project.project_url           = URL.new frag.xpath('projectUrl').to_s
     project.lead                  = frag.xpath('lead').to_s
     project.description           = frag.xpath('description').to_s
     project.issue_security_scheme =
