@@ -265,7 +265,7 @@ module RemoteAPI
     }
     response.document.xpath("#{RESPONSE_XPATH}/getAttachmentsFromIssueReturn").map {
       |frag|
-      JIRA::Attachment.attachment_with_xml_fragment frag
+      JIRA::AttachmentMetadata.attachment_with_xml_fragment frag
     }
   end
 end

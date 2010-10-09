@@ -407,7 +407,7 @@ end
 # Only contains the meta-data for an attachment. The URI for an attachment
 # appears to be of the form
 # $ENDPOINT_URL/secure/attachment/$ATTACHMENT_ID/$ATTACHMENT_FILENAME
-class Attachment
+class AttachmentMetadata
   attr_accessor :id, :author, :create_date, :filename, :file_size, :mime_type
 
   # Factory method that takes a fragment of a SOAP response.
