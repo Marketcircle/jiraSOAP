@@ -272,6 +272,20 @@ module RemoteAPI
     }
   end
 
+  # @param [String] project_key
+  # @param [String] version_name
+  # @param [boolean] state
+  # @return [boolean] true if successful, otherwise an exception is thrown
+  def set_archive_state_for_version_for_project(project_key, version_name, state)
+    response = invoke('soap:archiveVersion') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+      msg.add 'soap:in2', version_name
+      msg.add 'soap:in3', state
+    }
+    true
+  end
+
 
   # @param [String] id
   # @return [JIRA::Project]
