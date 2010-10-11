@@ -345,6 +345,18 @@ module RemoteAPI
     }
   end
 
+  # Retrieves favourite filters for the currently logged in user.
+  # @return [JIRA::Filter]
+  def get_favourite_filters
+    response = invoke('soap:getFavouriteFilters') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getFavouriteFiltersReturn").map {
+      |frag|
+      JIRA::Filter.filter_with_xml_fragment frag
+    }
+  end
+
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|

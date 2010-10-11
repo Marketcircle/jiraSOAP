@@ -483,4 +483,25 @@ class TimeInfo
   end
 end
 
+# Represents a filter
+# @todo find out what @project is supposed to be for
+class Filter
+  attr_accessor :id, :name, :author, :project, :description, :xml
+
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Filter,nil]
+  def self.filter_with_xml_fragment(frag)
+    return if frag.nil?
+    filter             = Filter.new
+    filter.id          = frag.xpath('id').to_s
+    filter.name        = frag.xpath('name').to_s
+    filter.author      = frag.xpath('author').to_s
+    filter.project     = frag.xpath('project').to_s
+    filter.description = frag.xpath('description').to_s
+    filter.xml         = frag.xpath('xml').to_s
+    filter
+  end
+end
+
 end
