@@ -271,6 +271,15 @@ module RemoteAPI
       JIRA::AttachmentMetadata.attachment_with_xml_fragment frag
     }
   end
+
+  # @return [JIRA::ServerInfo]
+  def get_server_info
+    response = invoke('soap:getServerInfo') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    frag = response.document.xpath '//getServerInfoReturn'
+    JIRA::ServerInfo.server_info_with_xml_fragment frag
+  end
 end
 
 #TODO: next block of useful methods
@@ -293,7 +302,6 @@ end
 # getIssuesFromTextSearchWithLimit
 # getIssueTypesForProject
 # getProjectById
-# getServerInfo
 # getSubTaskIssueTypes
 # getSubTaskIssueTypesForProject
 # progressWorkflowAction

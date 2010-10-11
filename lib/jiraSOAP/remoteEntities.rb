@@ -422,4 +422,42 @@ class AttachmentMetadata
   end
 end
 
+# Only contains basic information about the endpoint server.
+class ServerInfo
+  attr_accessor :base_url, :build_date, :build_number, :edition
+  attr_accessor :server_time, :version
+
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::ServerInfo,nil]
+  def self.server_info_with_xml_fragment(frag)
+    return if frag.nil?
+    server_info = ServerInfo.new
+    server_info.base_url     = URL.new frag.xpath('baseUrl').to_s
+    server_info.build_date   = Time.xmlschema frag.xpath('buildDate').to_s
+    server_info.build_number = frag.xpath('buildNumber').to_s.to_i
+    server_info.edition      = frag.xpath('edition').to_s
+    server_info.version      = frag.xpath('version').to_s
+    server_info.server_time  =
+      TimeInfo.time_info_with_xml_fragment frag.xpath 'serverTime'
+    server_info
+  end
+end
+
+# Simple structure for a time and time zone; used oddly.
+class TimeInfo
+  attr_accessor :server_time, :timezone
+
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::TimeInfo,nil]
+  def self.time_info_with_xml_fragment(frag)
+    return if frag.nil?
+    time_info             = TimeInfo.new
+    time_info.server_time = Time.parse frag.xpath('serverTime').to_s
+    time_info.timezone    = frag.xpath('timeZoneId').to_s
+    time_info
+  end
+end
+
 end
