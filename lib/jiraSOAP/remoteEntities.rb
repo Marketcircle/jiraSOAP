@@ -271,6 +271,8 @@ end
 #
 # The irony of the situation is that this structure is also the most critical
 # to have in working order.
+#
+# Issues with an UNRESOLVED status will have nil for the value of @resolution.
 class Issue
   attr_accessor :id, :key, :summary, :description, :type_id, :last_updated
   attr_accessor :votes, :status_id, :assignee_name, :reporter_name, :priority_id

@@ -49,12 +49,6 @@ Get the [Gist](http://gist.github.com/612186).
 Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames). The meat of the service is in the `RemoteAPI` module.
 
 
-Notes About Using This Gem
---------------------------
-
-1. URESOLVED issues have a Resolution with a value of `nil`.
-
-
 TODO
 ----
 
