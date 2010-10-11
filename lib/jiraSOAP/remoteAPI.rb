@@ -283,6 +283,20 @@ module RemoteAPI
     frag = response.document.xpath '//getProjectByIdReturn'
     JIRA::Project.project_with_xml_fragment frag
   end
+
+  # @param [String] issue_key
+  # @return [[JIRA::Comment]]
+  def get_comments_for_issue(issue_key)
+    response = invoke('soap:getComments') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getCommentsReturn").map {
+      |frag|
+      JIRA::Comment.comment_with_xml_fragment frag
+    }
+  end
+
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|

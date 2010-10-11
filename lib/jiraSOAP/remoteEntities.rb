@@ -107,6 +107,29 @@ class IssueType
   end
 end
 
+# Represents a comment. Straight forward.
+class Comment
+  attr_accessor :id, :original_author, :role_level, :group_level, :body
+  attr_accessor :create_date, :last_updated, :update_author
+
+  # Factory method that takes a fragment of a SOAP response.
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Comment,nil]
+  def self.comment_with_xml_fragment(frag)
+    return if frag.nil?
+    comment                 = Comment.new
+    comment.id              = frag.xpath('id').to_s
+    comment.original_author = frag.xpath('author').to_s
+    comment.body            = frag.xpath('body').to_s
+    comment.create_date     = Time.xmlschema frag.xpath('created').to_s
+    comment.group_level     = frag.xpath('updateAuthor').to_s
+    comment.role_level      = frag.xpath('roleLevel').to_s
+    comment.update_author   = frag.xpath('updateAuthor').to_s
+    comment.last_updated    = Time.xmlschema frag.xpath('updated').to_s
+    comment
+  end
+end
+
 # Represents a status. Straightforward.
 class Status
   attr_accessor :id, :name, :icon, :description
