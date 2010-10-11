@@ -388,18 +388,10 @@ end
 # deleteUser
 # editComment
 # getAvailableActions
-# getComment
-# getComments
-# getFavouriteFilters
 # getIssueCountForFilter
 # getIssuesFromFilterWithLimit
 # getIssuesFromTextSearchWithLimit
-# getIssueTypesForProject
-# getProjectById
-# getSubTaskIssueTypes
-# getSubTaskIssueTypesForProject
 # progressWorkflowAction
-# refreshCustomFields
 # releaseVersion
 # setProjectAvatar (change to different existing)
 # setNewProjectAvatar (upload new and set it)
