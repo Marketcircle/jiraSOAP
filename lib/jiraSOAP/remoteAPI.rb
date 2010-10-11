@@ -234,6 +234,7 @@ module RemoteAPI
     JIRA::Issue.issue_with_xml_fragment frag
   end
 
+  # @todo test this method
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key(issue_key)
@@ -245,6 +246,7 @@ module RemoteAPI
     JIRA:Issue.issue_with_xml_fragment frag
   end
 
+  # @todo test this method
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id(issue_id)
@@ -256,6 +258,7 @@ module RemoteAPI
     JIRA::Issue.issue_with_xml_fragment frag
   end
 
+  # @todo test this method
   # @param [String] issue_key
   # @return [[JIRA::Attachment]]
   def get_attachments_for_issue_with_key(issue_key)
