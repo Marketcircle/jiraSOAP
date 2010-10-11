@@ -309,6 +309,18 @@ module RemoteAPI
     }
   end
 
+  # @param [String] project_name
+  # @return [[JIRA::IssueType]]
+  def get_issue_types_for_project_with_id(project_id)
+    response = invoke('soap:getIssueTypesForProject') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_id
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getIssueTypesForProjectReturn").map {
+      |frag|
+      JIRA::IssueType.issue_type_with_xml_fragment frag
+    }
+  end
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|
