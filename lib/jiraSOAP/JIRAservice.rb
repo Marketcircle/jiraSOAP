@@ -22,7 +22,7 @@ class JIRAService < Handsoap::Service
   # @param [String] url URL for the JIRA server
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  def self.instance_for_endpoint(url, user, password)
+  def self.instance_with_endpoint(url, user, password)
     jira = JIRAService.new url
     jira.login user, password
     jira
