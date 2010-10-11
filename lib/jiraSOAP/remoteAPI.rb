@@ -345,6 +345,15 @@ module RemoteAPI
     }
   end
 
+  # @todo find out what this method does
+  # @return [boolean] true if successful, throws an exception otherwise
+  def refresh_custom_fields
+    response = invoke('soap:refreshCustomFields') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    true
+  end
+
   # Retrieves favourite filters for the currently logged in user.
   # @return [JIRA::Filter]
   def get_favourite_filters
