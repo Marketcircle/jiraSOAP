@@ -9,6 +9,8 @@ module JIRA
 # will end up messing up any other instances currently being used.
 #
 # It is best to treat this class as a singleton. There should only be one.
+# However, this is not enforced, in case you want to be able to login as
+# multiple users to the same endpoint.
 #
 # HTTPS is not supported in this version.
 #
