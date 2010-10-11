@@ -272,6 +272,17 @@ module RemoteAPI
     }
   end
 
+
+  # @param [String] id
+  # @return [JIRA::Project]
+  def get_project_with_id(id)
+    response = invoke('soap:getProjectById') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', id
+    }
+    frag = response.document.xpath '//getProjectByIdReturn'
+    JIRA::Project.project_with_xml_fragment frag
+  end
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|
