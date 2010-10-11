@@ -84,7 +84,7 @@ class CustomField
   end
 end
 
-# Represents and issue type. Straightforward.
+# Represents and issue type. Straight forward.
 class IssueType
   attr_accessor :id, :name, :icon, :description
   attr_writer   :subtask
