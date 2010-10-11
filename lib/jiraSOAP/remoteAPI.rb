@@ -25,7 +25,7 @@ module RemoteAPI
 
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
-  # @return [true] true if successful, otherwise an exception is thrown
+  # @return [true] true if successful, otherwise false
   def logout
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
