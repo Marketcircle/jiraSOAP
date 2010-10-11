@@ -321,6 +321,17 @@ module RemoteAPI
       JIRA::IssueType.issue_type_with_xml_fragment frag
     }
   end
+  # @return [[JIRA::IssueType]]
+  def get_subtask_issue_types
+    response = invoke('soap:getSubTaskIssueTypes') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getSubtaskIssueTypesReturn").map {
+      |frag|
+      JIRA::IssueType.issue_type_with_xml_fragment frag
+    }
+  end
+
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|
