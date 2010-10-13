@@ -14,6 +14,13 @@ class URL
     @url = URI.parse url
   end
 
+  # The to_s method technically exists and so method_missing would not
+  # work its magic to redirect it to @url so we manually override.
+  # @return [String]
+  def to_s
+    @url.to_s
+  end
+
   # The magic of the hack, passing everything to the level beneath.
   def method_missing(method, *args)
     @url.send method, *args
