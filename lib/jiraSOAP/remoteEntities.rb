@@ -448,7 +448,7 @@ class AttachmentMetadata
   # @return [JIRA::Attachment,nil]
   def self.attachment_with_xml_fragment(frag)
     return if frag.nil?
-    attachment             = Attachment.new
+    attachment             = AttachmentMetadata.new
     attachment.id          = frag.xpath('id').to_s
     attachment.author      = frag.xpath('author').to_s
     attachment.filename    = frag.xpath('filename').to_s
