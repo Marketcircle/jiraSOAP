@@ -148,11 +148,13 @@ module RemoteAPI
   # Gets ALL avatars for a given project use this method; if you
   # just want the default avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
+  # @param [boolean] include_default_avatars
   # @return [[JIRA::Avatar]]
-  def get_project_avatars_for_key(project_key)
+  def get_project_avatars_for_key(project_key, include_default_avatars = false)
     response = invoke('soap:getProjectAvatars') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_key
+      msg.add 'soap:in2', include_default_avatars
     }
     response.document.xpath("#{RESPONSE_XPATH}/getProjectAvatarsReturn").map {
       |frag|
