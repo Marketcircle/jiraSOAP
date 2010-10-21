@@ -245,7 +245,7 @@ module RemoteAPI
       msg.add 'soap:in1', issue_key
     }
     frag = response.document.xpath '//getIssueReturn'
-    JIRA:Issue.issue_with_xml_fragment frag
+    JIRA::Issue.issue_with_xml_fragment frag
   end
 
   # @todo test this method
