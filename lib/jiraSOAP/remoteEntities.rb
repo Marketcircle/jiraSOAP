@@ -14,8 +14,9 @@ class Priority
     priority.id          = frag.xpath('id').to_s
     priority.name        = frag.xpath('name').to_s
     priority.color       = frag.xpath('color').to_s
-    priority.icon        = URL.new frag.xpath('icon').to_s
     priority.description = frag.xpath('description').to_s
+    url                  = frag.xpath('icon').to_s
+    priority.icon        = URL.new url unless url.nil?
     priority
   end
 end
@@ -32,8 +33,9 @@ class Resolution
     resolution             = Resolution.new
     resolution.id          = frag.xpath('id').to_s
     resolution.name        = frag.xpath('name').to_s
-    resolution.icon        = URL.new frag.xpath('icon').to_s
     resolution.description = frag.xpath('description').to_s
+    url                    = frag.xpath('icon').to_s
+    resolution.icon        = url unless url.nil?
     resolution
   end
 end
@@ -100,9 +102,10 @@ class IssueType
     issue_type             = IssueType.new
     issue_type.id          = frag.xpath('id').to_s
     issue_type.name        = frag.xpath('name').to_s
-    issue_type.icon        = URL.new frag.xpath('icon').to_s
     issue_type.subtask     = frag.xpath('subtask').to_s == 'true'
     issue_type.description = frag.xpath('description').to_s
+    url                    = frag.xpath('icon').to_s
+    issue_type.icon        = URL.new url unless url.nil?
     issue_type
   end
 end
@@ -121,11 +124,13 @@ class Comment
     comment.id              = frag.xpath('id').to_s
     comment.original_author = frag.xpath('author').to_s
     comment.body            = frag.xpath('body').to_s
-    comment.create_date     = Time.xmlschema frag.xpath('created').to_s
     comment.group_level     = frag.xpath('updateAuthor').to_s
     comment.role_level      = frag.xpath('roleLevel').to_s
     comment.update_author   = frag.xpath('updateAuthor').to_s
-    comment.last_updated    = Time.xmlschema frag.xpath('updated').to_s
+    date = frag.xpath('created').to_s
+    comment.create_date     = Time.xmlschema date unless date.nil?
+    date = frag.xpath('updated').to_s
+    comment.last_updated    = Time.xmlschema date unless date.nil?
     comment
   end
 end
@@ -142,8 +147,9 @@ class Status
     status             = Status.new
     status.id          = frag.xpath('id').to_s
     status.name        = frag.xpath('name').to_s
-    status.icon        = URL.new frag.xpath('icon').to_s
     status.description = frag.xpath('description').to_s
+    url                = frag.xpath('icon').to_s
+    status.icon        = URL.new url unless url.nil?
     status
   end
 end
@@ -171,7 +177,8 @@ class Version
     version.sequence     = frag.xpath('sequence').to_s.to_i
     version.released     = frag.xpath('released').to_s == 'true'
     version.archived     = frag.xpath('archived').to_s == 'true'
-    version.release_date = Time.xmlschema frag.xpath('releaseDate')
+    date = frag.xpath('releaseDate').to_s
+    version.release_date = Time.xmlschema date unless date.nil?
     version
   end
 end
@@ -227,8 +234,6 @@ class Project
     project.id                    = frag.xpath('id').to_s
     project.name                  = frag.xpath('name').to_s
     project.key                   = frag.xpath('key').to_s
-    project.url                   = URL.new frag.xpath('url').to_s
-    project.project_url           = URL.new frag.xpath('projectUrl').to_s
     project.lead                  = frag.xpath('lead').to_s
     project.description           = frag.xpath('description').to_s
     project.issue_security_scheme =
@@ -237,6 +242,10 @@ class Project
       Scheme.scheme_with_xml_fragment frag.xpath 'notificationScheme'
     project.permission_scheme     =
       Scheme.scheme_with_xml_fragment frag.xpath 'permissionScheme'
+    url                           = frag.xpath('url').to_s
+    project.url                   = URL.new url unless url.nil?
+    url                           = frag.xpath('projectUrl').to_s
+    project.project_url           = URL.new url unless url.nil?
     project
   end
 end
@@ -306,17 +315,20 @@ class Issue
     issue.summary             = frag.xpath('summary').to_s
     issue.description         = frag.xpath('description').to_s
     issue.type_id             = frag.xpath('type').to_s
-    issue.last_updated        = Time.xmlschema frag.xpath('updated').to_s
     issue.votes               = frag.xpath('votes').to_s.to_i
     issue.status_id           = frag.xpath('status').to_s
     issue.assignee_name       = frag.xpath('assignee').to_s
     issue.reporter_name       = frag.xpath('reporter').to_s
     issue.priority_id         = frag.xpath('priority').to_s
     issue.project_name        = frag.xpath('project').to_s
-    issue.create_date         = Time.xmlschema frag.xpath('created').to_s
-    issue.due_date            = Time.xmlschema frag.xpath('duedate').to_s
     issue.resolution_id       = frag.xpath('resolution').to_s
     issue.environment         = frag.xpath('environment').to_s
+    date = frag.xpath('updated').to_s
+    issue.last_updated        = Time.xmlschema date unless date.nil?
+    date = frag.xpath('updated').to_s
+    issue.create_date         = Time.xmlschema date unless date.nil?
+    date = frag.xpath('updated').to_s
+    issue.due_date            = Time.xmlschema date unless date.nil?
     issue
   end
 
@@ -439,10 +451,11 @@ class AttachmentMetadata
     attachment             = Attachment.new
     attachment.id          = frag.xpath('id').to_s
     attachment.author      = frag.xpath('author').to_s
-    attachment.create_date = Time.xmlschema frag.xpath('created').to_s
     attachment.filename    = frag.xpath('filename').to_s
     attachment.file_size   = frag.xpath('filesize').to_s.to_i
     attachment.mime_type   = frag.xpath('mimetype').to_s
+    date = frag.xpath('created').to_s
+    attachment.create_date = Time.xmlschema date unless date.nil?
     attachment
   end
 end
@@ -458,13 +471,15 @@ class ServerInfo
   def self.server_info_with_xml_fragment(frag)
     return if frag.nil?
     server_info = ServerInfo.new
-    server_info.base_url     = URL.new frag.xpath('baseUrl').to_s
-    server_info.build_date   = Time.xmlschema frag.xpath('buildDate').to_s
     server_info.build_number = frag.xpath('buildNumber').to_s.to_i
     server_info.edition      = frag.xpath('edition').to_s
     server_info.version      = frag.xpath('version').to_s
+    date = frag.xpath('buildDate').to_s
+    server_info.build_date   = Time.xmlschema date unless date.nil?
     server_info.server_time  =
       TimeInfo.time_info_with_xml_fragment frag.xpath 'serverTime'
+    url                      = frag.xpath('baseUrl').to_s
+    server_info.base_url     = URL.new url unless url.nil?
     server_info
   end
 end
