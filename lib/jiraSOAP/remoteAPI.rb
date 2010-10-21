@@ -164,11 +164,15 @@ module RemoteAPI
 
   # This method is the equivalent of making an advanced search from the
   # web interface.
+  #
+  # During my own testing, I found that HTTP requests could timeout for really
+  # large requests (~2500 results). So I set a more reasonable upper limit;
+  # feel free to override it, but be aware of the potential issues.
   # @param [String] jql_query JQL query as a string
   # @param [Fixnum] max_results limit on number of returned results;
   #  the value may be overridden by the server if max_results is too large
   # @return [[JIRA::Issue]]
-  def get_issues_from_jql_search(jql_query, max_results = 500)
+  def get_issues_from_jql_search(jql_query, max_results = 2000)
     response = invoke('soap:getIssuesFromJqlSearch') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', jql_query
