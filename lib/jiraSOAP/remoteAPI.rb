@@ -275,6 +275,8 @@ module RemoteAPI
     }
   end
 
+  # The archive state can only be set to true for versions that have not been
+  # released. However, this is not reflected by the return value of this method.
   # @param [String] project_key
   # @param [String] version_name
   # @param [boolean] state
@@ -397,7 +399,6 @@ end
 # addBase64EncodedAttachmentsToIssue
 # addComment
 # addVersion
-# archiveVersion
 # createProject
 # createProjectRole
 # createUser
