@@ -181,6 +181,14 @@ class Version
     version.release_date = Time.xmlschema date unless date.nil?
     version
   end
+
+  # @param [Handsoap::XmlMason::Node] msg
+  # @return [Handsoap::XmlMason::Node]
+  def soapify_for(msg)
+    msg.add 'name', @name
+    msg.add 'sequence', @sequence unless @sequence.nil?
+    msg.add 'releaseDate', @release_date.xmlschema unless @release_date.nil?
+  end
 end
 
 # Represents a scheme used by the server. Not very useful for the sake of the
