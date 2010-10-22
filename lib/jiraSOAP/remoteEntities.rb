@@ -154,7 +154,8 @@ class Status
   end
 end
 
-# Represents a version for a project. Straightforward.
+# Represents a version for a project. The description field is never
+# included when you retrieve versions from the server.
 # @todo find out why we don't get a description for this object
 class Version
   attr_accessor :id, :name, :sequence, :released, :archived, :release_date
