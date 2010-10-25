@@ -1,7 +1,9 @@
-require 'handsoap'
 require 'logger'
 require 'time'
 require 'uri'
+
+require 'handsoap'
+Handsoap.http_driver = :net_http
 
 require 'jiraSOAP/url.rb'
 require 'jiraSOAP/handsoap_extensions.rb'
