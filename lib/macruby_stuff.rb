@@ -5,7 +5,9 @@ class URL
     @url = NSURL.URLWithString url_string
   end
 
-  alias_method absoluteString to_s
+  def to_s
+	@url.absoluteString
+  end
 end
 
 module JIRA
