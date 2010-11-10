@@ -313,6 +313,20 @@ module RemoteAPI
     true
   end
 
+  # Requires you to set at least a project name, key, and lead.
+  # However, it is also a good idea to set other project properties, such as
+  # the permission scheme as the default permission scheme can be too
+  # restrictive in most cases.
+  # @param [JIRA::Project] project
+  # @return [JIRA::Project]
+  def create_project_with_project(project)
+    response = invoke('soap:createProjectFromObject') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1' do |submsg| project.soapify_for submsg end
+    }
+    frag = response.document.xpath '//createProjectFromObjectReturn'
+    JIRA::Project.project_with_xml_fragment frag
+  end
 
   # @param [String] id
   # @return [JIRA::Project]

@@ -257,6 +257,19 @@ class Project
     project.project_url           = URL.new url unless url.nil?
     project
   end
+
+  # @todo encode the schemes
+  # @param [Handsoap::XmlMason::Node] msg
+  # @return [Handsoap::XmlMason::Node]
+  def soapify_for(msg)
+    msg.add 'id', @id
+    msg.add 'name', @name
+    msg.add 'key', @key
+    msg.add 'url', @url
+    msg.add 'projectUrl', @project_url
+    msg.add 'lead', @lead
+    msg.add 'description', @description
+  end
 end
 
 # Contains a base64 encoded avatar image and some metadata. Straightforward.
