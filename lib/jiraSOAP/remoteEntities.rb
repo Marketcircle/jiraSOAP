@@ -230,7 +230,9 @@ class Component
 end
 
 # Represents a project configuration. NOT straightforward.
-# @todo find out why the server always seems to pass nil for schemes
+# You need to explicitly ask for schemes in order to get them. By
+# default, most project fetching methods purposely leave out all
+# the scheme information as permission schemes can be very large.
 class Project
   attr_accessor :id, :name, :key, :url, :project_url, :lead, :description
   attr_accessor :issue_security_scheme, :notification_scheme, :permission_scheme
