@@ -576,22 +576,10 @@ module RemoteAPI
   end
 end
 
-#TODO: next block of useful methods
-# addBase64EncodedAttachmentsToIssue
-# addComment
-# createProject
+#TODO: v0.5
 # createProjectRole
-# createUser
 # deleteProjectAvatar
-# deleteUser
-# editComment
 # getAvailableActions
-# getIssueCountForFilter
-# getIssuesFromFilterWithLimit
-# getIssuesFromTextSearchWithLimit
 # progressWorkflowAction
-# releaseVersion
 # setProjectAvatar (change to different existing)
 # setNewProjectAvatar (upload new and set it)
-# updateProject
-# progressWorkflowAction
