@@ -378,6 +378,17 @@ module RemoteAPI
     frag = response.document.xpath '//createUserReturn'
     JIRA::User.user_with_xml_fragment frag
   end
+
+  # @param [String] username
+  # @return [boolean] true if successful, throws an exception otherwise
+  def delete_user_with_name(username)
+    response = invoke('soap:deleteUser') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', username
+    }
+    true
+  end
+
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_with_id(project_id)
