@@ -27,6 +27,7 @@ class JIRAService < Handsoap::Service
   # @param [String] url URL for the JIRA server
   # @param [String] user JIRA user name to login with
   # @param [String] password
+  # @return [JIRA::JIRAService]
   def self.instance_with_endpoint(url, user, password)
     jira = JIRAService.new url
     jira.login user, password
@@ -47,6 +48,7 @@ class JIRAService < Handsoap::Service
   end
 
   # Something to help users out until the rest of the API is implemented.
+  # @return [nil]
   def method_missing(method, *args)
     message  = "#{method} is not a valid method. Check the documentation; the "
     message << 'method may not be implemented or has changed in recent '
