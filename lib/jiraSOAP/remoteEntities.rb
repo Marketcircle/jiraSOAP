@@ -102,7 +102,7 @@ class IssueType
     issue_type             = IssueType.new
     issue_type.id          = frag.xpath('id').to_s
     issue_type.name        = frag.xpath('name').to_s
-    issue_type.subtask     = frag.xpath('subtask').to_s == 'true'
+    issue_type.subtask     = frag.xpath('subTask').to_s == 'true'
     issue_type.description = frag.xpath('description').to_s
     url                    = frag.xpath('icon').to_s
     issue_type.icon        = URL.new url unless url.nil?
