@@ -32,7 +32,14 @@ end
 
 # Represents a resolution. Straightforward.
 class Resolution
-  attr_accessor :id, :name, :icon, :description
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
+  attr_accessor :icon
+  # @return [String]
+  attr_accessor :description
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -51,7 +58,10 @@ end
 
 # Represents a field mapping.
 class Field
-  attr_accessor :id, :name
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -68,7 +78,12 @@ end
 # Represents a custom field with values.
 # @todo see if @key is always nil from the server
 class CustomField
-  attr_accessor :id, :key, :values
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :key
+  # @return [[String]]
+  attr_accessor :values
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -97,8 +112,16 @@ end
 
 # Represents and issue type. Straight forward.
 class IssueType
-  attr_accessor :id, :name, :icon, :description
-  attr_writer   :subtask
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [URL]
+  attr_accessor :icon
+  # @return [String]
+  attr_accessor :description
+  # @return [boolean]
+  attr_accessor :subtask
 
   # @return [boolean] true if the issue type is a subtask, otherwise false
   def subtask?; @subtask; end
@@ -121,8 +144,22 @@ end
 
 # Represents a comment. Straight forward.
 class Comment
-  attr_accessor :id, :original_author, :role_level, :group_level, :body
-  attr_accessor :create_date, :last_updated, :update_author
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :original_author
+  # @return [String]
+  attr_accessor :role_level
+  # @return [String]
+  attr_accessor :group_level
+  # @return [String]
+  attr_accessor :body
+  # @return [Time]
+  attr_accessor :create_date
+  # @return [Time]
+  attr_accessor :last_updated
+  # @return [String]
+  attr_accessor :update_author
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -157,7 +194,14 @@ end
 
 # Represents a status. Straightforward.
 class Status
-  attr_accessor :id, :name, :icon, :description
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [URL]
+  attr_accessor :icon
+  # @return [String]
+  attr_accessor :description
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -178,8 +222,18 @@ end
 # included when you retrieve versions from the server.
 # @todo find out why we don't get a description for this object
 class Version
-  attr_accessor :id, :name, :sequence, :released, :archived, :release_date
-  attr_writer   :released, :archived
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [Fixnum]
+  attr_accessor :sequence
+  # @return [boolean]
+  attr_accessor :released
+  # @return [boolean]
+  attr_accessor :archived
+  # @return [Time]
+  attr_accessor :release_date
 
   # @return [boolean] true if the version has been released, otherwise false
   def released?; @released; end
@@ -217,7 +271,14 @@ end
 # API; a more useful case might be if you wanted to emulate the server's
 # behaviour.
 class Scheme
-  attr_accessor :id, :name, :type, :description
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [String]
+  attr_accessor :type
+  # @return [String]
+  attr_accessor :description
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -244,7 +305,10 @@ end
 
 # Represents a component description for a project. Straightforward.
 class Component
-  attr_accessor :id, :name
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -263,8 +327,26 @@ end
 # default, most project fetching methods purposely leave out all
 # the scheme information as permission schemes can be very large.
 class Project
-  attr_accessor :id, :name, :key, :url, :project_url, :lead, :description
-  attr_accessor :issue_security_scheme, :notification_scheme, :permission_scheme
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [String]
+  attr_accessor :key
+  # @return [URL]
+  attr_accessor :url
+  # @return [URL]
+  attr_accessor :project_url
+  # @return [String]
+  attr_accessor :lead
+  # @return [String]
+  attr_accessor :description
+  # @return [JIRA::Scheme]
+  attr_accessor :issue_security_scheme
+  # @return [JIRA::Scheme]
+  attr_accessor :notification_scheme
+  # @return [JIRA::PermissionScheme]
+  attr_accessor :permission_scheme
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -306,8 +388,18 @@ end
 
 # Contains a base64 encoded avatar image and some metadata. Straightforward.
 class Avatar
-  attr_accessor :id, :owner, :type, :content_type, :base64_data
-  attr_writer   :system
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :owner
+  # @return [String]
+  attr_accessor :type
+  # @return [String]
+  attr_accessor :content_type
+  # @return [String]
+  attr_accessor :base64_data
+  # @return [boolean] indicates if the image is the system default
+  attr_accessor :system
 
   # @return [boolean] true if avatar is the default system avatar, else false
   def system?; @system; end
@@ -337,11 +429,48 @@ end
 #
 # Issues with an UNRESOLVED status will have nil for the value of @resolution.
 class Issue
-  attr_accessor :id, :key, :summary, :description, :type_id, :last_updated
-  attr_accessor :votes, :status_id, :assignee_name, :reporter_name, :priority_id
-  attr_accessor :project_name, :affects_versions, :create_date, :due_date
-  attr_accessor :fix_versions, :resolution_id, :environment, :components
-  attr_accessor :attachment_names, :custom_field_values
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :key
+  # @return [String]
+  attr_accessor :summary
+  # @return [String]
+  attr_accessor :description
+  # @return [String]
+  attr_accessor :type_id
+  # @return [Time]
+  attr_accessor :last_updated
+  # @return [Fixnum]
+  attr_accessor :votes
+  # @return [String]
+  attr_accessor :status_id
+  # @return [String]
+  attr_accessor :assignee_name
+  # @return [String]
+  attr_accessor :reporter_name
+  # @return [String]
+  attr_accessor :priority_id
+  # @return [String]
+  attr_accessor :project_name
+  # @return [[JIRA::Version]]
+  attr_accessor :affects_versions
+  # @return [Time]
+  attr_accessor :create_date
+  # @return [Time]
+  attr_accessor :due_date
+  # @return [[JIRA::Version]]
+  attr_accessor :fix_versions
+  # @return [String]
+  attr_accessor :resolution_id
+  # @return [String]
+  attr_accessor :environment
+  # @return [[JIRA::Component]]
+  attr_accessor :components
+  # @return [[String]]
+  attr_accessor :attachment_names
+  # @return [[JIRA::CustomField]]
+  attr_accessor :custom_field_values
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -449,7 +578,12 @@ end
 
 # Contains the basic information about a user. Straightforward.
 class User
-  attr_accessor :name, :full_name, :email
+  # @return [String]
+  attr_accessor :name
+  # @return [String]
+  attr_accessor :full_name
+  # @return [String]
+  attr_accessor :email
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -467,7 +601,10 @@ end
 # A structure that is a bit of a hack. It is essentially just a key-value pair
 # that is used mainly by {RemoteAPI#update_issue}.
 class FieldValue
-  attr_accessor :id, :values
+  # @return [String]
+  attr_accessor :id
+  # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
+  attr_accessor :values
 
   # Factory method that gives you a nil value for the given id.
   # @param [String] id name of the field for @values
@@ -495,7 +632,18 @@ end
 # appears to be of the form
 # $ENDPOINT_URL/secure/attachment/$ATTACHMENT_ID/$ATTACHMENT_FILENAME
 class AttachmentMetadata
-  attr_accessor :id, :author, :create_date, :filename, :file_size, :mime_type
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :author
+  # @return [Time]
+  attr_accessor :create_date
+  # @return [String]
+  attr_accessor :filename
+  # @return [Fixnum] measured in @todo units
+  attr_accessor :file_size
+  # @return [String]
+  attr_accessor :mime_type
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -517,8 +665,18 @@ end
 # Only contains basic information about the endpoint server.
 # @todo turn attributes back to read-only by not using a factory for init
 class ServerInfo
-  attr_accessor :base_url, :build_date, :build_number, :edition
-  attr_accessor :server_time, :version
+  # @return [URL]
+  attr_accessor :base_url
+  # @return [Time]
+  attr_accessor :build_date
+  # @return [Fixnum]
+  attr_accessor :build_number
+  # @return [String]
+  attr_accessor :edition
+  # @return [JIRA::TimeInfo]
+  attr_accessor :server_time
+  # @return [String]
+  attr_accessor :version
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -543,7 +701,10 @@ end
 # The only place this structure is used is when #get_server_info is called.
 # @todo turn attributes back to read-only by not using a factory for init
 class TimeInfo
-  attr_accessor :server_time, :timezone
+  # @return [Time]
+  attr_accessor :server_time
+  # @return [String]
+  attr_accessor :timezone
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -560,7 +721,18 @@ end
 # Represents a filter
 # @todo find out what @project is supposed to be for
 class Filter
-  attr_accessor :id, :name, :author, :project, :description, :xml
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [String]
+  attr_accessor :author
+  # @return [String]
+  attr_accessor :project
+  # @return [String]
+  attr_accessor :description
+  # @return [nil]
+  attr_accessor :xml
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
