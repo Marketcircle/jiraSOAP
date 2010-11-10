@@ -6,7 +6,7 @@ class URL
   end
 
   def to_s
-	@url.absoluteString
+    @url.absoluteString
   end
 end
 
