@@ -484,6 +484,23 @@ module RemoteAPI
   end
 
   # @param [String] id
+  # @param [Fixnum] max_results
+  # @param [Fixnum] offset
+  # @return [[JIRA::Issue]]
+  def get_issues_from_filter_with_id(id, max_results = 500, offset = 0)
+    response = invoke('soap:getIssuesFromFilterWithLimit') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', id
+      msg.add 'soap:in2', offset
+      msg.add 'soap:in3', max_results
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromFilterWithLimitReturn").map {
+      |frag|
+      JIRA::Issue.issue_with_xml_fragment frag
+    }
+  end
+
+  # @param [String] id
   # @return [Fixnum]
   def get_issue_count_for_filter_with_id(id)
     response = invoke('soap:getIssueCountForFilter') { |msg|
