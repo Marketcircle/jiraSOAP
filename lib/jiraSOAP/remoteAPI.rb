@@ -483,6 +483,16 @@ module RemoteAPI
     }
   end
 
+  # @param [String] id
+  # @return [Fixnum]
+  def get_issue_count_for_filter_with_id(id)
+    response = invoke('soap:getIssueCountForFilter') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', id
+    }
+    response.document.xpath('//getIssueCountForFilterReturn').to_s.to_i
+  end
+
   # @todo optimize building the message, try a single pass
   # Expect this method to be slow.
   # @param [String] issue_key
