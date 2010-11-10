@@ -355,7 +355,7 @@ module RemoteAPI
 
   # @param [String] issue_key
   # @return [[JIRA::Comment]]
-  def get_comments_for_issue(issue_key)
+  def get_comments_for_issue_with_key(issue_key)
     response = invoke('soap:getComments') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', issue_key
