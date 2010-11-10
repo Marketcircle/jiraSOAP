@@ -403,6 +403,7 @@ module RemoteAPI
     }
   end
 
+  # I have no idea what this method does.
   # @todo find out what this method does
   # @return [boolean] true if successful, throws an exception otherwise
   def refresh_custom_fields
