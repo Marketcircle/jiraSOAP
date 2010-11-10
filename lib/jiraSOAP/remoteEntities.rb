@@ -224,6 +224,15 @@ class Scheme
   end
 end
 
+class PermissionScheme < Scheme
+  attr_accessor :permission_mappings
+
+  def initialize(frag)
+    return if frag.nil?
+    # @todo pain the friggin ass to figure out
+  end
+end
+
 # Represents a component description for a project. Straightforward.
 class Component
   attr_accessor :id, :name
@@ -264,7 +273,7 @@ class Project
     project.notification_scheme   =
       Scheme.scheme_with_xml_fragment frag.xpath 'notificationScheme'
     project.permission_scheme     =
-      Scheme.scheme_with_xml_fragment frag.xpath 'permissionScheme'
+      PermissionScheme.scheme_with_xml_fragment frag.xpath 'permissionScheme'
     url                           = frag.xpath('url').to_s
     project.url                   = URL.new url unless url.nil?
     url                           = frag.xpath('projectUrl').to_s

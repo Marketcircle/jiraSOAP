@@ -400,6 +400,18 @@ module RemoteAPI
     JIRA::Project.project_with_xml_fragment frag
   end
 
+  # @todo parse the permission scheme
+  # Note: this method does not yet include the permission scheme.
+  # @param [String] project_id
+  # @return [JIRA::Project]
+  def get_project_including_schemes_with_id(project_id)
+    response = invoke('soap:getProjectWithSchemesById') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_id
+    }
+    frag = response.document.xpath '//getProjectWithSchemesByIdReturn'
+    JIRA::Project.project_with_xml_fragment frag
+  end
 
   # @param [String] issue_key
   # @param [JIRA::Comment] comment
