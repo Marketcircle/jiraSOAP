@@ -2,7 +2,16 @@ module JIRA
 
 # Represents a priority level. Straightforward.
 class Priority
-  attr_accessor :id, :name, :color, :icon, :description
+  # @return [String]
+  attr_accessor :id
+  # @return [String]
+  attr_accessor :name
+  # @return [String] is a hex value
+  attr_accessor :color
+  # @return [URL] is an NSURL on MacRuby and a URI::HTTP object in CRuby
+  attr_accessor :icon
+  # @return [String]
+  attr_accesor :description
 
   # Factory method that takes a fragment of a SOAP response.
   # @todo change @color to be some kind of hex Fixnum object
