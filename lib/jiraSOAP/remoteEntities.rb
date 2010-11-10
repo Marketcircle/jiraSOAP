@@ -189,6 +189,7 @@ class Version
     msg.add 'name', @name
     msg.add 'sequence', @sequence unless @sequence.nil?
     msg.add 'releaseDate', @release_date.xmlschema unless @release_date.nil?
+    msg.add 'released', @released
   end
 end
 
