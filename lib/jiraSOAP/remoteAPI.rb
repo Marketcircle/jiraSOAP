@@ -331,6 +331,18 @@ module RemoteAPI
   end
 
   # @param [String] id
+  # You can set the release state for a project with this method.
+  # @param [String] project_name
+  # @param [JIRA::Version] version
+  # @return [boolean] true, throws an exception otherwise
+  def release_state_for_version_for_project(project_name, version)
+    response = invoke('soap:releaseVersion') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_name
+      msg.add 'soap:in2' do |submsg| version.soapify_for submsg end
+    }
+    true
+  end
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_with_id(project_id)
