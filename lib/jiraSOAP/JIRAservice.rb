@@ -18,7 +18,10 @@ module JIRA
 class JIRAService < Handsoap::Service
   include RemoteAPI
 
-  attr_reader :auth_token, :user
+  # @return [String]
+  attr_reader :auth_token
+  # @return [String]
+  attr_reader :user
 
   # Factory method to initialize and login.
   # @param [String] url URL for the JIRA server
