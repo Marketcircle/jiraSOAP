@@ -133,6 +133,17 @@ class Comment
     comment.last_updated    = Time.xmlschema date unless date.nil?
     comment
   end
+
+  # @param [Handsoap::XmlMason::Node] msg
+  # @return [Handsoap::XmlMason::Node]
+  def soapify_for(msg)
+    msg.add 'id', @id
+    msg.add 'author', @original_author
+    msg.add 'body', @body
+    msg.add 'groupLevel', @group_level
+    msg.add 'roleLevel', @role_level
+    msg.add 'updateAuthor', @update_author
+  end
 end
 
 # Represents a status. Straightforward.

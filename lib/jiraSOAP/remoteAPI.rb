@@ -401,6 +401,18 @@ module RemoteAPI
   end
 
 
+  # @param [String] issue_key
+  # @param [JIRA::Comment] comment
+  # @return [boolean] true if successful, throws an exception otherwise
+  def add_comment_to_issue_with_key(issue_key, comment)
+    response = invoke('soap:addComment') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+      msg.add 'soap:in2' do |submsg| comment.soapify_for submsg end
+    }
+    true
+  end
+
   # @param [String] id
   # @return [JIRA::Comment]
   def get_comment_with_id(id)
@@ -437,6 +449,18 @@ module RemoteAPI
       JIRA::IssueType.issue_type_with_xml_fragment frag
     }
   end
+
+  # @param [JIRA::Comment] comment
+  # @return [JIRA::Comment]
+  def update_comment(comment)
+    response = invoke('soap:editComment') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1' do |submsg| comment.soapify_for submsg end
+    }
+    frag = response.document.xpath '//editCommentReturn'
+    JIRA::Comment.comment_with_xml_fragment frag
+  end
+
   # @return [[JIRA::IssueType]]
   def get_subtask_issue_types
     response = invoke('soap:getSubTaskIssueTypes') { |msg|
