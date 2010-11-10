@@ -5,6 +5,7 @@
 # URI object if you are running on CRuby, but it will be an NSURL if you
 # are running on MacRuby.
 class URL
+  # @return [NSURL, URI::HTTP] the type depends on your RUBY_ENGINE
   attr_accessor :url
 
   # Initializes @url with the correct object type.
