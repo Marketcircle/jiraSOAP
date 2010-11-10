@@ -330,7 +330,6 @@ module RemoteAPI
     JIRA::Project.project_with_xml_fragment frag
   end
 
-  # @param [String] id
   # You can set the release state for a project with this method.
   # @param [String] project_name
   # @param [JIRA::Version] version
