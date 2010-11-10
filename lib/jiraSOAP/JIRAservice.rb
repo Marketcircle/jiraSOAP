@@ -45,9 +45,9 @@ class JIRAService < Handsoap::Service
 
   # Something to help users out until the rest of the API is implemented.
   def method_missing(method, *args)
-    message  = 'Check the documentation; the method may not be implemented or '
-    message << 'has changed in recent revisions. The client side API has not '
-    message << 'been stabilized yet.'
+    message  = "#{method} is not a valid method. Check the documentation; the "
+    message << 'method may not be implemented or has changed in recent '
+    message << 'revisions. The client side API has not been stabilized yet.'
     raise NoMethodError, message, caller
   end
 
