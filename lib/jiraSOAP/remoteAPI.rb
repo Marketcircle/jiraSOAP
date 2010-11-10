@@ -343,6 +343,19 @@ module RemoteAPI
     }
     true
   end
+
+  # The id of the project is the only field that you cannot update. Or, at
+  # least the only field I know that you cannot update.
+  # @param [JIRA::Project] project
+  # @return [JIRA::Project]
+  def update_project_with_project(project)
+    response = invoke('soap:updateProject') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1' do |submsg| project.soapify_for submsg end
+    }
+    frag = response.document.xpath '//updateProjectReturn'
+    JIRA::Project.project_with_xml_fragment frag
+  end
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_with_id(project_id)
