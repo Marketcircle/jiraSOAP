@@ -168,6 +168,8 @@ module RemoteAPI
   # During my own testing, I found that HTTP requests could timeout for really
   # large requests (~2500 results). So I set a more reasonable upper limit;
   # feel free to override it, but be aware of the potential issues.
+  #
+  # The JIRA::Issue structure does not include any comments or attachments.
   # @param [String] jql_query JQL query as a string
   # @param [Fixnum] max_results limit on number of returned results;
   #  the value may be overridden by the server if max_results is too large
