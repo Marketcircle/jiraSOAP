@@ -483,6 +483,7 @@ class AttachmentMetadata
 end
 
 # Only contains basic information about the endpoint server.
+# @todo turn attributes back to read-only by not using a factory for init
 class ServerInfo
   attr_accessor :base_url, :build_date, :build_number, :edition
   attr_accessor :server_time, :version
@@ -507,6 +508,8 @@ class ServerInfo
 end
 
 # Simple structure for a time and time zone; used oddly.
+# The only place this structure is used is when #get_server_info is called.
+# @todo turn attributes back to read-only by not using a factory for init
 class TimeInfo
   attr_accessor :server_time, :timezone
 

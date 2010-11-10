@@ -423,6 +423,7 @@ module RemoteAPI
     }
   end
 
+  # The @build_date attribute is a Time value, but does not include a time.
   # @return [JIRA::ServerInfo]
   def get_server_info
     response = invoke('soap:getServerInfo') { |msg|
