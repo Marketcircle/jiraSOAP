@@ -412,7 +412,7 @@ module RemoteAPI
   end
 
   # Retrieves favourite filters for the currently logged in user.
-  # @return [JIRA::Filter]
+  # @return [[JIRA::Filter]]
   def get_favourite_filters
     response = invoke('soap:getFavouriteFilters') { |msg|
       msg.add 'soap:in0', @auth_token
