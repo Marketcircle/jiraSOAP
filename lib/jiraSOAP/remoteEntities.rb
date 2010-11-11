@@ -521,6 +521,13 @@ class FieldValue < Entity
     fv
   end
 
+  # @param [String] id
+  # @param [Array] values
+  def initialize(id = nil, values = nil)
+    @id     = id
+    @values = values
+  end
+
   # Generate the SOAP message fragment for a field value.
   # @param [Handsoap::XmlMason::Node] message the node to add the object to
   # @param [String] label name for the tags that wrap the message
