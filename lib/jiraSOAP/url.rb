@@ -1,9 +1,9 @@
 # A bit of a hack to support using an NSURL in MacRuby while still supporting
 # MRI by using the URI module.
 #
-# I suggest not thinking about it too much beyond this point: this is a
-# URI object if you are running on CRuby, but it will be an NSURL if you
-# are running on MacRuby.
+# For any JIRA entity that has a URL object as an instance variable, you can
+# stick what ever type of object you want in the instance varible, as long as
+# the object has a #to_s method that returns a properly formatted URI.
 class URL
   # @return [NSURL, URI::HTTP] the type depends on your RUBY_ENGINE
   attr_accessor :url
