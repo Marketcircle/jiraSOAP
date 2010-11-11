@@ -52,7 +52,7 @@ class JIRAService < Handsoap::Service
   def method_missing(method, *args)
     message  = "#{method} is not a valid method. Check the documentation; the "
     message << 'method may not be implemented or has changed in recent '
-    message << 'revisions. The client side API has not been stabilized yet.'
+    message << 'revisions. The API has not been stabilized yet.'
     raise NoMethodError, message, caller
   end
 
