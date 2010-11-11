@@ -1,9 +1,13 @@
 module JIRA
 
-# Represents a priority level. Straightforward.
-class Priority
+# @abstract
+class Entity
   # @return [String]
   attr_accessor :id
+end
+
+# Represents a priority level. Straightforward.
+class Priority < Entity
   # @return [String]
   attr_accessor :name
   # @return [String] is a hex value
@@ -31,9 +35,7 @@ class Priority
 end
 
 # Represents a resolution. Straightforward.
-class Resolution
-  # @return [String]
-  attr_accessor :id
+class Resolution < Entity
   # @return [String]
   attr_accessor :name
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
@@ -57,9 +59,7 @@ class Resolution
 end
 
 # Represents a field mapping.
-class Field
-  # @return [String]
-  attr_accessor :id
+class Field < Entity
   # @return [String]
   attr_accessor :name
 
@@ -77,9 +77,7 @@ end
 
 # Represents a custom field with values.
 # @todo see if @key is always nil from the server
-class CustomField
-  # @return [String]
-  attr_accessor :id
+class CustomField < Entity
   # @return [String]
   attr_accessor :key
   # @return [[String]]
@@ -111,9 +109,7 @@ class CustomField
 end
 
 # Represents and issue type. Straight forward.
-class IssueType
-  # @return [String]
-  attr_accessor :id
+class IssueType < Entity
   # @return [String]
   attr_accessor :name
   # @return [URL]
@@ -143,9 +139,7 @@ class IssueType
 end
 
 # Represents a comment. Straight forward.
-class Comment
-  # @return [String]
-  attr_accessor :id
+class Comment < Entity
   # @return [String]
   attr_accessor :original_author
   # @return [String]
@@ -193,9 +187,7 @@ class Comment
 end
 
 # Represents a status. Straightforward.
-class Status
-  # @return [String]
-  attr_accessor :id
+class Status < Entity
   # @return [String]
   attr_accessor :name
   # @return [URL]
@@ -221,9 +213,7 @@ end
 # Represents a version for a project. The description field is never
 # included when you retrieve versions from the server.
 # @todo find out why we don't get a description for this object
-class Version
-  # @return [String]
-  attr_accessor :id
+class Version < Entity
   # @return [String]
   attr_accessor :name
   # @return [Fixnum]
@@ -270,9 +260,7 @@ end
 # Represents a scheme used by the server. Not very useful for the sake of the
 # API; a more useful case might be if you wanted to emulate the server's
 # behaviour.
-class Scheme
-  # @return [String]
-  attr_accessor :id
+class Scheme < Entity
   # @return [String]
   attr_accessor :name
   # @return [String]
@@ -304,9 +292,7 @@ class PermissionScheme < Scheme
 end
 
 # Represents a component description for a project. Straightforward.
-class Component
-  # @return [String]
-  attr_accessor :id
+class Component < Entity
   # @return [String]
   attr_accessor :name
 
@@ -326,9 +312,7 @@ end
 # You need to explicitly ask for schemes in order to get them. By
 # default, most project fetching methods purposely leave out all
 # the scheme information as permission schemes can be very large.
-class Project
-  # @return [String]
-  attr_accessor :id
+class Project < Entity
   # @return [String]
   attr_accessor :name
   # @return [String]
@@ -387,9 +371,7 @@ class Project
 end
 
 # Contains a base64 encoded avatar image and some metadata. Straightforward.
-class Avatar
-  # @return [String]
-  attr_accessor :id
+class Avatar < Entity
   # @return [String]
   attr_accessor :owner
   # @return [String]
@@ -428,9 +410,7 @@ end
 # to have in working order.
 #
 # Issues with an UNRESOLVED status will have nil for the value of @resolution.
-class Issue
-  # @return [String]
-  attr_accessor :id
+class Issue < Entity
   # @return [String]
   attr_accessor :key
   # @return [String]
@@ -600,9 +580,7 @@ end
 
 # A structure that is a bit of a hack. It is essentially just a key-value pair
 # that is used mainly by {RemoteAPI#update_issue}.
-class FieldValue
-  # @return [String]
-  attr_accessor :id
+class FieldValue < Entity
   # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
   attr_accessor :values
 
@@ -631,9 +609,7 @@ end
 # Only contains the meta-data for an attachment. The URI for an attachment
 # appears to be of the form
 # $ENDPOINT_URL/secure/attachment/$ATTACHMENT_ID/$ATTACHMENT_FILENAME
-class AttachmentMetadata
-  # @return [String]
-  attr_accessor :id
+class AttachmentMetadata < Entity
   # @return [String]
   attr_accessor :author
   # @return [Time]
@@ -720,9 +696,7 @@ end
 
 # Represents a filter
 # @todo find out what @project is supposed to be for
-class Filter
-  # @return [String]
-  attr_accessor :id
+class Filter < Entity
   # @return [String]
   attr_accessor :name
   # @return [String]
