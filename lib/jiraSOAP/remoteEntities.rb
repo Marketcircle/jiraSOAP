@@ -7,6 +7,7 @@ class Entity
 end
 
 # Represents a priority level. Straightforward.
+# @todo change @color to be some kind of hex Fixnum object
 class Priority < Entity
   # @return [String]
   attr_accessor :name
@@ -18,7 +19,6 @@ class Priority < Entity
   attr_accessor :description
 
   # Factory method that takes a fragment of a SOAP response.
-  # @todo change @color to be some kind of hex Fixnum object
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Priority,nil]
   def self.priority_with_xml_fragment(frag)
