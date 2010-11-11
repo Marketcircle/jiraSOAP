@@ -18,19 +18,14 @@ class Priority < Entity
   # @return [String]
   attr_accessor :description
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Priority,nil]
-  def self.priority_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    priority             = Priority.new
-    priority.id          = frag.xpath('id').to_s
-    priority.name        = frag.xpath('name').to_s
-    priority.color       = frag.xpath('color').to_s
-    priority.description = frag.xpath('description').to_s
-    url                  = frag.xpath('icon').to_s
-    priority.icon        = URL.new url unless url.nil?
-    priority
+    super frag
+    @name        = frag.xpath('name').to_s
+    @color       = frag.xpath('color').to_s
+    @description = frag.xpath('description').to_s
+    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
 end
 
@@ -43,18 +38,13 @@ class Resolution < Entity
   # @return [String]
   attr_accessor :description
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Resolution,nil]
-  def self.resolution_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    resolution             = Resolution.new
-    resolution.id          = frag.xpath('id').to_s
-    resolution.name        = frag.xpath('name').to_s
-    resolution.description = frag.xpath('description').to_s
-    url                    = frag.xpath('icon').to_s
-    resolution.icon        = url unless url.nil?
-    resolution
+    super frag
+    @name        = frag.xpath('name').to_s
+    @description = frag.xpath('description').to_s
+    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
 end
 
@@ -63,15 +53,11 @@ class Field < Entity
   # @return [String]
   attr_accessor :name
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Field,nil]
-  def self.field_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    field      = Field.new
-    field.id   = frag.xpath('id').to_s
-    field.name = frag.xpath('name').to_s
-    field
+    super frag
+    @name = frag.xpath('name').to_s
   end
 end
 
@@ -83,16 +69,12 @@ class CustomField < Entity
   # @return [[String]]
   attr_accessor :values
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::CustomField,nil]
-  def self.custom_field_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    custom_field        = CustomField.new
-    custom_field.id     = frag.xpath('customfieldId').to_s
-    custom_field.key    = frag.xpath('key').to_s
-    custom_field.values = frag.xpath('values/*').map { |value| value.to_s }
-    custom_field
+    super frag
+    @key    = frag.xpath('key').to_s
+    @values = frag.xpath('values/*').map { |value| value.to_s }
   end
 
   # Generate a SOAP message fragment for the object.
@@ -122,19 +104,14 @@ class IssueType < Entity
   # @return [boolean] true if the issue type is a subtask, otherwise false
   def subtask?; @subtask; end
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::IssueType,nil]
-  def self.issue_type_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    issue_type             = IssueType.new
-    issue_type.id          = frag.xpath('id').to_s
-    issue_type.name        = frag.xpath('name').to_s
-    issue_type.subtask     = frag.xpath('subTask').to_s == 'true'
-    issue_type.description = frag.xpath('description').to_s
-    url                    = frag.xpath('icon').to_s
-    issue_type.icon        = URL.new url unless url.nil?
-    issue_type
+    super frag
+    @name        = frag.xpath('name').to_s
+    @subtask     = frag.xpath('subTask').to_s == 'true'
+    @description = frag.xpath('description').to_s
+    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
 end
 
@@ -155,23 +132,17 @@ class Comment < Entity
   # @return [String]
   attr_accessor :update_author
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Comment,nil]
-  def self.comment_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    comment                 = Comment.new
-    comment.id              = frag.xpath('id').to_s
-    comment.original_author = frag.xpath('author').to_s
-    comment.body            = frag.xpath('body').to_s
-    comment.group_level     = frag.xpath('updateAuthor').to_s
-    comment.role_level      = frag.xpath('roleLevel').to_s
-    comment.update_author   = frag.xpath('updateAuthor').to_s
-    date = frag.xpath('created').to_s
-    comment.create_date     = Time.xmlschema date unless date.nil?
-    date = frag.xpath('updated').to_s
-    comment.last_updated    = Time.xmlschema date unless date.nil?
-    comment
+    super frag
+    @original_author = frag.xpath('author').to_s
+    @body            = frag.xpath('body').to_s
+    @group_level     = frag.xpath('updateAuthor').to_s
+    @role_level      = frag.xpath('roleLevel').to_s
+    @update_author   = frag.xpath('updateAuthor').to_s
+    @create_date     = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
+    @last_updated    = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
   end
 
   # @param [Handsoap::XmlMason::Node] msg
@@ -195,18 +166,13 @@ class Status < Entity
   # @return [String]
   attr_accessor :description
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Status,nil]
-  def self.status_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    status             = Status.new
-    status.id          = frag.xpath('id').to_s
-    status.name        = frag.xpath('name').to_s
-    status.description = frag.xpath('description').to_s
-    url                = frag.xpath('icon').to_s
-    status.icon        = URL.new url unless url.nil?
-    status
+    super frag
+    @name        = frag.xpath('name').to_s
+    @description = frag.xpath('description').to_s
+    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
 end
 
@@ -231,20 +197,15 @@ class Version < Entity
   # @return [boolean] true if the version has been archive, otherwise false
   def archived?; @archived; end
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Status,nil]
-  def self.version_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    version              = Version.new
-    version.id           = frag.xpath('id').to_s
-    version.name         = frag.xpath('name').to_s
-    version.sequence     = frag.xpath('sequence').to_s.to_i
-    version.released     = frag.xpath('released').to_s == 'true'
-    version.archived     = frag.xpath('archived').to_s == 'true'
-    date = frag.xpath('releaseDate').to_s
-    version.release_date = Time.xmlschema date unless date.nil?
-    version
+    super frag
+    @name         = frag.xpath('name').to_s
+    @sequence     = frag.xpath('sequence').to_s.to_i
+    @released     = frag.xpath('released').to_s == 'true'
+    @archived     = frag.xpath('archived').to_s == 'true'
+    @release_date = Time.xmlschema date unless (date = frag.xpath('releaseDate').to_s).nil?
   end
 
   # @param [Handsoap::XmlMason::Node] msg
@@ -268,26 +229,23 @@ class Scheme < Entity
   # @return [String]
   attr_accessor :description
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Scheme,nil]
-  def self.scheme_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    scheme             = Scheme.new
-    scheme.id          = frag.xpath('id').to_s
-    scheme.name        = frag.xpath('name').to_s
-    scheme.type        = frag.xpath('type').to_s
-    scheme.description = frag.xpath('description').to_s
-    scheme
+    super frag
+    @name        = frag.xpath('name').to_s
+    @type        = frag.xpath('type').to_s
+    @description = frag.xpath('description').to_s
   end
 end
 
+# @todo complete this class
 class PermissionScheme < Scheme
   attr_accessor :permission_mappings
 
+  # @todo pain the friggin ass to code
   def initialize(frag)
     return if frag.nil?
-    # @todo pain the friggin ass to figure out
   end
 end
 
@@ -296,15 +254,11 @@ class Component < Entity
   # @return [String]
   attr_accessor :name
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Component,nil]
-  def self.component_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    component      = Component.new
-    component.id   = frag.xpath('id').to_s
-    component.name = frag.xpath('name').to_s
-    component
+    super frag
+    @name = frag.xpath('name').to_s
   end
 end
 
@@ -332,28 +286,22 @@ class Project < Entity
   # @return [JIRA::PermissionScheme]
   attr_accessor :permission_scheme
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Project,nil]
-  def self.project_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    project = Project.new
-    project.id                    = frag.xpath('id').to_s
-    project.name                  = frag.xpath('name').to_s
-    project.key                   = frag.xpath('key').to_s
-    project.lead                  = frag.xpath('lead').to_s
-    project.description           = frag.xpath('description').to_s
-    project.issue_security_scheme =
+    super frag
+    @name                  = frag.xpath('name').to_s
+    @key                   = frag.xpath('key').to_s
+    @lead                  = frag.xpath('lead').to_s
+    @description           = frag.xpath('description').to_s
+    @issue_security_scheme =
       Scheme.scheme_with_xml_fragment frag.xpath 'issueSecurityScheme'
-    project.notification_scheme   =
+    @notification_scheme   =
       Scheme.scheme_with_xml_fragment frag.xpath 'notificationScheme'
-    project.permission_scheme     =
+    @permission_scheme     =
       PermissionScheme.scheme_with_xml_fragment frag.xpath 'permissionScheme'
-    url                           = frag.xpath('url').to_s
-    project.url                   = URL.new url unless url.nil?
-    url                           = frag.xpath('projectUrl').to_s
-    project.project_url           = URL.new url unless url.nil?
-    project
+    @url                   = URL.new url unless (url = frag.xpath('url').to_s).nil?
+    @project_url           = URL.new url unless (url = frag.xpath('projectUrl').to_s).nil?
   end
 
   # @todo encode the schemes
@@ -386,19 +334,15 @@ class Avatar < Entity
   # @return [boolean] true if avatar is the default system avatar, else false
   def system?; @system; end
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Avatar,nil]
-  def self.avatar_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    avatar              = Avatar.new
-    avatar.id           = frag.xpath('id').to_s
-    avatar.owner        = frag.xpath('owner').to_s
-    avatar.system       = frag.xpath('system').to_s == 'true'
-    avatar.type         = frag.xpath('type').to_s
-    avatar.content_type = frag.xpath('contentType').to_s
-    avatar.base64_data  = frag.xpath('base64Data').to_s
-    avatar
+    super frag
+    @owner        = frag.xpath('owner').to_s
+    @system       = frag.xpath('system').to_s == 'true'
+    @type         = frag.xpath('type').to_s
+    @content_type = frag.xpath('contentType').to_s
+    @base64_data  = frag.xpath('base64Data').to_s
   end
 end
 
@@ -452,47 +396,30 @@ class Issue < Entity
   # @return [[JIRA::CustomField]]
   attr_accessor :custom_field_values
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Issue,nil]
-  def self.issue_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    issue                     = Issue.new
-    issue.affects_versions    = frag.xpath('affectsVersions/*').map { |frag|
-      Version.version_with_xml_fragment frag
-    }
-    issue.fix_versions        = frag.xpath('fixVersions/*').map { |frag|
-      Version.version_with_xml_fragment frag
-    }
-    issue.components          = frag.xpath('components/*').map { |frag|
-      Component.component_with_xml_fragment frag
-    }
-    issue.custom_field_values = frag.xpath('customFieldValues/*').map { |frag|
-      CustomField.custom_field_with_xml_fragment frag
-    }
-    issue.attachment_names    = frag.xpath('attachmentNames/*').map { |name|
-      name.to_s
-    }
-    issue.id                  = frag.xpath('id').to_s
-    issue.key                 = frag.xpath('key').to_s
-    issue.summary             = frag.xpath('summary').to_s
-    issue.description         = frag.xpath('description').to_s
-    issue.type_id             = frag.xpath('type').to_s
-    issue.votes               = frag.xpath('votes').to_s.to_i
-    issue.status_id           = frag.xpath('status').to_s
-    issue.assignee_name       = frag.xpath('assignee').to_s
-    issue.reporter_name       = frag.xpath('reporter').to_s
-    issue.priority_id         = frag.xpath('priority').to_s
-    issue.project_name        = frag.xpath('project').to_s
-    issue.resolution_id       = frag.xpath('resolution').to_s
-    issue.environment         = frag.xpath('environment').to_s
-    date = frag.xpath('updated').to_s
-    issue.last_updated        = Time.xmlschema date unless date.nil?
-    date = frag.xpath('updated').to_s
-    issue.create_date         = Time.xmlschema date unless date.nil?
-    date = frag.xpath('updated').to_s
-    issue.due_date            = Time.xmlschema date unless date.nil?
-    issue
+    super frag
+    @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
+    @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
+    @components          = frag.xpath('components/*').map { |frag| Component.new frag }
+    @custom_field_values = frag.xpath('customFieldValues/*').map { |frag| CustomField.new frag }
+    @attachment_names    = frag.xpath('attachmentNames/*').map { |name| name.to_s }
+    @key                 = frag.xpath('key').to_s
+    @summary             = frag.xpath('summary').to_s
+    @description         = frag.xpath('description').to_s
+    @type_id             = frag.xpath('type').to_s
+    @votes               = frag.xpath('votes').to_s.to_i
+    @status_id           = frag.xpath('status').to_s
+    @assignee_name       = frag.xpath('assignee').to_s
+    @reporter_name       = frag.xpath('reporter').to_s
+    @priority_id         = frag.xpath('priority').to_s
+    @project_name        = frag.xpath('project').to_s
+    @resolution_id       = frag.xpath('resolution').to_s
+    @environment         = frag.xpath('environment').to_s
+    @last_updated        = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
+    @create_date         = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
+    @due_date            = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
   end
 
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
@@ -565,16 +492,12 @@ class User
   # @return [String]
   attr_accessor :email
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::User,nil]
-  def self.user_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    user           = User.new
-    user.name      = frag.xpath('name').to_s
-    user.full_name = frag.xpath('fullname').to_s
-    user.email     = frag.xpath('email').to_s
-    user
+    @name      = frag.xpath('name').to_s
+    @full_name = frag.xpath('fullname').to_s
+    @email     = frag.xpath('email').to_s
   end
 end
 
@@ -623,18 +546,14 @@ class AttachmentMetadata < Entity
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Attachment,nil]
-  def self.attachment_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    attachment             = AttachmentMetadata.new
-    attachment.id          = frag.xpath('id').to_s
-    attachment.author      = frag.xpath('author').to_s
-    attachment.filename    = frag.xpath('filename').to_s
-    attachment.file_size   = frag.xpath('filesize').to_s.to_i
-    attachment.mime_type   = frag.xpath('mimetype').to_s
-    date = frag.xpath('created').to_s
-    attachment.create_date = Time.xmlschema date unless date.nil?
-    attachment
+    super frag
+    @author      = frag.xpath('author').to_s
+    @filename    = frag.xpath('filename').to_s
+    @file_size   = frag.xpath('filesize').to_s.to_i
+    @mime_type   = frag.xpath('mimetype').to_s
+    @create_date = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
   end
 end
 
@@ -656,20 +575,15 @@ class ServerInfo
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::ServerInfo,nil]
-  def self.server_info_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    server_info = ServerInfo.new
-    server_info.build_number = frag.xpath('buildNumber').to_s.to_i
-    server_info.edition      = frag.xpath('edition').to_s
-    server_info.version      = frag.xpath('version').to_s
-    date = frag.xpath('buildDate').to_s
-    server_info.build_date   = Time.xmlschema date unless date.nil?
-    server_info.server_time  =
-      TimeInfo.time_info_with_xml_fragment frag.xpath 'serverTime'
-    url                      = frag.xpath('baseUrl').to_s
-    server_info.base_url     = URL.new url unless url.nil?
-    server_info
+    super frag
+    @build_number = frag.xpath('buildNumber').to_s.to_i
+    @edition      = frag.xpath('edition').to_s
+    @version      = frag.xpath('version').to_s
+    @build_date   = Time.xmlschema date unless (date = frag.xpath('buildDate').to_s).nil?
+    @server_time  = TimeInfo.new frag.xpath 'serverTime'
+    @base_url     = URL.new url unless (url = frag.xpath('baseUrl').to_s).nil?
   end
 end
 
@@ -684,13 +598,11 @@ class TimeInfo
 
   # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::TimeInfo,nil]
-  def self.time_info_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    time_info             = TimeInfo.new
-    time_info.server_time = Time.parse frag.xpath('serverTime').to_s
-    time_info.timezone    = frag.xpath('timeZoneId').to_s
-    time_info
+    super frag
+    @server_time = Time.parse frag.xpath('serverTime').to_s
+    @timezone    = frag.xpath('timeZoneId').to_s
   end
 end
 
@@ -708,19 +620,15 @@ class Filter < Entity
   # @return [nil]
   attr_accessor :xml
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  # @return [JIRA::Filter,nil]
-  def self.filter_with_xml_fragment(frag)
+  def initialize(frag = nil)
     return if frag.nil?
-    filter             = Filter.new
-    filter.id          = frag.xpath('id').to_s
-    filter.name        = frag.xpath('name').to_s
-    filter.author      = frag.xpath('author').to_s
-    filter.project     = frag.xpath('project').to_s
-    filter.description = frag.xpath('description').to_s
-    filter.xml         = frag.xpath('xml').to_s
-    filter
+    super frag
+    @name        = frag.xpath('name').to_s
+    @author      = frag.xpath('author').to_s
+    @project     = frag.xpath('project').to_s
+    @description = frag.xpath('description').to_s
+    @xml         = frag.xpath('xml').to_s
   end
 end
 
