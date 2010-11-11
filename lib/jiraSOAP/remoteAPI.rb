@@ -193,15 +193,11 @@ module RemoteAPI
   # Though JIRA::FieldValue objects have an id field, they do not expect to be
   # given id values. You must use the name of the field you wish to update.
   # @example Usage With A Normal Field
-  #  summary        = JIRA::FieldValue.new
-  #  summary.id     = 'summary'
-  #  summary.values = ['My new summary']
+  #  summary        = JIRA::FieldValue.new 'summary', ['My new summary']
   # @example Usage With A Custom Field
-  #  custom_field        = JIRA::FieldValue.new
-  #  custom_field.id     = 'customfield_10060'
-  #  custom_field.values = ['123456']
+  #  custom_field        = JIRA::FieldValue.new 'customfield_10060', ['123456']
   # @example Setting a field to be blank/nil
-  #  description = JIRA::FieldValue.field_value_with_nil_values 'description'
+  #  description = JIRA::FieldValue.new 'description'
   # @example Calling the method to update an issue
   #  jira_service_instance.update_issue 'PROJECT-1', description, custom_field
   # @param [String] issue_key
