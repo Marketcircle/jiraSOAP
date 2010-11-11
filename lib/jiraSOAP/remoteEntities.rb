@@ -4,6 +4,10 @@ module JIRA
 class Entity
   # @return [String]
   attr_accessor :id
+
+  def initialize(frag)
+    @id = frag.xpath('id').to_s
+  end
 end
 
 # Represents a priority level. Straightforward.
