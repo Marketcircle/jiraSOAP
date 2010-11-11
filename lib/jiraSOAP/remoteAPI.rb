@@ -1,7 +1,15 @@
 # Contains the API defined by Atlassian for the JIRA SOAP service. The JavaDoc
 # for the SOAP API is located at http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html.
 # @todo exception handling
+# @todo logging
 # @todo code refactoring and de-duplication
+# @todo break the API down by task, like Apple's developer documentation
+# @todo createProjectRole [v0.5]
+# @todo deleteProjectAvatar [target v0.5]
+# @todo setProjectAvatar (change to different existing) [target v0.5]
+# @todo setNewProjectAvatar (upload new and set it) [target v0.5]
+# @todo getAvailableActions [target v0.6]
+# @todo progressWorkflowAction [target v0.6]
 module RemoteAPI
   # XPath constant to get a node containing a response array.
   # This could be used for all responses, but is only used in cases where we
@@ -575,11 +583,3 @@ module RemoteAPI
     JIRA::ServerInfo.server_info_with_xml_fragment frag
   end
 end
-
-#TODO: v0.5
-# createProjectRole
-# deleteProjectAvatar
-# getAvailableActions
-# progressWorkflowAction
-# setProjectAvatar (change to different existing)
-# setNewProjectAvatar (upload new and set it)
