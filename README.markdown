@@ -18,6 +18,7 @@ Pick up where `jira4r` left off:
 - Implement the current API; `jira4r` does not implement APIs from JIRA 4.x
 - More natural interface; not adhering to the API when the API is weird
 - Speed; network latency is bad enough
+- Excellent documentation, since the documentation given by Atlassian is so terse
 
 
 Getting Started
