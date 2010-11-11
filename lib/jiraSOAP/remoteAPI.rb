@@ -19,7 +19,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [true] true if successful, otherwise an exception is thrown
+  # @return [boolean] true if successful, otherwise an exception is thrown
   def login(user, password)
     response = invoke('soap:login') { |msg|
       msg.add 'soap:in0', user
@@ -33,7 +33,7 @@ module RemoteAPI
 
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
-  # @return [true] true if successful, otherwise false
+  # @return [boolean] true if successful, otherwise false
   def logout
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
