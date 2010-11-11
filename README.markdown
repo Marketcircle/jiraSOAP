@@ -50,14 +50,12 @@ Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/mast
 TODO
 ----
 
+- Finish implementing all of the API
+- Stabilize API
 - Performance optimizations; there are a number of places that can be optimized
   + Using GCD/Threads for parsing arrays of results; a significant speed up for large types and large arrays (ie. creating issues from JQL searches)
-- Refactor for a smaller code base
-- Fix type hacks;. dates should be `NSDate`s and URLs should be `NSURL`s, right now they are all strings
 - Public test suite
   + Needs a mock server
-- Error handling
-- Finish implementing all of the API
 
 
 Note on Patches/Pull Requests
