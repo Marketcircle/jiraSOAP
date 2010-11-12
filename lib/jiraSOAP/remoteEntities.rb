@@ -507,15 +507,17 @@ end
 
 # A structure that is a bit of a hack. It is essentially just a key-value pair
 # that is used mainly by {RemoteAPI#update_issue}.
-class FieldValue < Entity
+class FieldValue
+  # @return [String]
+  attr_accessor :field_name
   # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
   attr_accessor :values
 
-  # @param [String] id
+  # @param [String] field_name
   # @param [Array] values
-  def initialize(id = nil, values = nil)
-    @id     = id
-    @values = values
+  def initialize(field_name = nil, values = nil)
+    @field_name = field_name
+    @values     = values
   end
 
   # Generate the SOAP message fragment for a field value.
@@ -524,7 +526,7 @@ class FieldValue < Entity
   # @return [Handsoap::XmlMason::Element]
   def soapify_for(message, label = 'fieldValue')
     message.add label do |message|
-      message.add 'id', @id
+      message.add 'id', @field_name
       message.add_simple_array 'values', @values
     end
   end
