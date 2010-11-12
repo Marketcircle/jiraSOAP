@@ -3,6 +3,8 @@ jiraSOAP - Ruby interface to the JIRA SOAP API
 
 Uses [handsoap](http://wiki.github.com/unwire/handsoap/) to build a client for the JIRA SOAP API that works on MacRuby as well as Ruby 1.9.
 
+Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames). The meat of the service is in the `RemoteAPI` module.
+
 
 Motivation
 ----------
@@ -44,8 +46,6 @@ Once that ugliness is over with, you can run a quick demo (making appropriate su
      }
 
      db.logout
-
-Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames). The meat of the service is in the `RemoteAPI` module.
 
 
 TODO
