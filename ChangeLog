@@ -1,0 +1,6 @@
+Version 0.5
+
+	* Begin summarizing changes in a changelog
+	* Added RemoteAPI#get_server_configuration
+	* Changed JIRA::CustomField to JIRA::CustomFieldValue
+	* Changed JIRA::User#name to JIRA::User#username
