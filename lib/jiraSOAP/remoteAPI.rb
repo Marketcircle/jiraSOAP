@@ -113,6 +113,9 @@ module RemoteAPI
     }
   end
 
+  # You need to explicitly ask for schemes in order to get them. By
+  # default, most project fetching methods purposely leave out all
+  # the scheme information as permission schemes can be very large.
   # @param [String] project_key
   # @return [JIRA::Project]
   def get_project_with_key(project_key)
