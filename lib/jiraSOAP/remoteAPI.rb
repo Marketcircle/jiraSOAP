@@ -188,7 +188,7 @@ module RemoteAPI
   #
   # Fields known to not update via this method:
   #  - status - use {#progress_workflow_action}
-  #  - attachments - use {#add_base64_encoded_attachment_to_issue}
+  #  - attachments - use {#add_base64_encoded_attachments_to_issue_with_key}
   #
   # Though JIRA::FieldValue objects have an id field, they do not expect to be
   # given id values. You must use the name of the field you wish to update.
