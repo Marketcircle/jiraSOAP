@@ -22,6 +22,8 @@ class JIRAService < Handsoap::Service
   attr_reader :auth_token
   # @return [String]
   attr_reader :user
+  # @return [String]
+  attr_reader :endpoint_url
 
   # Factory method to initialize and login.
   # @param [String] url URL for the JIRA server
