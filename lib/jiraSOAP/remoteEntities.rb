@@ -511,16 +511,6 @@ class FieldValue < Entity
   # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
   attr_accessor :values
 
-  # Factory method that gives you a nil value for the given id.
-  # @param [String] id name of the field for @values
-  # @return [JIRA::FieldValue] Will always have @values = [nil]
-  def self.field_value_with_nil_values(id)
-    fv = FieldValue.new
-    fv.id = id
-    fv.values = [nil]
-    fv
-  end
-
   # @param [String] id
   # @param [Array] values
   def initialize(id = nil, values = nil)
