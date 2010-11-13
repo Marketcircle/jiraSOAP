@@ -139,11 +139,15 @@ end
 # @pragma mark < DynamicEntity
 ##############################
 
+# @abstract
+class NamedEntity < JIRA::DynamicEntity
+  # @return [String] a plain language name
   attr_accessor :name
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
+  def initialize(frag)
     super frag
     @name = frag.xpath('name').to_s
   end
