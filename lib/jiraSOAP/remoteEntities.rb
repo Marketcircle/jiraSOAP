@@ -463,6 +463,10 @@ class AttachmentMetadata < JIRA::NamedEntity
   end
 end
 
+################################
+# @pragma mark < DescribedEntity
+################################
+
   # @return [String]
   # @return [String]
 
