@@ -107,6 +107,53 @@ class TimeInfo
   end
 end
 
+# A simple structure that is used by {RemoteAPI#get_server_configuration}.
+class ServerConfiguration
+  # @return [boolean]
+  attr_reader :attachments_allowed
+  # @return [boolean]
+  attr_reader :external_user_management_allowed
+  # @return [boolean]
+  attr_reader :issue_linking_allowed
+  # @return [boolean]
+  attr_reader :subtasks_allowed
+  # @return [boolean]
+  attr_reader :time_tracking_allowed
+  # @return [boolean]
+  attr_reader :unassigned_issues_allowed
+  # @return [boolean]
+  attr_reader :voting_allowed
+  # @return [boolean]
+  attr_reader :watching_allowed
+  # @return [Fixnum]
+  attr_reader :time_tracking_days_per_week
+  # @return [Fixnum]
+  attr_reader :time_tracking_hours_per_day
+
+  def attachments_allowed?; @attachments_allowed; end
+  def external_user_management_allowed?; @external_user_management; end
+  def issue_linking_allowed?; @issue_linking_allowed; end
+  def subtasks_allowed?; @subtasks_allowed; end
+  def time_tracking_allowed?; @time_tracking_allowed; end
+  def unassigned_issues_allowed?; @unassigned_issues_allowed; end
+  def voting_allowed?; @voting_allowed; end
+  def watching_allowed?; @watching_allowed; end
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag)
+    @attachments_allowed              = frag.xpath('allowAttachments').to_s == 'true'
+    @external_user_management_allowed = frag.xpath('allowExternalUserManagement').to_s == 'true'
+    @issue_linking_allowed            = frag.xpath('allowIssueLinking').to_s == 'true'
+    @subtasks_allowed                 = frag.xpath('allowSubTasks').to_s == 'true'
+    @time_tracking_allowed            = frag.xpath('allowTimeTracking').to_s == 'true'
+    @unassigned_issues_allowed        = frag.xpath('allowUnassignedIssues').to_s == 'true'
+    @voting_allowed                   = frag.xpath('allowVoting').to_s == 'true'
+    @watching_allowed                 = frag.xpath('allowWatching').to_s == 'true'
+    @time_tracking_days_per_week      = frag.xpath('timeTrackingDaysPerWeek').to_s.to_i
+    @time_tracking_hours_per_day      = frag.xpath('timeTrackingHoursPerDay').to_s.to_i
+  end
+end
+
 ##############################
 # @pragma mark < DynamicEntity
 ##############################

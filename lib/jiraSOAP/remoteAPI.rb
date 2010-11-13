@@ -552,4 +552,12 @@ module RemoteAPI
     }
     JIRA::ServerInfo.new response.document.xpath '//getServerInfoReturn'
   end
+
+  # @return [JIRA::ServerConfiguration]
+  def get_server_configuration
+    response = invoke('soap:getConfiguration') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    JIRA::ServerConfiguration.new response.document.xpath '//getConfigurationReturn'
+  end
 end
