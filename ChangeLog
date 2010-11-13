@@ -1,6 +1,16 @@
 Version 0.5
 
 	* Begin summarizing changes in a changelog
+	* Begin abstracting parts of JIRA model
+
+	* Fixed RemoteAPI#add_version_to_project_with_key
+
 	* Added RemoteAPI#get_server_configuration
-	* Changed JIRA::CustomField to JIRA::CustomFieldValue
-	* Changed JIRA::User#name to JIRA::User#username
+
+	* Changed use of factories to constructors in the model
+	* Changed FieldValue#id to FieldValue#field_name
+	* Changed CustomField to CustomFieldValue
+	* Changed User#name to User#username
+	* Changed Scheme#type to return the class name
+	* Changed some RemoteAPI method names to be more descriptive
+	* Various documentation updates
