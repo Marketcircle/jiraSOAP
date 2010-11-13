@@ -520,18 +520,13 @@ end
 # @abstract
 class Scheme < JIRA::DescribedEntity
   # @return [String]
-  attr_accessor :description
-
-  # @return [String]
   def type
     self.class.to_s
   end
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @description = frag.xpath('description').to_s
+    super frag unless frag.nil?
   end
 end
 
