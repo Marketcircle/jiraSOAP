@@ -135,6 +135,10 @@ class TimeInfo
   end
 end
 
+##############################
+# @pragma mark < DynamicEntity
+##############################
+
   attr_accessor :name
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
