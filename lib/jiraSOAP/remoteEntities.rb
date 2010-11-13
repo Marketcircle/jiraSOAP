@@ -421,7 +421,8 @@ class DescribedEntity < JIRA::NamedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    super frag
+    @id          = frag.xpath('id').to_s
+    @name        = frag.xpath('name').to_s
     @description = frag.xpath('description').to_s
   end
 end
@@ -535,7 +536,9 @@ class IssueProperty < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    super frag
+    @id          = frag.xpath('id').to_s
+    @name        = frag.xpath('name').to_s
+    @description = frag.xpath('description').to_s
     url = nil
     @icon = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
