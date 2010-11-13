@@ -1,10 +1,12 @@
 module JIRA
 
 # @abstract
-class Entity
-  # @return [String]
+class DynamicEntity
+  # @return [String] usually holds a numerical value but for consistency with
+  #  with id's from custom fields this attribute is always a String
   attr_accessor :id
 
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
     @id = frag.xpath('id').to_s
   end
