@@ -1,5 +1,9 @@
 module JIRA
 
+#######################
+# @pragma mark < Object
+#######################
+
 # @abstract
 class DynamicEntity
   # @return [String] usually holds a numerical value but for consistency with
