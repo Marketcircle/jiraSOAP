@@ -74,12 +74,25 @@ end
 
 # Represents a resolution. Straightforward.
 class Resolution < Entity
+# Only contains basic information about the endpoint server and only used
+# by {RemoteAPI#get_server_info}.
+class ServerInfo
+  # @return [URL]
+  attr_reader :base_url
+  # @return [Time]
+  attr_reader :build_date
+  # @return [Fixnum]
+  attr_reader :build_number
   # @return [String]
   attr_accessor :name
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
   attr_accessor :icon
+  attr_reader :edition
+  # @return [JIRA::TimeInfo]
+  attr_reader :server_time
   # @return [String]
   attr_accessor :description
+  attr_reader :version
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
@@ -88,12 +101,36 @@ class Resolution < Entity
     @name        = frag.xpath('name').to_s
     @description = frag.xpath('description').to_s
     @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
+  def initialize(frag)
+    url = nil
+    date = nil
+    @build_number = frag.xpath('buildNumber').to_s.to_i
+    @edition      = frag.xpath('edition').to_s
+    @version      = frag.xpath('version').to_s
+    @build_date   = Time.xmlschema date unless (date = frag.xpath('buildDate').to_s).nil?
+    @server_time  = TimeInfo.new frag.xpath 'serverTime'
+    @base_url     = URL.new url unless (url = frag.xpath('baseUrl').to_s).nil?
   end
 end
 
 # Represents a field mapping.
 class Field < Entity
+# Simple structure for a time and time zone; only used by JIRA::ServerInfo
+# objects, which themselves are only created when {RemoteAPI#get_server_info}
+# is called.
+class TimeInfo
+  # @return [Time]
+  attr_reader :server_time
   # @return [String]
+  attr_reader :timezone
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag)
+    @server_time = Time.parse frag.xpath('serverTime').to_s
+    @timezone    = frag.xpath('timeZoneId').to_s
+  end
+end
+
   attr_accessor :name
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -567,52 +604,19 @@ class AttachmentMetadata < Entity
   end
 end
 
-# Only contains basic information about the endpoint server.
-# @todo turn attributes back to read-only by not using a factory for init
-class ServerInfo
-  # @return [URL]
-  attr_accessor :base_url
-  # @return [Time]
-  attr_accessor :build_date
-  # @return [Fixnum]
-  attr_accessor :build_number
   # @return [String]
-  attr_accessor :edition
-  # @return [JIRA::TimeInfo]
-  attr_accessor :server_time
   # @return [String]
-  attr_accessor :version
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    @build_number = frag.xpath('buildNumber').to_s.to_i
-    @edition      = frag.xpath('edition').to_s
-    @version      = frag.xpath('version').to_s
-    @build_date   = Time.xmlschema date unless (date = frag.xpath('buildDate').to_s).nil?
-    @server_time  = TimeInfo.new frag.xpath 'serverTime'
-    @base_url     = URL.new url unless (url = frag.xpath('baseUrl').to_s).nil?
   end
 end
 
-# Simple structure for a time and time zone; used oddly.
-# The only place this structure is used is when #get_server_info is called.
-# @todo turn attributes back to read-only by not using a factory for init
-class TimeInfo
-  # @return [Time]
-  attr_accessor :server_time
-  # @return [String]
-  attr_accessor :timezone
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
     super frag
-    @server_time = Time.parse frag.xpath('serverTime').to_s
-    @timezone    = frag.xpath('timeZoneId').to_s
   end
 end
 
