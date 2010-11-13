@@ -224,9 +224,15 @@ class Comment < JIRA::DynamicEntity
   end
 end
 
+# Contains most of the data and metadata for a JIRA issue, but does
+# not contain the {JIRA::Comment}'s or {JIRA::AttachmentMetadata}.
 #
+# This class is easily the most convoluted structure in the API, and will
+# likely be the greatest source of bugs. The irony of the situation is that
+# this structure is also the most critical to have in working order.
 #
 # Issues with an UNRESOLVED status will have nil for the value of @resolution.
+class Issue < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :key
   # @return [String]
@@ -265,15 +271,18 @@ end
   attr_accessor :components
   # @return [[String]]
   attr_accessor :attachment_names
+  # @return [[JIRA::CustomFieldValue]]
   attr_accessor :custom_field_values
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
     super frag
+    date = nil
     @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
     @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
     @components          = frag.xpath('components/*').map { |frag| Component.new frag }
+    @custom_field_values = frag.xpath('customFieldValues/*').map { |frag| CustomFieldValue.new frag }
     @attachment_names    = frag.xpath('attachmentNames/*').map { |name| name.to_s }
     @key                 = frag.xpath('key').to_s
     @summary             = frag.xpath('summary').to_s
@@ -312,6 +321,7 @@ end
   #
   # Passing an environment/due date field with a value of nil causes the
   # server to complain about the formatting of the message.
+  # @todo see if we can use the simple and complex array builders
   # @param [Handsoap::XmlMason::Node] msg  message the node to add the object to
   def soapify_for(msg)
     #might be going away, since it appears to have no effect at creation time
