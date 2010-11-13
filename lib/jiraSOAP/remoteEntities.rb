@@ -153,9 +153,10 @@ class NamedEntity < JIRA::DynamicEntity
   end
 end
 
-# Represents a custom field with values.
+# Represents an instance of a custom field (with values). This object is used
+# primarily as a member of {JIRA::Issue} objects.
 # @todo see if @key is always nil from the server
-class CustomField < Entity
+class CustomFieldValue < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :key
   # @return [[String]]
@@ -164,7 +165,7 @@ class CustomField < Entity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    super frag
+    @id     = frag.xpath('customfieldId').to_s
     @key    = frag.xpath('key').to_s
     @values = frag.xpath('values/*').map { |value| value.to_s }
   end
