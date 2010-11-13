@@ -388,8 +388,42 @@ class Field < JIRA::NamedEntity
   end
 end
 
+# Represents a version for a project. The description field is never
+# included when you retrieve versions from the server.
+# @todo find out why we don't get a description for this object
+class Version < JIRA::NamedEntity
+  # @return [Fixnum]
+  attr_accessor :sequence
+  # @return [boolean]
+  attr_accessor :released
+  # @return [boolean]
+  attr_accessor :archived
+  # @return [Time]
+  attr_accessor :release_date
 
+  def released?; @released; end
+  def archived?; @archived; end
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag = nil)
+    return if frag.nil?
+    super frag
+    date = nil
+    @sequence     = frag.xpath('sequence').to_s.to_i
+    @released     = frag.xpath('released').to_s == 'true'
+    @archived     = frag.xpath('archived').to_s == 'true'
+    @release_date = Time.xmlschema date unless (date = frag.xpath('releaseDate').to_s).nil?
   end
+
+  # @param [Handsoap::XmlMason::Node] msg
+  # @return [Handsoap::XmlMason::Node]
+  def soapify_for(msg)
+    msg.add 'name', @name
+    msg.add 'sequence', @sequence unless @sequence.nil?
+    msg.add 'releaseDate', @release_date.xmlschema unless @release_date.nil?
+    msg.add 'released', @released
+  end
+end
 
   end
 end
