@@ -378,8 +378,13 @@ class DescribedEntity < JIRA::NamedEntity
     @description = frag.xpath('description').to_s
   end
 end
+
+# Represents a field mapping.
+class Field < JIRA::NamedEntity
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
+    super frag
   end
 end
 
