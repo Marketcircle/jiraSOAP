@@ -281,7 +281,7 @@ module RemoteAPI
   # @param [String] project_key
   # @param [JIRA::Version] version
   # @return [JIRA::Version]
-  def add_version_to_project(project_key, version)
+  def add_version_to_project_with_key(project_key, version)
     response = invoke('soap:addVersion') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_key
