@@ -501,7 +501,9 @@ class IssueProperty < JIRA::DescribedEntity
   end
 end
 
+# Represents a filter, but does not seem to include the filters JQL query.
 # @todo find out what @project is supposed to be for
+class Filter < JIRA::DescribedEntity
   # @return [String]
   attr_accessor :author
   # @return [String]
