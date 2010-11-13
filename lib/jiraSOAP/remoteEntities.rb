@@ -519,6 +519,32 @@ end
   end
 end
 
+##################################
+# @pragma mark Inherit from Scheme
+##################################
+
+# @todo complete this class
+# Includes a mapping of project specific permission settings.
+class PermissionScheme < JIRA::Scheme
+  # @return [nil]
+  attr_accessor :permission_mappings
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag = nil)
+    return if frag.nil?
+    super frag
+    # @todo pain the friggin ass to code
+  end
+end
+
+# The basic metadata about a project's notification scheme.
+class NotificationScheme < JIRA::Scheme
+end
+
+# The basic metadata about a project's issue security scheme.
+class IssueSecurityScheme < JIRA::Scheme
+end
+
 #########################################
 # @pragma mark Inherit from IssueProperty
 #########################################
