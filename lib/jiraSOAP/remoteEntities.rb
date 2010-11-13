@@ -185,17 +185,29 @@ end
 
 # Represents and issue type. Straight forward.
 class IssueType < Entity
+# Contains a base64 encoded avatar image and metadata about the avatar.
+class Avatar < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :name
   # @return [URL]
   attr_accessor :icon
+  attr_accessor :owner
   # @return [String]
   attr_accessor :description
   # @return [boolean]
   attr_accessor :subtask
+  attr_accessor :type
+  # @return [String]
+  attr_accessor :content_type
+  # @return [String]
+  attr_accessor :base64_data
+  # @return [boolean] indicates if the image is the system default
+  attr_accessor :system
 
   # @return [boolean] true if the issue type is a subtask, otherwise false
   def subtask?; @subtask; end
+  # @return [boolean] true if avatar is the default system avatar, else false
+  def system?; @system; end
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
@@ -205,6 +217,11 @@ class IssueType < Entity
     @subtask     = frag.xpath('subTask').to_s == 'true'
     @description = frag.xpath('description').to_s
     @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
+    @owner        = frag.xpath('owner').to_s
+    @system       = frag.xpath('system').to_s == 'true'
+    @type         = frag.xpath('type').to_s
+    @content_type = frag.xpath('contentType').to_s
+    @base64_data  = frag.xpath('base64Data').to_s
   end
 end
 
@@ -408,34 +425,6 @@ class Project < Entity
     msg.add 'projectUrl', @project_url
     msg.add 'lead', @lead
     msg.add 'description', @description
-  end
-end
-
-# Contains a base64 encoded avatar image and some metadata. Straightforward.
-class Avatar < Entity
-  # @return [String]
-  attr_accessor :owner
-  # @return [String]
-  attr_accessor :type
-  # @return [String]
-  attr_accessor :content_type
-  # @return [String]
-  attr_accessor :base64_data
-  # @return [boolean] indicates if the image is the system default
-  attr_accessor :system
-
-  # @return [boolean] true if avatar is the default system avatar, else false
-  def system?; @system; end
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @owner        = frag.xpath('owner').to_s
-    @system       = frag.xpath('system').to_s == 'true'
-    @type         = frag.xpath('type').to_s
-    @content_type = frag.xpath('contentType').to_s
-    @base64_data  = frag.xpath('base64Data').to_s
   end
 end
 
