@@ -367,8 +367,17 @@ end
 # @pragma mark < NamedEntity
 ############################
 
+# @abstract
+class DescribedEntity < JIRA::NamedEntity
+  # @return [String] usually a short blurb
+  attr_accessor :description
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag)
+    super frag
+    @description = frag.xpath('description').to_s
+  end
+end
   def initialize(frag = nil)
     return if frag.nil?
   end
