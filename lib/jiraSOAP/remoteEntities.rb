@@ -242,12 +242,12 @@ class Comment < JIRA::DynamicEntity
   def initialize(frag = nil)
     return if frag.nil?
     @id              = frag.xpath('id').to_s
-    date = nil
     @original_author = frag.xpath('author').to_s
     @body            = frag.xpath('body').to_s
     @group_level     = frag.xpath('updateAuthor').to_s
     @role_level      = frag.xpath('roleLevel').to_s
     @update_author   = frag.xpath('updateAuthor').to_s
+    date = nil
     @create_date     = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
     @last_updated    = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
   end
@@ -318,7 +318,6 @@ class Issue < JIRA::DynamicEntity
   def initialize(frag = nil)
     return if frag.nil?
     @id                  = frag.xpath('id').to_s
-    date = nil
     @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
     @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
     @components          = frag.xpath('components/*').map { |frag| Component.new frag }
@@ -336,6 +335,7 @@ class Issue < JIRA::DynamicEntity
     @project_name        = frag.xpath('project').to_s
     @resolution_id       = frag.xpath('resolution').to_s
     @environment         = frag.xpath('environment').to_s
+    date = nil
     @last_updated        = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
     @create_date         = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
     @due_date            = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
@@ -448,10 +448,10 @@ class Version < JIRA::NamedEntity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    date = nil
     @sequence     = frag.xpath('sequence').to_s.to_i
     @released     = frag.xpath('released').to_s == 'true'
     @archived     = frag.xpath('archived').to_s == 'true'
+    date = nil
     @release_date = Time.xmlschema date unless (date = frag.xpath('releaseDate').to_s).nil?
   end
 
@@ -494,11 +494,11 @@ class AttachmentMetadata < JIRA::NamedEntity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    date = nil
     @author      = frag.xpath('author').to_s
     @filename    = frag.xpath('filename').to_s
     @file_size   = frag.xpath('filesize').to_s.to_i
     @mime_type   = frag.xpath('mimetype').to_s
+    date = nil
     @create_date = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
   end
 end
@@ -582,12 +582,12 @@ class Project < JIRA::DescribedEntity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    url = nil
     @key                   = frag.xpath('key').to_s
     @lead                  = frag.xpath('lead').to_s
     @issue_security_scheme = IssueSecurityScheme.new frag.xpath 'issueSecurityScheme'
     @notification_scheme   = NotificationScheme.new frag.xpath 'notificationScheme'
     @permission_scheme     = PermissionScheme.new frag.xpath 'permissionScheme'
+    url = nil
     @url                   = URL.new url unless (url = frag.xpath('url').to_s).nil?
     @project_url           = URL.new url unless (url = frag.xpath('projectUrl').to_s).nil?
   end
