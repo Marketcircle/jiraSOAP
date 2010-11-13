@@ -225,8 +225,8 @@ class Avatar < JIRA::DynamicEntity
   end
 end
 
-# Represents a comment. Straight forward.
-class Comment < Entity
+# Contains a comments body and its metadata.
+class Comment < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :original_author
   # @return [String]
@@ -246,6 +246,7 @@ class Comment < Entity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
+    date = nil
     @original_author = frag.xpath('author').to_s
     @body            = frag.xpath('body').to_s
     @group_level     = frag.xpath('updateAuthor').to_s
