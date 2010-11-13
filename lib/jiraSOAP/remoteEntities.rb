@@ -75,14 +75,12 @@ class ServerInfo
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    url = nil
-    date = nil
     @build_number = frag.xpath('buildNumber').to_s.to_i
     @edition      = frag.xpath('edition').to_s
     @version      = frag.xpath('version').to_s
-    @build_date   = Time.xmlschema date unless (date = frag.xpath('buildDate').to_s).nil?
+    @build_date   = Time.xmlschema frag.xpath('buildDate').to_s
     @server_time  = TimeInfo.new frag.xpath 'serverTime'
-    @base_url     = URL.new url unless (url = frag.xpath('baseUrl').to_s).nil?
+    @base_url     = URL.new tfrag.xpath('baseUrl').to_s
   end
 end
 
