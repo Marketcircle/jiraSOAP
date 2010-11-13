@@ -467,13 +467,24 @@ end
 # @pragma mark < DescribedEntity
 ################################
 
+# Represents a scheme used by the server. Not very useful for the sake of the
+# API; a more useful case might be if you wanted to emulate the server's
+# behaviour.
+# @abstract
+class Scheme < JIRA::DescribedEntity
   # @return [String]
+  attr_accessor :description
+
   # @return [String]
+  def type
+    self.class.to_s
+  end
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
     super frag
+    @description = frag.xpath('description').to_s
   end
 end
 
