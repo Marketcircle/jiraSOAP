@@ -165,7 +165,13 @@ end
 
 # Represents an instance of a custom field (with values). This object is used
 # primarily as a member of {JIRA::Issue} objects.
+#
+# The structure of this class resembles JIRA::FieldValue, it is different
+# in that @values will always be stored as an Array of String objects in a
+# custom field and a field value is more flexible. You can expect the classes
+# to merge in the near future.
 # @todo see if @key is always nil from the server
+# @todo merge this class with JIRA::FieldValue
 class CustomFieldValue < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :key
