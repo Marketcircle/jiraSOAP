@@ -15,12 +15,37 @@ end
 # Represents a priority level. Straightforward.
 # @todo change @color to be some kind of hex Fixnum object
 class Priority < Entity
+# A structure that is a bit of a hack. It is essentially just a key-value pair
+# that is used mainly by {RemoteAPI#update_issue}.
+class FieldValue
   # @return [String]
   attr_accessor :name
   # @return [String] is a hex value
   attr_accessor :color
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
   attr_accessor :icon
+  attr_accessor :field_name
+  # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
+  attr_accessor :values
+
+  # @param [String] field_name
+  # @param [Array] values
+  def initialize(field_name = nil, values = nil)
+    @field_name = field_name
+    @values     = values
+  end
+
+  # Generate the SOAP message fragment for a field value.
+  # @param [Handsoap::XmlMason::Node] message the node to add the object to
+  # @param [String] label name for the tags that wrap the message
+  # @return [Handsoap::XmlMason::Element]
+  def soapify_for(message, label = 'fieldValue')
+    message.add label do |message|
+      message.add 'id', @field_name
+      message.add_simple_array 'values', @values unless @values.nil?
+    end
+  end
+end
   # @return [String]
   attr_accessor :description
 
@@ -507,30 +532,9 @@ class User
   end
 end
 
-# A structure that is a bit of a hack. It is essentially just a key-value pair
-# that is used mainly by {RemoteAPI#update_issue}.
-class FieldValue
-  # @return [String]
-  attr_accessor :field_name
-  # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
-  attr_accessor :values
 
-  # @param [String] field_name
-  # @param [Array] values
-  def initialize(field_name = nil, values = nil)
-    @field_name = field_name
-    @values     = values
   end
 
-  # Generate the SOAP message fragment for a field value.
-  # @param [Handsoap::XmlMason::Node] message the node to add the object to
-  # @param [String] label name for the tags that wrap the message
-  # @return [Handsoap::XmlMason::Element]
-  def soapify_for(message, label = 'fieldValue')
-    message.add label do |message|
-      message.add 'id', @field_name
-      message.add_simple_array 'values', @values
-    end
   end
 end
 
