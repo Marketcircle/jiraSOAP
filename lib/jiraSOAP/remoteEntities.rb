@@ -124,7 +124,7 @@ class ServerConfiguration
   attr_reader :time_tracking_hours_per_day
 
   def attachments_allowed?; @attachments_allowed; end
-  def external_user_management_allowed?; @external_user_management; end
+  def external_user_management_allowed?; @external_user_management_allowed; end
   def issue_linking_allowed?; @issue_linking_allowed; end
   def subtasks_allowed?; @subtasks_allowed; end
   def time_tracking_allowed?; @time_tracking_allowed; end
