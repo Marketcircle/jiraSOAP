@@ -80,7 +80,7 @@ class ServerInfo
     @version      = frag.xpath('version').to_s
     @build_date   = Time.xmlschema frag.xpath('buildDate').to_s
     @server_time  = TimeInfo.new frag.xpath 'serverTime'
-    @base_url     = URL.new tfrag.xpath('baseUrl').to_s
+    @base_url     = URL.new frag.xpath('baseUrl').to_s
   end
 end
 
