@@ -9,11 +9,6 @@ class DynamicEntity
   # @return [String] usually holds a numerical value but for consistency with
   #  with id's from custom fields this attribute is always a String
   attr_accessor :id
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
-    @id = frag.xpath('id').to_s
-  end
 end
 
 # A structure that is a bit of a hack. It is essentially just a key-value pair
@@ -165,7 +160,7 @@ class NamedEntity < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    super frag
+    @id   = frag.xpath('id').to_s
     @name = frag.xpath('name').to_s
   end
 end
@@ -219,7 +214,7 @@ class Avatar < JIRA::DynamicEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    super frag
+    @id           = frag.xpath('id').to_s
     @owner        = frag.xpath('owner').to_s
     @system       = frag.xpath('system').to_s == 'true'
     @type         = frag.xpath('type').to_s
@@ -248,7 +243,7 @@ class Comment < JIRA::DynamicEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    super frag
+    @id              = frag.xpath('id').to_s
     date = nil
     @original_author = frag.xpath('author').to_s
     @body            = frag.xpath('body').to_s
@@ -324,7 +319,7 @@ class Issue < JIRA::DynamicEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    super frag
+    @id                  = frag.xpath('id').to_s
     date = nil
     @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
     @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
