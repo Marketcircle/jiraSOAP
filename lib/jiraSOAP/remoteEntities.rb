@@ -16,18 +16,10 @@ class DynamicEntity
   end
 end
 
-# Represents a priority level. Straightforward.
-# @todo change @color to be some kind of hex Fixnum object
-class Priority < Entity
 # A structure that is a bit of a hack. It is essentially just a key-value pair
 # that is used mainly by {RemoteAPI#update_issue}.
 class FieldValue
   # @return [String]
-  attr_accessor :name
-  # @return [String] is a hex value
-  attr_accessor :color
-  # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
-  attr_accessor :icon
   attr_accessor :field_name
   # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
   attr_accessor :values
@@ -55,7 +47,6 @@ end
 # are the permissions and login statistics.
 class User
   # @return [String]
-  attr_accessor :description
   attr_accessor :username
   # @return [String]
   attr_accessor :full_name
@@ -65,19 +56,12 @@ class User
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    super frag
-    @name        = frag.xpath('name').to_s
-    @color       = frag.xpath('color').to_s
-    @description = frag.xpath('description').to_s
-    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
     @username      = frag.xpath('name').to_s
     @full_name     = frag.xpath('fullname').to_s
     @email_address = frag.xpath('email').to_s
   end
 end
 
-# Represents a resolution. Straightforward.
-class Resolution < Entity
 # Only contains basic information about the endpoint server and only used
 # by {RemoteAPI#get_server_info}.
 class ServerInfo
@@ -88,23 +72,13 @@ class ServerInfo
   # @return [Fixnum]
   attr_reader :build_number
   # @return [String]
-  attr_accessor :name
-  # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
-  attr_accessor :icon
   attr_reader :edition
   # @return [JIRA::TimeInfo]
   attr_reader :server_time
   # @return [String]
-  attr_accessor :description
   attr_reader :version
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name        = frag.xpath('name').to_s
-    @description = frag.xpath('description').to_s
-    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   def initialize(frag)
     url = nil
     date = nil
@@ -117,8 +91,6 @@ class ServerInfo
   end
 end
 
-# Represents a field mapping.
-class Field < Entity
 # Simple structure for a time and time zone; only used by JIRA::ServerInfo
 # objects, which themselves are only created when {RemoteAPI#get_server_info}
 # is called.
@@ -145,8 +117,6 @@ class NamedEntity < JIRA::DynamicEntity
   attr_accessor :name
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
   def initialize(frag)
     super frag
     @name = frag.xpath('name').to_s
@@ -183,19 +153,11 @@ class CustomFieldValue < JIRA::DynamicEntity
   end
 end
 
-# Represents and issue type. Straight forward.
-class IssueType < Entity
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class Avatar < JIRA::DynamicEntity
   # @return [String]
-  attr_accessor :name
-  # @return [URL]
-  attr_accessor :icon
   attr_accessor :owner
   # @return [String]
-  attr_accessor :description
-  # @return [boolean]
-  attr_accessor :subtask
   attr_accessor :type
   # @return [String]
   attr_accessor :content_type
@@ -204,8 +166,6 @@ class Avatar < JIRA::DynamicEntity
   # @return [boolean] indicates if the image is the system default
   attr_accessor :system
 
-  # @return [boolean] true if the issue type is a subtask, otherwise false
-  def subtask?; @subtask; end
   # @return [boolean] true if avatar is the default system avatar, else false
   def system?; @system; end
 
@@ -213,10 +173,6 @@ class Avatar < JIRA::DynamicEntity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    @name        = frag.xpath('name').to_s
-    @subtask     = frag.xpath('subTask').to_s == 'true'
-    @description = frag.xpath('description').to_s
-    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
     @owner        = frag.xpath('owner').to_s
     @system       = frag.xpath('system').to_s == 'true'
     @type         = frag.xpath('type').to_s
@@ -268,176 +224,9 @@ class Comment < JIRA::DynamicEntity
   end
 end
 
-# Represents a status. Straightforward.
-class Status < Entity
-  # @return [String]
-  attr_accessor :name
-  # @return [URL]
-  attr_accessor :icon
-  # @return [String]
-  attr_accessor :description
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name        = frag.xpath('name').to_s
-    @description = frag.xpath('description').to_s
-    @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
-  end
-end
-
-# Represents a version for a project. The description field is never
-# included when you retrieve versions from the server.
-# @todo find out why we don't get a description for this object
-class Version < Entity
-  # @return [String]
-  attr_accessor :name
-  # @return [Fixnum]
-  attr_accessor :sequence
-  # @return [boolean]
-  attr_accessor :released
-  # @return [boolean]
-  attr_accessor :archived
-  # @return [Time]
-  attr_accessor :release_date
-
-  # @return [boolean] true if the version has been released, otherwise false
-  def released?; @released; end
-
-  # @return [boolean] true if the version has been archive, otherwise false
-  def archived?; @archived; end
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name         = frag.xpath('name').to_s
-    @sequence     = frag.xpath('sequence').to_s.to_i
-    @released     = frag.xpath('released').to_s == 'true'
-    @archived     = frag.xpath('archived').to_s == 'true'
-    @release_date = Time.xmlschema date unless (date = frag.xpath('releaseDate').to_s).nil?
-  end
-
-  # @param [Handsoap::XmlMason::Node] msg
-  # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
-    msg.add 'name', @name
-    msg.add 'sequence', @sequence unless @sequence.nil?
-    msg.add 'releaseDate', @release_date.xmlschema unless @release_date.nil?
-    msg.add 'released', @released
-  end
-end
-
-# Represents a scheme used by the server. Not very useful for the sake of the
-# API; a more useful case might be if you wanted to emulate the server's
-# behaviour.
-class Scheme < Entity
-  # @return [String]
-  attr_accessor :name
-  # @return [String]
-  attr_accessor :type
-  # @return [String]
-  attr_accessor :description
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name        = frag.xpath('name').to_s
-    @type        = frag.xpath('type').to_s
-    @description = frag.xpath('description').to_s
-  end
-end
-
-# @todo complete this class
-class PermissionScheme < Scheme
-  attr_accessor :permission_mappings
-
-  # @todo pain the friggin ass to code
-  def initialize(frag)
-    return if frag.nil?
-  end
-end
-
-# Represents a component description for a project. Straightforward.
-class Component < Entity
-  # @return [String]
-  attr_accessor :name
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name = frag.xpath('name').to_s
-  end
-end
-
-# Represents a project configuration. NOT straightforward.
-# You need to explicitly ask for schemes in order to get them. By
-# default, most project fetching methods purposely leave out all
-# the scheme information as permission schemes can be very large.
-class Project < Entity
-  # @return [String]
-  attr_accessor :name
-  # @return [String]
-  attr_accessor :key
-  # @return [URL]
-  attr_accessor :url
-  # @return [URL]
-  attr_accessor :project_url
-  # @return [String]
-  attr_accessor :lead
-  # @return [String]
-  attr_accessor :description
-  # @return [JIRA::Scheme]
-  attr_accessor :issue_security_scheme
-  # @return [JIRA::Scheme]
-  attr_accessor :notification_scheme
-  # @return [JIRA::PermissionScheme]
-  attr_accessor :permission_scheme
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @name                  = frag.xpath('name').to_s
-    @key                   = frag.xpath('key').to_s
-    @lead                  = frag.xpath('lead').to_s
-    @description           = frag.xpath('description').to_s
-    @issue_security_scheme =
-      Scheme.scheme_with_xml_fragment frag.xpath 'issueSecurityScheme'
-    @notification_scheme   =
-      Scheme.scheme_with_xml_fragment frag.xpath 'notificationScheme'
-    @permission_scheme     =
-      PermissionScheme.scheme_with_xml_fragment frag.xpath 'permissionScheme'
-    @url                   = URL.new url unless (url = frag.xpath('url').to_s).nil?
-    @project_url           = URL.new url unless (url = frag.xpath('projectUrl').to_s).nil?
-  end
-
-  # @todo encode the schemes
-  # @param [Handsoap::XmlMason::Node] msg
-  # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
-    msg.add 'id', @id
-    msg.add 'name', @name
-    msg.add 'key', @key
-    msg.add 'url', @url
-    msg.add 'projectUrl', @project_url
-    msg.add 'lead', @lead
-    msg.add 'description', @description
-  end
-end
-
-# Represents a JIRA issue; easily the most convoluted structure in the API.
-# This structure and anything related directly to it will most likely be the
-# greatest source of bugs.
 #
-# The irony of the situation is that this structure is also the most critical
-# to have in working order.
 #
 # Issues with an UNRESOLVED status will have nil for the value of @resolution.
-class Issue < Entity
   # @return [String]
   attr_accessor :key
   # @return [String]
@@ -476,7 +265,6 @@ class Issue < Entity
   attr_accessor :components
   # @return [[String]]
   attr_accessor :attachment_names
-  # @return [[JIRA::CustomField]]
   attr_accessor :custom_field_values
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
@@ -486,7 +274,6 @@ class Issue < Entity
     @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
     @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
     @components          = frag.xpath('components/*').map { |frag| Component.new frag }
-    @custom_field_values = frag.xpath('customFieldValues/*').map { |frag| CustomField.new frag }
     @attachment_names    = frag.xpath('attachmentNames/*').map { |name| name.to_s }
     @key                 = frag.xpath('key').to_s
     @summary             = frag.xpath('summary').to_s
@@ -579,22 +366,17 @@ end
   end
 end
 
-# Only contains the meta-data for an attachment. The URI for an attachment
 # appears to be of the form
-# $ENDPOINT_URL/secure/attachment/$ATTACHMENT_ID/$ATTACHMENT_FILENAME
-class AttachmentMetadata < Entity
   # @return [String]
   attr_accessor :author
   # @return [Time]
   attr_accessor :create_date
   # @return [String]
   attr_accessor :filename
-  # @return [Fixnum] measured in @todo units
   attr_accessor :file_size
   # @return [String]
   attr_accessor :mime_type
 
-  # Factory method that takes a fragment of a SOAP response.
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
@@ -623,17 +405,11 @@ end
   end
 end
 
-# Represents a filter
 # @todo find out what @project is supposed to be for
-class Filter < Entity
-  # @return [String]
-  attr_accessor :name
   # @return [String]
   attr_accessor :author
   # @return [String]
   attr_accessor :project
-  # @return [String]
-  attr_accessor :description
   # @return [nil]
   attr_accessor :xml
 
@@ -641,10 +417,8 @@ class Filter < Entity
   def initialize(frag = nil)
     return if frag.nil?
     super frag
-    @name        = frag.xpath('name').to_s
     @author      = frag.xpath('author').to_s
     @project     = frag.xpath('project').to_s
-    @description = frag.xpath('description').to_s
     @xml         = frag.xpath('xml').to_s
   end
 end
