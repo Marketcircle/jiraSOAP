@@ -181,6 +181,7 @@ class CustomFieldValue < JIRA::DynamicEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
+    # careful, value of id is actually customfieldId
     @id     = frag.xpath('customfieldId').to_s
     @key    = frag.xpath('key').to_s
     @values = frag.xpath('values/*').map { |value| value.to_s }
