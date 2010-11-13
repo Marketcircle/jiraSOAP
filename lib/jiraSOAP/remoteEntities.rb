@@ -521,6 +521,51 @@ class Filter < JIRA::DescribedEntity
   end
 end
 
+# Contains the data and metadata about a project and its configuration.
+class Project < JIRA::DescribedEntity
+  # @return [String]
+  attr_accessor :key
+  # @return [URL]
+  attr_accessor :url
+  # @return [URL]
+  attr_accessor :project_url
+  # @return [String]
+  attr_accessor :lead
+  # @return [JIRA::IssueSecurityScheme]
+  attr_accessor :issue_security_scheme
+  # @return [JIRA::NotificationScheme]
+  attr_accessor :notification_scheme
+  # @return [JIRA::PermissionScheme]
+  attr_accessor :permission_scheme
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag = nil)
+    return if frag.nil?
+    super frag
+    url = nil
+    @key                   = frag.xpath('key').to_s
+    @lead                  = frag.xpath('lead').to_s
+    @issue_security_scheme = IssueSecurityScheme.new frag.xpath 'issueSecurityScheme'
+    @notification_scheme   = NotificationScheme.new frag.xpath 'notificationScheme'
+    @permission_scheme     = PermissionScheme.new frag.xpath 'permissionScheme'
+    @url                   = URL.new url unless (url = frag.xpath('url').to_s).nil?
+    @project_url           = URL.new url unless (url = frag.xpath('projectUrl').to_s).nil?
+  end
+
+  # @todo encode the schemes
+  # @param [Handsoap::XmlMason::Node] msg
+  # @return [Handsoap::XmlMason::Node]
+  def soapify_for(msg)
+    msg.add 'id', @id
+    msg.add 'name', @name
+    msg.add 'key', @key
+    msg.add 'url', @url
+    msg.add 'projectUrl', @project_url
+    msg.add 'lead', @lead
+    msg.add 'description', @description
+  end
+end
+
 ##################################
 # @pragma mark Inherit from Scheme
 ##################################
