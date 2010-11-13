@@ -46,8 +46,17 @@ class FieldValue
     end
   end
 end
+
+# Contains the basic information about a user. The only things missing here
+# are the permissions and login statistics.
+class User
   # @return [String]
   attr_accessor :description
+  attr_accessor :username
+  # @return [String]
+  attr_accessor :full_name
+  # @return [String]
+  attr_accessor :email_address
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
@@ -57,6 +66,9 @@ end
     @color       = frag.xpath('color').to_s
     @description = frag.xpath('description').to_s
     @icon        = URL.new url unless (url = frag.xpath('icon').to_s).nil?
+    @username      = frag.xpath('name').to_s
+    @full_name     = frag.xpath('fullname').to_s
+    @email_address = frag.xpath('email').to_s
   end
 end
 
@@ -514,21 +526,10 @@ class Issue < Entity
   end
 end
 
-# Contains the basic information about a user. Straightforward.
-class User
-  # @return [String]
-  attr_accessor :name
-  # @return [String]
-  attr_accessor :full_name
-  # @return [String]
-  attr_accessor :email
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
     return if frag.nil?
-    @name      = frag.xpath('name').to_s
-    @full_name = frag.xpath('fullname').to_s
-    @email     = frag.xpath('email').to_s
   end
 end
 
