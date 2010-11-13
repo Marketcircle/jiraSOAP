@@ -363,6 +363,10 @@ class Issue < JIRA::DynamicEntity
   end
 end
 
+############################
+# @pragma mark < NamedEntity
+############################
+
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
