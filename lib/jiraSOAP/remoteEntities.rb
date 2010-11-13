@@ -488,9 +488,16 @@ class Scheme < JIRA::DescribedEntity
   end
 end
 
+# @abstract
+class IssueProperty < JIRA::DescribedEntity
+  # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
+  attr_accessor :icon
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag)
     super frag
+    url = nil
+    @icon = URL.new url unless (url = frag.xpath('icon').to_s).nil?
   end
 end
 
