@@ -435,13 +435,17 @@ class Component < JIRA::NamedEntity
   end
 end
 
+# Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
+# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#filename}"
+class AttachmentMetadata < JIRA::NamedEntity
   # @return [String]
   attr_accessor :author
   # @return [Time]
   attr_accessor :create_date
   # @return [String]
   attr_accessor :filename
+  # @return [Fixnum] measured in bytes
   attr_accessor :file_size
   # @return [String]
   attr_accessor :mime_type
@@ -450,6 +454,7 @@ end
   def initialize(frag = nil)
     return if frag.nil?
     super frag
+    date = nil
     @author      = frag.xpath('author').to_s
     @filename    = frag.xpath('filename').to_s
     @file_size   = frag.xpath('filesize').to_s.to_i
