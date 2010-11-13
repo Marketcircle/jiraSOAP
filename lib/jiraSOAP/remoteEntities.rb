@@ -425,6 +425,13 @@ class Version < JIRA::NamedEntity
   end
 end
 
+# Represents a component description for a project. It does not include
+# the component lead.
+class Component < JIRA::NamedEntity
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag = nil)
+    return if frag.nil?
+    super frag
   end
 end
 
