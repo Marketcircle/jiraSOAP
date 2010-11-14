@@ -148,8 +148,8 @@ module RemoteAPI
     JIRA::Avatar.new response.document.xpath '//getProjectAvatarReturn'
   end
 
-  # Gets ALL avatars for a given project use this method; if you
-  # just want the default avatar, use {#get_project_avatar_for_key}.
+  # Gets ALL avatars for a given project with this method; if you
+  # just want the project avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
   # @param [boolean] include_default_avatars
   # @return [[JIRA::Avatar]]
