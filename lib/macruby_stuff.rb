@@ -10,7 +10,7 @@ class URL
   end
 end
 
+# @todo get a parallel map method for collections
 module JIRA
-  #overrides for MacRuby
 
 end
