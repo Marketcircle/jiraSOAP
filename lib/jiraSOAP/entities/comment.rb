@@ -24,10 +24,8 @@ class Comment < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :update_author
 
-  # @todo remove the control couple
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return unless frag
+  def initialize_with_xml_fragment(frag)
     super frag
     @original_author, @body, @group_level, @role_level,
     @update_author, @create_date, @last_updated =

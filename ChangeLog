@@ -14,6 +14,4 @@ Version 0.5
 	* Changed Scheme#type to return the class name
 	* Changed some RemoteAPI method names to be more descriptive
 	* Changed Avatar#content_type to Avatar#mime_type
-	* Changed User to require an XML fragment at initialization
-	* Changed CustomFieldValue to require an XML fragment at initialization
 	* Various documentation updates

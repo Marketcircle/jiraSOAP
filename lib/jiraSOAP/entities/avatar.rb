@@ -21,10 +21,8 @@ class Avatar < JIRA::DynamicEntity
   # @return [boolean] true if avatar is the default system avatar, else false
   def system?; @system; end
 
-  # @todo remove the control couple
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return unless frag
+  def initialize_with_xml_fragment(frag)
     super frag
     @owner, @type, @mime_type, @base64_data, @system =
       frag.nodes( ['owner',       :to_s],

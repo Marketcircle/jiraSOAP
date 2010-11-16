@@ -70,10 +70,8 @@ class Issue < JIRA::DynamicEntity
   # @return [[JIRA::CustomFieldValue]]
   attr_accessor :custom_field_values
 
-  # @todo remove the control couple
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    return unless frag
+  def initialize_with_xml_fragment(frag)
     super frag
     @id, @key, @summary, @description, @type_id, @status_id,
     @assignee_name, @reporter_name, @priority_id, @project_name,
