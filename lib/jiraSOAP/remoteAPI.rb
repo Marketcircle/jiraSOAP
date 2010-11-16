@@ -521,7 +521,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', id
     }
-    response.document.xpath('//getIssueCountForFilterReturn').to_s.to_i
+    response.document.xpath('//getIssueCountForFilterReturn').to_i
   end
 
   # @todo optimize building the message, try a single pass
