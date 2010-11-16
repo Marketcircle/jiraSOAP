@@ -620,11 +620,10 @@ class PermissionScheme < JIRA::Scheme
   # @return [nil]
   attr_accessor :permission_mappings
 
+  # @todo actually parse the permission mapping
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    # @todo pain the friggin ass to code
+    super frag unless frag
   end
 end
 
