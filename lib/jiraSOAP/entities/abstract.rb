@@ -1,9 +1,24 @@
 module JIRA
 
-# The base class for most of the JIRA object, most classes include an id
-# attribute as a unique identifier in their area.
 # @abstract
-class DynamicEntity
+# The base class for all JIRA objects that can be created by the server.
+class Entity
+  def self.new_with_xml_fragment(frag)
+    entity = allocate
+    entity.initialize_with_xml_fragment frag
+    entity
+  end
+
+  def initialize_with_xml_fragment(frag)
+    raise NotImplementedError.new, 'Subclasses should override and implement'
+  end
+end
+
+# @abstract
+# Most JIRA objects will have an id attribute as a unique identifier in
+# their area.
+class DynamicEntity < JIRA::Entity
+
   # @return [String] usually holds a numerical value but for consistency with
   #  with id's from custom fields this attribute is always a String
   attr_accessor :id
