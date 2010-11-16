@@ -38,7 +38,7 @@ module RemoteAPI
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
     }
-    response.document.xpath('//logoutReturn').first.to_s == 'true'
+    response.document.xpath('//logoutReturn').to_boolean
   end
 
   # @return [[JIRA::Priority]]
