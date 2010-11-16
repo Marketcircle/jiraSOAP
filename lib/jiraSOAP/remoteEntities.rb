@@ -438,7 +438,7 @@ end
 class Field < JIRA::NamedEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    super frag unless frag.nil?
+    super frag unless frag
   end
 end
 
