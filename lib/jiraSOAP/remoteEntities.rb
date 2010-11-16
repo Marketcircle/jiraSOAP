@@ -4,6 +4,8 @@ module JIRA
 # @pragma mark < Object
 #######################
 
+# Does no initialization itself, subclassing classes need to
+# initialize attributes themselves.
 # @abstract
 class DynamicEntity
   # @return [String] usually holds a numerical value but for consistency with
@@ -14,9 +16,10 @@ end
 # A structure that is a bit of a hack. It is essentially just a key-value pair
 # that is used mainly by {RemoteAPI#update_issue}.
 class FieldValue
-  # @return [String]
+  # @return [String] the name for regular fields, and the id for custom fields
   attr_accessor :field_name
-  # @return [[String,Time,URL,JIRA::*,nil]] hard to say what the type should be
+  # @return [[String,Time,URL,nil]] Whatever the type, just make sure it is
+  #   wrapped in an array.
   attr_accessor :values
 
   # @param [String] field_name
@@ -26,7 +29,7 @@ class FieldValue
     @values     = values
   end
 
-  # Generate the SOAP message fragment for a field value.
+  # @todo soapify properly for custom objects (JIRA module).
   # @param [Handsoap::XmlMason::Node] message the node to add the object to
   # @param [String] label name for the tags that wrap the message
   # @return [Handsoap::XmlMason::Element]
@@ -492,7 +495,7 @@ end
 
 # Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
-# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#filename}"
+# "{JIRA::JIRAService.uri}/secure/attachment/{#id}/{#filename}"
 class AttachmentMetadata < JIRA::NamedEntity
   # @return [String]
   attr_accessor :author
@@ -539,6 +542,7 @@ class Scheme < JIRA::DescribedEntity
   end
 end
 
+# A common base for most issue properties.
 # @abstract
 class IssueProperty < JIRA::DescribedEntity
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
