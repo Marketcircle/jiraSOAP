@@ -26,4 +26,55 @@ module XmlMason
     end
   end
 end
+
+# Some simple extensions to make initialization of JIRA objects cleaner.
+module XmlQueryFront
+  # Represents a node in an XML document used when parsing SOAP responses.
+  # This class is extended for use with jiraSOAP.
+  class NokogiriDriver
+
+    # @param [Array] *attributes pairs or triplets, the first element is the
+    #  attribute you want, the second element is the method to send to the
+    #  result, and the third element is the argument to that method (if needed)
+    # @return [[Objects]]
+    def nodes(*attributes)
+      attributes.map { |attr|
+        self.xpath(attr[0]).send attr[1..2]
+      }
+    end
+
+    # @return [URL]
+    def to_url
+      temp = self.to_s
+      return if temp.empty?
+      URL.new temp
+    end
+
+    # @return [[String]]
+    def to_ss
+      self.map { |val| val.to_s }
+    end
+  end
+
+  # Simple additions to help expedite parsing XML.
+  class NodeSelection
+    # @return [URL]
+    def to_url
+      self.first.to_url if self.any?
+    end
+
+    # @param [Class] klass the object you want an array of
+    # @return [Array] an array of klass objects
+    def to_objects(klass)
+      self.map { |frag| klass.new frag }
+    end
+
+    # @param [Class] klass the object you want to make
+    # @return [Object] an instance of klass
+    def to_object(klass)
+      klass.new self.first if self.any?
+    end
+  end
+end
+
 end
