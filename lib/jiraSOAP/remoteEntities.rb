@@ -50,10 +50,9 @@ class User
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    @username      = frag.xpath('name').to_s
-    @full_name     = frag.xpath('fullname').to_s
-    @email_address = frag.xpath('email').to_s
+    return unless frag
+    @username, @full_name, @email_address =
+      frag.nodes ['name', :to_s], ['fullname', :to_s], ['email', :to_s]
   end
 end
 
@@ -75,12 +74,13 @@ class ServerInfo
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @build_number = frag.xpath('buildNumber').to_s.to_i
-    @edition      = frag.xpath('edition').to_s
-    @version      = frag.xpath('version').to_s
-    @build_date   = Time.xmlschema frag.xpath('buildDate').to_s
-    @server_time  = TimeInfo.new frag.xpath 'serverTime'
-    @base_url     = URL.new frag.xpath('baseUrl').to_s
+    @build_date, @build_number, @base_url, @edition, @version, @server_time =
+      frag.nodes( ['buildDate',   :to_date],
+                  ['buildNumber', :to_i],
+                  ['baseUrl',     :to_url],
+                  ['edition',     :to_s],
+                  ['version',     :to_s],
+                  ['serverTime',  :to_object, JIRA::TimeInfo] )
   end
 end
 
@@ -90,13 +90,13 @@ end
 class TimeInfo
   # @return [Time]
   attr_reader :server_time
-  # @return [String]
+  # @return [String] in the form of 'America/Toronto'
   attr_reader :timezone
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @server_time = Time.parse frag.xpath('serverTime').to_s
-    @timezone    = frag.xpath('timeZoneId').to_s
+    @server_time, @timezone =
+      frag.nodes ['serverTime', :to_date], ['timeZoneId', :to_s]
   end
 end
 
@@ -134,16 +134,21 @@ class ServerConfiguration
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @attachments_allowed              = frag.xpath('allowAttachments').to_s == 'true'
-    @external_user_management_allowed = frag.xpath('allowExternalUserManagement').to_s == 'true'
-    @issue_linking_allowed            = frag.xpath('allowIssueLinking').to_s == 'true'
-    @subtasks_allowed                 = frag.xpath('allowSubTasks').to_s == 'true'
-    @time_tracking_allowed            = frag.xpath('allowTimeTracking').to_s == 'true'
-    @unassigned_issues_allowed        = frag.xpath('allowUnassignedIssues').to_s == 'true'
-    @voting_allowed                   = frag.xpath('allowVoting').to_s == 'true'
-    @watching_allowed                 = frag.xpath('allowWatching').to_s == 'true'
-    @time_tracking_days_per_week      = frag.xpath('timeTrackingDaysPerWeek').to_s.to_i
-    @time_tracking_hours_per_day      = frag.xpath('timeTrackingHoursPerDay').to_s.to_i
+    @external_user_management_allowed, @attachments_allowed,
+    @issue_linking_allowed,            @subtasks_allowed,
+    @time_tracking_allowed,            @unassigned_issues_allowed,
+    @voting_allowed,                   @watching_allowed,
+    @time_tracking_days_per_week,      @time_tracking_hours_per_day =
+      frag.nodes( ['allowExternalUserManagement', :to_boolean],
+                  ['allowAttachments',            :to_boolean],
+                  ['allowIssueLinking',           :to_boolean],
+                  ['allowSubTasks',               :to_boolean],
+                  ['allowTimeTracking',           :to_boolean],
+                  ['allowUnassignedIssues',       :to_boolean],
+                  ['allowVoting',                 :to_boolean],
+                  ['allowWatching',               :to_boolean],
+                  ['timeTrackingDaysPerWeek',     :to_i],
+                  ['timeTrackingHoursPerDay',     :to_i] )
   end
 end
 
@@ -158,8 +163,7 @@ class NamedEntity < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id   = frag.xpath('id').to_s
-    @name = frag.xpath('name').to_s
+    @id, @name = frag.nodes ['id', :to_s], ['name', :to_s]
   end
 end
 
@@ -180,11 +184,10 @@ class CustomFieldValue < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
+    return unless frag
     # careful, value of id is actually customfieldId
-    @id     = frag.xpath('customfieldId').to_s
-    @key    = frag.xpath('key').to_s
-    @values = frag.xpath('values/*').map { |value| value.to_s }
+    @id, @key, @values =
+      frag.nodes ['customfieldId', :to_s], ['key', :to_s], ['values/*', :to_ss]
   end
 
   # Generate a SOAP message fragment for the object.
@@ -204,10 +207,10 @@ end
 class Avatar < JIRA::DynamicEntity
   # @return [String]
   attr_accessor :owner
-  # @return [String]
+  # @return [String] the place where the avatar is used
   attr_accessor :type
   # @return [String]
-  attr_accessor :content_type
+  attr_accessor :mime_type
   # @return [String]
   attr_accessor :base64_data
   # @return [boolean] indicates if the image is the system default
@@ -218,13 +221,14 @@ class Avatar < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    @id           = frag.xpath('id').to_s
-    @owner        = frag.xpath('owner').to_s
-    @system       = frag.xpath('system').to_s == 'true'
-    @type         = frag.xpath('type').to_s
-    @content_type = frag.xpath('contentType').to_s
-    @base64_data  = frag.xpath('base64Data').to_s
+    return unless frag
+    @id, @owner, @type, @mime_type, @base64_data, @system =
+      frag.nodes( ['id',          :to_s],
+                  ['owner',       :to_s],
+                  ['type',        :to_s],
+                  ['contentType', :to_s],
+                  ['base64Data',  :to_s],
+                  ['system',      :to_boolean] )
   end
 end
 
@@ -247,16 +251,16 @@ class Comment < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    @id              = frag.xpath('id').to_s
-    @original_author = frag.xpath('author').to_s
-    @body            = frag.xpath('body').to_s
-    @group_level     = frag.xpath('updateAuthor').to_s
-    @role_level      = frag.xpath('roleLevel').to_s
-    @update_author   = frag.xpath('updateAuthor').to_s
-    date = nil
-    @create_date     = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
-    @last_updated    = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
+    return unless frag
+    @id, @original_author, @body, @group_level, @role_level, @update_author, @create_date, @last_updated =
+      frag.nodes( ['id',           :to_s],
+                  ['author',       :to_s],
+                  ['body',         :to_s],
+                  ['groupLevel',   :to_s],
+                  ['roleLevel',    :to_s],
+                  ['updateAuthor', :to_s],
+                  ['created',      :to_date],
+                  ['updated',      :to_date] )
   end
 
   # @param [Handsoap::XmlMason::Node] msg
@@ -323,29 +327,33 @@ class Issue < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    @id                  = frag.xpath('id').to_s
-    @affects_versions    = frag.xpath('affectsVersions/*').map { |frag| Version.new frag }
-    @fix_versions        = frag.xpath('fixVersions/*').map { |frag| Version.new frag }
-    @components          = frag.xpath('components/*').map { |frag| Component.new frag }
-    @custom_field_values = frag.xpath('customFieldValues/*').map { |frag| CustomFieldValue.new frag }
-    @attachment_names    = frag.xpath('attachmentNames/*').map { |name| name.to_s }
-    @key                 = frag.xpath('key').to_s
-    @summary             = frag.xpath('summary').to_s
-    @description         = frag.xpath('description').to_s
-    @type_id             = frag.xpath('type').to_s
-    @votes               = frag.xpath('votes').to_s.to_i
-    @status_id           = frag.xpath('status').to_s
-    @assignee_name       = frag.xpath('assignee').to_s
-    @reporter_name       = frag.xpath('reporter').to_s
-    @priority_id         = frag.xpath('priority').to_s
-    @project_name        = frag.xpath('project').to_s
-    @resolution_id       = frag.xpath('resolution').to_s
-    @environment         = frag.xpath('environment').to_s
-    date = nil
-    @last_updated        = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
-    @create_date         = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
-    @due_date            = Time.xmlschema date unless (date = frag.xpath('updated').to_s).nil?
+    return unless frag
+    @id, @key, @summary, @description, @type_id, @status_id,
+    @assignee_name, @reporter_name, @priority_id, @project_name,
+    @resolution_id, @environment, @votes, @last_updated, @create_date,
+    @due_date, @affects_versions, @fix_versions, @components,
+    @custom_field_values, @attachment_names =
+      frag.nodes( ['id',                  :to_s],
+                  ['key',                 :to_s],
+                  ['summary',             :to_s],
+                  ['description',         :to_s],
+                  ['type',                :to_s],
+                  ['status',              :to_s],
+                  ['assignee',            :to_s],
+                  ['reporter',            :to_s],
+                  ['priority',            :to_s],
+                  ['project',             :to_s],
+                  ['resolution',          :to_s],
+                  ['environment',         :to_s],
+                  ['votes',               :to_i],
+                  ['updated',             :to_date],
+                  ['created',             :to_date],
+                  ['duedate',             :to_date],
+                  ['affectsVersions/*',   :to_objects, JIRA::Version],
+                  ['fixVersions/*',       :to_objects, JIRA::Version],
+                  ['components/*',        :to_objects, JIRA::Component],
+                  ['customFieldValues/*', :to_objects, JIRA::CustomFieldValue],
+                  ['attachmentNames/*',   :to_ss] )
   end
 
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
@@ -421,9 +429,8 @@ class DescribedEntity < JIRA::NamedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id          = frag.xpath('id').to_s
-    @name        = frag.xpath('name').to_s
-    @description = frag.xpath('description').to_s
+    @id, @name, @description =
+      frag.nodes ['id', :to_s], ['name', :to_s], ['description', :to_s]
   end
 end
 
@@ -453,13 +460,14 @@ class Version < JIRA::NamedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @sequence     = frag.xpath('sequence').to_s.to_i
-    @released     = frag.xpath('released').to_s == 'true'
-    @archived     = frag.xpath('archived').to_s == 'true'
-    date = nil
-    @release_date = Time.xmlschema date unless (date = frag.xpath('releaseDate').to_s).nil?
+    return unless frag
+    @id, @name, @sequence, @released, @archived, @release_date =
+      frag.nodes( ['id',          :to_s],
+                  ['name',        :to_s],
+                  ['sequence',    :to_i],
+                  ['released',    :to_boolean],
+                  ['archived',    :to_boolean],
+                  ['releaseDate', :to_date] )
   end
 
   # @param [Handsoap::XmlMason::Node] msg
@@ -499,14 +507,15 @@ class AttachmentMetadata < JIRA::NamedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @author      = frag.xpath('author').to_s
-    @filename    = frag.xpath('filename').to_s
-    @file_size   = frag.xpath('filesize').to_s.to_i
-    @mime_type   = frag.xpath('mimetype').to_s
-    date = nil
-    @create_date = Time.xmlschema date unless (date = frag.xpath('created').to_s).nil?
+    return unless frag
+    @id, @name, @author, @filename, @mime_type, @file_size, @create_date =
+      frag.nodes( ['id',       :to_s],
+                  ['name',     :to_s],
+                  ['author',   :to_s],
+                  ['filename', :to_s],
+                  ['mimetype', :to_s],
+                  ['filesize', :to_i],
+                  ['created',  :to_date] )
   end
 end
 
@@ -537,11 +546,11 @@ class IssueProperty < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id          = frag.xpath('id').to_s
-    @name        = frag.xpath('name').to_s
-    @description = frag.xpath('description').to_s
-    url = nil
-    @icon = URL.new url unless (url = frag.xpath('icon').to_s).nil?
+    @id, @name, @description, @icon =
+      frag.nodes( ['id',          :to_s],
+                  ['name',        :to_s],
+                  ['description', :to_s],
+                  ['icon',        :to_url] )
   end
 end
 
@@ -557,11 +566,14 @@ class Filter < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @author      = frag.xpath('author').to_s
-    @project     = frag.xpath('project').to_s
-    @xml         = frag.xpath('xml').to_s
+    return unless frag
+    @id, @name, @description, @author, @project, @xml =
+      frag.nodes( ['id',          :to_s],
+                  ['name',        :to_s],
+                  ['description', :to_s],
+                  ['author',      :to_s],
+                  ['project',     :to_s],
+                  ['xml',         :to_s] )
   end
 end
 
@@ -584,16 +596,20 @@ class Project < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
-    super frag
-    @key                   = frag.xpath('key').to_s
-    @lead                  = frag.xpath('lead').to_s
-    @issue_security_scheme = IssueSecurityScheme.new frag.xpath 'issueSecurityScheme'
-    @notification_scheme   = NotificationScheme.new frag.xpath 'notificationScheme'
-    @permission_scheme     = PermissionScheme.new frag.xpath 'permissionScheme'
-    url = nil
-    @url                   = URL.new url unless (url = frag.xpath('url').to_s).nil?
-    @project_url           = URL.new url unless (url = frag.xpath('projectUrl').to_s).nil?
+    return unless frag
+    @id, @name, @description, @key, @lead,
+    @issue_security_scheme, @notification_scheme, @permission_scheme,
+    @url, @project_url =
+      frag.nodes( ['id',                  :to_s],
+                  ['name',                :to_s],
+                  ['description',         :to_s],
+                  ['key',                 :to_s],
+                  ['lead',                :to_s],
+                  ['issueSecurityScheme', :to_object, JIRA::IssueSecurityScheme],
+                  ['notificationScheme',  :to_object, JIRA::NotificationScheme],
+                  ['permissionScheme',    :to_object, JIRA::PermissionScheme],
+                  ['url',                 :to_url],
+                  ['projectUrl',          :to_url] )
   end
 
   # @todo encode the schemes
