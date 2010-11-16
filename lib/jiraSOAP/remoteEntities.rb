@@ -644,7 +644,7 @@ end
 class Resolution < JIRA::IssueProperty
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    super frag unless frag.nil?
+    super frag unless frag
   end
 end
 
@@ -652,7 +652,7 @@ end
 class Status < JIRA::IssueProperty
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    super frag unless frag.nil?
+    super frag unless frag
   end
 end
 
@@ -664,9 +664,9 @@ class Priority < JIRA::IssueProperty
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
+    return unless frag
     super frag
-    @color = frag.xpath('color').to_s
+    @color = (frag/'color').to_s
   end
 end
 
@@ -680,9 +680,9 @@ class IssueType < JIRA::IssueProperty
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    return if frag.nil?
+    return unless frag
     super frag
-    @subtask = frag.xpath('subTask').to_s == 'true'
+    @subtask = (frag/'subTask').to_boolean
   end
 end
 
