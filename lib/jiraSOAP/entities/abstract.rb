@@ -1,14 +1,20 @@
 module JIRA
 
-# Does no initialization itself, subclassing classes need to
-# initialize attributes themselves.
+# The base class for most of the JIRA object, most classes include an id
+# attribute as a unique identifier in their area.
 # @abstract
 class DynamicEntity
   # @return [String] usually holds a numerical value but for consistency with
   #  with id's from custom fields this attribute is always a String
   attr_accessor :id
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  def initialize(frag)
+    @id = (frag/'id').to_s
+  end
 end
 
+# Many JIRA objects include a name.
 # @abstract
 class NamedEntity < JIRA::DynamicEntity
   # @return [String] a plain language name
@@ -16,10 +22,12 @@ class NamedEntity < JIRA::DynamicEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id, @name = frag.nodes ['id', :to_s], ['name', :to_s]
+    super frag
+    @name = (frag/'name').to_s
   end
 end
 
+# A description would work better as a trait, but those are not supported yet.
 # @abstract
 class DescribedEntity < JIRA::NamedEntity
   # @return [String] usually a short blurb
@@ -27,8 +35,8 @@ class DescribedEntity < JIRA::NamedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id, @name, @description =
-      frag.nodes ['id', :to_s], ['name', :to_s], ['description', :to_s]
+    super frag
+    @description = (frag/'description').to_s
   end
 end
 
@@ -37,18 +45,23 @@ end
 # behaviour.
 # @abstract
 class Scheme < JIRA::DescribedEntity
+  # Schemes that inherit this class will have to be careful when they try
+  # to encode the scheme type in an xml message.
   # @return [String]
   def type
     self.class.to_s
   end
 
+  # @todo remove the control couple
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag = nil)
-    super frag unless frag.nil?
+    super frag unless frag
   end
 end
 
-# A common base for most issue properties.
+# A common base for most issue properties. Core issue properties have
+# an icon to go with them to help identify properties of issues more
+# quickly.
 # @abstract
 class IssueProperty < JIRA::DescribedEntity
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
@@ -56,11 +69,8 @@ class IssueProperty < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize(frag)
-    @id, @name, @description, @icon =
-      frag.nodes( ['id',          :to_s],
-                  ['name',        :to_s],
-                  ['description', :to_s],
-                  ['icon',        :to_url] )
+    super frag
+    @icon = (frag/'icon').to_url
   end
 end
 
