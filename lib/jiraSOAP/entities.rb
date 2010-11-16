@@ -1,11 +1,11 @@
-require 'lib/jiraSOAP/entities/abstract'
-require 'lib/jiraSOAP/entities/read_only'
-require 'lib/jiraSOAP/entities/field_value'
-require 'lib/jiraSOAP/entities/user'
+require 'jiraSOAP/entities/abstract'
+require 'jiraSOAP/entities/read_only'
+require 'jiraSOAP/entities/field_value'
+require 'jiraSOAP/entities/user'
 
-require 'lib/jiraSOAP/entities/avatar'
-require 'lib/jiraSOAP/entities/comment'
-require 'lib/jiraSOAP/entities/issue'
+require 'jiraSOAP/entities/avatar'
+require 'jiraSOAP/entities/comment'
+require 'jiraSOAP/entities/issue'
 
 module JIRA
 
