@@ -4,12 +4,12 @@
 # @todo logging
 # @todo code refactoring and de-duplication
 # @todo break the API down by task, like Apple's developer documentation
-# @todo createProjectRole [v0.5]
 # @todo deleteProjectAvatar [target v0.5]
 # @todo setProjectAvatar (change to different existing) [target v0.5]
 # @todo setNewProjectAvatar (upload new and set it) [target v0.5]
-# @todo getAvailableActions [target v0.6]
-# @todo progressWorkflowAction [target v0.6]
+# @todo createProjectRole [v0.6]
+# @todo getAvailableActions [target v0.7]
+# @todo progressWorkflowAction [target v0.7]
 module RemoteAPI
   # XPath constant to get a node containing a response array.
   # This could be used for all responses, but is only used in cases where we
