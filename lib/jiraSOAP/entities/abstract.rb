@@ -24,41 +24,43 @@ class DynamicEntity < JIRA::Entity
   attr_accessor :id
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
+  def initialize_with_xml_fragment(frag)
     @id = (frag/'id').to_s
   end
 end
 
-# Many JIRA objects include a name.
 # @abstract
+# Many JIRA objects include a name.
 class NamedEntity < JIRA::DynamicEntity
+
   # @return [String] a plain language name
   attr_accessor :name
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
+  def initialize_with_xml_fragment(frag)
     super frag
     @name = (frag/'name').to_s
   end
 end
 
-# A description would work better as a trait, but those are not supported yet.
 # @abstract
+# Several JIRA objects include a short description.
 class DescribedEntity < JIRA::NamedEntity
+
   # @return [String] usually a short blurb
   attr_accessor :description
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
+  def initialize_with_xml_fragment(frag)
     super frag
     @description = (frag/'description').to_s
   end
 end
 
+# @abstract
 # Represents a scheme used by the server. Not very useful for the sake of the
 # API; a more useful case might be if you wanted to emulate the server's
 # behaviour.
-# @abstract
 class Scheme < JIRA::DescribedEntity
   # Schemes that inherit this class will have to be careful when they try
   # to encode the scheme type in an xml message.
@@ -66,24 +68,19 @@ class Scheme < JIRA::DescribedEntity
   def type
     self.class.to_s
   end
-
-  # @todo remove the control couple
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag = nil)
-    super frag unless frag
-  end
 end
 
+# @abstract
 # A common base for most issue properties. Core issue properties have
 # an icon to go with them to help identify properties of issues more
 # quickly.
-# @abstract
 class IssueProperty < JIRA::DescribedEntity
+
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
   attr_accessor :icon
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
+  def initialize_with_xml_fragment(frag)
     super frag
     @icon = (frag/'icon').to_url
   end
