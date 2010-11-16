@@ -20,8 +20,10 @@ class JIRAService < Handsoap::Service
 
   # @return [String]
   attr_reader :auth_token
+
   # @return [String]
   attr_reader :user
+
   # @return [String]
   attr_reader :endpoint_url
 
