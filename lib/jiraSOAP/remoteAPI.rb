@@ -187,7 +187,10 @@ module RemoteAPI
     }
   end
 
-  # This method can update most, but not all, issue fields.
+  # This method can update most, but not all, issue fields. Some limitations
+  # are because of how the API is designed, and some are because I have not
+  # yet implemented the ability to update fields made of custom objects (things
+  # in the JIRA module).
   #
   # Fields known to not update via this method:
   #  - status - use {#progress_workflow_action}
