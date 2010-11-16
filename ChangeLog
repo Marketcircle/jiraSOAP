@@ -13,4 +13,5 @@ Version 0.5
 	* Changed User#name to User#username
 	* Changed Scheme#type to return the class name
 	* Changed some RemoteAPI method names to be more descriptive
+	* Changed Avatar#content_type to Avatar#mime_type
 	* Various documentation updates
