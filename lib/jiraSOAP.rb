@@ -7,8 +7,8 @@ Handsoap.http_driver = :net_http
 
 require 'jiraSOAP/url.rb'
 require 'jiraSOAP/handsoap_extensions.rb'
-require 'jiraSOAP/remoteEntities.rb'
-require 'jiraSOAP/remoteAPI.rb'
+require 'jiraSOAP/entities.rb'
+require 'jiraSOAP/api.rb'
 
 require 'jiraSOAP/JIRAservice.rb'
 
