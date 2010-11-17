@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/ferrous26/jiraSOAP"
     gem.authors = ["Mark Rada"]
     gem.add_dependency 'handsoap', '~> 1.1'
-    gem.add_dependency 'nokogiri'
+    gem.add_dependency 'nokogiri', '>= 1.4.4'
     gem.add_development_dependency "minitest"
     gem.add_development_dependency "yard"
 	gem.files = ['lib/**/*']
