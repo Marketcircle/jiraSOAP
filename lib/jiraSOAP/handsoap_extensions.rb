@@ -43,6 +43,13 @@ module XmlQueryFront
       }
     end
 
+    # @return [Time]
+    def to_string_date
+      temp = self.to_s
+      return unless temp
+      Time.new temp
+    end
+
     # @return [URL]
     def to_url
       temp = self.to_s
@@ -63,6 +70,10 @@ module XmlQueryFront
       self.first.to_url if self.any?
     end
 
+    # @return [Time]
+    def to_string_date
+      self.first.to_string_date
+    end
     # @param [Class] klass the object you want an array of
     # @return [Array] an array of klass objects
     def to_objects(klass)
