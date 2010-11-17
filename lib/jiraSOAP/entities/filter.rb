@@ -14,7 +14,7 @@ class Filter < JIRA::DescribedEntity
   attr_accessor :xml
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize(frag)
+  def initialize_with_xml_fragment(frag)
     super frag
     @author, @project, @xml =
       frag.nodes( ['author',  :to_s],
