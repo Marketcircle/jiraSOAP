@@ -66,13 +66,13 @@ module XmlQueryFront
     # @param [Class] klass the object you want an array of
     # @return [Array] an array of klass objects
     def to_objects(klass)
-      self.map { |frag| klass.new frag }
+      self.map { |frag| klass.new_with_xml_fragment frag }
     end
 
     # @param [Class] klass the object you want to make
     # @return [Object] an instance of klass
     def to_object(klass)
-      klass.new self.first if self.any?
+      klass.new_with_xml_fragment self.first if self.any?
     end
   end
 end
