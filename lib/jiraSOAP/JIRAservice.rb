@@ -41,8 +41,6 @@ class JIRAService < Handsoap::Service
   # Slightly hacky in order to set the endpoint at the initialization.
   # @param endpoint_url URL for the JIRA server
   def initialize(endpoint_url)
-    super
-
     @endpoint_url = endpoint_url
     endpoint_data = {
       :uri => "#{endpoint_url}/rpc/soap/jirasoapservice-v2",
