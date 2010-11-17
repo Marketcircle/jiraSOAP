@@ -113,6 +113,8 @@ class ServerConfiguration < JIRA::Entity
                   ['allowWatching',               :to_boolean],
                   ['timeTrackingDaysPerWeek',     :to_i],
                   ['timeTrackingHoursPerDay',     :to_i] )
+    # in case Atlassian still has not fixed their spelling of 'management'
+    @external_user_management_allowed ||= (frag/'allowExternalUserManagment').to_boolean
   end
 end
 
