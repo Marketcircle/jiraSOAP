@@ -398,7 +398,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_id
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath '//getProjectWithSchemesByIdReturn'
+    JIRA::Project.new_with_xml_fragment response.document.xpath('//getProjectWithSchemesByIdReturn').first
   end
 
   # @param [String] issue_key
