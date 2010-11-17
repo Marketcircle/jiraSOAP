@@ -73,7 +73,7 @@ class Issue < JIRA::DynamicEntity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
     super frag
-    @id, @key, @summary, @description, @type_id, @status_id,
+    @key, @summary, @description, @type_id, @status_id,
     @assignee_name, @reporter_name, @priority_id, @project_name,
     @resolution_id, @environment, @votes, @last_updated, @create_date,
     @due_date, @affects_versions, @fix_versions, @components,
