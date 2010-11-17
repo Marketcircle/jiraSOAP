@@ -39,7 +39,7 @@ module XmlQueryFront
     # @return [[Objects]]
     def nodes(*attributes)
       attributes.map { |attr|
-        self.xpath(attr[0]).send attr[1..2]
+        self.xpath(attr.shift).send *attr
       }
     end
 
