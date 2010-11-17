@@ -3,12 +3,18 @@ module JIRA
 # @abstract
 # The base class for all JIRA objects that can be created by the server.
 class Entity
+
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @return [JIRA::Entity]
   def self.new_with_xml_fragment(frag)
     entity = allocate
     entity.initialize_with_xml_fragment frag
     entity
   end
 
+  # @raise [NotImplementedError] this method MUST be implemented in a non
+  #  abstract descendant
+  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
     raise NotImplementedError.new, 'Subclasses should override and implement'
   end
