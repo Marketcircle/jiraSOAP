@@ -49,7 +49,7 @@ class TimeInfo < JIRA::Entity
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
     @server_time, @timezone =
-      frag.nodes ['serverTime', :to_date], ['timeZoneId', :to_s]
+      frag.nodes ['serverTime', :to_string_date], ['timeZoneId', :to_s]
   end
 end
 
