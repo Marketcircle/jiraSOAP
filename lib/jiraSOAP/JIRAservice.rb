@@ -57,7 +57,8 @@ class JIRAService < Handsoap::Service
     message  = "#{method} is not a valid method. Check the documentation; the "
     message << 'method may not be implemented or has changed in recent '
     message << 'revisions. The API has not been stabilized yet.'
-    raise NoMethodError.new, message, caller
+    STDERR.puts message
+    super method, *args
   end
 
   protected
