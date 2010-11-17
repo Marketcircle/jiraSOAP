@@ -74,6 +74,12 @@ module XmlQueryFront
     def to_string_date
       self.first.to_string_date
     end
+
+    # @return [[String]]
+    def to_ss
+      self.map { |val| val.to_s }
+    end
+
     # @param [Class] klass the object you want an array of
     # @return [Array] an array of klass objects
     def to_objects(klass)
