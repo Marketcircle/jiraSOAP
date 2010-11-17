@@ -7,6 +7,7 @@ require 'jiraSOAP/entities/avatar'
 require 'jiraSOAP/entities/comment'
 require 'jiraSOAP/entities/issue'
 
+require 'jiraSOAP/entities/filter'
 require 'jiraSOAP/entities/version'
 require 'jiraSOAP/entities/attachments'
 require 'jiraSOAP/entities/project'
