@@ -26,6 +26,7 @@ class Project < JIRA::DescribedEntity
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
+    super frag
     @key, @lead,
     @issue_security_scheme, @notification_scheme, @permission_scheme,
     @url, @project_url =
