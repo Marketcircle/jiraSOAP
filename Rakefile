@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{A Ruby client for the JIRA SOAP API}
     gem.description = %Q{Written to run fast and work on Ruby 1.9 as well as MacRuby}
     gem.email = "mrada@marketcircle.com"
-    gem.homepage = "http://github.com/ferrous26/jiraSOAP"
+    gem.homepage = "http://github.com/Marketcircle/jiraSOAP"
     gem.authors = ["Mark Rada"]
     gem.add_dependency 'handsoap', '~> 1.1'
     gem.add_dependency 'nokogiri', '>= 1.4.4'
