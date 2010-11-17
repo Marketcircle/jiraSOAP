@@ -53,7 +53,7 @@ module XmlQueryFront
     # @return [URL]
     def to_url
       temp = self.to_s
-      return if temp.empty?
+      return unless temp
       URL.new temp
     end
 
