@@ -59,42 +59,41 @@ class ServerConfiguration < JIRA::Entity
 
   # @return [boolean]
   attr_reader :attachments_allowed
+  alias_method :attachments_allowed?, :attachments_allowed
 
   # @return [boolean]
   attr_reader :external_user_management_allowed
+  alias_method :external_user_management_allowed?, :external_user_management_allowed
 
   # @return [boolean]
   attr_reader :issue_linking_allowed
+  alias_method :issue_linking_allowed?, :issue_linking_allowed
 
   # @return [boolean]
   attr_reader :subtasks_allowed
+  alias_method :subtasks_allowed?, :subtasks_allowed
 
   # @return [boolean]
   attr_reader :time_tracking_allowed
+  alias_method :time_tracking_allowed?, :time_tracking_allowed
 
   # @return [boolean]
   attr_reader :unassigned_issues_allowed
+  alias_method :unassigned_issues_allowed?, :unassigned_issues_allowed
 
   # @return [boolean]
   attr_reader :voting_allowed
+  alias_method :voting_allowed?, :voting_allowed
 
   # @return [boolean]
   attr_reader :watching_allowed
+  alias_method :watching_allowed?, :watching_allowed
 
   # @return [Fixnum]
   attr_reader :time_tracking_days_per_week
 
   # @return [Fixnum]
   attr_reader :time_tracking_hours_per_day
-
-  def attachments_allowed?; @attachments_allowed; end
-  def external_user_management_allowed?; @external_user_management_allowed; end
-  def issue_linking_allowed?; @issue_linking_allowed; end
-  def subtasks_allowed?; @subtasks_allowed; end
-  def time_tracking_allowed?; @time_tracking_allowed; end
-  def unassigned_issues_allowed?; @unassigned_issues_allowed; end
-  def voting_allowed?; @voting_allowed; end
-  def watching_allowed?; @watching_allowed; end
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)

@@ -25,11 +25,9 @@ end
 # Contains all the metadata for an issue type.
 class IssueType < JIRA::IssueProperty
 
-  # @return [boolean]
+  # @return [boolean]  true if the issue type is also a subtask
   attr_accessor :subtask
-
-  # @return [boolean] true if the issue type is a subtask, otherwise false
-  def subtask?; @subtask; end
+  alias_method :subtask?, :subtask
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)

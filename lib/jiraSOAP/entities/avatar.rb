@@ -17,9 +17,7 @@ class Avatar < JIRA::DynamicEntity
 
   # @return [boolean] indicates if the image is the system default
   attr_accessor :system
-
-  # @return [boolean] true if avatar is the default system avatar, else false
-  def system?; @system; end
+  alias_method :system?, :system
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)

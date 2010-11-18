@@ -10,15 +10,14 @@ class Version < JIRA::NamedEntity
 
   # @return [boolean]
   attr_accessor :released
+  alias_method :released?, :released
 
   # @return [boolean]
   attr_accessor :archived
+  alias_method :archived?, :archived
 
   # @return [Time]
   attr_accessor :release_date
-
-  def released?; @released; end
-  def archived?; @archived; end
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
