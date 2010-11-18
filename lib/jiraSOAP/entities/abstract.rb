@@ -70,10 +70,8 @@ end
 class Scheme < JIRA::DescribedEntity
   # Schemes that inherit this class will have to be careful when they try
   # to encode the scheme type in an xml message.
-  # @return [String]
-  def type
-    self.class.to_s
-  end
+  # @return [Class]
+  alias_method :type, :class
 end
 
 # @abstract
