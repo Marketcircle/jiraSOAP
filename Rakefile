@@ -46,8 +46,8 @@ end
 task :test => :check_dependencies
 
 begin
-  require 'reek/rake_task'
-  Reek::RakeTask.new do |t|
+  require 'reek/rake/task'
+  Reek::Rake::Task.new do |t|
     t.fail_on_error = true
     t.verbose = false
     t.source_files = 'lib/**/*.rb'
