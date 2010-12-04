@@ -14,6 +14,8 @@ begin
     gem.add_dependency 'nokogiri', '>= 1.4.4'
     gem.add_development_dependency "minitest"
     gem.add_development_dependency "yard"
+    gem.add_development_dependency "bluecloth"
+    gem.add_development_dependency "jeweler"
 	gem.files = ['lib/**/*']
     gem.required_ruby_version = '>= 1.9.2'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
