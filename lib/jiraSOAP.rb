@@ -13,4 +13,4 @@ require 'jiraSOAP/api.rb'
 require 'jiraSOAP/JIRAservice.rb'
 
 #overrides and additions
-require 'lib/jiraSOAP/macruby_bonuses.rb' if RUBY_ENGINE == 'macruby'
+require 'jiraSOAP/macruby_bonuses.rb' if RUBY_ENGINE == 'macruby'
