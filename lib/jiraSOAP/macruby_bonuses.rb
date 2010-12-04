@@ -1,4 +1,5 @@
 framework 'Foundation'
+require 'dispatch'
 
 class URL
   def initialize(url_string)
