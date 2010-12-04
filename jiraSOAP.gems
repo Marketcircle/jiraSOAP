@@ -1,0 +1,10 @@
+# jiraSOAP generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+bluecloth -v2.0.9
+bundler -v1.0.7
+git -v1.2.5
+handsoap -v1.1.7
+jeweler -v1.5.1
+minitest -v2.0.0
+nokogiri -v1.4.4
+rake -v0.8.7
+yard -v0.6.3
