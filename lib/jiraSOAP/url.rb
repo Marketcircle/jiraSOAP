@@ -2,9 +2,10 @@
 # MRI by using the URI module.
 #
 # For any JIRA entity that has a URL object as an instance variable, you can
-# stick what ever type of object you want in the instance varible, as long as
+# stick whatever type of object you want in the instance varible, as long as
 # the object has a #to_s method that returns a properly formatted URI.
 class URL
+
   # @return [NSURL, URI::HTTP] the type depends on your RUBY_ENGINE
   attr_accessor :url
 
@@ -15,7 +16,7 @@ class URL
     @url = URI.parse url
   end
 
-  # The to_s method technically exists and so method_missing would not
+  # The #to_s method technically exists and so method_missing would not
   # work its magic to redirect it to @url so we manually override.
   # @return [String]
   def to_s
