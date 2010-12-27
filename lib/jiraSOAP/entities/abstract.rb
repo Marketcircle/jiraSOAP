@@ -4,19 +4,33 @@ module JIRA
 # The base class for all JIRA objects that can be created by the server.
 class Entity
 
+  class << self
+    attr_accessor :attributes
+  end
+
+  @attributes = {}
+
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
-  def self.new_with_xml_fragment(frag)
+  def self.new_with_xml_fragment frag
     entity = allocate
     entity.initialize_with_xml_fragment frag
     entity
   end
 
-  # @raise [NotImplementedError] this method MUST be implemented in a non
-  #  abstract descendant
+  # @todo put debug message through the logger
+  # @todo make this faster by cutting out NokogiriDriver,
+  #  but I will need to add an accessor for @element of the
+  #  driver object and then need to inject the marshaling
+  #  methods into Nokogiri classes
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   def initialize_with_xml_fragment(frag)
-    raise NotImplementedError.new, 'Subclasses should override and implement'
+    attributes = self.class.attributes
+    frag.children.each { |node|
+      action = attributes[node.node_name]
+      # puts "Action is #{action.inspect} for #{node.node_name}"
+      self.send action[0], (node.send *action[1..-1])
+    }
   end
 end
 
