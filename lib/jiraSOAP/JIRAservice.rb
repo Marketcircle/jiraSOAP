@@ -15,6 +15,7 @@ module JIRA
 # HTTPS is not supported in this version.
 #
 # @todo consider adding a finalizer that will try to logout
+# @todo support spelling color as colour and all other language bumps
 class JIRAService < Handsoap::Service
   include RemoteAPI
 

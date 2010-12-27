@@ -10,6 +10,7 @@ class Entity
 
   @attributes = {}
 
+  # @todo change name to #new_from_xml
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
   def self.new_with_xml_fragment frag
