@@ -39,42 +39,37 @@ end
 # their area.
 class DynamicEntity < JIRA::Entity
 
+  @attributes = ancestors[1].attributes
+  @attributes['id'] = [:id=, :to_s]
+
   # @return [String] usually holds a numerical value but for consistency with
   #  with id's from custom fields this attribute is always a String
   attr_accessor :id
 
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    @id = (frag/'id').to_s
-  end
 end
 
 # @abstract
 # Many JIRA objects include a name.
 class NamedEntity < JIRA::DynamicEntity
 
+  @attributes = ancestors[1].attributes
+  @attributes['name'] = [:name=, :to_s]
+
   # @return [String] a plain language name
   attr_accessor :name
 
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @name = (frag/'name').to_s
-  end
 end
 
 # @abstract
 # Several JIRA objects include a short description.
 class DescribedEntity < JIRA::NamedEntity
 
+  @attributes = ancestors[1].attributes
+  @attributes['description'] = [:description=, :to_s]
+
   # @return [String] usually a short blurb
   attr_accessor :description
 
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @description = (frag/'description').to_s
-  end
 end
 
 # @abstract
@@ -94,14 +89,12 @@ end
 # quickly.
 class IssueProperty < JIRA::DescribedEntity
 
+  @attributes = ancestors[1].attributes
+  @attributes['icon'] = [:icon=, :to_url]
+
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
   attr_accessor :icon
 
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @icon = (frag/'icon').to_url
-  end
 end
 
 end
