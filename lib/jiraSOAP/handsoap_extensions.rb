@@ -61,6 +61,12 @@ module XmlQueryFront
     def to_ss
       self.map { |val| val.to_s }
     end
+
+    # @param [Class] klass the object you want to make
+    # @return [Object] an instance of klass
+    def to_object(klass)
+      klass.new_with_xml_fragment self
+    end
   end
 
   # Simple additions to help expedite parsing XML.
