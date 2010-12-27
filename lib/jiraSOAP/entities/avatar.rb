@@ -3,6 +3,15 @@ module JIRA
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class Avatar < JIRA::DynamicEntity
 
+  @attributes = ancestors[1].attributes
+  @attributes.update({
+    'owner'       => [:owner=,       :to_s],
+    'type'        => [:type=,        :to_s],
+    'contentType' => [:mime_type=,   :to_s],
+    'base64Data'  => [:base64_data=, :to_s],
+    'system'      => [:system=,      :to_boolean],
+  })
+
   # @return [String]
   attr_accessor :owner
 
@@ -19,16 +28,6 @@ class Avatar < JIRA::DynamicEntity
   attr_accessor :system
   alias_method :system?, :system
 
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @owner, @type, @mime_type, @base64_data, @system =
-      frag.nodes( ['owner',       :to_s],
-                  ['type',        :to_s],
-                  ['contentType', :to_s],
-                  ['base64Data',  :to_s],
-                  ['system',      :to_boolean] )
-  end
 end
 
 end
