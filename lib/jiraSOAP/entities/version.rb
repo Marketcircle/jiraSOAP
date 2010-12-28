@@ -1,9 +1,7 @@
-module JIRA
-
 # @todo find out why we don't get a description for this object
 # Represents a version for a project. The description field is never
 # included when you retrieve versions from the server.
-class Version < JIRA::NamedEntity
+class JIRA::Version < JIRA::NamedEntity
   add_attributes({
     'sequence'    => [:sequence=,     :to_i],
     'released'    => [:released=,     :to_boolean],
@@ -35,6 +33,4 @@ class Version < JIRA::NamedEntity
     msg.add 'releaseDate', @release_date.xmlschema unless @release_date.nil?
     msg.add 'released', @released unless @released.nil?
   end
-end
-
 end

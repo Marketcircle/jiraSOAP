@@ -1,8 +1,6 @@
-module JIRA
-
 # @todo find out what the id value of @owner relates to
 # Contains a base64 encoded avatar image and metadata about the avatar.
-class Avatar < JIRA::DynamicEntity
+class JIRA::Avatar < JIRA::DynamicEntity
   add_attributes({
     'owner'       => [:owner=,       :to_s],
     'type'        => [:type=,        :to_s],
@@ -26,6 +24,4 @@ class Avatar < JIRA::DynamicEntity
   # @return [boolean] indicates if the image is the system default
   attr_accessor :system
   alias_method :system?, :system
-end
-
 end

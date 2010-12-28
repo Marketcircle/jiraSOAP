@@ -1,7 +1,5 @@
-module JIRA
-
 # Contains a comments body and its metadata.
-class Comment < JIRA::DynamicEntity
+class JIRA::Comment < JIRA::DynamicEntity
   add_attributes({
     'author'       => [:author=,            :to_s],
     'body'         => [:body=,              :to_s],
@@ -44,6 +42,4 @@ class Comment < JIRA::DynamicEntity
     msg.add 'roleLevel', @role_level
     msg.add 'updateAuthor', @update_author
   end
-end
-
 end

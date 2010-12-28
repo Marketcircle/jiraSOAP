@@ -1,10 +1,8 @@
-module JIRA
-
 # @abstract The base class for all JIRA objects that can given by the server.
 # @todo remove the need for attr_accessor by having add_attributes make the
 #  call for me, but I will need to make a YARD plugin to fix the gap in the
 #  documentation when that happens
-class Entity
+class JIRA::Entity
 
   class << self
     # @return [Hash{String => Array}] used by the metaclass
@@ -42,6 +40,4 @@ class Entity
       #puts "Action is #{action.inspect} for #{node.node_name}"
     }
   end
-end
-
 end
