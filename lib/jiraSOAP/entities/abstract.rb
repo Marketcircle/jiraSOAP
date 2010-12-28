@@ -43,33 +43,6 @@ class Entity
 end
 
 # @abstract
-# Most JIRA objects will have an id attribute as a unique identifier in
-# their area.
-class DynamicEntity < JIRA::Entity
-  add_attributes({ 'id' => [:id=, :to_s] })
-
-  # @return [String] usually a numerical value, but sometimes
-  #  prefixed with a string (e.g. '12450' or 'customfield_10000')
-  attr_accessor :id
-end
-
-# @abstract
-# Many JIRA objects include a name.
-class NamedEntity < JIRA::DynamicEntity
-  add_attributes({ 'name' => [:name=, :to_s] })
-
-  # @return [String] a plain language name
-  attr_accessor :name
-end
-
-# @abstract
-# Several JIRA objects include a short description.
-class DescribedEntity < JIRA::NamedEntity
-  add_attributes({ 'description' => [:description=, :to_s] })
-
-  # @return [String] usually a short blurb
-  attr_accessor :description
-end
 
 # @abstract
 # Represents a scheme used by the server. Not very useful for the sake of the
