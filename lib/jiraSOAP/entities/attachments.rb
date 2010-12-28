@@ -2,11 +2,11 @@ module JIRA
 
 # Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
-# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#filename}"
+# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#file_name}"
 class AttachmentMetadata < JIRA::NamedEntity
   add_attributes({
     'author'   => [:author=,      :to_s],
-    'filename' => [:filename=,    :to_s],
+    'filename' => [:file_name=,   :to_s],
     'mimetype' => [:mime_type=,   :to_s],
     'filesize' => [:file_size=,   :to_i],
     'created'  => [:create_time=, :to_date],
@@ -19,7 +19,7 @@ class AttachmentMetadata < JIRA::NamedEntity
   attr_accessor :create_time
 
   # @return [String]
-  attr_accessor :filename
+  attr_accessor :file_name
 
   # @return [Fixnum] measured in bytes
   attr_accessor :file_size
