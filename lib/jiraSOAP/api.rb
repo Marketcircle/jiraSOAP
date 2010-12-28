@@ -4,9 +4,6 @@
 # @todo logging
 # @todo code refactoring and de-duplication
 # @todo break the API down by task, like Apple's developer documentation
-# @todo deleteProjectAvatar [target v0.5]
-# @todo setProjectAvatar (change to different existing) [target v0.5]
-# @todo setNewProjectAvatar (upload new and set it) [target v0.5]
 # @todo createProjectRole [v0.6]
 # @todo getAvailableActions [target v0.7]
 # @todo progressWorkflowAction [target v0.7]
@@ -563,4 +560,58 @@ module RemoteAPI
     }
     JIRA::ServerConfiguration.new_with_xml response.document.xpath('//getConfigurationReturn').first
   end
+  # @todo add tests for this method
+  # @note You cannot delete the system avatar
+  # @note You need project administration permissions to delete an avatar
+  # @param [#to_s] avatar_id
+  # @return [true]
+  def delete_project_avatar_with_id avatar_id
+    invoke('soap:deleteProjectAvatar') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', avatar_id
+    }
+    true
+  end
+
+  # @todo add tests for this method
+  # Change the project avatar to another existing avatar. If you want to
+  # upload a new avatar and set it to be the new project avatar use
+  # {#set_new_project_avatar} instead.
+  # @note You need project administration permissions to edit an avatar
+  # @return [true]
+  def set_project_avatar_for_project_with_key project_key, avatar_id
+    invoke('soap:setProjectAvatar') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+      msg.add 'soap:in2', avatar_id
+    }
+    true
+  end
+
+  # @todo add tests for this method
+  # Use this method to create a new custom avatar for a project and set it
+  # to be current avatar for the project.
+  #
+  # The image, provided as base64 encoded data, should be a 48x48 pixel square.
+  # If the image is larger, the top left 48 pixels are taken, if it is smaller
+  # then it will be upscaled to 48 pixels.
+  # The small version of the avatar image (16 pixels) is generated
+  # automatically.
+  # If you want to switch a project avatar to an avatar that already exists on
+  # the system then use {#set_project_avatar_for_project_with_key} instead.
+  # @note You need project administration permissions to edit an avatar
+  # @param [String] project_key
+  # @param [String] mime_type
+  # @param [#to_s] base64_image
+  # @return [true]
+  def set_new_project_avatar_for_project_with_key project_key, mime_type, base64_image
+    invoke('soap:setNewProjectAvatar') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+      msg.add 'soap:in2', mime_type
+      msg.add 'soap:in3', base64_image
+    }
+    true
+  end
+
 end
