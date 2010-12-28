@@ -560,6 +560,18 @@ module RemoteAPI
     }
     JIRA::ServerConfiguration.new_with_xml response.document.xpath('//getConfigurationReturn').first
   end
+
+  # @note This will not fill in JIRA::Scheme data for the projects.
+  # @return [[JIRA::Project]]
+  def get_projects_without_schemes
+    response = invoke('soap:getProjectNoSchemes') { |msg|
+      msg.add 'soap:in0', @auth_token
+    }
+    response.document.xpath("#{RESPONSE_XPATH}/getProjectNoSchemesReturn").map {
+      |frag| JIRA::Project.new_with_xml frag
+    }
+  end
+
   # @todo add tests for this method
   # @note You cannot delete the system avatar
   # @note You need project administration permissions to delete an avatar
