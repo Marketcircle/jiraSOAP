@@ -26,13 +26,17 @@ Pick up where `jira4r` left off:
 Getting Started
 ---------------
 
-`jiraSOAP` should run on Ruby 1.9.2 and MacRuby 0.8. You can install it using `gem`, or build from source:
+`jiraSOAP` should run on Ruby 1.9.2 and MacRuby 0.8 or newer. It is available through rubygems or you can build from source:
 
+        # Using rubygems
+        sudo gem install jiraSOAP
+
+        # Building from source
         git clone git://github.com/Marketcircle/jiraSOAP.git
         rake build
         rake install
 
-Once that ugliness is over with, you can run a quick demo (making appropriate substitutions):
+Once installed, you can run a quick demo (making appropriate substitutions):
 
      require 'jiraSOAP'
 
