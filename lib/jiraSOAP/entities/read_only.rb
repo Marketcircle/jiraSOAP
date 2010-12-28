@@ -1,37 +1,32 @@
 module JIRA
 
-
 # Simple structure for a time and time zone; only used by JIRA::ServerInfo
 # objects, which themselves are only created when {RemoteAPI#get_server_info}
 # is called.
 class TimeInfo < JIRA::Entity
-
-  @attributes = {
+  add_attributes({
     'serverTime' => [:server_time=, :to_string_date],
     'timeZoneId' => [:timezone=,    :to_s]
-  }
+  })
 
   # @return [Time]
   attr_accessor :server_time
 
   # @return [String] in the form of 'America/Toronto'
   attr_accessor :timezone
-
 end
-
 
 # Only contains basic information about the endpoint server and only used
 # by {RemoteAPI#get_server_info}.
 class ServerInfo < JIRA::Entity
-
-  @attributes = {
+  add_attributes({
     'baseUrl'     => [:base_url=,     :to_url],
     'buildDate'   => [:build_date=,   :to_date],
     'buildNumber' => [:build_number=, :to_i],
     'edition'     => [:edition=,      :to_s],
     'version'     => [:version=,      :to_s],
     'serverTime'  => [:server_time=,  :to_object, JIRA::TimeInfo]
-  }
+  })
 
   # @return [URL]
   attr_accessor :base_url
@@ -50,14 +45,11 @@ class ServerInfo < JIRA::Entity
 
   # @return [JIRA::TimeInfo]
   attr_accessor :server_time
-
 end
-
 
 # A simple structure that is used by {RemoteAPI#get_server_configuration}.
 class ServerConfiguration < JIRA::Entity
-
-  @attributes = {
+  add_attributes({
     'allowExternalUserManagement' => [:external_user_management_allowed=, :to_boolean],
     'allowAttachments'            => [:attachments_allowed=,              :to_boolean],
     'allowIssueLinking'           => [:issue_linking_allowed=,            :to_boolean],
@@ -71,7 +63,7 @@ class ServerConfiguration < JIRA::Entity
 
     # in case we are using a version of JIRA that misspells 'management'
     'allowExternalUserManagment'  => [:external_user_management_allowed=, :to_boolean]
-  }
+  })
 
   # @return [boolean]
   attr_accessor :attachments_allowed
@@ -110,7 +102,6 @@ class ServerConfiguration < JIRA::Entity
 
   # @return [Fixnum]
   attr_accessor :time_tracking_hours_per_day
-
 end
 
 end

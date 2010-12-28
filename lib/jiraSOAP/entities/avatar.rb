@@ -2,9 +2,7 @@ module JIRA
 
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class Avatar < JIRA::DynamicEntity
-
-  @attributes = ancestors[1].attributes
-  @attributes.update({
+  add_attributes({
     'owner'       => [:owner=,       :to_s],
     'type'        => [:type=,        :to_s],
     'contentType' => [:mime_type=,   :to_s],
@@ -27,7 +25,6 @@ class Avatar < JIRA::DynamicEntity
   # @return [boolean] indicates if the image is the system default
   attr_accessor :system
   alias_method :system?, :system
-
 end
 
 end

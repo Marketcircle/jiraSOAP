@@ -2,6 +2,15 @@ module JIRA
 
 # Contains the data and metadata about a project and its configuration.
 class Project < JIRA::DescribedEntity
+  add_attributes({
+    'key'                 => [:key=,                   :to_s],
+    'lead'                => [:lead=,                  :to_s],
+    'issueSecurityScheme' => [:issue_security_scheme=, :to_object, JIRA::IssueSecurityScheme],
+    'notificationScheme'  => [:notification_scheme=,   :to_object, JIRA::NotificationScheme],
+    'permissionScheme'    => [:permission_scheme=,     :to_object, JIRA::PermissionScheme],
+    'url'                 => [:url=,                   :to_url],
+    'projectUrl'          => [:project_url=,           :to_url]
+  })
 
   # @return [String]
   attr_accessor :key
@@ -23,21 +32,6 @@ class Project < JIRA::DescribedEntity
 
   # @return [JIRA::PermissionScheme]
   attr_accessor :permission_scheme
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @key, @lead,
-    @issue_security_scheme, @notification_scheme, @permission_scheme,
-    @url, @project_url =
-      frag.nodes( ['key',                 :to_s],
-                  ['lead',                :to_s],
-                  ['issueSecurityScheme', :to_object, JIRA::IssueSecurityScheme],
-                  ['notificationScheme',  :to_object, JIRA::NotificationScheme],
-                  ['permissionScheme',    :to_object, JIRA::PermissionScheme],
-                  ['url',                 :to_url],
-                  ['projectUrl',          :to_url] )
-  end
 
   # @todo make this method shorter
   # @todo encode the schemes

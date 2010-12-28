@@ -9,6 +9,28 @@ module JIRA
 #
 # Issues with an UNRESOLVED status will have nil for the value of @resolution.
 class Issue < JIRA::DynamicEntity
+  add_attributes({
+    'key'               => [:key=,                 :to_s],
+    'summary'           => [:summary=,             :to_s],
+    'description'       => [:description=,         :to_s],
+    'type'              => [:type_id=,             :to_s],
+    'status'            => [:status_id=,           :to_s],
+    'assignee'          => [:assignee_name=,       :to_s],
+    'reporter'          => [:reporter_name=,       :to_s],
+    'priority'          => [:priority_id=,         :to_s],
+    'project'           => [:project_name=,        :to_s],
+    'resolution'        => [:resolution_id=,       :to_s],
+    'environment'       => [:environment=,         :to_s],
+    'votes'             => [:votes=,               :to_i],
+    'updated'           => [:last_updated=,        :to_date],
+    'created'           => [:create_date=,         :to_date],
+    'duedate'           => [:due_date=,            :to_date],
+    'affectsVersions'   => [:affects_versions=,    :to_objects, JIRA::Version],
+    'fixVersions'       => [:fix_versions=,        :to_objects, JIRA::Version],
+    'components'        => [:components=,          :to_objects, JIRA::Component],
+    'customFieldValues' => [:custom_field_values=, :to_objects, JIRA::CustomFieldValue],
+    'attachmentNames'   => [:attachment_names=,    :to_ss]
+  })
 
   # @return [String]
   attr_accessor :key
@@ -69,36 +91,6 @@ class Issue < JIRA::DynamicEntity
 
   # @return [[JIRA::CustomFieldValue]]
   attr_accessor :custom_field_values
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @key, @summary, @description, @type_id, @status_id,
-    @assignee_name, @reporter_name, @priority_id, @project_name,
-    @resolution_id, @environment, @votes, @last_updated, @create_date,
-    @due_date, @affects_versions, @fix_versions, @components,
-    @custom_field_values, @attachment_names =
-      frag.nodes( ['key',                 :to_s],
-                  ['summary',             :to_s],
-                  ['description',         :to_s],
-                  ['type',                :to_s],
-                  ['status',              :to_s],
-                  ['assignee',            :to_s],
-                  ['reporter',            :to_s],
-                  ['priority',            :to_s],
-                  ['project',             :to_s],
-                  ['resolution',          :to_s],
-                  ['environment',         :to_s],
-                  ['votes',               :to_i],
-                  ['updated',             :to_date],
-                  ['created',             :to_date],
-                  ['duedate',             :to_date],
-                  ['affectsVersions/*',   :to_objects, JIRA::Version],
-                  ['fixVersions/*',       :to_objects, JIRA::Version],
-                  ['components/*',        :to_objects, JIRA::Component],
-                  ['customFieldValues/*', :to_objects, JIRA::CustomFieldValue],
-                  ['attachmentNames/*',   :to_ss] )
-  end
 
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
   # and inconsistencies? (hint: there are many).

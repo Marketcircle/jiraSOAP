@@ -4,6 +4,12 @@ module JIRA
 # included when you retrieve versions from the server.
 # @todo find out why we don't get a description for this object
 class Version < JIRA::NamedEntity
+  add_attributes({
+    'sequence'    => [:sequence=,     :to_i],
+    'released'    => [:released=,     :to_boolean],
+    'archived'    => [:archived=,     :to_boolean],
+    'releaseDate' => [:release_date=, :to_date]
+  })
 
   # @return [Fixnum]
   attr_accessor :sequence
@@ -18,16 +24,6 @@ class Version < JIRA::NamedEntity
 
   # @return [Time]
   attr_accessor :release_date
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @sequence, @released, @archived, @release_date =
-      frag.nodes( ['sequence',    :to_i],
-                  ['released',    :to_boolean],
-                  ['archived',    :to_boolean],
-                  ['releaseDate', :to_date] )
-  end
 
   # @todo make this method shorter
   # @param [Handsoap::XmlMason::Node] msg

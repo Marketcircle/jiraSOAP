@@ -30,7 +30,6 @@ class FieldValue
   end
 end
 
-
 # Represents an instance of a custom field (with values). This object is used
 # as a member of {JIRA::Issue} objects.
 #
@@ -41,21 +40,18 @@ end
 # @todo see if @key is always nil from the server, maybe we can remove it
 # @todo merge this class with JIRA::FieldValue
 class CustomFieldValue < JIRA::DynamicEntity
+  @attributes = {
+    'customfieldId' => [:id=,     :to_s],
+    'key'           => [:key=,    :to_s],
+    # concern here since we want the children nodes
+    'values'        => [:values=, :to_ss]
+  }
 
   # @return [String]
   attr_accessor :key
 
   # @return [[String]]
   attr_accessor :values
-
-  # @note careful, value of id is actually customfieldId
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    @id, @key, @values =
-      frag.nodes( ['customfieldId', :to_s],
-                  ['key', :to_s],
-                  ['values/*', :to_ss] )
-  end
 
   # Generate a SOAP message fragment for the object.
   # @param [Handsoap::XmlMason::Node] msg SOAP message to add the object to

@@ -2,6 +2,15 @@ module JIRA
 
 # Contains a comments body and its metadata.
 class Comment < JIRA::DynamicEntity
+  add_attributes({
+    'author'       => [:original_author=, :to_s],
+    'body'         => [:body=,            :to_s],
+    'groupLevel'   => [:group_level=,     :to_s],
+    'roleLevel'    => [:role_level=,      :to_s],
+    'updateAuthor' => [:update_author=,   :to_s],
+    'created'      => [:create_date=,     :to_date],
+    'updated'      => [:last_updated=,    :to_date]
+  })
 
   # @return [String]
   attr_accessor :original_author
@@ -23,20 +32,6 @@ class Comment < JIRA::DynamicEntity
 
   # @return [String]
   attr_accessor :update_author
-
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
-    super frag
-    @original_author, @body, @group_level, @role_level,
-    @update_author, @create_date, @last_updated =
-      frag.nodes( ['author',       :to_s],
-                  ['body',         :to_s],
-                  ['groupLevel',   :to_s],
-                  ['roleLevel',    :to_s],
-                  ['updateAuthor', :to_s],
-                  ['created',      :to_date],
-                  ['updated',      :to_date] )
-  end
 
   # @todo make this method shorter
   # @param [Handsoap::XmlMason::Node] msg

@@ -4,9 +4,7 @@ module JIRA
 # appears to be of the form
 # "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#filename}"
 class AttachmentMetadata < JIRA::NamedEntity
-
-  @attributes = ancestors[1].attributes
-  @attributes.update({
+  add_attributes({
     'author'   => [:author=,      :to_s],
     'filename' => [:filename=,    :to_s],
     'mimetype' => [:mime_type=,   :to_s],
@@ -28,7 +26,6 @@ class AttachmentMetadata < JIRA::NamedEntity
 
   # @return [String]
   attr_accessor :mime_type
-
 end
 
 end

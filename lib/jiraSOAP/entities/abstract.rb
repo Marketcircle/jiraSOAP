@@ -46,38 +46,29 @@ end
 # Most JIRA objects will have an id attribute as a unique identifier in
 # their area.
 class DynamicEntity < JIRA::Entity
+  add_attributes({ 'id' => [:id=, :to_s] })
 
-  @attributes = ancestors[1].attributes
-  @attributes['id'] = [:id=, :to_s]
-
-  # @return [String] usually holds a numerical value but for consistency with
-  #  with id's from custom fields this attribute is always a String
+  # @return [String] usually a numerical value, but sometimes
+  #  prefixed with a string (e.g. '12450' or 'customfield_10000')
   attr_accessor :id
-
 end
 
 # @abstract
 # Many JIRA objects include a name.
 class NamedEntity < JIRA::DynamicEntity
-
-  @attributes = ancestors[1].attributes
-  @attributes['name'] = [:name=, :to_s]
+  add_attributes({ 'name' => [:name=, :to_s] })
 
   # @return [String] a plain language name
   attr_accessor :name
-
 end
 
 # @abstract
 # Several JIRA objects include a short description.
 class DescribedEntity < JIRA::NamedEntity
-
-  @attributes = ancestors[1].attributes
-  @attributes['description'] = [:description=, :to_s]
+  add_attributes({ 'description' => [:description=, :to_s] })
 
   # @return [String] usually a short blurb
   attr_accessor :description
-
 end
 
 # @abstract
@@ -85,8 +76,9 @@ end
 # API; a more useful case might be if you wanted to emulate the server's
 # behaviour.
 class Scheme < JIRA::DescribedEntity
-  # Schemes that inherit this class will have to be careful when they try
-  # to encode the scheme type in an xml message.
+  add_attributes({})
+
+  # Child classes need to be careful when encoding the scheme type to XML.
   # @return [Class]
   alias_method :type, :class
 end
@@ -96,13 +88,10 @@ end
 # an icon to go with them to help identify properties of issues more
 # quickly.
 class IssueProperty < JIRA::DescribedEntity
-
-  @attributes = ancestors[1].attributes
-  @attributes['icon'] = [:icon=, :to_url]
+  add_attributes({ 'icon' => [:icon=, :to_url] })
 
   # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
   attr_accessor :icon
-
 end
 
 end
