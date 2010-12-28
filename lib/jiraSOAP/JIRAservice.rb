@@ -2,7 +2,6 @@
 module JIRA
 
 # @todo consider adding a finalizer that will try to logout
-# @todo support spelling color as colour and all other language bumps
 # @note HTTPS is not supported in this version.
 # Interface to the JIRA endpoint server.
 #
