@@ -44,18 +44,4 @@ class Entity
   end
 end
 
-# @abstract
-
-
-# @abstract
-# A common base for most issue properties. Core issue properties have
-# an icon to go with them to help identify properties of issues more
-# quickly.
-class IssueProperty < JIRA::DescribedEntity
-  add_attributes({ 'icon' => [:icon=, :to_url] })
-
-  # @return [URL] A NSURL on MacRuby and a URI::HTTP object in CRuby
-  attr_accessor :icon
-end
-
 end
