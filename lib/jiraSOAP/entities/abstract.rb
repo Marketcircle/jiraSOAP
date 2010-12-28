@@ -46,17 +46,6 @@ end
 
 # @abstract
 
-# @abstract
-# Represents a scheme used by the server. Not very useful for the sake of the
-# API; a more useful case might be if you wanted to emulate the server's
-# behaviour.
-class Scheme < JIRA::DescribedEntity
-  add_attributes({})
-
-  # Child classes need to be careful when encoding the scheme type to XML.
-  # @return [Class]
-  alias_method :type, :class
-end
 
 # @abstract
 # A common base for most issue properties. Core issue properties have
