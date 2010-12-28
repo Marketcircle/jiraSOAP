@@ -3,11 +3,11 @@ module JIRA
 # Contains a comments body and its metadata.
 class Comment < JIRA::DynamicEntity
   add_attributes({
-    'body'         => [:body=,            :to_s],
-    'groupLevel'   => [:group_level=,     :to_s],
-    'roleLevel'    => [:role_level=,      :to_s],
-    'updateAuthor' => [:update_author=,   :to_s],
     'author'       => [:author=,            :to_s],
+    'body'         => [:body=,              :to_s],
+    'groupLevel'   => [:group_level=,       :to_s],
+    'roleLevel'    => [:role_level=,        :to_s],
+    'updateAuthor' => [:update_author=,     :to_s],
     'created'      => [:create_time=,       :to_date],
     'updated'      => [:last_updated_time=, :to_date]
   })
@@ -30,7 +30,7 @@ class Comment < JIRA::DynamicEntity
   # @return [Time]
   attr_accessor :last_updated_time
 
-  # @return [String]
+  # @return [String] a username
   attr_accessor :update_author
 
   # @todo make this method shorter
