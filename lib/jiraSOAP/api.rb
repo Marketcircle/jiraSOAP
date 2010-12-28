@@ -16,7 +16,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [boolean] true if successful, otherwise an exception is thrown
+  # @return [true]
   def login(user, password)
     response = invoke('soap:login') { |msg|
       msg.add 'soap:in0', user
@@ -30,7 +30,7 @@ module RemoteAPI
 
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
-  # @return [boolean] true if successful, otherwise false
+  # @return [true,false] true if successful, otherwise false
   def logout
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
@@ -295,9 +295,9 @@ module RemoteAPI
   # @param [String] project_key
   # @param [String] version_name
   # @param [boolean] state
-  # @return [boolean] true if successful, otherwise an exception is thrown
+  # @return [true]
   def set_archive_state_for_version_for_project(project_key, version_name, state)
-    response = invoke('soap:archiveVersion') { |msg|
+    invoke('soap:archiveVersion') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_key
       msg.add 'soap:in2', version_name
@@ -323,9 +323,9 @@ module RemoteAPI
   # You can set the release state for a project with this method.
   # @param [String] project_name
   # @param [JIRA::Version] version
-  # @return [boolean] true, throws an exception otherwise
+  # @return [true]
   def release_state_for_version_for_project(project_name, version)
-    response = invoke('soap:releaseVersion') { |msg|
+    invoke('soap:releaseVersion') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_name
       msg.add 'soap:in2' do |submsg| version.soapify_for submsg end
@@ -367,9 +367,9 @@ module RemoteAPI
   end
 
   # @param [String] username
-  # @return [boolean] true if successful, throws an exception otherwise
+  # @return [true]
   def delete_user_with_name(username)
-    response = invoke('soap:deleteUser') { |msg|
+    invoke('soap:deleteUser') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', username
     }
@@ -400,9 +400,9 @@ module RemoteAPI
 
   # @param [String] issue_key
   # @param [JIRA::Comment] comment
-  # @return [boolean] true if successful, throws an exception otherwise
+  # @return [true]
   def add_comment_to_issue_with_key(issue_key, comment)
-    response = invoke('soap:addComment') { |msg|
+    invoke('soap:addComment') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', issue_key
       msg.add 'soap:in2' do |submsg| comment.soapify_for submsg end
@@ -479,9 +479,9 @@ module RemoteAPI
 
   # I have no idea what this method does.
   # @todo find out what this method does
-  # @return [boolean] true if successful, throws an exception otherwise
+  # @return [true]
   def refresh_custom_fields
-    response = invoke('soap:refreshCustomFields') { |msg|
+    invoke('soap:refreshCustomFields') { |msg|
       msg.add 'soap:in0', @auth_token
     }
     true
@@ -529,9 +529,9 @@ module RemoteAPI
   # @param [String] issue_key
   # @param [[String]] filenames names to put on the files
   # @param [[String]] data base64 encoded data
-  # @return [boolean] true if successful, otherwise an exception is thrown
+  # @return [true]
   def add_base64_encoded_attachments_to_issue_with_key(issue_key, filenames, data)
-    response = invoke('soap:addBase64EncodedAttachmentsToIssue') { |msg|
+    invoke('soap:addBase64EncodedAttachmentsToIssue') { |msg|
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', issue_key
       msg.add 'soap:in2' do |submsg|
