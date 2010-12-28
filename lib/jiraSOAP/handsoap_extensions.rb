@@ -43,6 +43,7 @@ module XmlQueryFront
       }
     end
 
+    # Parses non-strict date strings into Time objects.
     # @return [Time]
     def to_string_date
       temp = self.to_s
@@ -57,6 +58,7 @@ module XmlQueryFront
       URL.new temp
     end
 
+    # Returns the node's children to an array of strings.
     # @return [[String]]
     def to_ss
       children.map { |val| val.to_s }
@@ -64,13 +66,14 @@ module XmlQueryFront
 
     # @param [Class] klass the object you want to make
     # @return [Object] an instance of klass
-    def to_object(klass)
-      klass.new_with_xml_fragment self
+    def to_object klass
+      klass.new_with_xml self
     end
 
     # @param [Class] klass the object you want an array of
     # @return [Array] an array of klass objects
     def to_objects klass
+      children.map { |node| klass.new_with_xml node }
     end
   end
 end
