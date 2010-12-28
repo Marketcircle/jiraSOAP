@@ -1,5 +1,6 @@
 module JIRA
 
+# @todo find out what the id value of @owner relates to
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class Avatar < JIRA::DynamicEntity
   add_attributes({
@@ -10,10 +11,10 @@ class Avatar < JIRA::DynamicEntity
     'system'      => [:system=,      :to_boolean],
   })
 
-  # @return [String]
+  # @return [String] this seems to be an id ref to some other object
   attr_accessor :owner
 
-  # @return [String] the place where the avatar is used
+  # @return [String] the place where the avatar is used (e.g. 'project')
   attr_accessor :type
 
   # @return [String]

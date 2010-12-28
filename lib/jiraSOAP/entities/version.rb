@@ -1,8 +1,8 @@
 module JIRA
 
+# @todo find out why we don't get a description for this object
 # Represents a version for a project. The description field is never
 # included when you retrieve versions from the server.
-# @todo find out why we don't get a description for this object
 class Version < JIRA::NamedEntity
   add_attributes({
     'sequence'    => [:sequence=,     :to_i],
