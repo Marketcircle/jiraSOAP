@@ -51,6 +51,14 @@ module XmlQueryFront
       Time.new temp
     end
 
+    # This is a bit naive, but should be sufficient for its purpose.
+    # @return [String]
+    def to_hex_string
+      temp = self.to_s
+      return unless temp
+      temp.match(/#(..)(..)(..)/).captures
+    end
+
     # @return [URL]
     def to_url
       temp = self.to_s
