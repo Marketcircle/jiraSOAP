@@ -40,7 +40,7 @@ module XmlQueryFront
 
     # Parses non-strict date strings into Time objects.
     # @return [Time]
-    def to_string_date
+    def to_date_string
       temp = self.to_s
       return unless temp
       Time.new temp
