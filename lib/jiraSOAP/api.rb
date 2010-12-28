@@ -573,6 +573,30 @@ module RemoteAPI
   end
 
   # @todo add tests for this method
+  # @param [#to_s] issue_id
+  # @return [Time]
+  def get_resolution_date_for_issue_with_id issue_id
+    response = invoke('soap:getResolutionDateById') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_id
+    }
+    response.document.xpath('//getResolutionDateByIdReturn').to_date
+  end
+
+  # @todo add tests for this method
+  # @param [String] issue_key
+  # @return [Time]
+  def get_resolution_date_for_issue_with_key issue_key
+    response = invoke('soap:getResolutionDateByKey') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+    }
+    response.document.xpath('//getResolutionDateByKeyReturn').to_date
+  end
+
+  # @todo add tests for this method
+
+  # @todo add tests for this method
   # @note You cannot delete the system avatar
   # @note You need project administration permissions to delete an avatar
   # @param [#to_s] avatar_id
