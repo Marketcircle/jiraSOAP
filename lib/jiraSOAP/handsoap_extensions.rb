@@ -71,39 +71,6 @@ module XmlQueryFront
     # @param [Class] klass the object you want an array of
     # @return [Array] an array of klass objects
     def to_objects klass
-      # concern here
-      children.map { |node| klass.new_with_xml_fragment node }
-    end
-
-  end
-
-  # Simple additions to help expedite parsing XML.
-  class NodeSelection
-    # @return [URL]
-    def to_url
-      self.first.to_url if self.any?
-    end
-
-    # @return [Time]
-    def to_string_date
-      self.first.to_string_date
-    end
-
-    # @return [[String]]
-    def to_ss
-      self.map { |val| val.to_s }
-    end
-
-    # @param [Class] klass the object you want an array of
-    # @return [Array] an array of klass objects
-    def to_objects(klass)
-      self.map { |frag| klass.new_with_xml_fragment frag }
-    end
-
-    # @param [Class] klass the object you want to make
-    # @return [Object] an instance of klass
-    def to_object(klass)
-      klass.new_with_xml_fragment self.first if self.any?
     end
   end
 end
