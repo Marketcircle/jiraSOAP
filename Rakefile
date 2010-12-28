@@ -84,3 +84,23 @@ rescue LoadError
     abort "YARD is not available. In order to run yardoc, you must: sudo gem install yard"
   end
 end
+
+task :yardstick do
+  begin
+
+    # measure
+    require 'yardstick/rake/measurement'
+    Yardstick::Rake::Measurement.new(:yardstick_measure) do |measurement|
+      measurement.output = 'measurement/report.txt'
+    end
+
+    # verify
+    require 'yardstick/rake/verify'
+    Yardstick::Rake::Verify.new do |verify|
+      verify.threshold = 100
+    end
+
+  rescue LoadError
+    abort 'Yardstick is not available. In order to run yardstick, you must: sud gem install yardstick'
+  end
+end

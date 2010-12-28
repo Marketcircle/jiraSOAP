@@ -148,7 +148,7 @@ module RemoteAPI
   # Gets ALL avatars for a given project with this method; if you
   # just want the project avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
-  # @param [boolean] include_default_avatars
+  # @param [true,false] include_default_avatars
   # @return [[JIRA::Avatar]]
   def get_project_avatars_for_key(project_key, include_default_avatars = false)
     response = invoke('soap:getProjectAvatars') { |msg|
@@ -294,7 +294,7 @@ module RemoteAPI
   # released. However, this is not reflected by the return value of this method.
   # @param [String] project_key
   # @param [String] version_name
-  # @param [boolean] state
+  # @param [true,false] state
   # @return [true]
   def set_archive_state_for_version_for_project(project_key, version_name, state)
     invoke('soap:archiveVersion') { |msg|
