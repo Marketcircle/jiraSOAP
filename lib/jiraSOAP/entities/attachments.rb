@@ -9,14 +9,14 @@ class AttachmentMetadata < JIRA::NamedEntity
     'filename' => [:filename=,    :to_s],
     'mimetype' => [:mime_type=,   :to_s],
     'filesize' => [:file_size=,   :to_i],
-    'created'  => [:create_date=, :to_date],
+    'created'  => [:create_time=, :to_date],
   })
 
   # @return [String]
   attr_accessor :author
 
   # @return [Time]
-  attr_accessor :create_date
+  attr_accessor :create_time
 
   # @return [String]
   attr_accessor :filename

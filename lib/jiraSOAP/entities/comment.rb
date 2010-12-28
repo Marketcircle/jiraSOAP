@@ -8,8 +8,8 @@ class Comment < JIRA::DynamicEntity
     'groupLevel'   => [:group_level=,     :to_s],
     'roleLevel'    => [:role_level=,      :to_s],
     'updateAuthor' => [:update_author=,   :to_s],
-    'created'      => [:create_date=,     :to_date],
     'updated'      => [:last_updated=,    :to_date]
+    'created'      => [:create_time=,       :to_date],
   })
 
   # @return [String]
@@ -25,7 +25,7 @@ class Comment < JIRA::DynamicEntity
   attr_accessor :body
 
   # @return [Time]
-  attr_accessor :create_date
+  attr_accessor :create_time
 
   # @return [Time]
   attr_accessor :last_updated

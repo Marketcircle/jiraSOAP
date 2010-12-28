@@ -23,7 +23,6 @@ class Issue < JIRA::DynamicEntity
     'environment'       => [:environment=,         :to_s],
     'votes'             => [:votes=,               :to_i],
     'updated'           => [:last_updated=,        :to_date],
-    'created'           => [:create_date=,         :to_date],
     'duedate'           => [:due_date=,            :to_date],
     'affectsVersions'   => [:affects_versions=,    :to_objects, JIRA::Version],
     'fixVersions'       => [:fix_versions=,        :to_objects, JIRA::Version],
@@ -67,9 +66,6 @@ class Issue < JIRA::DynamicEntity
 
   # @return [[JIRA::Version]]
   attr_accessor :affects_versions
-
-  # @return [Time]
-  attr_accessor :create_date
 
   # @return [Time]
   attr_accessor :due_date
@@ -145,6 +141,10 @@ class Issue < JIRA::DynamicEntity
         submsg.add 'fixVersions' do |version_msg|
           version_msg.add 'id', version.id end
       }
+      'created'           => [:create_time=,         :to_date],
+    # @return [Time]
+    attr_accessor :create_time
+
     end
 
     msg.add 'assignee', (@assignee_name || '-1')
