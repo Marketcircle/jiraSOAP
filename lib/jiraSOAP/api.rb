@@ -47,7 +47,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getPrioritiesReturn").map {
-      |frag| JIRA::Priority.new_with_xml_fragment frag
+      |frag| JIRA::Priority.new_with_xml frag
     }
   end
 
@@ -57,7 +57,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getResolutionsReturn").map {
-      |frag| JIRA::Resolution.new_with_xml_fragment frag
+      |frag| JIRA::Resolution.new_with_xml frag
     }
   end
 
@@ -67,7 +67,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getCustomFieldsReturn").map {
-      |frag| JIRA::Field.new_with_xml_fragment frag
+      |frag| JIRA::Field.new_with_xml frag
     }
   end
 
@@ -77,7 +77,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getIssueTypesReturn").map {
-      |frag| JIRA::IssueType.new_with_xml_fragment frag
+      |frag| JIRA::IssueType.new_with_xml frag
     }
   end
 
@@ -87,7 +87,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getStatusesReturn").map {
-      |frag| JIRA::Status.new_with_xml_fragment frag
+      |frag| JIRA::Status.new_with_xml frag
     }
   end
 
@@ -97,7 +97,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getNotificationSchemesReturn").map {
-      |frag| JIRA::NotificationScheme.new_with_xml_fragment frag
+      |frag| JIRA::NotificationScheme.new_with_xml frag
     }
   end
 
@@ -109,7 +109,7 @@ module RemoteAPI
       msg.add 'soap:in1', project_key
     }
     response.document.xpath("#{RESPONSE_XPATH}/getVersionsReturn").map {
-      |frag| JIRA::Version.new_with_xml_fragment frag
+      |frag| JIRA::Version.new_with_xml frag
     }
   end
 
@@ -123,7 +123,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_key
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath('//getProjectByKeyReturn').first
+    JIRA::Project.new_with_xml response.document.xpath('//getProjectByKeyReturn').first
   end
 
   # @param [String] user_name
@@ -133,7 +133,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', user_name
     }
-    JIRA::User.new_with_xml_fragment response.document.xpath('//getUserReturn').first
+    JIRA::User.new_with_xml response.document.xpath('//getUserReturn').first
   end
 
   # Gets you the default avatar image for a project; if you want all
@@ -145,7 +145,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_key
     }
-    JIRA::Avatar.new_with_xml_fragment response.document.xpath('//getProjectAvatarReturn').first
+    JIRA::Avatar.new_with_xml response.document.xpath('//getProjectAvatarReturn').first
   end
 
   # Gets ALL avatars for a given project with this method; if you
@@ -160,7 +160,7 @@ module RemoteAPI
       msg.add 'soap:in2', include_default_avatars
     }
     response.document.xpath("#{RESPONSE_XPATH}/getProjectAvatarsReturn").map {
-      |frag| JIRA::Avatar.new_with_xml_fragment frag
+      |frag| JIRA::Avatar.new_with_xml frag
     }
   end
 
@@ -183,7 +183,7 @@ module RemoteAPI
       msg.add 'soap:in2', max_results
     }
     response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromJqlSearchReturn").map {
-      |frag| JIRA::Issue.new_with_xml_fragment frag
+      |frag| JIRA::Issue.new_with_xml frag
     }
   end
 
@@ -217,7 +217,7 @@ module RemoteAPI
         field_values.each { |fv| fv.soapify_for submsg }
       end
     }
-    JIRA::Issue.new_with_xml_fragment response.document.xpath('//updateIssueReturn').first
+    JIRA::Issue.new_with_xml response.document.xpath('//updateIssueReturn').first
   end
 
   # Some fields will be ignored when an issue is created.
@@ -237,7 +237,7 @@ module RemoteAPI
         issue.soapify_for submsg
       end
     }
-    JIRA::Issue.new_with_xml_fragment response.document.xpath('//createIssueReturn').first
+    JIRA::Issue.new_with_xml response.document.xpath('//createIssueReturn').first
   end
 
   # @param [String] issue_key
@@ -247,7 +247,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', issue_key
     }
-    JIRA::Issue.new_with_xml_fragment response.document.xpath('//getIssueReturn').first
+    JIRA::Issue.new_with_xml response.document.xpath('//getIssueReturn').first
   end
 
   # @param [String] issue_id
@@ -257,7 +257,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', issue_id
     }
-    JIRA::Issue.new_with_xml_fragment response.document.xpath('//getIssueByIdReturn').first
+    JIRA::Issue.new_with_xml response.document.xpath('//getIssueByIdReturn').first
   end
 
   # @param [String] issue_key
@@ -268,7 +268,7 @@ module RemoteAPI
       msg.add 'soap:in1', issue_key
     }
     response.document.xpath("#{RESPONSE_XPATH}/getAttachmentsFromIssueReturn").map {
-      |frag| JIRA::AttachmentMetadata.new_with_xml_fragment frag
+      |frag| JIRA::AttachmentMetadata.new_with_xml frag
     }
   end
 
@@ -290,7 +290,7 @@ module RemoteAPI
       msg.add 'soap:in1', project_key
       msg.add 'soap:in2' do |submsg| version.soapify_for submsg end
     }
-    JIRA::Version.new_with_xml_fragment response.document.xpath('//addVersionReturn').first
+    JIRA::Version.new_with_xml response.document.xpath('//addVersionReturn').first
   end
 
   # The archive state can only be set to true for versions that have not been
@@ -320,7 +320,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1' do |submsg| project.soapify_for submsg end
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath('//createProjectFromObjectReturn').first
+    JIRA::Project.new_with_xml response.document.xpath('//createProjectFromObjectReturn').first
   end
 
   # You can set the release state for a project with this method.
@@ -345,7 +345,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1' do |submsg| project.soapify_for submsg end
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath('//updateProjectReturn').first
+    JIRA::Project.new_with_xml response.document.xpath('//updateProjectReturn').first
   end
 
   # It seems that creating a user without any permission groups will trigger
@@ -366,7 +366,7 @@ module RemoteAPI
       msg.add 'soap:in3', full_name
       msg.add 'soap:in4', email
     }
-    JIRA::User.new_with_xml_fragment response.document.xpath('//createUserReturn').first
+    JIRA::User.new_with_xml response.document.xpath('//createUserReturn').first
   end
 
   # @param [String] username
@@ -386,7 +386,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_id
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath('//getProjectByIdReturn').first
+    JIRA::Project.new_with_xml response.document.xpath('//getProjectByIdReturn').first
   end
 
   # @todo parse the permission scheme
@@ -398,7 +398,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', project_id
     }
-    JIRA::Project.new_with_xml_fragment response.document.xpath('//getProjectWithSchemesByIdReturn').first
+    JIRA::Project.new_with_xml response.document.xpath('//getProjectWithSchemesByIdReturn').first
   end
 
   # @param [String] issue_key
@@ -420,7 +420,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', id
     }
-    JIRA::Comment.new_with_xml_fragment response.document.xpath('//getCommentReturn').first
+    JIRA::Comment.new_with_xml response.document.xpath('//getCommentReturn').first
   end
 
   # @param [String] issue_key
@@ -431,7 +431,7 @@ module RemoteAPI
       msg.add 'soap:in1', issue_key
     }
     response.document.xpath("#{RESPONSE_XPATH}/getCommentsReturn").map {
-      |frag| JIRA::Comment.new_with_xml_fragment frag
+      |frag| JIRA::Comment.new_with_xml frag
     }
   end
 
@@ -443,7 +443,7 @@ module RemoteAPI
       msg.add 'soap:in1', project_id
     }
     response.document.xpath("#{RESPONSE_XPATH}/getIssueTypesForProjectReturn").map {
-      |frag| JIRA::IssueType.new_with_xml_fragment frag
+      |frag| JIRA::IssueType.new_with_xml frag
     }
   end
 
@@ -455,7 +455,7 @@ module RemoteAPI
       msg.add 'soap:in1' do |submsg| comment.soapify_for submsg end
     }
     frag = response.document.xpath('//editCommentReturn').first
-    JIRA::Comment.new_with_xml_fragment frag
+    JIRA::Comment.new_with_xml frag
   end
 
   # @return [[JIRA::IssueType]]
@@ -464,7 +464,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getSubTaskIssueTypesReturn").map {
-      |frag| JIRA::IssueType.new_with_xml_fragment frag
+      |frag| JIRA::IssueType.new_with_xml frag
     }
   end
 
@@ -476,7 +476,7 @@ module RemoteAPI
       msg.add 'soap:in1', project_id
     }
     response.document.xpath("#{RESPONSE_XPATH}/getSubtaskIssueTypesForProjectReturn").map {
-      |frag| JIRA::IssueType.new_with_xml_fragment frag
+      |frag| JIRA::IssueType.new_with_xml frag
     }
   end
 
@@ -497,7 +497,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
     }
     response.document.xpath("#{RESPONSE_XPATH}/getFavouriteFiltersReturn").map {
-      |frag| JIRA::Filter.new_with_xml_fragment frag
+      |frag| JIRA::Filter.new_with_xml frag
     }
   end
 
@@ -513,7 +513,7 @@ module RemoteAPI
       msg.add 'soap:in3', max_results
     }
     response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromFilterWithLimitReturn").map {
-      |frag| JIRA::Issue.new_with_xml_fragment frag
+      |frag| JIRA::Issue.new_with_xml frag
     }
   end
 
@@ -553,7 +553,7 @@ module RemoteAPI
     response = invoke('soap:getServerInfo') { |msg|
       msg.add 'soap:in0', @auth_token
     }
-    JIRA::ServerInfo.new_with_xml_fragment response.document.xpath('//getServerInfoReturn').first
+    JIRA::ServerInfo.new_with_xml response.document.xpath('//getServerInfoReturn').first
   end
 
   # @return [JIRA::ServerConfiguration]
@@ -561,6 +561,6 @@ module RemoteAPI
     response = invoke('soap:getConfiguration') { |msg|
       msg.add 'soap:in0', @auth_token
     }
-    JIRA::ServerConfiguration.new_with_xml_fragment response.document.xpath('//getConfigurationReturn').first
+    JIRA::ServerConfiguration.new_with_xml response.document.xpath('//getConfigurationReturn').first
   end
 end

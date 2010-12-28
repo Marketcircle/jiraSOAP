@@ -17,10 +17,9 @@ class Entity
 
   @attributes = {} # needs to be initialized
 
-  # @todo change name to #new_from_xml
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
-  def self.new_with_xml_fragment frag
+  def self.new_with_xml frag
     entity = allocate
     entity.initialize_with_xml frag
     entity
