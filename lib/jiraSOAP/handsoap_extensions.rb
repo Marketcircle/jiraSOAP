@@ -33,15 +33,6 @@ module XmlQueryFront
   # This class is extended for use with jiraSOAP.
   class NokogiriDriver
 
-    # @param [Array] *attributes pairs or triplets, the first element is the
-    #  attribute you want, the second element is the method to send to the
-    #  result, and the third element is the argument to that method (if needed)
-    # @return [[Objects]]
-    def nodes(*attributes)
-      attributes.map { |attr|
-        self.xpath(attr.shift).send *attr
-      }
-    end
 
     # Parses non-strict date strings into Time objects.
     # @return [Time]
