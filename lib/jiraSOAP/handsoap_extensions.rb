@@ -59,7 +59,7 @@ module XmlQueryFront
 
     # @return [[String]]
     def to_ss
-      self.map { |val| val.to_s }
+      children.map { |val| val.to_s }
     end
 
     # @param [Class] klass the object you want to make
