@@ -1,6 +1,27 @@
 Version 0.6
 
+	* Added RemoteAPI#get_projects_without_schemes
+	* Added RemoteAPI#delete_project_avatar_with_id
+	* Added RemoteAPI#delete_project_with_key
+	* Added RemoteAPI#set_project_avatar_for_project_with_key
+	* Added RemoteAPI#set_new_project_avatar_for_project_with_key
+	* Added RemoteAPI#get_resolution_date_for_issue_with_id
+	* Added RemoteAPI#get_resolution_date_for_issue_with_key
+
+	* Changed parsing logic (1.5-2x faster)
 	* Changed Scheme#type to return a Class constant
+	* Changed #color in JIRA::Priority to be formatted as an array
+	triple
+	* Alias #colour to #color in JIRA::Priority
+	* Changed instances of #lead to #lead_username
+	* Changed instances of #create_date to #create_time
+	* Changed instances of #last_updated to #last_updated_time
+	* Changed instances of #filename to #file_name
+	* Changed instances of #original_author to #author
+	* Changed instances of #reporter_name to #reporter_username
+	* Changed instances of #assignee_name to #assignee_username
+	* Consolidated Handsoap parsing extensions into NokogiriDriver
+	* Various documentation updates
 
 Version 0.5
 
