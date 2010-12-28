@@ -6,16 +6,23 @@ class Entity
 
   class << self
     attr_accessor :attributes
+
+    # @param [Hash] attributes
+    # @return [Hash]
+    def add_attributes attributes
+      @attributes = ancestors[1].attributes.dup
+      @attributes.update attributes
+    end
   end
 
-  @attributes = {}
+  @attributes = {} # needs to be initialized
 
   # @todo change name to #new_from_xml
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
   def self.new_with_xml_fragment frag
     entity = allocate
-    entity.initialize_with_xml_fragment frag
+    entity.initialize_with_xml frag
     entity
   end
 
@@ -25,12 +32,12 @@ class Entity
   #  driver object and then need to inject the marshaling
   #  methods into Nokogiri classes
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
-  def initialize_with_xml_fragment(frag)
+  def initialize_with_xml frag
     attributes = self.class.attributes
     frag.children.each { |node|
       action = attributes[node.node_name]
-      # puts "Action is #{action.inspect} for #{node.node_name}"
-      self.send action[0], (node.send *action[1..-1])
+      self.send action[0], (node.send *action[1..-1]) if action
+      #puts "Action is #{action.inspect} for #{node.node_name}"
     }
   end
 end
