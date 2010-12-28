@@ -1,10 +1,13 @@
 module JIRA
 
-# @abstract
-# The base class for all JIRA objects that can be created by the server.
+# @abstract The base class for all JIRA objects that can given by the server.
+# @todo remove the need for attr_accessor by having add_attributes make the
+#  call for me, but I will need to make a YARD plugin to fix the gap in the
+#  documentation when that happens
 class Entity
 
   class << self
+    # @return [Hash{String => Array}] used by the metaclass
     attr_accessor :attributes
 
     # @param [Hash] attributes
