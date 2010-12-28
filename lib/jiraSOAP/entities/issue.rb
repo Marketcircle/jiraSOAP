@@ -22,7 +22,6 @@ class Issue < JIRA::DynamicEntity
     'resolution'        => [:resolution_id=,       :to_s],
     'environment'       => [:environment=,         :to_s],
     'votes'             => [:votes=,               :to_i],
-    'updated'           => [:last_updated=,        :to_date],
     'duedate'           => [:due_date=,            :to_date],
     'affectsVersions'   => [:affects_versions=,    :to_objects, JIRA::Version],
     'fixVersions'       => [:fix_versions=,        :to_objects, JIRA::Version],
@@ -42,9 +41,6 @@ class Issue < JIRA::DynamicEntity
 
   # @return [String]
   attr_accessor :type_id
-
-  # @return [Time]
-  attr_accessor :last_updated
 
   # @return [Fixnum]
   attr_accessor :votes
@@ -141,9 +137,10 @@ class Issue < JIRA::DynamicEntity
         submsg.add 'fixVersions' do |version_msg|
           version_msg.add 'id', version.id end
       }
+      'updated'           => [:last_updated_time=,   :to_date],
       'created'           => [:create_time=,         :to_date],
     # @return [Time]
-    attr_accessor :create_time
+    attr_accessor :last_updated_time
 
     end
 
@@ -154,5 +151,9 @@ class Issue < JIRA::DynamicEntity
     msg.add 'duedate', @due_date.xmlschema unless @due_date.nil?
   end
 end
+
+
+    # @return [Time]
+    attr_accessor :create_time
 
 end
