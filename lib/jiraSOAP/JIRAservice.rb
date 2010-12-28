@@ -1,6 +1,9 @@
 # All the remote entities as well as the SOAP service client.
 module JIRA
 
+# @todo consider adding a finalizer that will try to logout
+# @todo support spelling color as colour and all other language bumps
+# @note HTTPS is not supported in this version.
 # Interface to the JIRA endpoint server.
 #
 # Due to limitations in Handsoap::Service, there can only be one endpoint.
@@ -8,14 +11,8 @@ module JIRA
 # like; but if you try to set a differnt endpoint for a new instance you
 # will end up messing up any other instances currently being used.
 #
-# It is best to treat this class as a singleton. There should only be one.
-# However, this is not enforced, in case you want to be able to login as
-# multiple users to the same endpoint.
-#
-# HTTPS is not supported in this version.
-#
-# @todo consider adding a finalizer that will try to logout
-# @todo support spelling color as colour and all other language bumps
+# It is best to treat this class as a singleton, but it is not enforced
+# in case you want to be able to login as multiple users to the same endpoint.
 class JIRAService < Handsoap::Service
   include RemoteAPI
 
@@ -51,19 +48,25 @@ class JIRAService < Handsoap::Service
   # An extra note for users when things break.
   # @deprecated This will be removed in v1.0 when the API is stable.
   # @return [nil]
-  def method_missing(method, *args)
+  def method_missing method, *args
     message  = "#{method} is not a valid method. Check the documentation; the "
     message << 'API is not stabale yet and the method name likely changed.'
     STDERR.puts message
     super method, *args
   end
 
+
   protected
-  def on_create_document(doc)
+
+  # Makes sure the correct namespace is set
+  def on_create_document doc
     doc.alias 'soap', 'http://soap.rpc.jira.atlassian.com'
   end
-  def on_response_document(doc)
+
+  # Make sure that the required namespace is added
+  def on_response_document doc
     doc.add_namespace 'jir', @endpoint_url
   end
+
 end
 end
