@@ -3,17 +3,17 @@ module JIRA
 # Contains a comments body and its metadata.
 class Comment < JIRA::DynamicEntity
   add_attributes({
-    'author'       => [:original_author=, :to_s],
     'body'         => [:body=,            :to_s],
     'groupLevel'   => [:group_level=,     :to_s],
     'roleLevel'    => [:role_level=,      :to_s],
     'updateAuthor' => [:update_author=,   :to_s],
+    'author'       => [:author=,            :to_s],
     'created'      => [:create_time=,       :to_date],
     'updated'      => [:last_updated_time=, :to_date]
   })
 
-  # @return [String]
-  attr_accessor :original_author
+  # @return [String] a username
+  attr_accessor :author
 
   # @return [String]
   attr_accessor :role_level
@@ -38,7 +38,7 @@ class Comment < JIRA::DynamicEntity
   # @return [Handsoap::XmlMason::Node]
   def soapify_for(msg)
     msg.add 'id', @id
-    msg.add 'author', @original_author
+    msg.add 'author', @author
     msg.add 'body', @body
     msg.add 'groupLevel', @group_level
     msg.add 'roleLevel', @role_level
