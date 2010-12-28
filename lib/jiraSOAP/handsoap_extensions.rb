@@ -67,6 +67,14 @@ module XmlQueryFront
     def to_object(klass)
       klass.new_with_xml_fragment self
     end
+
+    # @param [Class] klass the object you want an array of
+    # @return [Array] an array of klass objects
+    def to_objects klass
+      # concern here
+      children.map { |node| klass.new_with_xml_fragment node }
+    end
+
   end
 
   # Simple additions to help expedite parsing XML.
