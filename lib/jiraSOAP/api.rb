@@ -595,6 +595,15 @@ module RemoteAPI
   end
 
   # @todo add tests for this method
+  # @param [String] project_key
+  # @return [true]
+  def delete_project_with_key project_key
+    invoke('soap:deleteProject') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', project_key
+    }
+    true
+  end
 
   # @todo add tests for this method
   # @note You cannot delete the system avatar
