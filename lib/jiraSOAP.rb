@@ -1,6 +1,7 @@
 require 'logger'
 require 'time'
 require 'uri'
+require 'nokogiri'
 
 require 'handsoap'
 Handsoap.http_driver = :net_http
