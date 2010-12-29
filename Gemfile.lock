@@ -1,0 +1,40 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bluecloth (2.0.9)
+    git (1.2.5)
+    handsoap (1.1.7)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    minitest (2.0.2)
+    nokogiri (1.4.4)
+    rake (0.8.7)
+    reek (1.2.8)
+      ruby2ruby (~> 1.2)
+      ruby_parser (~> 2.0)
+      sexp_processor (~> 3.0)
+    ruby2ruby (1.2.5)
+      ruby_parser (~> 2.0)
+      sexp_processor (~> 3.0)
+    ruby_parser (2.0.5)
+      sexp_processor (~> 3.0)
+    sexp_processor (3.0.5)
+    yard (0.6.4)
+    yardstick (0.2.0)
+      yard (~> 0.6.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bluecloth (~> 2.0.0)
+  bundler (~> 1.0.0)
+  handsoap (~> 1.0)
+  jeweler (~> 1.5.1)
+  minitest (~> 2.0.0)
+  nokogiri (~> 1.4.4)
+  reek (~> 1.2.0)
+  yard (~> 0.6.0)
+  yardstick (~> 0.2.0)
