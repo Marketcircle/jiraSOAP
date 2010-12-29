@@ -10,6 +10,7 @@ require 'jiraSOAP/entities/component'
 require 'jiraSOAP/entities/field'
 require 'jiraSOAP/entities/filter'
 require 'jiraSOAP/entities/user'
+require 'jiraSOAP/entities/project_role'
 
 require 'jiraSOAP/entities/field_value'
 require 'jiraSOAP/entities/custom_field_value'
