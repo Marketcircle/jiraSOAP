@@ -7,6 +7,7 @@ Version 0.6
 	* Added RemoteAPI#set_new_project_avatar_for_project_with_key
 	* Added RemoteAPI#get_resolution_date_for_issue_with_id
 	* Added RemoteAPI#get_resolution_date_for_issue_with_key
+	* Added RemoteAPI#get_project_roles and friends
 
 	* Changed parsing logic (1.5-2x faster)
 	* Changed Scheme#type to return a Class constant
