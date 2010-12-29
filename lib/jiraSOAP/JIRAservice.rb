@@ -1,6 +1,3 @@
-# All the remote entities as well as the SOAP service client.
-module JIRA
-
 # @todo consider adding a finalizer that will try to logout
 # @note HTTPS is not supported in this version.
 # Interface to the JIRA endpoint server.
@@ -12,7 +9,7 @@ module JIRA
 #
 # It is best to treat this class as a singleton, but it is not enforced
 # in case you want to be able to login as multiple users to the same endpoint.
-class JIRAService < Handsoap::Service
+class JIRA::JIRAService < Handsoap::Service
   include RemoteAPI
 
   # @return [String]
@@ -67,5 +64,4 @@ class JIRAService < Handsoap::Service
     doc.add_namespace 'jir', @endpoint_url
   end
 
-end
 end

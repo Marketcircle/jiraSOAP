@@ -1,6 +1,3 @@
-module JIRA
-end
-
 require 'jiraSOAP/entities/entity'
 require 'jiraSOAP/entities/dynamic_entity'
 require 'jiraSOAP/entities/named_entity'
