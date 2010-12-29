@@ -1,13 +1,15 @@
-# Contains the API defined by Atlassian for the JIRA SOAP service. The JavaDoc
-# for the SOAP API is located at http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html.
-# @todo exception handling
+# Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
+#
+# There are several cases where this API diverges from the one defined by
+# Atlassian; most notably, this API tries to be more idomatically Ruby by using
+# snake case for method names.
 # @todo logging
 # @todo code refactoring and de-duplication
 # @todo break the API down by task, like Apple's developer documentation
 # @todo createProjectRole [v0.6]
-# @todo getAvailableActions [target v0.7]
-# @todo progressWorkflowAction [target v0.7]
+# @todo progressWorkflowAction and friends [target v0.7]
 module RemoteAPI
+
   # XPath constant to get a node containing a response array.
   # This could be used for all responses, but is only used in cases where we
   # cannot use a more blunt XPath expression.
