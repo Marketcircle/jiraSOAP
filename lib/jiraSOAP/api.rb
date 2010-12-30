@@ -565,10 +565,10 @@ module RemoteAPI
   # @note This will not fill in JIRA::Scheme data for the projects.
   # @return [[JIRA::Project]]
   def get_projects_without_schemes
-    response = invoke('soap:getProjectNoSchemes') { |msg|
+    response = invoke('soap:getProjectsNoSchemes') { |msg|
       msg.add 'soap:in0', @auth_token
     }
-    response.document.xpath("#{RESPONSE_XPATH}/getProjectNoSchemesReturn").map {
+    response.document.xpath("#{RESPONSE_XPATH}/getProjectsNoSchemesReturn").map {
       |frag| JIRA::Project.new_with_xml frag
     }
   end
