@@ -573,7 +573,6 @@ module RemoteAPI
     }
   end
 
-  # @todo add tests for this method
   # @param [#to_s] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
@@ -584,7 +583,6 @@ module RemoteAPI
     response.document.xpath('//getResolutionDateByIdReturn').to_date
   end
 
-  # @todo add tests for this method
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
@@ -595,7 +593,6 @@ module RemoteAPI
     response.document.xpath('//getResolutionDateByKeyReturn').to_date
   end
 
-  # @todo add tests for this method
   # @param [String] project_key
   # @return [true]
   def delete_project_with_key project_key
