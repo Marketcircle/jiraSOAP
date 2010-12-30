@@ -27,7 +27,7 @@ class JIRA::JIRAService < Handsoap::Service
   # @param [String] password
   # @return [JIRA::JIRAService]
   def self.instance_with_endpoint url, user, password
-    jira = JIRAService.new url
+    jira = JIRA::JIRAService.new url
     jira.login user, password
     jira
   end
@@ -35,7 +35,7 @@ class JIRA::JIRAService < Handsoap::Service
   # @param [String,URL] endpoint_url for the JIRA server
   def initialize endpoint_url
     @endpoint_url = endpoint_url
-    JIRAService.endpoint({
+    JIRA::JIRAService.endpoint({
       uri:"#{endpoint_url.to_s}/rpc/soap/jirasoapservice-v2",
       version:2
     })
