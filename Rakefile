@@ -28,7 +28,6 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-task :test => :check_dependencies
 task :default => :test
 
 require 'rake/testtask'
