@@ -30,3 +30,7 @@ require 'jiraSOAP/entities/issue_type'
 
 require 'jiraSOAP/entities/project'
 require 'jiraSOAP/entities/issue'
+
+require 'jiraSOAP/entities/time_info'
+require 'jiraSOAP/entities/server_info'
+require 'jiraSOAP/entities/server_configuration'
