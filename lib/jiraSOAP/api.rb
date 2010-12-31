@@ -617,11 +617,11 @@ module RemoteAPI
     true
   end
 
-  # @todo add tests for this method
+  # @note You need project administration permissions to edit an avatar
+  # @note JIRA does not care if the avatar_id is valid
   # Change the project avatar to another existing avatar. If you want to
   # upload a new avatar and set it to be the new project avatar use
   # {#set_new_project_avatar} instead.
-  # @note You need project administration permissions to edit an avatar
   # @return [true]
   def set_project_avatar_for_project_with_key project_key, avatar_id
     invoke('soap:setProjectAvatar') { |msg|
@@ -632,7 +632,7 @@ module RemoteAPI
     true
   end
 
-  # @todo add tests for this method
+  # @note You need project administration permissions to edit an avatar
   # Use this method to create a new custom avatar for a project and set it
   # to be current avatar for the project.
   #
@@ -643,7 +643,6 @@ module RemoteAPI
   # automatically.
   # If you want to switch a project avatar to an avatar that already exists on
   # the system then use {#set_project_avatar_for_project_with_key} instead.
-  # @note You need project administration permissions to edit an avatar
   # @param [String] project_key
   # @param [String] mime_type
   # @param [#to_s] base64_image
@@ -658,7 +657,6 @@ module RemoteAPI
     true
   end
 
-  # @todo add tests for this method
   # @return [[JIRA::ProjectRole]]
   def get_project_roles
     response = invoke('soap:getProjectRoles') { |msg|
@@ -669,7 +667,6 @@ module RemoteAPI
     }
   end
 
-  # @todo add tests for this method
   # @param [#to_s] role_id
   # @return [JIRA::ProjectRole]
   def get_project_role_with_id role_id
@@ -677,10 +674,9 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1', role_id
     }
-    JIRA::ProjectRole.new_with_xml response.document.xpath '//getProjectRoleReturn'
+    JIRA::ProjectRole.new_with_xml response.document.xpath('//getProjectRoleReturn').first
   end
 
-  # @todo add tests for this method
   # @param [JIRA::ProjectRole] project_role
   # @return [JIRA::ProjectRole] the role that was created
   def create_project_role_with_role project_role
@@ -688,11 +684,11 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1' do |submsg| project_role.soapify_for submsg end
     }
-    JIRA::ProjectRole.new_with_xml response.document.xpath '//createProjectRoleReturn'
+    JIRA::ProjectRole.new_with_xml response.document.xpath('//createProjectRoleReturn').first
   end
 
-  # @todo add tests for this method
-  # @todo true if name does not exist?
+  # @note JIRA 4.0 returns an exception if the name already exists
+  # Returns true if the name does not exist.
   # @param [String] project_role_name
   # @return [true,false]
   def project_role_name_unique? project_role_name
@@ -703,8 +699,7 @@ module RemoteAPI
     response.document.xpath('//isProjectRoleNameUniqueReturn').to_boolean
   end
 
-  # @todo add tests for this method
-  # @todo what is the confirm value for?!?
+  # @note the confirm argument appears to do nothing (at least on JIRA 4.0)
   # @param [JIRA::ProjectRole] project_role
   # @param [true,false] confirm
   # @return [true]
@@ -717,7 +712,8 @@ module RemoteAPI
     true
   end
 
-  # @todo add tests for this method
+  # @note JIRA 4.0 will not update project roles, it will instead throw
+  #  an exception telling you that the project role already exists
   # @param [JIRA::ProjectRole] project_role
   # @return [JIRA::ProjectRole] the role after the update
   def update_project_role_with_role project_role
@@ -725,7 +721,7 @@ module RemoteAPI
       msg.add 'soap:in0', @auth_token
       msg.add 'soap:in1' do |submsg| project_role.soapify_for submsg end
     }
-    JIRA::ProjectRole.new_with_xml response.document.xpath '//updateProjectRoleReturn'
+    JIRA::ProjectRole.new_with_xml response.document.xpath('//updateProjectRoleReturn').first
   end
 
 end
