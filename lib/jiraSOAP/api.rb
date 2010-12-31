@@ -5,7 +5,8 @@
 # snake case for method names.
 # @todo logging
 # @todo code refactoring and de-duplication
-# @todo break the API down by task, like Apple's developer documentation
+# @todo break the API down by task, like Apple's developer documentation;
+#  I can break the tasks down by CRUD or by what they affect, or both
 # @todo progressWorkflowAction and friends [target v0.7]
 module RemoteAPI
 
