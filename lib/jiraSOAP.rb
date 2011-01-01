@@ -15,6 +15,7 @@ end
 
 require 'jiraSOAP/entities'
 require 'jiraSOAP/api'
+require 'jiraSOAP/api/convenience'
 require 'jiraSOAP/JIRAservice'
 
 require 'jiraSOAP/macruby_bonuses' if RUBY_ENGINE == 'macruby'

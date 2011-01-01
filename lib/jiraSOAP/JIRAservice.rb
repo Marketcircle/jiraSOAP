@@ -11,6 +11,7 @@
 # in case you want to be able to login as multiple users to the same endpoint.
 class JIRA::JIRAService < Handsoap::Service
   include RemoteAPI
+  include RemoteAPIAdditions
 
   # @return [String]
   attr_reader :auth_token

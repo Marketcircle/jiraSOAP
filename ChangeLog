@@ -1,3 +1,8 @@
+Version 0.6.1
+
+	* Added RemoteAPIAdditions module for conveniences
+	* Fix duplicate dependancy listings
+
 Version 0.6
 
 	* Added RemoteAPI#get_projects_without_schemes
