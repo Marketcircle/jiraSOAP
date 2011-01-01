@@ -17,12 +17,6 @@ Jeweler::Tasks.new do |gem|
   gem.email = "mrada@marketcircle.com"
   gem.homepage = "http://github.com/Marketcircle/jiraSOAP"
   gem.authors = ["Mark Rada"]
-  gem.add_dependency 'handsoap', '~> 1.1'
-  gem.add_dependency 'nokogiri', '~> 1.4.4'
-  gem.add_development_dependency 'minitest', '~> 2.0'
-  gem.add_development_dependency 'yard', '~> 0.6.0'
-  gem.add_development_dependency 'bluecloth', '~> 2.0.0'
-  gem.add_development_dependency 'jeweler', '~> 1.5.0'
   gem.files = ['lib/**/*']
   gem.required_ruby_version = '~> 1.9.2'
 end
