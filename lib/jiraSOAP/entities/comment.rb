@@ -1,35 +1,16 @@
 # Contains a comments body and its metadata.
 class JIRA::Comment < JIRA::DynamicEntity
-  add_attributes({
-    'author'       => [:author=,            :to_s],
-    'body'         => [:body=,              :to_s],
-    'groupLevel'   => [:group_level=,       :to_s],
-    'roleLevel'    => [:role_level=,        :to_s],
-    'updateAuthor' => [:update_author=,     :to_s],
-    'created'      => [:create_time=,       :to_date],
-    'updated'      => [:last_updated_time=, :to_date]
-  })
-
-  # @return [String] a username
-  attr_accessor :author
-
-  # @return [String]
-  attr_accessor :role_level
-
-  # @return [String]
-  attr_accessor :group_level
-
-  # @return [String]
-  attr_accessor :body
-
-  # @return [Time]
-  attr_accessor :create_time
-
-  # @return [Time]
-  attr_accessor :last_updated_time
-
-  # @return [String] a username
-  attr_accessor :update_author
+  add_attributes(
+    # a username
+    ['author',       :author,            :to_s],
+    ['body',         :body,              :to_s],
+    ['groupLevel',   :group_level,       :to_s],
+    ['roleLevel',    :role_level,        :to_s],
+    # a username
+    ['updateAuthor', :update_author,     :to_s],
+    ['created',      :create_time,       :to_date],
+    ['updated',      :last_updated_time, :to_date]
+  )
 
   # @todo make this method shorter
   # @param [Handsoap::XmlMason::Node] msg

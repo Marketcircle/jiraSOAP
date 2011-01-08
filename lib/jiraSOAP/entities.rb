@@ -6,8 +6,11 @@ require 'jiraSOAP/entities/described_entity'
 require 'jiraSOAP/entities/component'
 require 'jiraSOAP/entities/field'
 require 'jiraSOAP/entities/filter'
-require 'jiraSOAP/entities/user'
 require 'jiraSOAP/entities/project_role'
+
+require 'jiraSOAP/entities/remote_entity'
+require 'jiraSOAP/entities/user'
+
 
 require 'jiraSOAP/entities/field_value'
 require 'jiraSOAP/entities/custom_field_value'
@@ -20,6 +23,8 @@ require 'jiraSOAP/entities/attachment_metadata'
 require 'jiraSOAP/entities/scheme'
 require 'jiraSOAP/entities/notification_scheme'
 require 'jiraSOAP/entities/issue_security_scheme'
+require 'jiraSOAP/entities/permission'
+require 'jiraSOAP/entities/permission_mapping'
 require 'jiraSOAP/entities/permission_scheme'
 
 require 'jiraSOAP/entities/issue_property'

@@ -8,88 +8,29 @@
 # @note Issues with an UNRESOLVED status will have nil for the value of
 #  #resolution.
 class JIRA::Issue < JIRA::DynamicEntity
-  add_attributes({
-    'key'               => [:key=,                 :to_s],
-    'summary'           => [:summary=,             :to_s],
-    'description'       => [:description=,         :to_s],
-    'type'              => [:type_id=,             :to_s],
-    'status'            => [:status_id=,           :to_s],
-    'assignee'          => [:assignee_username=,   :to_s],
-    'reporter'          => [:reporter_username=,   :to_s],
-    'priority'          => [:priority_id=,         :to_s],
-    'project'           => [:project_name=,        :to_s],
-    'resolution'        => [:resolution_id=,       :to_s],
-    'environment'       => [:environment=,         :to_s],
-    'votes'             => [:votes=,               :to_i],
-    'updated'           => [:last_updated_time=,   :to_date],
-    'created'           => [:create_time=,         :to_date],
-    'duedate'           => [:due_date=,            :to_date],
-    'affectsVersions'   => [:affects_versions=,    :to_objects, JIRA::Version],
-    'fixVersions'       => [:fix_versions=,        :to_objects, JIRA::Version],
-    'components'        => [:components=,          :to_objects, JIRA::Component],
-    'customFieldValues' => [:custom_field_values=, :to_objects, JIRA::CustomFieldValue],
-    'attachmentNames'   => [:attachment_names=,    :to_ss]
-  })
-
-  # @return [String]
-  attr_accessor :key
-
-  # @return [String]
-  attr_accessor :summary
-
-  # @return [String]
-  attr_accessor :description
-
-  # @return [String]
-  attr_accessor :type_id
-
-  # @return [Time]
-  attr_accessor :last_updated_time
-
-  # @return [Fixnum]
-  attr_accessor :votes
-
-  # @return [String]
-  attr_accessor :status_id
-
-  # @return [String]
-  attr_accessor :assignee_username
-
-  # @return [String]
-  attr_accessor :reporter_username
-
-  # @return [String]
-  attr_accessor :priority_id
-
-  # @return [String]
-  attr_accessor :project_name
-
-  # @return [[JIRA::Version]]
-  attr_accessor :affects_versions
-
-  # @return [Time]
-  attr_accessor :create_time
-
-  # @return [Time] this is actually a Time object with no time resolution
-  attr_accessor :due_date
-
-  # @return [[JIRA::Version]]
-  attr_accessor :fix_versions
-
-  # @return [String]
-  attr_accessor :resolution_id
-
-  # @return [String]
-  attr_accessor :environment
-
-  # @return [[JIRA::Component]]
-  attr_accessor :components
-
-  # @return [[String]]
-  attr_accessor :attachment_names
-
-  # @return [[JIRA::CustomFieldValue]]
-  attr_accessor :custom_field_values
+  add_attributes(
+    ['key',               :key,                 :to_s],
+    ['summary',           :summary,             :to_s],
+    ['description',       :description,         :to_s],
+    ['type',              :type_id,             :to_s],
+    ['status',            :status_id,           :to_s],
+    ['assignee',          :assignee_username,   :to_s],
+    ['reporter',          :reporter_username,   :to_s],
+    ['priority',          :priority_id,         :to_s],
+    ['project',           :project_name,        :to_s],
+    ['resolution',        :resolution_id,       :to_s],
+    ['environment',       :environment,         :to_s],
+    ['votes',             :votes,               :to_i],
+    ['updated',           :last_updated_time,   :to_date],
+    ['created',           :create_time,         :to_date],
+    # this is actually a Time object with no time resolution
+    ['duedate',           :due_date,            :to_date],
+    ['affectsVersions',   :affects_versions,    :to_objects, JIRA::Version],
+    ['fixVersions',       :fix_versions,        :to_objects, JIRA::Version],
+    ['components',        :components,          :to_objects, JIRA::Component],
+    ['customFieldValues', :custom_field_values, :to_objects, JIRA::CustomFieldValue],
+    ['attachmentNames',   :attachment_names,    :to_ss]
+  )
 
   # @todo see if we can use the simple and complex array builders
   # @todo make this method shorter

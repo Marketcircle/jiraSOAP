@@ -1,35 +1,14 @@
 # Contains the data and metadata about a project and its configuration.
 class JIRA::Project < JIRA::DescribedEntity
-  add_attributes({
-    'key'                 => [:key=,                   :to_s],
-    'lead'                => [:lead_username=,         :to_s],
-    'issueSecurityScheme' => [:issue_security_scheme=, :to_object, JIRA::IssueSecurityScheme],
-    'notificationScheme'  => [:notification_scheme=,   :to_object, JIRA::NotificationScheme],
-    'permissionScheme'    => [:permission_scheme=,     :to_object, JIRA::PermissionScheme],
-    'url'                 => [:jira_url=,              :to_url],
-    'projectUrl'          => [:project_url=,           :to_url]
-  })
-
-  # @return [String]
-  attr_accessor :key
-
-  # @return [URL]
-  attr_accessor :jira_url
-
-  # @return [URL]
-  attr_accessor :project_url
-
-  # @return [String]
-  attr_accessor :lead_username
-
-  # @return [JIRA::IssueSecurityScheme]
-  attr_accessor :issue_security_scheme
-
-  # @return [JIRA::NotificationScheme]
-  attr_accessor :notification_scheme
-
-  # @return [JIRA::PermissionScheme]
-  attr_accessor :permission_scheme
+  add_attributes(
+    ['key',                 :key,                   :to_s],
+    ['lead',                :lead_username,         :to_s],
+    ['issueSecurityScheme', :issue_security_scheme, :to_object, JIRA::IssueSecurityScheme],
+    ['notificationScheme',  :notification_scheme,   :to_object, JIRA::NotificationScheme],
+    ['permissionScheme',    :permission_scheme,     :to_object, JIRA::PermissionScheme],
+    ['url',                 :jira_url,              :to_url],
+    ['projectUrl',          :project_url,           :to_url]
+  )
 
   # @todo make this method shorter
   # @todo encode the schemes
