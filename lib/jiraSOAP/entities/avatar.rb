@@ -5,9 +5,9 @@ class JIRA::Avatar < JIRA::DynamicEntity
     # this seems to be an id ref to some other object
     ['owner',       :owner,       :to_s],
     # the place where the avatar is used (e.g. 'project')
-    ['type',        :type,        :to_string],
-    ['contentType', :mime_type,   :to_string],
-    ['base64Data',  :base64_data, :to_string],
+    ['type',        :type,        :to_s],
+    ['contentType', :mime_type,   :to_s],
+    ['base64Data',  :base64_data, :to_s],
     # indicates if the image is the system default
     ['system',      :system,      :to_boolean]
   )
