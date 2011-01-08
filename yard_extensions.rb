@@ -8,3 +8,5 @@ class MyAttributeHandler < YARD::Handlers::Ruby::AttributeHandler
     puts namespace.attributes[scope].class
   end
 end
+
+# @todo add tasks section for RemoteAPI
