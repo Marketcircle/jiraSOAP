@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 gem 'nokogiri', '~> 1.4.4'
-gem 'handsoap', '~> 1.0'
+gem 'handsoap', '~> 1.1'
 
 group :development do
   gem 'minitest', '~> 2.0.0'

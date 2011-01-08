@@ -3,7 +3,7 @@ GEM
   specs:
     bluecloth (2.0.9)
     git (1.2.5)
-    handsoap (1.1.7)
+    handsoap (1.1.8)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
@@ -31,7 +31,7 @@ PLATFORMS
 DEPENDENCIES
   bluecloth (~> 2.0.0)
   bundler (~> 1.0.0)
-  handsoap (~> 1.0)
+  handsoap (~> 1.1)
   jeweler (~> 1.5.1)
   minitest (~> 2.0.0)
   nokogiri (~> 1.4.4)
