@@ -8,7 +8,7 @@ require 'jiraSOAP/entities/field'
 require 'jiraSOAP/entities/filter'
 require 'jiraSOAP/entities/project_role'
 
-require 'jiraSOAP/entities/remote_entity'
+require 'jiraSOAP/entities/username'
 require 'jiraSOAP/entities/user'
 
 
