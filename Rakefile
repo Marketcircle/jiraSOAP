@@ -38,6 +38,13 @@ Reek::Rake::Task.new do |t|
   t.source_files = 'lib/**/*.rb'
 end
 
+require 'rcov/rcovtask'
+Rcov::RcovTask.new do |test|
+  test.libs << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
+end
+
 require 'yard'
 YARD::Rake::YardocTask.new
 

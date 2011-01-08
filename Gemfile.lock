@@ -11,6 +11,7 @@ GEM
     minitest (2.0.2)
     nokogiri (1.4.4)
     rake (0.8.7)
+    rcov (0.9.9)
     reek (1.2.8)
       ruby2ruby (~> 1.2)
       ruby_parser (~> 2.0)
@@ -35,6 +36,7 @@ DEPENDENCIES
   jeweler (~> 1.5.1)
   minitest (~> 2.0.0)
   nokogiri (~> 1.4.4)
+  rcov
   reek (~> 1.2.0)
   yard (~> 0.6.0)
   yardstick (~> 0.2.0)
