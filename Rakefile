@@ -46,6 +46,7 @@ Rcov::RcovTask.new do |test|
 end
 
 require 'yard'
+require File.join(File.dirname(__FILE__),'yard_extensions')
 YARD::Rake::YardocTask.new
 
 task :yardstick do
