@@ -604,7 +604,6 @@ module RemoteAPI
     true
   end
 
-  # @todo add tests for this method
   # @note You cannot delete the system avatar
   # @note You need project administration permissions to delete an avatar
   # @param [#to_s] avatar_id
