@@ -1,3 +1,10 @@
+Version 0.7
+
+	* Added YARD extension for documentation
+
+	* Tweaked parsing logic more in preparation for the builder
+	* Various documentation updates
+
 Version 0.6.1
 
 	* Added RemoteAPIAdditions module for conveniences
