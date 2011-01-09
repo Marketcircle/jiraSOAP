@@ -621,7 +621,7 @@ module RemoteAPI
   # @note JIRA does not care if the avatar_id is valid
   # Change the project avatar to another existing avatar. If you want to
   # upload a new avatar and set it to be the new project avatar use
-  # {#set_new_project_avatar} instead.
+  # {#set_new_project_avatar_for_project_with_key} instead.
   # @return [true]
   def set_project_avatar_for_project_with_key project_key, avatar_id
     invoke('soap:setProjectAvatar') { |msg|
