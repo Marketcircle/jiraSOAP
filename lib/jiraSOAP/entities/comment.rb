@@ -1,12 +1,12 @@
 # Contains a comments body and its metadata.
 class JIRA::Comment < JIRA::DynamicEntity
   add_attributes(
-    # a username
+    # A username
     ['author',       :author,            :to_s],
     ['body',         :body,              :to_s],
     ['groupLevel',   :group_level,       :to_s],
     ['roleLevel',    :role_level,        :to_s],
-    # a username
+    # A username
     ['updateAuthor', :update_author,     :to_s],
     ['created',      :create_time,       :to_date],
     ['updated',      :last_updated_time, :to_date]
