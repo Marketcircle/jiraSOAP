@@ -6,7 +6,8 @@
 # @todo logging
 # @todo code refactoring and de-duplication
 # @todo break the API down by task, like Apple's developer documentation;
-#  I can break the tasks down by CRUD or by what they affect, or both
+#  I can break the tasks down by CRUD or by what they affect, or both;
+#  done using the @group and @endgroup tags in comments
 # @todo progressWorkflowAction and friends [target v0.7]
 module RemoteAPI
 

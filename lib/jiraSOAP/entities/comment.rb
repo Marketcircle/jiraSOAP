@@ -1,4 +1,4 @@
-# Contains a comments body and its metadata.
+# Contains a comment's body and metadata.
 class JIRA::Comment < JIRA::DynamicEntity
   add_attributes(
     # A username

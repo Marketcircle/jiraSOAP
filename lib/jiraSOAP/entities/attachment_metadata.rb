@@ -6,7 +6,7 @@ class JIRA::AttachmentMetadata < JIRA::NamedEntity
     ['author',   :author,      :to_s],
     ['filename', :file_name,   :to_s],
     ['mimetype', :mime_type,   :to_s],
-    # measured in bytes
+    # Measured in bytes
     ['filesize', :file_size,   :to_i],
     ['created',  :create_time, :to_date]
   )

@@ -2,13 +2,13 @@
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class JIRA::Avatar < JIRA::DynamicEntity
   add_attributes(
-    # this seems to be an id ref to some other object
+    # This seems to be an id ref to some other object
     ['owner',       :owner,       :to_s],
-    # the place where the avatar is used (e.g. 'project')
+    # The place where the avatar is used (e.g. 'project')
     ['type',        :type,        :to_s],
     ['contentType', :mime_type,   :to_s],
     ['base64Data',  :base64_data, :to_s],
-    # indicates if the image is the system default
+    # Indicates if the image is the system default
     ['system',      :system,      :to_boolean]
   )
 end

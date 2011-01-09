@@ -1,12 +1,12 @@
 # Contains most of the data and metadata for a JIRA issue, but does
-# not contain the {JIRA::Comment}'s or {JIRA::AttachmentMetadata}.
+# not contain the {JIRA::Comment}s or {JIRA::AttachmentMetadata}.
 #
 # This class is easily the most convoluted structure in the API, and will
 # likely be the greatest source of bugs. The irony of the situation is that
 # this structure is also the most critical to have in working order.
 #
-# @note Issues with an UNRESOLVED status will have nil for the value of
-#  #resolution.
+# @note Issues with an UNRESOLVED status will have nil for the value for
+#  {#resolution_id}.
 class JIRA::Issue < JIRA::DynamicEntity
   add_attributes(
     ['key',               :key,                 :to_s],
@@ -23,7 +23,7 @@ class JIRA::Issue < JIRA::DynamicEntity
     ['votes',             :votes,               :to_i],
     ['updated',           :last_updated_time,   :to_date],
     ['created',           :create_time,         :to_date],
-    # this is actually a Time object with no time resolution
+    # This is actually a Time object with no time resolution.
     ['duedate',           :due_date,            :to_date],
     ['affectsVersions',   :affects_versions,    :to_objects, JIRA::Version],
     ['fixVersions',       :fix_versions,        :to_objects, JIRA::Version],
@@ -33,7 +33,6 @@ class JIRA::Issue < JIRA::DynamicEntity
   )
 
   # @todo see if we can use the simple and complex array builders
-  # @todo make this method shorter
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
   # and inconsistencies? (hint: there are many).
   #
@@ -50,13 +49,13 @@ class JIRA::Issue < JIRA::DynamicEntity
   # and do not contain the rest of the {JIRA::Component}/{JIRA::Version}
   # structure.
   #
-  # To get the automatic assignee we pass '-1' as the value for @assignee.
+  # To get the automatic assignee we pass `'-1'` as the value for @assignee.
   #
   # Passing an environment/due date field with a value of nil causes the
   # server to complain about the formatting of the message.
   # @param [Handsoap::XmlMason::Node] msg  message the node to add the object to
   def soapify_for(msg)
-    #might be going away, since it appears to have no effect at creation time
+    # might be going away, since it appears to have no effect at creation time
     msg.add 'reporter', @reporter_name unless @reporter.nil?
 
     msg.add 'priority', @priority_id

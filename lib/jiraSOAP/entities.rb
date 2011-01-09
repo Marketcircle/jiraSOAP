@@ -11,7 +11,6 @@ require 'jiraSOAP/entities/project_role'
 require 'jiraSOAP/entities/username'
 require 'jiraSOAP/entities/user'
 
-
 require 'jiraSOAP/entities/field_value'
 require 'jiraSOAP/entities/custom_field_value'
 

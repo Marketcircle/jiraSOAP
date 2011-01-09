@@ -11,7 +11,7 @@ class JIRA::ServerConfiguration < JIRA::Entity
     ['allowWatching',               :watching_allowed,                 :to_boolean],
     ['timeTrackingDaysPerWeek',     :time_tracking_days_per_week,      :to_i],
     ['timeTrackingHoursPerDay',     :time_tracking_hours_per_day,      :to_i],
-    # in case we are using a version of JIRA that misspells 'management'
+    # In case we are using a version of JIRA that misspells 'management'
     ['allowExternalUserManagment',  :external_user_management_allowed, :to_boolean]
   )
 end
