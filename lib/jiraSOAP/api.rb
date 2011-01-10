@@ -8,12 +8,8 @@ module JIRA
 #
 # There are several cases where this API diverges from the one defined by
 # Atlassian; most notably, this API tries to be more idomatically Ruby by using
-# snake case for method names.
+# snake case for method names, default values, varargs, etc..
 # @todo logging
-# @todo code refactoring and de-duplication
-# @todo break the API down by task, like Apple's developer documentation;
-#  I can break the tasks down by CRUD or by what they affect, or both;
-#  done using the @group and @endgroup tags in comments
 # @todo progressWorkflowAction and friends [target v0.7]
 module RemoteAPI
 
@@ -25,7 +21,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [true]
+  # @return [Boolean]
   def login(user, password)
     response = invoke('soap:login') { |msg|
       msg.add 'soap:in0', user
@@ -39,7 +35,7 @@ module RemoteAPI
 
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
-  # @return [true,false] true if successful, otherwise false
+  # @return [Boolean] true if successful, otherwise false
   def logout
     response = invoke('soap:logout') { |msg|
       msg.add 'soap:in0', @auth_token
