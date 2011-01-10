@@ -1,5 +1,8 @@
 module JIRA
 
+# Methods declared here do not directly map to methods defined in JIRA's
+# SOAP API javadoc. They are generally close to something from the javadoc
+# but with some extra conveniences.
 module RemoteAPIAdditions
 
   # Returns nil if the field is not found.
