@@ -1,3 +1,5 @@
+require 'jiraSOAP/api/additions'
+
 module JIRA
 
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
