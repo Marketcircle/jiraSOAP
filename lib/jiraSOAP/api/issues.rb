@@ -114,6 +114,26 @@ module RemoteAPI
     }
   end
 
+  # @param [#to_s] issue_id
+  # @return [Time]
+  def get_resolution_date_for_issue_with_id issue_id
+    response = invoke('soap:getResolutionDateById') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_id
+    }
+    response.document.xpath('//getResolutionDateByIdReturn').to_date
+  end
+
+  # @param [String] issue_key
+  # @return [Time]
+  def get_resolution_date_for_issue_with_key issue_key
+    response = invoke('soap:getResolutionDateByKey') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+    }
+    response.document.xpath('//getResolutionDateByKeyReturn').to_date
+  end
+
   # @endgroup
 end
 end
