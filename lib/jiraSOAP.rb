@@ -1,4 +1,3 @@
-require 'logger'
 require 'time'
 require 'uri'
 require 'nokogiri'
