@@ -10,8 +10,8 @@
 # It is best to treat this class as a singleton, but it is not enforced
 # in case you want to be able to login as multiple users to the same endpoint.
 class JIRA::JIRAService < Handsoap::Service
-  include RemoteAPI
-  include RemoteAPIAdditions
+  include JIRA::RemoteAPI
+  include JIRA::RemoteAPIAdditions
 
   # @return [String]
   attr_reader :auth_token

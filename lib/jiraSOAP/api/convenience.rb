@@ -1,3 +1,5 @@
+module JIRA
+
 module RemoteAPIAdditions
 
   # Returns nil if the field is not found.
@@ -9,4 +11,7 @@ module RemoteAPIAdditions
     }
     nil
   end
+
+end
+
 end

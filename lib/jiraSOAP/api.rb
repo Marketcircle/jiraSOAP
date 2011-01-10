@@ -1,3 +1,5 @@
+module JIRA
+
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
 # There are several cases where this API diverges from the one defined by
@@ -723,5 +725,7 @@ module RemoteAPI
     }
     JIRA::ProjectRole.new_with_xml response.document.xpath('//updateProjectRoleReturn').first
   end
+
+end
 
 end
