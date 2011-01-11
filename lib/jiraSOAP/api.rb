@@ -28,33 +28,45 @@ module RemoteAPI
   # cannot use a more blunt XPath expression.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
+  # @todo change method name to #login! since we are changing internal state?
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
   # @return [Boolean]
-  def login(user, password)
-    response = invoke('soap:login') { |msg|
-      msg.add 'soap:in0', user
-      msg.add 'soap:in1', password
-    }
-    # cache now that we know it is safe to do so
-    @user       = user
+  def login user, password
+    response    = soap_call 'login', user, password
     @auth_token = response.document.xpath('//loginReturn').first.to_s
+    @user       = user
     true
   end
 
+  # @todo change method name to #logout! since we are changing internal state?
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    response = invoke('soap:logout') { |msg|
-      msg.add 'soap:in0', @auth_token
-    }
-    response.document.xpath('//logoutReturn').to_boolean
+    jira_call( 'logout' ).document.xpath('//logoutReturn').to_boolean
   end
 
 
+  private
 
+  # A generic method for calling a SOAP method and soapifying all
+  #  the arguments.
+  # @param [String] method_name
+  # @param [Object] args
+  def soap_call method_name, *args
+    invoke("soap:#{method_name}") { |msg|
+      for i in 0...args.size
+        msg.add "soap:in#{i}", args[i]
+      end
+    }
+  end
+
+  # A wrapper around soap_call to add the @auth_token
+  def jira_call method_name, *args
+    soap_call method_name, @auth_token, *args
+  end
 
 end
 
