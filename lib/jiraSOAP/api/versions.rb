@@ -5,10 +5,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [[JIRA::Version]]
   def get_versions_for_project project_key
-    response = invoke('soap:getVersions') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-    }
+    response = jira_call 'getVersions', project_key
     response.document.xpath("#{RESPONSE_XPATH}/getVersionsReturn").map {
       |frag| JIRA::Version.new_with_xml frag
     }

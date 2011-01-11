@@ -7,24 +7,17 @@ module RemoteAPI
   # @param [String] project_key
   # @return [JIRA::Avatar]
   def get_project_avatar_for_key project_key
-    response = invoke('soap:getProjectAvatar') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-    }
+    response = jira_call 'getProjectAvatar', project_key
     JIRA::Avatar.new_with_xml response.document.xpath('//getProjectAvatarReturn').first
   end
 
   # Gets ALL avatars for a given project with this method; if you
   # just want the project avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
-  # @param [true,false] include_default_avatars
+  # @param [Boolean] include_default_avatars
   # @return [[JIRA::Avatar]]
   def get_project_avatars_for_key project_key, include_default_avatars = false
-    response = invoke('soap:getProjectAvatars') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-      msg.add 'soap:in2', include_default_avatars
-    }
+    response = jira_call 'getProjectAvatars', project_key, include_default_avatars
     response.document.xpath("#{RESPONSE_XPATH}/getProjectAvatarsReturn").map {
       |frag| JIRA::Avatar.new_with_xml frag
     }
@@ -32,13 +25,10 @@ module RemoteAPI
 
   # @note You cannot delete the system avatar
   # @note You need project administration permissions to delete an avatar
-  # @param [#to_s] avatar_id
-  # @return [true]
+  # @param [String] avatar_id
+  # @return [Boolean] true if successful
   def delete_project_avatar_with_id avatar_id
-    invoke('soap:deleteProjectAvatar') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', avatar_id
-    }
+    jira_call 'deleteProjectAvatar', avatar_id
     true
   end
 
@@ -47,13 +37,9 @@ module RemoteAPI
   # Change the project avatar to another existing avatar. If you want to
   # upload a new avatar and set it to be the new project avatar use
   # {#set_new_project_avatar_for_project_with_key} instead.
-  # @return [true]
+  # @return [Boolean] true if successful
   def set_project_avatar_for_project_with_key project_key, avatar_id
-    invoke('soap:setProjectAvatar') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-      msg.add 'soap:in2', avatar_id
-    }
+    jira_call 'setProjectAvatar', project_key, avatar_id
     true
   end
 
@@ -70,15 +56,10 @@ module RemoteAPI
   # the system then use {#set_project_avatar_for_project_with_key} instead.
   # @param [String] project_key
   # @param [String] mime_type
-  # @param [#to_s] base64_image
-  # @return [true]
+  # @param [String] base64_image
+  # @return [Boolean] true if successful
   def set_new_project_avatar_for_project_with_key project_key, mime_type, base64_image
-    invoke('soap:setNewProjectAvatar') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-      msg.add 'soap:in2', mime_type
-      msg.add 'soap:in3', base64_image
-    }
+    jira_call 'setNewProjectAvatar', project_key, mime_type, base64_image
     true
   end
 

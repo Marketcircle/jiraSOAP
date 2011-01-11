@@ -5,10 +5,7 @@ module RemoteAPI
   # @param [String] user_name
   # @return [JIRA::User]
   def get_user_with_name user_name
-    response = invoke('soap:getUser') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', user_name
-    }
+    response = jira_call 'getUser', user_name
     JIRA::User.new_with_xml response.document.xpath('//getUserReturn').first
   end
 
@@ -21,25 +18,16 @@ module RemoteAPI
   # @param [String] full_name
   # @param [String] email
   # @return [JIRA::User,nil] depending on your JIRA version, this method may
-  #   always raise an exception instead of actually returning anythin
+  #  always raise an exception instead of actually returning anythin
   def create_user username, password, full_name, email
-    response = invoke('soap:createUser') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', username
-      msg.add 'soap:in2', password
-      msg.add 'soap:in3', full_name
-      msg.add 'soap:in4', email
-    }
+    response = jira_call 'createUser', username, password, full_name, email
     JIRA::User.new_with_xml response.document.xpath('//createUserReturn').first
   end
 
   # @param [String] username
-  # @return [true]
+  # @return [Boolean] true if successful
   def delete_user_with_name username
-    invoke('soap:deleteUser') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', username
-    }
+    jira_call 'deleteUser', username
     true
   end
 
