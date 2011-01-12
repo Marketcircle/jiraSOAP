@@ -12,6 +12,7 @@ module RemoteAPI
       |frag| JIRA::Filter.new_with_xml frag
     }
   end
+  alias_method :get_favorite_filters, :get_favourite_filters
 
   # @param [String] id
   # @return [Fixnum]
