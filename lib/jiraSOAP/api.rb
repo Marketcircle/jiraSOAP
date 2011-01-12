@@ -55,6 +55,7 @@ module RemoteAPI
   #  the arguments.
   # @param [String] method_name
   # @param [Object] args
+  # @return [Handsoap::SoapResponse]
   def soap_call method_name, *args
     invoke("soap:#{method_name}") { |msg|
       for i in 0...args.size
@@ -63,7 +64,10 @@ module RemoteAPI
     }
   end
 
-  # A wrapper around soap_call to add the @auth_token
+  # A wrapper around soap_call to add the @auth_token.
+  # @param [String] method_name
+  # @param [Object] args
+  # @return [Handsoap::SoapResponse]
   def jira_call method_name, *args
     soap_call method_name, @auth_token, *args
   end
