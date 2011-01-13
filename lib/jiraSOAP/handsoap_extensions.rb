@@ -1,6 +1,7 @@
 # Some simple extensions to Handsoap.
 module Handsoap
 
+# @todo check if these methods already exist in Handsoap::Service
 # Some extensions to the XML builder to make message building less ugly.
 module XmlMason
 
@@ -35,6 +36,7 @@ end
 # These are simple extensions to the existing class provided by Handsoap.
 module XmlQueryFront
 
+  # @todo move these extensions straight to the nokogiri layer
   # Simple extensions on the existing Handsoap class to make parsing easier.
   class NokogiriDriver
 

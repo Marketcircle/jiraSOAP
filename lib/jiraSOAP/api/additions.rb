@@ -15,6 +15,7 @@ module RemoteAPIAdditions
     nil
   end
 
+  # @todo a method for getting attachments
 end
 
 end

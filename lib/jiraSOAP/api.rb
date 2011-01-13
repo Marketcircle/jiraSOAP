@@ -21,6 +21,9 @@ module JIRA
 # snake case for method names, default values, varargs, etc..
 # @todo logging
 # @todo progressWorkflowAction and friends [target v0.7]
+# @todo get Nokogiri element directly
+# @todo extend nokogiri class
+# @todo instead of #map, try using a loop over #children.size
 module RemoteAPI
 
   # XPath constant to get a node containing a response array.
