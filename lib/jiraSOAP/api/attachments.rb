@@ -4,7 +4,7 @@ module RemoteAPI
 
   # @todo change method name to reflect that you only get metadata
   # @param [String] issue_key
-  # @return [[JIRA::AttachmentMetadata]]
+  # @return [Array<JIRA::AttachmentMetadata>]
   def get_attachments_for_issue_with_key issue_key
     jira_call( 'getAttachmentsFromIssue', issue_key ).map { |frag|
       JIRA::AttachmentMetadata.new_with_xml frag
@@ -14,9 +14,9 @@ module RemoteAPI
   # @todo optimize building the message, try a single pass
   # Expect this method to be slow.
   # @param [String] issue_key
-  # @param [[String]] filenames names to put on the files
-  # @param [[String]] data base64 encoded data
-  # @return [true]
+  # @param [Array<String>] filenames names to put on the files
+  # @param [Array<String>] data base64 encoded data
+  # @return [Boolean] true if successful
   def add_base64_encoded_attachments_to_issue_with_key issue_key, filenames, data
     invoke('soap:addBase64EncodedAttachmentsToIssue') { |msg|
       msg.add 'soap:in0', @auth_token

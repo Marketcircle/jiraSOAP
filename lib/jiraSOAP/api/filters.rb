@@ -3,7 +3,7 @@ module RemoteAPI
   # @group Working with Filters
 
   # Retrieves favourite filters for the currently logged in user.
-  # @return [[JIRA::Filter]]
+  # @return [Array<JIRA::Filter>]
   def get_favourite_filters
     jira_call( 'getFavouriteFilters' ).map { |frag|
       JIRA::Filter.new_with_xml frag

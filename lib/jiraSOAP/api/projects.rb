@@ -44,7 +44,7 @@ module RemoteAPI
   end
 
   # @todo parse the permission scheme
-  # Note: this method does not yet include the permission scheme.
+  # @note This method does not yet include the permission scheme.
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_including_schemes_with_id project_id
@@ -52,7 +52,7 @@ module RemoteAPI
   end
 
   # @param [String] project_name
-  # @return [[JIRA::IssueType]]
+  # @return [Array<JIRA::IssueType>]
   def get_issue_types_for_project_with_id project_id
     jira_call( 'getIssueTypesForProject', project_id ).map { |frag|
       JIRA::IssueType.new_with_xml frag
@@ -60,13 +60,13 @@ module RemoteAPI
   end
 
   # @note This will not fill in JIRA::Scheme data for the projects.
-  # @return [[JIRA::Project]]
+  # @return [Array<JIRA::Project>]
   def get_projects_without_schemes
     jira_call( 'getProjectsNoSchemes' ).map { |frag| JIRA::Project.new_with_xml frag }
   end
 
   # @param [String] project_key
-  # @return [true]
+  # @return [Boolean] true if successful
   def delete_project_with_key project_key
     jira_call 'deleteProject', project_key
     true

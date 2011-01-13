@@ -14,7 +14,7 @@ module RemoteAPI
   # just want the project avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
   # @param [Boolean] include_default_avatars
-  # @return [[JIRA::Avatar]]
+  # @return [Array<JIRA::Avatar>]
   def get_project_avatars_for_key project_key, include_default_avatars = false
     jira_call( 'getProjectAvatars', project_key, include_default_avatars ).map {
       |frag| JIRA::Avatar.new_with_xml frag

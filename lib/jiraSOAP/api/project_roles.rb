@@ -2,12 +2,12 @@ module JIRA
 module RemoteAPI
   # @group Working with Project Roles
 
-  # @return [[JIRA::ProjectRole]]
+  # @return [Array<JIRA::ProjectRole>]
   def get_project_roles
     jira_call( 'getProjectRoles' ).map { |frag| JIRA::ProjectRole.new_with_xml frag }
   end
 
-  # @param [#to_s] role_id
+  # @param [String] role_id
   # @return [JIRA::ProjectRole]
   def get_project_role_with_id role_id
 
@@ -27,15 +27,15 @@ module RemoteAPI
   # @note JIRA 4.0 returns an exception if the name already exists
   # Returns true if the name does not exist.
   # @param [String] project_role_name
-  # @return [true,false]
+  # @return [Boolean] true if successful
   def project_role_name_unique? project_role_name
     jira_call( 'isProjectRoleNameUnique', project_role_name ).to_boolean
   end
 
   # @note the confirm argument appears to do nothing (at least on JIRA 4.0)
   # @param [JIRA::ProjectRole] project_role
-  # @param [true,false] confirm
-  # @return [true]
+  # @param [Boolean] confirm
+  # @return [Boolean] true if successful
   def delete_project_role project_role, confirm = true
     invoke('soap:deleteProjectRole') { |msg|
       msg.add 'soap:in0', @auth_token

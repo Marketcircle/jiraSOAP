@@ -32,7 +32,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [Boolean]
+  # @return [Boolean] true if successful
   def login username, password
     response = invoke('soap:login') { |msg|
       msg.add 'soap:in0', username

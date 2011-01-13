@@ -13,7 +13,7 @@ module RemoteAPI
   # @param [String] jql_query JQL query as a string
   # @param [Fixnum] max_results limit on number of returned results;
   #  the value may be overridden by the server if max_results is too large
-  # @return [[JIRA::Issue]]
+  # @return [Array<JIRA::Issue>]
   def get_issues_from_jql_search jql_query, max_results = 2000
     jira_call( 'getIssuesFromJqlSearch', jql_query, max_results ).map { |frag|
       JIRA::Issue.new_with_xml frag
@@ -88,13 +88,13 @@ module RemoteAPI
   # @param [String] id
   # @param [Fixnum] max_results
   # @param [Fixnum] offset
-  # @return [[JIRA::Issue]]
+  # @return [Array<JIRA::Issue>]
   def get_issues_from_filter_with_id id, max_results = 500, offset = 0
     node = jira_call 'getIssuesFromFilterWithLimit', id, offset, max_results
     node.map { |frag| JIRA::Issue.new_with_xml frag }
   end
 
-  # @param [#to_s] issue_id
+  # @param [String] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_date

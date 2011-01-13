@@ -3,7 +3,7 @@ module RemoteAPI
   # @group Working with Versions
 
   # @param [String] project_key
-  # @return [[JIRA::Version]]
+  # @return [Array<JIRA::Version>]
   def get_versions_for_project project_key
     jira_call( 'getVersions', project_key ).map { |frag|
       JIRA::Version.new_with_xml frag
@@ -35,8 +35,8 @@ module RemoteAPI
   # released. However, this is not reflected by the return value of this method.
   # @param [String] project_key
   # @param [String] version_name
-  # @param [true,false] state
-  # @return [true]
+  # @param [Boolean] state
+  # @return [Boolean] true if successful
   def set_archive_state_for_version_for_project project_key, version_name, state
     jira_call 'archiveVersion', project_key, version_name, state
     true
@@ -45,7 +45,7 @@ module RemoteAPI
   # You can set the release state for a project with this method.
   # @param [String] project_name
   # @param [JIRA::Version] version
-  # @return [true]
+  # @return [Boolean] true if successful
   def release_state_for_version_for_project project_name, version
     invoke('soap:releaseVersion') { |msg|
       msg.add 'soap:in0', @auth_token

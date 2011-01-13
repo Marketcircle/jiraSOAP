@@ -4,7 +4,7 @@ module RemoteAPI
 
   # @param [String] issue_key
   # @param [JIRA::Comment] comment
-  # @return [true]
+  # @return [Boolean] true if successful
   def add_comment_to_issue_with_key issue_key, comment
     invoke('soap:addComment') { |msg|
       msg.add 'soap:in0', @auth_token
@@ -21,7 +21,7 @@ module RemoteAPI
   end
 
   # @param [String] issue_key
-  # @return [[JIRA::Comment]]
+  # @return [Array<JIRA::Comment>]
   def get_comments_for_issue_with_key issue_key
     jira_call( 'getComments', issue_key ).map { |frag|
       JIRA::Comment.new_with_xml frag
