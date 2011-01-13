@@ -33,8 +33,11 @@ module RemoteAPI
   # @param [String] user JIRA user name to login with
   # @param [String] password
   # @return [Boolean]
-  def login user, password
-    response    = soap_call 'login', user, password
+  def login username, password
+    response = invoke('soap:login') { |msg|
+      msg.add 'soap:in0', username
+      msg.add 'soap:in1', password
+    }
     @auth_token = response.document.xpath('//loginReturn').first.to_s
     @user       = user
     true
@@ -45,23 +48,26 @@ module RemoteAPI
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    jira_call( 'logout' ).document.xpath('//logoutReturn').to_boolean
+    jira_call( 'logout' ).to_boolean
   end
 
 
   private
 
+  # @todo which is faster? args.shift or args[i-1]
   # A generic method for calling a SOAP method and soapifying all
-  #  the arguments.
+  # the arguments.
   # @param [String] method_name
-  # @param [Object] args
-  # @return [Handsoap::SoapResponse]
-  def soap_call method_name, *args
-    invoke("soap:#{method_name}") { |msg|
-      for i in 0...args.size
-        msg.add "soap:in#{i}", args[i]
+  # @param [Object] *args
+  # @return [Handsoap::XmlQueryFront::NodeSelection]
+  def jira_call method_name, *args
+    response = invoke("soap:#{method_name}") { |msg|
+      msg.add 'soap:in0', @auth_token
+      for i in 1..args.size
+        msg.add "soap:in#{i}", args[i-1]
       end
     }
+    response.document.xpath "#{RESPONSE_XPATH}/#{method_name}Return"
   end
 
   # A wrapper around soap_call to add the @auth_token.

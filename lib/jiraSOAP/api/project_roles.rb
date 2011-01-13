@@ -4,22 +4,14 @@ module RemoteAPI
 
   # @return [[JIRA::ProjectRole]]
   def get_project_roles
-    response = invoke('soap:getProjectRoles') { |msg|
-      msg.add 'soap:in0', @auth_token
-    }
-    response.document.xpath("#{RESPONSE_XPATH}/getProjectRolesReturn").map {
-      |frag| JIRA::ProjectRole.new_with_xml frag
-    }
+    jira_call( 'getProjectRoles' ).map { |frag| JIRA::ProjectRole.new_with_xml frag }
   end
 
   # @param [#to_s] role_id
   # @return [JIRA::ProjectRole]
   def get_project_role_with_id role_id
-    response = invoke('soap:getProjectRole') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', role_id
-    }
-    JIRA::ProjectRole.new_with_xml response.document.xpath('//getProjectRoleReturn').first
+
+    JIRA::ProjectRole.new_with_xml jira_call( 'getProjectRole', role_id ).first
   end
 
   # @param [JIRA::ProjectRole] project_role
@@ -37,11 +29,7 @@ module RemoteAPI
   # @param [String] project_role_name
   # @return [true,false]
   def project_role_name_unique? project_role_name
-    response = invoke('soap:isProjectRoleNameUnique') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_role_name
-    }
-    response.document.xpath('//isProjectRoleNameUniqueReturn').to_boolean
+    jira_call( 'isProjectRoleNameUnique', project_role_name ).to_boolean
   end
 
   # @note the confirm argument appears to do nothing (at least on JIRA 4.0)

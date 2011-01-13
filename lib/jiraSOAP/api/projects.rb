@@ -8,11 +8,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [JIRA::Project]
   def get_project_with_key project_key
-    response = invoke('soap:getProjectByKey') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-    }
-    JIRA::Project.new_with_xml response.document.xpath('//getProjectByKeyReturn').first
+    JIRA::Project.new_with_xml jira_call( 'getProjectByKey', project_key ).first
   end
 
   # Requires you to set at least a project name, key, and lead.
@@ -44,11 +40,7 @@ module RemoteAPI
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_with_id project_id
-    response = invoke('soap:getProjectById') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_id
-    }
-    JIRA::Project.new_with_xml response.document.xpath('//getProjectByIdReturn').first
+    JIRA::Project.new_with_xml jira_call( 'getProjectById', project_id ).first
   end
 
   # @todo parse the permission scheme
@@ -56,43 +48,27 @@ module RemoteAPI
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_including_schemes_with_id project_id
-    response = invoke('soap:getProjectWithSchemesById') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_id
-    }
-    JIRA::Project.new_with_xml response.document.xpath('//getProjectWithSchemesByIdReturn').first
+    JIRA::Project.new_with_xml jira_call( 'getProjectWithSchemesById', project_id ).first
   end
 
   # @param [String] project_name
   # @return [[JIRA::IssueType]]
-  def get_issue_types_for_project_with_id(project_id)
-    response = invoke('soap:getIssueTypesForProject') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_id
-    }
-    response.document.xpath("#{RESPONSE_XPATH}/getIssueTypesForProjectReturn").map {
-      |frag| JIRA::IssueType.new_with_xml frag
+  def get_issue_types_for_project_with_id project_id
+    jira_call( 'getIssueTypesForProject', project_id ).map { |frag|
+      JIRA::IssueType.new_with_xml frag
     }
   end
 
   # @note This will not fill in JIRA::Scheme data for the projects.
   # @return [[JIRA::Project]]
   def get_projects_without_schemes
-    response = invoke('soap:getProjectsNoSchemes') { |msg|
-      msg.add 'soap:in0', @auth_token
-    }
-    response.document.xpath("#{RESPONSE_XPATH}/getProjectsNoSchemesReturn").map {
-      |frag| JIRA::Project.new_with_xml frag
-    }
+    jira_call( 'getProjectsNoSchemes' ).map { |frag| JIRA::Project.new_with_xml frag }
   end
 
   # @param [String] project_key
   # @return [true]
   def delete_project_with_key project_key
-    invoke('soap:deleteProject') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-    }
+    jira_call 'deleteProject', project_key
     true
   end
 

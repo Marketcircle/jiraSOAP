@@ -15,13 +15,8 @@ module RemoteAPI
   #  the value may be overridden by the server if max_results is too large
   # @return [[JIRA::Issue]]
   def get_issues_from_jql_search jql_query, max_results = 2000
-    response = invoke('soap:getIssuesFromJqlSearch') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', jql_query
-      msg.add 'soap:in2', max_results
-    }
-    response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromJqlSearchReturn").map {
-      |frag| JIRA::Issue.new_with_xml frag
+    jira_call( 'getIssuesFromJqlSearch', jql_query, max_results ).map { |frag|
+      JIRA::Issue.new_with_xml frag
     }
   end
 
@@ -81,21 +76,13 @@ module RemoteAPI
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key issue_key
-    response = invoke('soap:getIssue') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_key
-    }
-    JIRA::Issue.new_with_xml response.document.xpath('//getIssueReturn').first
+    JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key ).first
   end
 
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id issue_id
-    response = invoke('soap:getIssueById') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_id
-    }
-    JIRA::Issue.new_with_xml response.document.xpath('//getIssueByIdReturn').first
+    JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id ).first
   end
 
   # @param [String] id
@@ -103,35 +90,20 @@ module RemoteAPI
   # @param [Fixnum] offset
   # @return [[JIRA::Issue]]
   def get_issues_from_filter_with_id id, max_results = 500, offset = 0
-    response = invoke('soap:getIssuesFromFilterWithLimit') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', id
-      msg.add 'soap:in2', offset
-      msg.add 'soap:in3', max_results
-    }
-    response.document.xpath("#{RESPONSE_XPATH}/getIssuesFromFilterWithLimitReturn").map {
-      |frag| JIRA::Issue.new_with_xml frag
-    }
+    node = jira_call 'getIssuesFromFilterWithLimit', id, offset, max_results
+    node.map { |frag| JIRA::Issue.new_with_xml frag }
   end
 
   # @param [#to_s] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
-    response = invoke('soap:getResolutionDateById') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_id
-    }
-    response.document.xpath('//getResolutionDateByIdReturn').to_date
+    jira_call( 'getResolutionDateById', issue_id ).to_date
   end
 
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
-    response = invoke('soap:getResolutionDateByKey') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_key
-    }
-    response.document.xpath('//getResolutionDateByKeyReturn').to_date
+    jira_call( 'getResolutionDateByKey', issue_key ).to_date
   end
 
   # @endgroup

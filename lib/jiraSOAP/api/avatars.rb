@@ -7,8 +7,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [JIRA::Avatar]
   def get_project_avatar_for_key project_key
-    response = jira_call 'getProjectAvatar', project_key
-    JIRA::Avatar.new_with_xml response.document.xpath('//getProjectAvatarReturn').first
+    JIRA::Avatar.new_with_xml jira_call( 'getProjectAvatar', project_key ).first
   end
 
   # Gets ALL avatars for a given project with this method; if you
@@ -17,8 +16,7 @@ module RemoteAPI
   # @param [Boolean] include_default_avatars
   # @return [[JIRA::Avatar]]
   def get_project_avatars_for_key project_key, include_default_avatars = false
-    response = jira_call 'getProjectAvatars', project_key, include_default_avatars
-    response.document.xpath("#{RESPONSE_XPATH}/getProjectAvatarsReturn").map {
+    jira_call( 'getProjectAvatars', project_key, include_default_avatars ).map {
       |frag| JIRA::Avatar.new_with_xml frag
     }
   end
