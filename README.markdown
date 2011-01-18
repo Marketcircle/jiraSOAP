@@ -20,7 +20,7 @@ Pick up where `jira4r` left off:
 - Implement the current API; `jira4r` does not implement APIs from JIRA 4.x
 - More natural interface; not adhering to the API when the API is weird
 - Speed; network latency is bad enough
-- Excellent documentation, since the documentation given by Atlassian is so terse
+- Excellent documentation, since the documentation given by Atlassian can be terse (the newer APIs are documented)
 
 
 Getting Started
@@ -33,8 +33,7 @@ Getting Started
 
         # Building from source
         git clone git://github.com/Marketcircle/jiraSOAP.git
-        rake build
-        rake install
+        rake build install
 
 Once installed, you can run a quick demo (making appropriate substitutions):
 
@@ -60,15 +59,14 @@ TODO
 - Performance optimizations; there are a number of places that can be optimized
   + Using GCD/Threads for parsing arrays of results; a significant speed up for large types and large arrays (ie. creating issues from JQL searches)
 - Public test suite
-  + Needs a mock server
+  + Needs a lot of mock data
 
 
 Note on Patches/Pull Requests
 -----------------------------
 
 This project has a tendancy to change drastically between releases as it
-is still unstable, so patches may not cleanly apply. It may be better to
-just open an issue.
+is still unstable, so patches may not cleanly apply.
 
 If you want to help by submitting patches:
 
