@@ -1,6 +1,7 @@
 Version 0.7
 
 	* Added YARD extension for documentation
+	* Removed URL class in favour of directly using underlying objects
 
 	* Tweaked parsing logic more in preparation for the builder
 	* Various documentation updates

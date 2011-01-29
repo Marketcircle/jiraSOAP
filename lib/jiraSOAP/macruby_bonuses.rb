@@ -1,16 +1,22 @@
 framework 'Foundation'
 
-class URL
-  def initialize(url_string)
-    @url = NSURL.URLWithString url_string
+# In the case of MacRuby, we extend NSURL to behave enough like a
+# URI::HTTP object that they can be interchanged.
+class NSURL
+
+  # We have to override, using alias_method does not work because
+  # {#to_s} is defined in the base class.
+  # @return [String]
+  def to_s
+    absoluteString
   end
 
-  def to_s
-    @url.absoluteString
-  end
 end
+
+$url = NSURL
+$url_init_method = :'URLWithString:'
+
 
 # @todo get a parallel map method for collections
 module JIRA
-
 end

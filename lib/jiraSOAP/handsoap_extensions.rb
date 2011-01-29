@@ -56,11 +56,11 @@ module XmlQueryFront
       temp.match(/#(..)(..)(..)/).captures
     end
 
-    # @return [URL]
+    # @return [URI::HTTP,NSURL]
     def to_url
       temp = self.to_s
       return unless temp
-      URL.new temp
+      $url.send $url_init_method, temp
     end
 
     # Returns the node's children to an array of strings.

@@ -11,7 +11,7 @@ class MyAttributeHandler < YARD::Handlers::Ruby::AttributeHandler
              to_ss:'Array<String>',
          to_object:'PROBLEM?', #' emacs ruby-mode fail
         to_objects:'Array<PROBLEM?>',
-            to_url:'URL',
+            to_url:'URI::HTTP,NSURL',
     to_date_string:'String',
      to_hex_string:'String'
   }
