@@ -61,6 +61,5 @@ class MyAttributeHandler < YARD::Handlers::Ruby::AttributeHandler
     object.docstring.add_tag(YARD::Tags::Tag.new(:return, "", type))
     object
   end
-end
 
-# @todo add tasks section for RemoteAPI
+end
