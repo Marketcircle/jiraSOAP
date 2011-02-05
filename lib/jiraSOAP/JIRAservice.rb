@@ -19,7 +19,7 @@ class JIRA::JIRAService < Handsoap::Service
   # @return [String]
   attr_reader :user
 
-  # @return [URL]
+  # @return [String]
   attr_reader :endpoint_url
 
   # Initialize and log in.
@@ -33,9 +33,9 @@ class JIRA::JIRAService < Handsoap::Service
     jira
   end
 
-  # @param [String,URL] endpoint_url for the JIRA server
+  # @param [String,URI::HTTP,NSURL] endpoint_url for the JIRA server
   def initialize endpoint_url
-    @endpoint_url = endpoint_url
+    @endpoint_url = endpoint_url.to_s
     JIRA::JIRAService.endpoint({
       uri:"#{endpoint_url.to_s}/rpc/soap/jirasoapservice-v2",
       version:2
