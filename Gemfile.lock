@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    bluecloth (2.0.9)
+    bluecloth (2.0.10)
     git (1.2.5)
     handsoap (1.1.8)
     jeweler (1.5.2)
@@ -30,13 +30,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bluecloth (~> 2.0.0)
-  bundler (~> 1.0.0)
-  handsoap (~> 1.1)
-  jeweler (~> 1.5.1)
-  minitest (~> 2.0.0)
+  bluecloth (~> 2.0.10)
+  bundler (~> 1.0.10)
+  handsoap (~> 1.1.8)
+  jeweler (~> 1.5.2)
+  minitest (~> 2.0.2)
   nokogiri (~> 1.4.4)
   rcov
-  reek (~> 1.2.0)
-  yard (~> 0.6.0)
+  reek (~> 1.2.8)
+  yard (~> 0.6.4)
   yardstick (~> 0.2.0)
