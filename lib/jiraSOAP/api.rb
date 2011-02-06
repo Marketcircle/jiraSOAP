@@ -57,7 +57,6 @@ module RemoteAPI
 
   private
 
-  # @todo which is faster? args.shift or args[i-1]
   # A generic method for calling a SOAP method and soapifying all
   # the arguments.
   # @param [String] method_name
@@ -67,7 +66,7 @@ module RemoteAPI
     response = invoke("soap:#{method_name}") { |msg|
       msg.add 'soap:in0', @auth_token
       for i in 1..args.size
-        msg.add "soap:in#{i}", args[i-1]
+        msg.add "soap:in#{i}", args.shift
       end
     }
     response.document.xpath "#{RESPONSE_XPATH}/#{method_name}Return"
