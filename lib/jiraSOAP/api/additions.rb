@@ -5,7 +5,8 @@ module JIRA
 # but with some extra conveniences.
 module RemoteAPIAdditions
 
-  # Returns nil if the field is not found.
+  # Returns the first field that exactly matches the given
+  # name, otherwise returns nil.
   # @param [String] name
   # @return [JIRA::Field,nil]
   def get_custom_field_with_name name

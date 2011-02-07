@@ -21,9 +21,11 @@ module JIRA
 # snake case for method names, default values, varargs, etc..
 # @todo logging
 # @todo progressWorkflowAction and friends [target v0.7]
-# @todo get Nokogiri element directly
-# @todo extend nokogiri class
-# @todo instead of #map, try using a loop over #children.size
+# @todo get Nokogiri element directly and monkey patch nokogiri directly
+#  instead of the handsoap wrapper
+# @todo remove the get_ prefix from api methods that don't need them
+# @todo monkey patch Array to include a #to_soap method
+# @todo replace $url with an attribute that belongs to the RemoteAPI module
 module RemoteAPI
 
   # XPath constant to get a node containing a response array.

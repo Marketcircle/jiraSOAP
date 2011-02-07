@@ -19,7 +19,7 @@ module RemoteAPI
     JIRA::ProjectRole.new_with_xml call( 'createProjectRole', project_role ).first
   end
 
-  # @note JIRA 4.0 returns an exception if the name already exists
+  # @note JIRA 4.0 and 4.2 returns an exception if the name already exists
   # Returns true if the name does not exist.
   # @param [String] project_role_name
   # @return [Boolean] true if successful

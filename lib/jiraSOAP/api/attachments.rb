@@ -9,7 +9,6 @@ module RemoteAPI
     jira_call JIRA::AttachmentMetadata, 'getAttachmentsFromIssue', issue_key
   end
 
-  # @todo optimize building the message, try a single pass
   # Expect this method to be slow.
   # @param [String] issue_key
   # @param [Array<String>] filenames names to put on the files
