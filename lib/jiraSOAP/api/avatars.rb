@@ -7,7 +7,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [JIRA::Avatar]
   def get_project_avatar_for_key project_key
-    JIRA::Avatar.new_with_xml jira_call( 'getProjectAvatar', project_key ).first
+    JIRA::Avatar.new_with_xml call( 'getProjectAvatar', project_key ).first
   end
 
   # Gets ALL avatars for a given project with this method; if you
@@ -16,9 +16,7 @@ module RemoteAPI
   # @param [Boolean] include_default_avatars
   # @return [Array<JIRA::Avatar>]
   def get_project_avatars_for_key project_key, include_default_avatars = false
-    jira_call( 'getProjectAvatars', project_key, include_default_avatars ).map {
-      |frag| JIRA::Avatar.new_with_xml frag
-    }
+    jira_call JIRA::Avatar, 'getProjectAvatars', project_key, include_default_avatars
   end
 
   # @note You cannot delete the system avatar
@@ -26,7 +24,7 @@ module RemoteAPI
   # @param [String] avatar_id
   # @return [Boolean] true if successful
   def delete_project_avatar_with_id avatar_id
-    jira_call 'deleteProjectAvatar', avatar_id
+    call 'deleteProjectAvatar', avatar_id
     true
   end
 
@@ -37,7 +35,7 @@ module RemoteAPI
   # {#set_new_project_avatar_for_project_with_key} instead.
   # @return [Boolean] true if successful
   def set_project_avatar_for_project_with_key project_key, avatar_id
-    jira_call 'setProjectAvatar', project_key, avatar_id
+    call 'setProjectAvatar', project_key, avatar_id
     true
   end
 
@@ -57,7 +55,7 @@ module RemoteAPI
   # @param [String] base64_image
   # @return [Boolean] true if successful
   def set_new_project_avatar_for_project_with_key project_key, mime_type, base64_image
-    jira_call 'setNewProjectAvatar', project_key, mime_type, base64_image
+    call 'setNewProjectAvatar', project_key, mime_type, base64_image
     true
   end
 

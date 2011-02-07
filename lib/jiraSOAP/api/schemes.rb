@@ -4,9 +4,7 @@ module RemoteAPI
 
   # @return [Array<JIRA::NotificationScheme>]
   def get_notification_schemes
-    jira_call( 'getNotificationSchemes' ).map { |frag|
-      JIRA::NotificationScheme.new_with_xml frag
-    }
+    jira_call JIRA::NotificationScheme, 'getNotificationSchemes'
   end
 
   # @endgroup

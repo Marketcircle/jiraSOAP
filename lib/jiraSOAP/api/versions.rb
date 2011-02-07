@@ -5,9 +5,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [Array<JIRA::Version>]
   def get_versions_for_project project_key
-    jira_call( 'getVersions', project_key ).map { |frag|
-      JIRA::Version.new_with_xml frag
-    }
+    jira_call JIRA::Version, 'getVersions', project_key
   end
 
   # New versions cannot have the archived bit set and the release date
@@ -23,12 +21,7 @@ module RemoteAPI
   # @param [JIRA::Version] version
   # @return [JIRA::Version]
   def add_version_to_project_with_key project_key, version
-    response = invoke('soap:addVersion') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_key
-      msg.add 'soap:in2' do |submsg| version.soapify_for submsg end
-    }
-    JIRA::Version.new_with_xml response.document.xpath('//addVersionReturn').first
+    JIRA::Version.new_with_xml call( 'addVersion', project_key, version ).first
   end
 
   # The archive state can only be set to true for versions that have not been
@@ -38,7 +31,7 @@ module RemoteAPI
   # @param [Boolean] state
   # @return [Boolean] true if successful
   def set_archive_state_for_version_for_project project_key, version_name, state
-    jira_call 'archiveVersion', project_key, version_name, state
+    call 'archiveVersion', project_key, version_name, state
     true
   end
 
@@ -47,11 +40,7 @@ module RemoteAPI
   # @param [JIRA::Version] version
   # @return [Boolean] true if successful
   def release_state_for_version_for_project project_name, version
-    invoke('soap:releaseVersion') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', project_name
-      msg.add 'soap:in2' do |submsg| version.soapify_for submsg end
-    }
+    call 'releaseVersion', project_name, version
     true
   end
 

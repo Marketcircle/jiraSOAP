@@ -6,36 +6,26 @@ module RemoteAPI
   # @param [JIRA::Comment] comment
   # @return [Boolean] true if successful
   def add_comment_to_issue_with_key issue_key, comment
-    invoke('soap:addComment') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_key
-      msg.add 'soap:in2' do |submsg| comment.soapify_for submsg end
-    }
+    call 'addComment', issue_key, comment
     true
   end
 
   # @param [String] id
   # @return [JIRA::Comment]
   def get_comment_with_id id
-    JIRA::Comment.new_with_xml jira_call( 'getComment', id ).first
+    JIRA::Comment.new_with_xml call( 'getComment', id ).first
   end
 
   # @param [String] issue_key
   # @return [Array<JIRA::Comment>]
   def get_comments_for_issue_with_key issue_key
-    jira_call( 'getComments', issue_key ).map { |frag|
-      JIRA::Comment.new_with_xml frag
-    }
+    jira_call JIRA::Comment, 'getComments', issue_key
   end
 
   # @param [JIRA::Comment] comment
   # @return [JIRA::Comment]
   def update_comment comment
-    document = invoke('soap:editComment') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1' do |submsg| comment.soapify_for submsg end
-    }
-    JIRA::Comment.new_with_xml document.xpath('//editCommentReturn').first
+    JIRA::Comment.new_with_xml call( 'editComment', comment ).first
   end
 
   # @endgroup

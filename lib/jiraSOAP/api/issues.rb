@@ -15,9 +15,7 @@ module RemoteAPI
   #  the value may be overridden by the server if max_results is too large
   # @return [Array<JIRA::Issue>]
   def get_issues_from_jql_search jql_query, max_results = 2000
-    jira_call( 'getIssuesFromJqlSearch', jql_query, max_results ).map { |frag|
-      JIRA::Issue.new_with_xml frag
-    }
+    jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
   end
 
   # This method can update most, but not all, issue fields. Some limitations
@@ -43,14 +41,7 @@ module RemoteAPI
   # @param [JIRA::FieldValue] *field_values
   # @return [JIRA::Issue]
   def update_issue issue_key, *field_values
-    response = invoke('soap:updateIssue') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1', issue_key
-      msg.add 'soap:in2'  do |submsg|
-        field_values.each { |fv| fv.soapify_for submsg }
-      end
-    }
-    JIRA::Issue.new_with_xml response.document.xpath('//updateIssueReturn').first
+    JIRA::Issue.new_with_xml call( 'updateIssue', issue_key, field_values ).first
   end
 
   # Some fields will be ignored when an issue is created.
@@ -64,25 +55,19 @@ module RemoteAPI
   # @param [JIRA::Issue] issue
   # @return [JIRA::Issue]
   def create_issue_with_issue issue
-    response = invoke('soap:createIssue') { |msg|
-      msg.add 'soap:in0', @auth_token
-      msg.add 'soap:in1' do |submsg|
-        issue.soapify_for submsg
-      end
-    }
-    JIRA::Issue.new_with_xml response.document.xpath('//createIssueReturn').first
+    JIRA::Issue.new_with_xml call( 'createIssue', issue ).first
   end
 
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key issue_key
-    JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key ).first
+    JIRA::Issue.new_with_xml call( 'getIssue', issue_key ).first
   end
 
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id issue_id
-    JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id ).first
+    JIRA::Issue.new_with_xml call( 'getIssueById', issue_id ).first
   end
 
   # @param [String] id
@@ -90,20 +75,19 @@ module RemoteAPI
   # @param [Fixnum] offset
   # @return [Array<JIRA::Issue>]
   def get_issues_from_filter_with_id id, max_results = 500, offset = 0
-    node = jira_call 'getIssuesFromFilterWithLimit', id, offset, max_results
-    node.map { |frag| JIRA::Issue.new_with_xml frag }
+    jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
 
   # @param [String] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
-    jira_call( 'getResolutionDateById', issue_id ).to_date
+    call( 'getResolutionDateById', issue_id ).to_date
   end
 
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
-    jira_call( 'getResolutionDateByKey', issue_key ).to_date
+    call( 'getResolutionDateByKey', issue_key ).to_date
   end
 
   # @endgroup

@@ -6,9 +6,7 @@ module RemoteAPI
   # @param [String] issue_key
   # @return [Array<JIRA::AttachmentMetadata>]
   def get_attachments_for_issue_with_key issue_key
-    jira_call( 'getAttachmentsFromIssue', issue_key ).map { |frag|
-      JIRA::AttachmentMetadata.new_with_xml frag
-    }
+    jira_call JIRA::AttachmentMetadata, 'getAttachmentsFromIssue', issue_key
   end
 
   # @todo optimize building the message, try a single pass

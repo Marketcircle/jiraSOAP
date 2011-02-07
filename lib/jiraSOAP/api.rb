@@ -37,10 +37,7 @@ module RemoteAPI
   # @param [String] password
   # @return [Boolean] true if successful
   def login username, password
-    response = invoke('soap:login') { |msg|
-      msg.add 'soap:in0', username
-      msg.add 'soap:in1', password
-    }
+    response    = build 'login', username, password
     @auth_token = response.document.xpath('//loginReturn').first.to_s
     @user       = user
     true
@@ -51,33 +48,52 @@ module RemoteAPI
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    jira_call( 'logout' ).to_boolean
+    call( 'logout' ).to_boolean
   end
 
 
   private
 
+  # @todo make this method less ugly
+  # @todo double check the return type
   # A generic method for calling a SOAP method and soapifying all
-  # the arguments.
-  # @param [String] method_name
+  # the arguments, adapted for usage with jiraSOAP.
+  # @param [String] method
   # @param [Object] *args
-  # @return [Handsoap::XmlQueryFront::NodeSelection]
-  def jira_call method_name, *args
-    response = invoke("soap:#{method_name}") { |msg|
-      msg.add 'soap:in0', @auth_token
-      for i in 1..args.size
-        msg.add "soap:in#{i}", args.shift
+  # @return [Handsoap::Response]
+  def build method, *args
+    invoke "soap:#{method}" do |msg|
+      for i in 0...args.size
+        arg = args.shift
+        case arg
+        when JIRA::Entity
+          msg.add "soap:in#{i}", do |submsg| arg.soapify_for submsg end
+        else
+          msg.add "soap:in#{i}", arg
+        end
       end
-    }
-    response.document.xpath "#{RESPONSE_XPATH}/#{method_name}Return"
+    end
   end
 
-  # A wrapper around soap_call to add the @auth_token.
-  # @param [String] method_name
-  # @param [Object] args
-  # @return [Handsoap::SoapResponse]
-  def jira_call method_name, *args
-    soap_call method_name, @auth_token, *args
+  # @todo find a less blunt XPath expression
+  # A simple call, for methods that will return a single object.
+  # @param [String] method
+  # @param [Object] *args
+  # @return [Handsoap::XmlQueryFront::NodeSelection]
+  def call method, *args
+    response = build method, @auth_token, *args
+    response .document.xpath "//#{method}Return"
+  end
+
+  # A more complex form of {#call} that does a little more work for
+  # you when you need to build an array of return values.
+  # @param [String] method
+  # @param [Object] *args
+  # @return [Handsoap::XmlQueryFront::NodeSelection]
+  def jira_call type, method, *args
+    response = build method, @auth_token, *args
+    frags    = response.document.xpath("#{RESPONSE_XPATH}/#{method}Return")
+    frags.map { |frag| type.new_with_xml frag }
   end
 
 end

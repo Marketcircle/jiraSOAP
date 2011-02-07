@@ -5,8 +5,7 @@ module RemoteAPI
   # @param [String] user_name
   # @return [JIRA::User]
   def get_user_with_name user_name
-    response = jira_call 'getUser', user_name
-    JIRA::User.new_with_xml response.document.xpath('//getUserReturn').first
+    JIRA::User.new_with_xml call( 'getUser', user_name ).first
   end
 
   # It seems that creating a user without any permission groups will trigger
@@ -20,14 +19,14 @@ module RemoteAPI
   # @return [JIRA::User,nil] depending on your JIRA version, this method may
   #  always raise an exception instead of actually returning anythin
   def create_user username, password, full_name, email
-    response = jira_call 'createUser', username, password, full_name, email
-    JIRA::User.new_with_xml response.document.xpath('//createUserReturn').first
+    fragment = call( 'createUser', username, password, full_name, email ).first
+    JIRA::User.new_with_xml fragment
   end
 
   # @param [String] username
   # @return [Boolean] true if successful
   def delete_user_with_name username
-    jira_call 'deleteUser', username
+    call 'deleteUser', username
     true
   end
 
