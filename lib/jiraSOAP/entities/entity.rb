@@ -1,7 +1,4 @@
 # @abstract The base class for all JIRA objects that can given by the server.
-# @todo remove the need for attr_accessor by having add_attributes make the
-#  call for me, but I will need to make a YARD plugin to fix the gap in the
-#  documentation when that happens
 class JIRA::Entity
 
   class << self
