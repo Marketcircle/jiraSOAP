@@ -13,10 +13,11 @@ class NSURL
 
 end
 
-$url = NSURL
-$url_init_method = :'URLWithString:'
-
 
 # @todo get a parallel map method for collections
 module JIRA
+
+  @url_class       = NSURL
+  @url_init_method = :'URLWithString:'
+
 end

@@ -60,7 +60,7 @@ module XmlQueryFront
     def to_url
       temp = self.to_s
       return unless temp
-      $url.send $url_init_method, temp
+      JIRA.url_class.send JIRA.url_init_method, temp
     end
 
     # Returns the node's children to an array of strings.
