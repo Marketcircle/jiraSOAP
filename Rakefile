@@ -19,6 +19,15 @@ Jeweler::Tasks.new do |gem|
   gem.authors = ["Mark Rada"]
   gem.files = ['lib/**/*']
   gem.required_ruby_version = '~> 1.9.2'
+  gem.dependency 'nokogiri', '~> 1.4.4'
+  gem.dependency 'handsoap', '~> 1.1.8'
+  gem.development_dependency 'yard',      '~> 0.6.4'
+  gem.development_dependency 'bluecloth', '~> 2.0.10'
+  gem.development_dependency 'bundler',   '~> 1.0.14'
+  gem.development_dependency 'jeweler',   '~> 1.5.2'
+  gem.development_dependency 'reek',      '~> 1.2.8'
+  gem.development_dependency 'rcov',      '>= 0'
+  gem.test_files = Dir.glob('test/*_test.rb')
 end
 Jeweler::RubygemsDotOrgTasks.new
 
