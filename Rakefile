@@ -11,12 +11,12 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = "jiraSOAP"
-  gem.summary = %Q{A Ruby client for the JIRA SOAP API}
-  gem.description = %Q{Written to run fast and work on Ruby 1.9 as well as MacRuby}
-  gem.email = "mrada@marketcircle.com"
-  gem.homepage = "http://github.com/Marketcircle/jiraSOAP"
-  gem.authors = ["Mark Rada"]
+  gem.name = 'jiraSOAP'
+  gem.summary = 'A Ruby client for the JIRA SOAP API'
+  gem.description = 'Written to run fast and work on Ruby 1.9 as well as MacRuby'
+  gem.email = 'mrada@marketcircle.com'
+  gem.homepage = 'http://github.com/Marketcircle/jiraSOAP'
+  gem.authors = ['Mark Rada']
   gem.files = ['lib/**/*']
   gem.required_ruby_version = '~> 1.9.2'
   gem.test_files = Dir.glob('test/*_test.rb')
@@ -51,7 +51,7 @@ end
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
