@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'bundler'
+
+# @todo add metric_fu
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e

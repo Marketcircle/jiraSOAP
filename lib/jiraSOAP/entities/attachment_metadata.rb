@@ -1,3 +1,4 @@
+# @todo add an attribute to fetch the attachment
 # Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
 # "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#file_name}"

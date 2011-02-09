@@ -25,6 +25,7 @@ module JIRA
 #  instead of the handsoap wrapper
 # @todo remove the get_ prefix from api methods that don't need them
 # @todo monkey patch Array to include a #to_soap method
+# @todo document how to override the url_class setting
 module RemoteAPI
 
   # XPath constant to get a node containing a response array.
