@@ -41,7 +41,14 @@ module RemoteAPI
   # @param [JIRA::FieldValue] *field_values
   # @return [JIRA::Issue]
   def update_issue issue_key, *field_values
-    JIRA::Issue.new_with_xml call( 'updateIssue', issue_key, field_values ).first
+    response = invoke('soap:updateIssue') { |msg|
+      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in1', issue_key
+      msg.add 'soap:in2' do |submsg|
+        field_values.each { |fv| fv.soapify_for submsg }
+      end
+    }
+    JIRA::Issue.new_with_xml response.document.xpath('//updateIssueReturn').first
   end
 
   # Some fields will be ignored when an issue is created.
