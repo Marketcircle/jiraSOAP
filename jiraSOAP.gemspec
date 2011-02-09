@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mark Rada"]
-  s.date = %q{2011-02-08}
+  s.date = %q{2011-02-09}
   s.description = %q{Written to run fast and work on Ruby 1.9 as well as MacRuby}
   s.email = %q{mrada@marketcircle.com}
   s.extra_rdoc_files = [
@@ -69,51 +69,55 @@ Gem::Specification.new do |s|
     "lib/jiraSOAP/entities/version.rb",
     "lib/jiraSOAP/handsoap_extensions.rb",
     "lib/jiraSOAP/macruby_bonuses.rb",
-    "lib/jiraSOAP/url.rb"
+    "lib/jiraSOAP/url.rb",
+    "yard_extensions.rb"
   ]
   s.homepage = %q{http://github.com/Marketcircle/jiraSOAP}
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new("~> 1.9.2")
   s.rubygems_version = %q{1.5.0}
   s.summary = %q{A Ruby client for the JIRA SOAP API}
+  s.test_files = [
+    "test/jiraSOAP_test.rb"
+  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<jiraSOAP>, [">= 0"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.4"])
+      s.add_runtime_dependency(%q<handsoap>, ["~> 1.1.8"])
+      s.add_development_dependency(%q<minitest>, ["~> 2.0.2"])
       s.add_development_dependency(%q<yard>, ["~> 0.6.4"])
       s.add_development_dependency(%q<bluecloth>, ["~> 2.0.10"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.10"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_development_dependency(%q<rcov>, ["~> 0.9.9"])
-      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.4"])
-      s.add_runtime_dependency(%q<handsoap>, ["~> 1.1.8"])
-      s.add_development_dependency(%q<minitest>, ["~> 2.0.2"])
     else
       s.add_dependency(%q<jiraSOAP>, [">= 0"])
+      s.add_dependency(%q<nokogiri>, ["~> 1.4.4"])
+      s.add_dependency(%q<handsoap>, ["~> 1.1.8"])
+      s.add_dependency(%q<minitest>, ["~> 2.0.2"])
       s.add_dependency(%q<yard>, ["~> 0.6.4"])
       s.add_dependency(%q<bluecloth>, ["~> 2.0.10"])
       s.add_dependency(%q<bundler>, ["~> 1.0.10"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_dependency(%q<rcov>, ["~> 0.9.9"])
-      s.add_dependency(%q<nokogiri>, ["~> 1.4.4"])
-      s.add_dependency(%q<handsoap>, ["~> 1.1.8"])
-      s.add_dependency(%q<minitest>, ["~> 2.0.2"])
     end
   else
     s.add_dependency(%q<jiraSOAP>, [">= 0"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.4.4"])
+    s.add_dependency(%q<handsoap>, ["~> 1.1.8"])
+    s.add_dependency(%q<minitest>, ["~> 2.0.2"])
     s.add_dependency(%q<yard>, ["~> 0.6.4"])
     s.add_dependency(%q<bluecloth>, ["~> 2.0.10"])
     s.add_dependency(%q<bundler>, ["~> 1.0.10"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<reek>, ["~> 1.2.8"])
     s.add_dependency(%q<rcov>, ["~> 0.9.9"])
-    s.add_dependency(%q<nokogiri>, ["~> 1.4.4"])
-    s.add_dependency(%q<handsoap>, ["~> 1.1.8"])
-    s.add_dependency(%q<minitest>, ["~> 2.0.2"])
   end
 end
 

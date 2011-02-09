@@ -21,6 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = 'http://github.com/Marketcircle/jiraSOAP'
   gem.authors = ['Mark Rada']
   gem.files = ['lib/**/*']
+  gem.files.include 'yard_extensions.rb'
   gem.required_ruby_version = '~> 1.9.2'
   gem.test_files = Dir.glob('test/*_test.rb')
   gem.add_dependency 'nokogiri', '~> 1.4.4'
@@ -32,6 +33,7 @@ Jeweler::Tasks.new do |gem|
   gem.add_development_dependency 'jeweler',   '~> 1.5.2'
   gem.add_development_dependency 'reek',      '~> 1.2.8'
   gem.add_development_dependency 'rcov',      '~> 0.9.9'
+  gem.test_files = Dir.glob('test/*_test.rb')
 end
 Jeweler::RubygemsDotOrgTasks.new
 
