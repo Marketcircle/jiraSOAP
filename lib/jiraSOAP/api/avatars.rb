@@ -19,7 +19,7 @@ module RemoteAPI
     jira_call JIRA::Avatar, 'getProjectAvatars', project_key, include_default_avatars
   end
 
-  # @note You cannot delete the system avatar
+  # @note You cannot delete system avatars
   # @note You need project administration permissions to delete an avatar
   # @param [String] avatar_id
   # @return [Boolean] true if successful

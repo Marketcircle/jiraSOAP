@@ -17,7 +17,7 @@ module RemoteAPI
   # @param [String] full_name
   # @param [String] email
   # @return [JIRA::User,nil] depending on your JIRA version, this method may
-  #  always raise an exception instead of actually returning anythin
+  #  always raise an exception instead of actually returning anything
   def create_user username, password, full_name, email
     fragment = call( 'createUser', username, password, full_name, email ).first
     JIRA::User.new_with_xml fragment

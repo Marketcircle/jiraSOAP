@@ -33,6 +33,9 @@ module RemoteAPI
   # cannot use a more blunt XPath expression.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
+
+  # @group Logging in/out
+
   # @todo change method name to #login! since we are changing internal state?
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
@@ -52,6 +55,8 @@ module RemoteAPI
   def logout
     call( 'logout' ).to_boolean
   end
+
+  # @endgroup
 
 
   private
