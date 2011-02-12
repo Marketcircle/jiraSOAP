@@ -2,6 +2,8 @@
 --private
 --no-cache
 --markup markdown
+--readme README.markdown
+lib/**/*.rb
 -
-LICENSE
+LICENSE.txt
 ChangeLog
