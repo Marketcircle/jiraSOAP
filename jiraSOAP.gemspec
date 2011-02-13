@@ -20,8 +20,9 @@ Gem::Specification.new do |s|
   s.test_files       = Dir.glob('test/**/*')
   s.extra_rdoc_files = [
                         'ChangeLog',
-                        'LICENSE',
-                        'README.markdown'
+                        'LICENSE.txt',
+                        'README.markdown',
+                        '.yardopts'
                        ]
 
   s.add_runtime_dependency 'jiraSOAP', ['>= 0']
