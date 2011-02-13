@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
                         '.yardopts'
                        ]
 
-  s.add_runtime_dependency 'jiraSOAP', ['>= 0']
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
   s.add_runtime_dependency 'handsoap', ['~> 1.1.8']
 
