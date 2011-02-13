@@ -85,6 +85,6 @@ If you want to help by submitting patches:
 License
 -------
 
-Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010
+Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010-2011
 
 See LICENSE.txt for details.
