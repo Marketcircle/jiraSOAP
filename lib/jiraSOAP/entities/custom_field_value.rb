@@ -10,7 +10,7 @@ class JIRA::CustomFieldValue < JIRA::DynamicEntity
   add_attributes(
     ['customfieldId', :id,     :to_s],
     ['key',           :key,    :to_s],
-    ['values',        :values, :to_s]
+    ['values',        :values, :to_ss]
   )
 
   # Generate a SOAP message fragment for the object.
