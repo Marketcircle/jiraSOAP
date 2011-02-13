@@ -6,3 +6,4 @@ pkg
 doc
 Gemfile.lock
 *.rbo
+*.gem
