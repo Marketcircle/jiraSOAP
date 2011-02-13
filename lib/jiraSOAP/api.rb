@@ -20,7 +20,7 @@ module JIRA
 # Atlassian; most notably, this API tries to be more idomatically Ruby by using
 # snake case for method names, default values, varargs, etc..
 # @todo logging
-# @todo progressWorkflowAction and friends [target v0.7]
+# @todo progressWorkflowAction and friends [target v0.8]
 # @todo get Nokogiri element directly and monkey patch nokogiri directly
 #  instead of the handsoap wrapper
 # @todo remove the get_ prefix from api methods that don't need them
