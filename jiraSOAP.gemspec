@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name    = 'jiraSOAP'
-  s.version = '0.7.0'
+  s.version = '0.7.1'
 
   s.required_rubygems_version = '>= 1.3.6'
   s.rubygems_version          = '1.5.0'

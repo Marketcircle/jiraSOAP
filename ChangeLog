@@ -1,3 +1,6 @@
+Version 0.7.1
+	* Remove AOT compiled files from gem
+
 Version 0.7
 
 	* Added YARD extension for documentation
