@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.license     = ['MIT']
 
   s.require_paths    = ['lib']
-  s.files            = Dir.glob('lib/**/*.rb') + ['yard-jiraSOAP.rb']
+  s.files            = Dir.glob('lib/**/*.rb*') + ['yard-jiraSOAP.rb']
   s.test_files       = Dir.glob('test/**/*')
   s.extra_rdoc_files = [
                         'ChangeLog',
