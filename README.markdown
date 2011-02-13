@@ -3,7 +3,9 @@ jiraSOAP - Ruby interface to the JIRA SOAP API
 
 Uses [handsoap](http://wiki.github.com/unwire/handsoap/) to build a client for the JIRA SOAP API that works on MacRuby as well as Ruby 1.9.
 
-Read the documentation [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames). The meat of the service is in the `RemoteAPI` module.
+Documentation for the latest release is [here](http://rubydoc.info/gems/jiraSOAP/). The meat of the service is in the `RemoteAPI` module.
+
+Documentation for the HEAD commit can be found [here](http://rdoc.info/github/Marketcircle/jiraSOAP/master/frames).
 
 
 Motivation
@@ -20,7 +22,7 @@ Pick up where `jira4r` left off:
 - Implement the current API; `jira4r` does not implement APIs from JIRA 4.x
 - More natural interface; not adhering to the API when the API is weird
 - Speed; network latency is bad enough
-- Excellent documentation, since the documentation given by Atlassian can be terse (the newer APIs are documented)
+- Excellent documentation, since the documentation given by Atlassian can be terse (the newer APIs are well documented)
 
 
 Getting Started
@@ -85,4 +87,4 @@ License
 
 Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010
 
-See LICENSE for details.
+See LICENSE.txt for details.
