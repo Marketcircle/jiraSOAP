@@ -58,5 +58,4 @@ Reek::Rake::Task.new do |t|
 end
 
 require 'yard'
-require File.join(File.dirname(__FILE__),'yard_extensions')
 YARD::Rake::YardocTask.new
