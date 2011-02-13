@@ -2,9 +2,16 @@ Version 0.7
 
 	* Added YARD extension for documentation
 	* Removed URL class in favour of directly using underlying objects
+	* Added AOT compilation for MacRuby
+	* Moved RemoteAPI into the JIRA namespace
+	* Alias #get_favourite_filter to #get_favorite_filter
 
-	* Tweaked parsing logic more in preparation for the builder
+	* Tweaked parsing logic more in preparation for the builder generalization
 	* Various documentation updates
+
+	* Removed jeweler development dependency
+	* Removed yardstick development dependency
+	* General tweaking of the rakefile, gemspec, gemfile, and .yardopts
 
 Version 0.6.1
 
