@@ -5,4 +5,4 @@ pkg
 .yardoc
 doc
 Gemfile.lock
-
+*.rbo
