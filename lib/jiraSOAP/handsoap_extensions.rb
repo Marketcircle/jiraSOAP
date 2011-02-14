@@ -80,6 +80,8 @@ module XmlQueryFront
     def to_objects klass
       children.map { |node| klass.new_with_xml node }
     end
+    # @return [Nokogiri::XML::Element]
+    attr_reader :element
   end
 end
 
