@@ -33,56 +33,14 @@ module XmlMason
 end
 
 
-# These are simple extensions to the existing class provided by Handsoap.
+# Exposing an attribute in the underlying NokogiriDriver class.
 module XmlQueryFront
 
-  # @todo move these extensions straight to the nokogiri layer
-  # Simple extensions on the existing Handsoap class to make parsing easier.
+  # Monkey patch to expose the underlying Nokogiri object
   class NokogiriDriver
-
-    # Parses non-strict date strings into Time objects.
-    # @return [Time]
-    def to_date_string
-      temp = self.to_s
-      return unless temp
-      Time.new temp
-    end
-
-    # This is a bit naive, but should be sufficient for its purpose.
-    # @return [String]
-    def to_hex_string
-      temp = self.to_s
-      return unless temp
-      temp.match(/#(..)(..)(..)/).captures
-    end
-
-    # @return [URI::HTTP,NSURL]
-    def to_url
-      temp = self.to_s
-      return unless temp
-      JIRA.url_class.send JIRA.url_init_method, temp
-    end
-
-    # Returns the node's children to an array of strings.
-    # @return [[String]]
-    def to_ss
-      children.map { |val| val.to_s }
-    end
-
-    # @param [Class] klass the object you want to make
-    # @return [Object] an instance of klass
-    def to_object klass
-      klass.new_with_xml self
-    end
-
-    # @param [Class] klass the object you want an array of
-    # @return [Array] an array of klass objects
-    def to_objects klass
-      children.map { |node| klass.new_with_xml node }
-    end
     # @return [Nokogiri::XML::Element]
     attr_reader :element
   end
-end
 
+end
 end
