@@ -1,4 +1,9 @@
+Version 0.8
+
+	* Removed handsoap parsing abstraction
+
 Version 0.7.1
+
 	* Remove AOT compiled files from gem
 
 Version 0.7

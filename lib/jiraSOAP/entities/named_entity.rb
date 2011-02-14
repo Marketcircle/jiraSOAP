@@ -2,6 +2,6 @@
 class JIRA::NamedEntity < JIRA::DynamicEntity
   add_attributes(
     # A plain language name.
-    ['name', :name, :to_s]
+    ['name', :name, :content]
   )
 end

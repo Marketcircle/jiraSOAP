@@ -3,10 +3,10 @@
 class JIRA::ServerInfo < JIRA::Entity
   add_attributes(
     ['baseUrl',     :base_url,     :to_url],
-    ['buildDate',   :build_date,   :to_date],
+    ['buildDate',   :build_date,   :to_iso_date],
     ['buildNumber', :build_number, :to_i],
-    ['edition',     :edition,      :to_s],
-    ['version',     :version,      :to_s],
-    ['serverTime',  :server_time,  :to_object, JIRA::TimeInfo]
+    ['edition',     :edition,      :content],
+    ['version',     :version,      :content],
+    ['serverTime',  :server_time,  :children_as_object, JIRA::TimeInfo]
   )
 end

@@ -34,15 +34,11 @@ class JIRA::Entity
   end
 
   # @todo put debug message through the logger
-  # @todo make this faster by cutting out NokogiriDriver,
-  #  but I will need to add an accessor for @element of the
-  #  driver object and then need to inject the marshaling
-  #  methods into Nokogiri classes
-  # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
+  # @param [Nokogiri::XML::Element] element
   def initialize_with_xml frag
     attributes = self.class.parse
     frag.children.each { |node|
-      action = attributes[node.node_name]
+      action = attributes[node.name]
       self.send action[0], (node.send *action[1..-1]) if action
       #puts "Action is #{action.inspect} for #{node.node_name}"
     }

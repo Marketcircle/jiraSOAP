@@ -8,9 +8,9 @@
 # to merge in the near future.
 class JIRA::CustomFieldValue < JIRA::DynamicEntity
   add_attributes(
-    ['customfieldId', :id,     :to_s],
-    ['key',           :key,    :to_s],
-    ['values',        :values, :to_ss]
+    ['customfieldId', :id,     :content],
+    ['key',           :key,    :content],
+    ['values',        :values, :contents_of_children]
   )
 
   # Generate a SOAP message fragment for the object.

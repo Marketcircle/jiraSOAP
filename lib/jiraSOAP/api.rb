@@ -43,7 +43,7 @@ module RemoteAPI
   # @return [Boolean] true if successful
   def login username, password
     response    = build 'login', username, password
-    @auth_token = response.document.xpath('//loginReturn').first.to_s
+    @auth_token = response.document.element./(RESPONSE_XPATH).first.content
     @user       = user
     true
   end
@@ -89,7 +89,7 @@ module RemoteAPI
   # @return [Handsoap::XmlQueryFront::NodeSelection]
   def call method, *args
     response = build method, @auth_token, *args
-    response .document.xpath "//#{method}Return"
+    response .document.element/("#{RESPONSE_XPATH}/#{method}Return").first
   end
 
   # A more complex form of {#call} that does a little more work for
@@ -99,7 +99,7 @@ module RemoteAPI
   # @return [Handsoap::XmlQueryFront::NodeSelection]
   def jira_call type, method, *args
     response = build method, @auth_token, *args
-    frags    = response.document.xpath("#{RESPONSE_XPATH}/#{method}Return")
+    frags    = response.document.element/"#{RESPONSE_XPATH}/#{method}Return"
     frags.map { |frag| type.new_with_xml frag }
   end
 

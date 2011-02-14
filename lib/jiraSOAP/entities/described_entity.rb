@@ -2,6 +2,6 @@
 class JIRA::DescribedEntity < JIRA::NamedEntity
   add_attributes(
     # A short blurb.
-    ['description', :description, :to_s]
+    ['description', :description, :content]
   )
 end

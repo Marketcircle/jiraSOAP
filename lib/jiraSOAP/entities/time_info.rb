@@ -3,8 +3,8 @@
 # is called.
 class JIRA::TimeInfo < JIRA::Entity
   add_attributes(
-    ['serverTime', :server_time, :to_date_string],
-    # in the form of 'America/Toronto'
-    ['timeZoneId', :timezone,    :to_s]
+    ['serverTime', :server_time, :to_natural_date],
+    # in the form 'America/Toronto'
+    ['timeZoneId', :timezone,    :content]
   )
 end

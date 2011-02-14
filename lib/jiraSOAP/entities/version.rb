@@ -6,7 +6,7 @@ class JIRA::Version < JIRA::NamedEntity
     ['sequence',    :sequence,     :to_i],
     ['released',    :released,     :to_boolean],
     ['archived',    :archived,     :to_boolean],
-    ['releaseDate', :release_date, :to_date]
+    ['releaseDate', :release_date, :to_iso_date]
   )
 
   # @todo make this method shorter

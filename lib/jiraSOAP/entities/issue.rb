@@ -10,27 +10,27 @@
 #  {#resolution_id}.
 class JIRA::Issue < JIRA::DynamicEntity
   add_attributes(
-    ['key',               :key,                 :to_s],
-    ['summary',           :summary,             :to_s],
-    ['description',       :description,         :to_s],
-    ['type',              :type_id,             :to_s],
-    ['status',            :status_id,           :to_s],
-    ['assignee',          :assignee_username,   :to_s],
-    ['reporter',          :reporter_username,   :to_s],
-    ['priority',          :priority_id,         :to_s],
-    ['project',           :project_name,        :to_s],
-    ['resolution',        :resolution_id,       :to_s],
-    ['environment',       :environment,         :to_s],
+    ['key',               :key,                 :content],
+    ['summary',           :summary,             :content],
+    ['description',       :description,         :content],
+    ['type',              :type_id,             :content],
+    ['status',            :status_id,           :content],
+    ['assignee',          :assignee_username,   :content],
+    ['reporter',          :reporter_username,   :content],
+    ['priority',          :priority_id,         :content],
+    ['project',           :project_name,        :content],
+    ['resolution',        :resolution_id,       :content],
+    ['environment',       :environment,         :content],
     ['votes',             :votes,               :to_i],
-    ['updated',           :last_updated_time,   :to_date],
-    ['created',           :create_time,         :to_date],
+    ['updated',           :last_updated_time,   :to_iso_date],
+    ['created',           :create_time,         :to_iso_date],
     # This is actually a Time object with no time resolution.
-    ['duedate',           :due_date,            :to_date],
-    ['affectsVersions',   :affects_versions,    :to_objects, JIRA::Version],
-    ['fixVersions',       :fix_versions,        :to_objects, JIRA::Version],
-    ['components',        :components,          :to_objects, JIRA::Component],
-    ['customFieldValues', :custom_field_values, :to_objects, JIRA::CustomFieldValue],
-    ['attachmentNames',   :attachment_names,    :to_ss]
+    ['duedate',           :due_date,            :to_iso_date],
+    ['affectsVersions',   :affects_versions,    :children_as_objects, JIRA::Version],
+    ['fixVersions',       :fix_versions,        :children_as_objects, JIRA::Version],
+    ['components',        :components,          :children_as_objects, JIRA::Component],
+    ['customFieldValues', :custom_field_values, :children_as_objects, JIRA::CustomFieldValue],
+    ['attachmentNames',   :attachment_names,    :contents_of_children]
   )
 
   # @todo see if we can use the simple and complex array builders

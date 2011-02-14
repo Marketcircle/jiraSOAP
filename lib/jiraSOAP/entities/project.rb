@@ -1,11 +1,11 @@
 # Contains the data and metadata about a project and its configuration.
 class JIRA::Project < JIRA::DescribedEntity
   add_attributes(
-    ['key',                 :key,                   :to_s],
-    ['lead',                :lead_username,         :to_s],
-    ['issueSecurityScheme', :issue_security_scheme, :to_object, JIRA::IssueSecurityScheme],
-    ['notificationScheme',  :notification_scheme,   :to_object, JIRA::NotificationScheme],
-    ['permissionScheme',    :permission_scheme,     :to_object, JIRA::PermissionScheme],
+    ['key',                 :key,                   :content],
+    ['lead',                :lead_username,         :content],
+    ['issueSecurityScheme', :issue_security_scheme, :children_as_object, JIRA::IssueSecurityScheme],
+    ['notificationScheme',  :notification_scheme,   :children_as_object, JIRA::NotificationScheme],
+    ['permissionScheme',    :permission_scheme,     :children_as_object, JIRA::PermissionScheme],
     ['url',                 :jira_url,              :to_url],
     ['projectUrl',          :project_url,           :to_url]
   )

@@ -2,7 +2,7 @@
 class JIRA::Permission < JIRA::Entity
   add_attributes(
     # The permission type
-    ['name',       :name,       :to_s],
+    ['name',       :name,       :content],
     # A unique id number
     ['permission', :permission, :to_i]
   )

@@ -2,14 +2,14 @@
 class JIRA::Comment < JIRA::DynamicEntity
   add_attributes(
     # A username
-    ['author',       :author,            :to_s],
-    ['body',         :body,              :to_s],
-    ['groupLevel',   :group_level,       :to_s],
-    ['roleLevel',    :role_level,        :to_s],
+    ['author',       :author,            :content],
+    ['body',         :body,              :content],
+    ['groupLevel',   :group_level,       :content],
+    ['roleLevel',    :role_level,        :content],
     # A username
-    ['updateAuthor', :update_author,     :to_s],
-    ['created',      :create_time,       :to_date],
-    ['updated',      :last_updated_time, :to_date]
+    ['updateAuthor', :update_author,     :content],
+    ['created',      :create_time,       :to_iso_date],
+    ['updated',      :last_updated_time, :to_iso_date]
   )
 
   # @todo make this method shorter

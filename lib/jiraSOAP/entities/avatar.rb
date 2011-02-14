@@ -3,11 +3,11 @@
 class JIRA::Avatar < JIRA::DynamicEntity
   add_attributes(
     # This seems to be an id ref to some other object
-    ['owner',       :owner,       :to_s],
+    ['owner',       :owner,       :content],
     # The place where the avatar is used (e.g. 'project')
-    ['type',        :type,        :to_s],
-    ['contentType', :mime_type,   :to_s],
-    ['base64Data',  :base64_data, :to_s],
+    ['type',        :type,        :content],
+    ['contentType', :mime_type,   :content],
+    ['base64Data',  :base64_data, :content],
     # Indicates if the image is the system default
     ['system',      :system,      :to_boolean]
   )
