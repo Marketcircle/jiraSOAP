@@ -3,12 +3,12 @@ class JIRA::Entity
 
   class << self
 
-    # @return [Hash{String=>Array<Symbol,Symbol,Class*>}] used by the
-    #  metaclass for parsing XML
+    # @return [Hash{String=>Array<Symbol,Symbol,Class*>}] used for
+    #  parsing XML
     attr_accessor :parse
 
     # @param [Array<String,Symbol,Class>] attributes
-    # @return [nil]
+    # @return [Array<String,Symbol,Class>] returns what you gave it
     def add_attributes *attributes
       superclass = ancestors[1]
       @parse = superclass.parse.dup
