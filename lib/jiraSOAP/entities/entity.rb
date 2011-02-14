@@ -11,7 +11,7 @@ class JIRA::Entity
     # @return [Array<String,Symbol,Class>] returns what you gave it
     def add_attributes *attributes
       superclass = ancestors[1]
-      @parse = superclass.parse.dup
+      @parse = superclass.parse.dup unless @parse
 
       attributes.each { |attribute|
         attr_accessor attribute[1]
