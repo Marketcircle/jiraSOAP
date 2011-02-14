@@ -12,7 +12,9 @@ class JIRA::FieldValue
   # @param [Array] values
   def initialize(field_name = nil, values = nil)
     @field_name = field_name
-    @values     = values
+    if values 
+      @values = values.is_a?( ::Array ) ? values : [values]
+    end
   end
 
   # @todo soapify properly for custom objects (JIRA module).
