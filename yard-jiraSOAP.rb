@@ -4,16 +4,17 @@ class MyAttributeHandler < YARD::Handlers::Ruby::AttributeHandler
 
   # @return [Hash{Symbol=>String}] convert a parse method to an object type
   CONVERT_TABLE = {
-              to_s:'String',
-              to_i:'Fixnum',
-           to_date:'Time',
-        to_boolean:'Boolean',
-             to_ss:'Array<String>',
-         to_object:'PROBLEM?', #' emacs ruby-mode fail
-        to_objects:'Array<PROBLEM?>',
-            to_url:'URI::HTTP,NSURL',
-    to_date_string:'String',
-     to_hex_string:'String'
+                 content:'String',
+                    to_i:'Fixnum',
+             to_iso_date:'Time',
+              to_boolean:'Boolean',
+    contents_of_children:'Array<String>',
+      children_as_object:'PROBLEM?', #' emacs ruby-mode fail
+     children_as_objects:'Array<PROBLEM?>',
+                  to_url:'URI::HTTP,NSURL',
+         to_natural_date:'String',
+         to_color_triple:'Array<String>',
+        to_colour_triple:'Array<String>'
   }
 
   process do
