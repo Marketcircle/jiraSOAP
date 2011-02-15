@@ -21,8 +21,6 @@ module JIRA
 # snake case for method names, default values, varargs, etc..
 # @todo logging
 # @todo progressWorkflowAction and friends [target v0.8]
-# @todo get Nokogiri element directly and monkey patch nokogiri directly
-#  instead of the handsoap wrapper
 # @todo remove the get_ prefix from api methods that don't need them
 # @todo monkey patch Array to include a #to_soap method
 # @todo document how to override the url_class setting
