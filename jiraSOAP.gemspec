@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.email       = ['mrada@marketcircle.com']
   s.homepage    = 'http://github.com/Marketcircle/jiraSOAP'
   s.license     = ['MIT']
+  s.has_rdoc    = 'yard'
 
   s.require_paths    = ['lib']
   s.files            = Dir.glob('lib/**/*.rb') + ['yard-jiraSOAP.rb']
