@@ -40,7 +40,7 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [Boolean] true if successful, otherwise raises an exception
+  # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
     response    = build 'login', username, password
     self.auth_token = response.document.element./(RESPONSE_XPATH).first.content
@@ -57,14 +57,6 @@ module RemoteAPI
   end
 
   # @endgroup
-  def auth_token
-    @auth_token
-  end
-
-  def auth_token=(token)
-    @auth_token = token
-  end
-
 
   private
 
