@@ -52,11 +52,11 @@ module RemoteAPI
 
   private
 
-  # @todo make this method less ugly
-  # @todo double check the return type
   # XPath constant to get a node containing a response data.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
+  # @todo make this method less ugly
+  # @todo handle arrays of strings
   # A generic method for calling a SOAP method and soapifying all
   # the arguments.
   # @param [String] method name of the JIRA SOAP API method
