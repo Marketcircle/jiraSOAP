@@ -15,7 +15,7 @@ module RemoteAPI
   #  the value may be overridden by the server if max_results is too large
   # @return [Array<JIRA::Issue>]
   def get_issues_from_jql_search jql_query, max_results = 2000
-    jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
+    array_jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
   end
 
   # This method can update most, but not all, issue fields. Some limitations
@@ -62,19 +62,19 @@ module RemoteAPI
   # @param [JIRA::Issue] issue
   # @return [JIRA::Issue]
   def create_issue_with_issue issue
-    JIRA::Issue.new_with_xml call( 'createIssue', issue ).first
+    JIRA::Issue.new_with_xml jira_call( 'createIssue', issue )
   end
 
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key issue_key
-    JIRA::Issue.new_with_xml call( 'getIssue', issue_key ).first
+    JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key )
   end
 
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id issue_id
-    JIRA::Issue.new_with_xml call( 'getIssueById', issue_id ).first
+    JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id )
   end
 
   # @param [String] id
@@ -82,19 +82,19 @@ module RemoteAPI
   # @param [Fixnum] offset
   # @return [Array<JIRA::Issue>]
   def get_issues_from_filter_with_id id, max_results = 500, offset = 0
-    jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
+    array_jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
 
   # @param [String] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
-    call( 'getResolutionDateById', issue_id ).to_date
+    jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
 
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
-    call( 'getResolutionDateByKey', issue_key ).to_date
+    jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
 
   # @endgroup

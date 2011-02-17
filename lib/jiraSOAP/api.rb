@@ -45,7 +45,7 @@ module RemoteAPI
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    call( 'logout' ).to_boolean
+    jira_call( 'logout' ).to_boolean
   end
 
   # @endgroup
@@ -58,9 +58,10 @@ module RemoteAPI
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
   # A generic method for calling a SOAP method and soapifying all
-  # the arguments, adapted for usage with jiraSOAP.
-  # @param [String] method
-  # @param [Object] *args
+  # the arguments.
+  # @param [String] method name of the JIRA SOAP API method
+  # @param [Object] *args the arguments for the method, excluding the
+  #  authentication token
   # @return [Handsoap::Response]
   def build method, *args
     invoke "soap:#{method}" do |msg|
@@ -84,21 +85,23 @@ module RemoteAPI
   # A simple call, for methods that will return a single object.
   # @param [String] method
   # @param [Object] *args
-  # @return [Handsoap::XmlQueryFront::NodeSelection]
-  def call method, *args
-    response = build method, self.auth_token, *args
-    response .document.element/("#{RESPONSE_XPATH}/#{method}Return").first
+  # @return [Nokogiri::XML::Element]
+  def jira_call method, *args
+    response = soap_call method, self.auth_token, *args
+    response.first
   end
 
   # A more complex form of {#call} that does a little more work for
   # you when you need to build an array of return values.
-  # @param [String] method
-  # @param [Object] *args
-  # @return [Handsoap::XmlQueryFront::NodeSelection]
-  def jira_call type, method, *args
-    response = build method, self.auth_token, *args
-    frags    = response.document.element/"#{RESPONSE_XPATH}/#{method}Return"
-    frags.map { |frag| type.new_with_xml frag }
+  # @param [String] method name of the JIRA SOAP API method
+  # @param [Object] *args the arguments for the method, excluding the
+  #  authentication token
+  # @return [Nokogiri::XML::NodeSet]
+  def array_jira_call type, method, *args
+    response = soap_call method, self.auth_token, *args
+    response.xpath("node()").map { |frag|
+      type.new_with_xml frag
+    }
   end
 
 end

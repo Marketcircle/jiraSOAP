@@ -5,7 +5,7 @@ module RemoteAPI
   # @param [String] project_key
   # @return [Array<JIRA::Version>]
   def get_versions_for_project project_key
-    jira_call JIRA::Version, 'getVersions', project_key
+    array_jira_call JIRA::Version, 'getVersions', project_key
   end
 
   # New versions cannot have the archived bit set and the release date
@@ -21,7 +21,7 @@ module RemoteAPI
   # @param [JIRA::Version] version
   # @return [JIRA::Version]
   def add_version_to_project_with_key project_key, version
-    JIRA::Version.new_with_xml call( 'addVersion', project_key, version ).first
+    JIRA::Version.new_with_xml jira_call( 'addVersion', project_key, version )
   end
 
   # The archive state can only be set to true for versions that have not been
@@ -31,7 +31,7 @@ module RemoteAPI
   # @param [Boolean] state
   # @return [Boolean] true if successful
   def set_archive_state_for_version_for_project project_key, version_name, state
-    call 'archiveVersion', project_key, version_name, state
+    jira_call 'archiveVersion', project_key, version_name, state
     true
   end
 
@@ -40,7 +40,7 @@ module RemoteAPI
   # @param [JIRA::Version] version
   # @return [Boolean] true if successful
   def release_state_for_version_for_project project_name, version
-    call 'releaseVersion', project_name, version
+    jira_call 'releaseVersion', project_name, version
     true
   end
 
