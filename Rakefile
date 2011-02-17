@@ -50,12 +50,5 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'reek/rake/task'
-Reek::Rake::Task.new do |t|
-  t.fail_on_error = true
-  t.verbose       = false
-  t.source_files  = 'lib/**/*.rb'
-end
-
 require 'yard'
 YARD::Rake::YardocTask.new
