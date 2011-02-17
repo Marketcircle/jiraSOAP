@@ -64,8 +64,7 @@ module RemoteAPI
   def build method, *args
     invoke "soap:#{method}" do |msg|
       for i in 0...args.size
-        arg = args.shift
-        case arg
+        case arg = args.shift
         when JIRA::Entity
           msg.add "soap:in#{i}", do |submsg| arg.soapify_for submsg end
         else
