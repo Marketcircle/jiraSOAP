@@ -33,5 +33,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler',   ['~> 1.0.10']
   s.add_development_dependency 'minitest',  ['~> 2.0.2']
   s.add_development_dependency 'yard',      ['~> 0.6.4']
-  s.add_development_dependency 'bluecloth', ['~> 2.0.10']
+  s.add_development_dependency 'bluecloth', ['~> 2.0.11']
 end
