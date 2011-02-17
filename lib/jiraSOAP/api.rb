@@ -74,7 +74,12 @@ module RemoteAPI
     end
   end
 
-  # @todo find a less blunt XPath expression
+  # @return [Nokogiri::XML::NodeSet]
+  def soap_call method, *args
+    response = build method, *args
+    response .document.element/RESPONSE_XPATH
+  end
+
   # A simple call, for methods that will return a single object.
   # @param [String] method
   # @param [Object] *args
