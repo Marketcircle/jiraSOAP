@@ -28,14 +28,15 @@ module RemoteAPI
   # @group Logging in/out
 
   # @todo change method name to #login! since we are changing internal state?
+  # @todo move the #build call down into a private method
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
   # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
-    response    = build 'login', username, password
-    self.auth_token = response.document.element./(RESPONSE_XPATH).first.content
-    @user       = user
+    response        = soap_call 'login', username, password
+    self.auth_token = response.first.content
+    @user           = user
     self.auth_token
   end
 
