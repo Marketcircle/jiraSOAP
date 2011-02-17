@@ -25,12 +25,6 @@ module JIRA
 # @todo monkey patch Array to include a #to_soap method
 module RemoteAPI
 
-  # XPath constant to get a node containing a response array.
-  # This could be used for all responses, but is only used in cases where we
-  # cannot use a more blunt XPath expression.
-  RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
-
-
   # @group Logging in/out
 
   # @todo change method name to #login! since we are changing internal state?
@@ -59,6 +53,9 @@ module RemoteAPI
 
   # @todo make this method less ugly
   # @todo double check the return type
+  # XPath constant to get a node containing a response data.
+  RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
+
   # A generic method for calling a SOAP method and soapifying all
   # the arguments, adapted for usage with jiraSOAP.
   # @param [String] method
