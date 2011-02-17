@@ -42,7 +42,7 @@ module RemoteAPI
   # @return [JIRA::Issue]
   def update_issue issue_key, *field_values
     response = invoke('soap:updateIssue') { |msg|
-      msg.add 'soap:in0', @auth_token
+      msg.add 'soap:in0', self.auth_token
       msg.add 'soap:in1', issue_key
       msg.add 'soap:in2' do |submsg|
         field_values.each { |fv| fv.soapify_for submsg }

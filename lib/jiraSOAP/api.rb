@@ -37,12 +37,12 @@ module RemoteAPI
   # The first method to call; other methods will fail until you are logged in.
   # @param [String] user JIRA user name to login with
   # @param [String] password
-  # @return [Boolean] true if successful, otherwise raises an exception
+  # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
     response    = build 'login', username, password
-    @auth_token = response.document.element./(RESPONSE_XPATH).first.content
+    self.auth_token = response.document.element./(RESPONSE_XPATH).first.content
     @user       = user
-    true
+    self.auth_token
   end
 
   # @todo change method name to #logout! since we are changing internal state?
@@ -54,7 +54,6 @@ module RemoteAPI
   end
 
   # @endgroup
-
 
   private
 
@@ -85,7 +84,7 @@ module RemoteAPI
   # @param [Object] *args
   # @return [Handsoap::XmlQueryFront::NodeSelection]
   def call method, *args
-    response = build method, @auth_token, *args
+    response = build method, self.auth_token, *args
     response .document.element/("#{RESPONSE_XPATH}/#{method}Return").first
   end
 
@@ -95,7 +94,7 @@ module RemoteAPI
   # @param [Object] *args
   # @return [Handsoap::XmlQueryFront::NodeSelection]
   def jira_call type, method, *args
-    response = build method, @auth_token, *args
+    response = build method, self.auth_token, *args
     frags    = response.document.element/"#{RESPONSE_XPATH}/#{method}Return"
     frags.map { |frag| type.new_with_xml frag }
   end
