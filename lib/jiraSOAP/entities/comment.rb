@@ -12,15 +12,6 @@ class JIRA::Comment < JIRA::DynamicEntity
     ['updated',      :last_updated_time, :to_iso_date]
   )
 
-  # @todo make this method shorter
-  # @param [Handsoap::XmlMason::Node] msg
-  # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
-    msg.add 'id', @id
-    msg.add 'author', @author
-    msg.add 'body', @body
-    msg.add 'groupLevel', @group_level
-    msg.add 'roleLevel', @role_level
-    msg.add 'updateAuthor', @update_author
-  end
+  @build.delete 'created'
+  @build.delete 'updated'
 end
