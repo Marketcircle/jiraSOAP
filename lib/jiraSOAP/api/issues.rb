@@ -48,7 +48,7 @@ module RemoteAPI
         field_values.each { |fv| fv.soapify_for submsg }
       end
     }
-    JIRA::Issue.new_with_xml response.document.xpath('//updateIssueReturn').first
+    JIRA::Issue.new_with_xml response.document.element.xpath('//updateIssueReturn').first
   end
 
   # Some fields will be ignored when an issue is created.
