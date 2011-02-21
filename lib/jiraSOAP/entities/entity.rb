@@ -10,7 +10,7 @@ class JIRA::Entity
     # @param [Array<String,Symbol,Class>] attributes
     # @return [Array<String,Symbol,Class>] returns what you gave it
     def add_attributes *attributes
-      superclass = ancestors[1]
+      superclass = ancestors[1] # this is fragile to mixins
       @parse = superclass.parse.dup unless @parse
 
       attributes.each { |attribute|
