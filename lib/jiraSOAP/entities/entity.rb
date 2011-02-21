@@ -7,23 +7,34 @@ class JIRA::Entity
     #  parsing XML
     attr_accessor :parse
 
+    # @return [Hash{String=>Symbol}] used for building XML SOAP messages
+    attr_accessor :build
+
     # @param [Array<String,Symbol,Class>] attributes
     # @return [Array<String,Symbol,Class>] returns what you gave it
     def add_attributes *attributes
       superclass = ancestors[1] # this is fragile to mixins
+      @build = superclass.build.dup unless @build
       @parse = superclass.parse.dup unless @parse
 
       attributes.each { |attribute|
-        attr_accessor attribute[1]
-        @parse[attribute[0]] = [:"#{attribute[1]}=", *attribute[2,2]]
-        alias_method :"#{attribute[1]}?", attribute[1] if attribute[2] == :to_boolean
+        jira_name, local_name = attribute[0..1]
+
+        attr_accessor local_name
+
+        @build[jira_name] = local_name
+
+        @parse[jira_name] = [:"#{local_name}=", *attribute[2,2]]
+        alias_method :"#{local_name}?", local_name if attribute[2] == :to_boolean
         #" ruby-mode parse fail
       }
     end
 
   end
 
-  @parse = {} # needs to be initialized
+  # they need to be initialized
+  @build = {}
+  @parse = {}
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
