@@ -6,5 +6,6 @@
 --load './yard-jiraSOAP.rb'
 lib/**/*.rb
 -
+docs/GettingStarted.markdown
 LICENSE.txt
 ChangeLog
