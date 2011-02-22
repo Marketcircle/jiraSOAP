@@ -25,11 +25,26 @@ module JIRA
 # @todo monkey patch Array to include a #to_soap method
 module RemoteAPI
 
+  include Attachments
+  include Avatars
+  include Comments
+  include Filters
+  include IssueAttributes
+  include Issues
+  include Projects
+  include Schemes
+  include ServerInfos
+  include Users
+  include Versions
+
   # @group Logging in/out
 
+  ##
   # @todo change method name to #login! since we are changing internal state?
   # @todo move the #build call down into a private method
+  #
   # The first method to call; other methods will fail until you are logged in.
+  #
   # @param [String] user JIRA user name to login with
   # @param [String] password
   # @return [String] auth_token if successful, otherwise raises an exception
@@ -40,9 +55,12 @@ module RemoteAPI
     self.auth_token
   end
 
+  ##
   # @todo change method name to #logout! since we are changing internal state?
+  #
   # You only need to call this to make an explicit logout; normally, a session
   # will automatically expire after a set time (configured on the server).
+  #
   # @return [Boolean] true if successful, otherwise false
   def logout
     jira_call( 'logout' ).to_boolean
@@ -50,15 +68,19 @@ module RemoteAPI
 
   # @endgroup
 
+
   private
 
   # XPath constant to get a node containing a response data.
   RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
 
+  ##
   # @todo make this method less ugly
   # @todo handle arrays of strings
+  #
   # A generic method for calling a SOAP method and soapifying all
   # the arguments.
+  #
   # @param [String] method name of the JIRA SOAP API method
   # @param [Object] *args the arguments for the method, excluding the
   #  authentication token
@@ -76,13 +98,16 @@ module RemoteAPI
     end
   end
 
+  ##
   # @return [Nokogiri::XML::NodeSet]
   def soap_call method, *args
     response = build method, *args
     response .document.element/RESPONSE_XPATH
   end
 
+  ##
   # A simple call, for methods that will return a single object.
+  #
   # @param [String] method
   # @param [Object] *args
   # @return [Nokogiri::XML::Element]
@@ -91,8 +116,10 @@ module RemoteAPI
     response.first
   end
 
+  ##
   # A more complex form of {#call} that does a little more work for
   # you when you need to build an array of return values.
+  #
   # @param [String] method name of the JIRA SOAP API method
   # @param [Object] *args the arguments for the method, excluding the
   #  authentication token
@@ -105,5 +132,4 @@ module RemoteAPI
   end
 
 end
-
 end

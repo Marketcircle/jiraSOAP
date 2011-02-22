@@ -1,7 +1,11 @@
 module JIRA
 module RemoteAPI
-  # @group Working with Issues
 
+##
+# @todo Find out what I haven't implemented yet
+module Issues
+
+  ##
   # This method is the equivalent of making an advanced search from the
   # web interface.
   #
@@ -18,6 +22,7 @@ module RemoteAPI
     array_jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
   end
 
+  ##
   # This method can update most, but not all, issue fields. Some limitations
   # are because of how the API is designed, and some are because I have not
   # yet implemented the ability to update fields made of custom objects (things
@@ -51,6 +56,7 @@ module RemoteAPI
     JIRA::Issue.new_with_xml response.document.element.xpath('//updateIssueReturn').first
   end
 
+  ##
   # Some fields will be ignored when an issue is created.
   #  - reporter - you cannot override this value at creation
   #  - resolution
@@ -65,18 +71,21 @@ module RemoteAPI
     JIRA::Issue.new_with_xml jira_call( 'createIssue', issue )
   end
 
+  ##
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key issue_key
     JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key )
   end
 
+  ##
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id issue_id
     JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id )
   end
 
+  ##
   # @param [String] id
   # @param [Fixnum] max_results
   # @param [Fixnum] offset
@@ -85,18 +94,21 @@ module RemoteAPI
     array_jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
 
+  ##
   # @param [String] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
 
+  ##
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
     jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
 
-  # @endgroup
+
+end
 end
 end

@@ -1,15 +1,21 @@
 module JIRA
 module RemoteAPI
-  # @group Working with Avatars
 
+##
+# This module has implemented all relevant APIs as of JIRA 4.2.
+module Avatars
+
+  ##
   # Gets you the default avatar image for a project; if you want all
   # the avatars for a project, use {#get_project_avatars_for_key}.
+  #
   # @param [String] project_key
   # @return [JIRA::Avatar]
   def get_project_avatar_for_key project_key
     JIRA::Avatar.new_with_xml jira_call( 'getProjectAvatar', project_key )
   end
 
+  ##
   # Gets ALL avatars for a given project with this method; if you
   # just want the project avatar, use {#get_project_avatar_for_key}.
   # @param [String] project_key
@@ -59,6 +65,6 @@ module RemoteAPI
     true
   end
 
-  # @endgroup
+end
 end
 end
