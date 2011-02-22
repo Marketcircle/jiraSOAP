@@ -108,6 +108,13 @@ module Issues
     jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
 
+  ##
+  # @param [String] issue_Key
+  # @return [Boolean]
+  def delete_issue_with_key issue_key
+    jira_call 'deleteIssue', issue_key
+    true
+  end
 
 end
 end
