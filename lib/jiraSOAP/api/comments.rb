@@ -35,6 +35,13 @@ module Comments
     JIRA::Comment.new_with_xml jira_call( 'editComment', comment )
   end
 
+  ##
+  # @todo test this method
+  #
+  # @param [JIRA::Comment]
+  def permission_to_edit_comment? comment
+    jira_call( 'hasPermissionToEditComment', comment ).to_boolean
+  end
 
 end
 end
