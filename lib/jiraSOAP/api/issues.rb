@@ -50,7 +50,7 @@ module Issues
       msg.add 'soap:in0', self.auth_token
       msg.add 'soap:in1', issue_key
       msg.add 'soap:in2' do |submsg|
-        field_values.each { |fv| fv.soapify_for submsg }
+        field_values.each { |fv| fv.to_soap submsg }
       end
     }
     JIRA::Issue.new_with_xml response.document.element.xpath('//updateIssueReturn').first
