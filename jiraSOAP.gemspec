@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
   s.name    = 'jiraSOAP'
   s.version = '0.7.1'
