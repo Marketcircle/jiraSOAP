@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.require_paths    = ['lib']
   s.files            = Dir.glob('lib/**/*.rb')
-  s.test_files       = Dir.glob('test/**/*')
+  s.test_files       = Dir.glob('spec/**/*')
   s.extra_rdoc_files = [
                         'ChangeLog',
                         'LICENSE.txt',
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake',      ['~> 0.8.7']
   s.add_development_dependency 'bundler',   ['~> 1.0.10']
-  s.add_development_dependency 'minitest',  ['~> 2.0.2']
+  s.add_development_dependency 'rspec',     ['~> 2.5.0']
   s.add_development_dependency 'yard',      ['~> 0.6.4']
   s.add_development_dependency 'bluecloth', ['~> 2.0.11']
 end

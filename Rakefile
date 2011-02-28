@@ -43,11 +43,10 @@ task :install => :build do
   puts `gem install #{Dir.glob('*.gem').sort.reverse.first}`
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs   << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
 require 'yard'
