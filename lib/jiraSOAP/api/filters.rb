@@ -2,7 +2,8 @@ module JIRA
 module RemoteAPI
 
 ##
-# @todo Implement 'getIssuesFromFilterWithLimit'
+# @note {Issues#get_issues_from_filter_with_id} is implemented in
+# {JIRA::RemoteAPI::Issues}.
 module Filters
 
   ##
