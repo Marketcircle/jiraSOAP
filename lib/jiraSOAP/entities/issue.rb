@@ -1,3 +1,4 @@
+##
 # @todo add attributes for the comments and the attachment metadata
 # Contains most of the data and metadata for a JIRA issue, but does
 # not contain the {JIRA::Comment}s or {JIRA::AttachmentMetadata}.

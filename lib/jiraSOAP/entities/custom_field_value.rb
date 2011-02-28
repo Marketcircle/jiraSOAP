@@ -1,11 +1,10 @@
+##
 # @todo see if @key is always nil from the server, maybe we can remove it
-# Represents an instance of a custom field (with values). This object is used
-# as a member of {JIRA::Issue} objects.
 #
-# The structure of this class resembles JIRA::FieldValue, it is different
-# in that @values will always be stored as an Array of String objects for
-# custom fields and a field value is more flexible. You can expect the classes
-# to merge in the near future.
+# @note There are no API methods that directly create objects of this class,
+#  they are only created as an attribute of {JIRA::Issue} objects.
+#
+# Represents an instance of a custom field (with values).
 class JIRA::CustomFieldValue < JIRA::DynamicEntity
   add_attributes(
     ['customfieldId', :id,     :content],

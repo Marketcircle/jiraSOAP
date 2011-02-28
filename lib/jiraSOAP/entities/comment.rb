@@ -12,6 +12,11 @@ class JIRA::Comment < JIRA::DynamicEntity
     ['updated',      :last_updated_time, :to_iso_date]
   )
 
+  # @todo are there any other cases when we need to build
+  #  a message from a comment and include the create_time
+  #  or update_time?
+  # These are things we should not include when building
+  # a SOAP message to create a comment
   @build.delete 'created'
   @build.delete 'updated'
 end

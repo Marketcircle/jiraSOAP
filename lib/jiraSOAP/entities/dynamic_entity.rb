@@ -1,3 +1,4 @@
+##
 # @abstract Anything that can be configured has an id field.
 class JIRA::DynamicEntity < JIRA::Entity
   add_attributes(

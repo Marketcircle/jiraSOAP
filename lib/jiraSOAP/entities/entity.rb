@@ -1,17 +1,17 @@
+##
 # @abstract The base class for all JIRA objects that can given by the server.
 class JIRA::Entity
 
   class << self
 
-    # @return [Hash{String=>Array<Symbol,Symbol,Class*>}] used for
-    #  parsing XML
+    # @return [Hash{String=>Array<Symbol,Symbol,Class*>}] used for parsing XML
     attr_accessor :parse
 
     # @return [Hash{String=>Symbol}] used for building XML SOAP messages
     attr_accessor :build
 
     # @param [Array<String,Symbol,Class>] attributes
-    # @return [Array<String,Symbol,Class>] returns what you gave it
+    # @return [nil]
     def add_attributes *attributes
       superclass = ancestors[1] # this is fragile to mixins
       @build = superclass.build.dup unless @build

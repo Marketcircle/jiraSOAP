@@ -11,4 +11,7 @@ class JIRA::Avatar < JIRA::DynamicEntity
     # Indicates if the image is the system default
     ['system',      :system,      :to_boolean]
   )
+
+  # @todo I suspect that I will have to remove
+  # system, owner
 end
