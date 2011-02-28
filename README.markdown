@@ -43,7 +43,7 @@ Pick up where `jira4r` left off:
    * not including APIs that have been deprecated in JIRA 4.x
 - More natural interface; not adhering to the API when the API is weird
 - Speed; network latency is bad enough
-- Excellent documentation, since the documentation given by Atlassian can be terse (the newer APIs are well documented)
+- Excellent documentation, since the documentation given by Atlassian can be terse (newer APIs are well documented)
 
 
 Getting Started
@@ -81,9 +81,15 @@ TODO
 - Stabilize API
 - Performance optimizations; there are a number of places that can be optimized
   + Using GCD/Threads for parsing arrays of results; a significant speed up for large types and large arrays (ie. creating issues from JQL searches)
+  + Parsing can be done with array indexing instead of hash lookups
+  + Use a different web driver backend (net/http is slow)
 - Public test suite
   + Needs a lot of mock data
-
+- ActiveRecord-esque conveniences
+  + ProjectRole.new( 'test role' ).unique? # => check uniqueness
+ + Issue.new( args ).create! # => creates a new issue
+  + Issue.with_key( 'JIRA-123' ) # => returns result of issue lookup
+  + Issue.new( args ).project # => returns a JIRA::Project
 
 Note on Patches/Pull Requests
 -----------------------------
