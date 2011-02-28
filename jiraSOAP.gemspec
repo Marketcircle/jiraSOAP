@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
                         'LICENSE.txt',
                         'README.markdown',
                         '.yardopts',
+                        'docs/GettingStarted.markdown',
                         'yard-jiraSOAP.rb'
                        ]
 
