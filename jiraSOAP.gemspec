@@ -17,13 +17,14 @@ Gem::Specification.new do |s|
   s.has_rdoc    = 'yard'
 
   s.require_paths    = ['lib']
-  s.files            = Dir.glob('lib/**/*.rb') + ['yard-jiraSOAP.rb']
+  s.files            = Dir.glob('lib/**/*.rb')
   s.test_files       = Dir.glob('test/**/*')
   s.extra_rdoc_files = [
                         'ChangeLog',
                         'LICENSE.txt',
                         'README.markdown',
-                        '.yardopts'
+                        '.yardopts',
+                        'yard-jiraSOAP.rb'
                        ]
 
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']

@@ -2,7 +2,7 @@ module JIRA
 module RemoteAPI
 
 ##
-# @todo Implement #permission_to_edit_comment?
+# This module has implemented all relevant APIs as of JIRA 4.2.
 module Comments
 
   ##
