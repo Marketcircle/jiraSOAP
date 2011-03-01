@@ -5,6 +5,33 @@ module RemoteAPI
 # @todo documentatiton
 module ProjectRoles
 
+  ##
+  # @todo find out specifics of arguments
+  # @todo test this method
+  #
+  # @param [JIRA::Project] project
+  # @param [JIRA::ProjectRole] project_role
+  # @param [String] actor_type
+  # @param [String] *actors
+  # @return [Boolean] true
+  def add_actors_to_project_role_for_project project, project_role, actor_type, *actors
+    jira_call 'addActorsToProjectRole', actors, project_role, project, actor_type
+    true
+  end
+
+  ##
+  # @todo find out specifics of arguments
+  # @todo test this method
+  #
+  # @param [JIRA::ProjectRole] project_role
+  # @param [String] actor_type
+  # @param [String] *actors
+  # @return [Boolean] true
+  def add_default_actors_to_project_role project_role, actor_type, *actors
+    jira_call 'addDefaultActorsToProjectRole', actors, project_role, actor_type
+    true
+  end
+
   # @return [Array<JIRA::ProjectRole>]
   def get_project_roles
     array_jira_call JIRA::ProjectRole, 'getProjectRoles'
