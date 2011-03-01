@@ -32,6 +32,7 @@ module RemoteAPI
   include IssueAttributes
   include Issues
   include Projects
+  include ProjectRoles
   include Schemes
   include ServerInfos
   include Users

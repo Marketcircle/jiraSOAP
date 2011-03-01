@@ -1,6 +1,9 @@
 module JIRA
 module RemoteAPI
-  # @group Working with Project Roles
+
+##
+# @todo documentatiton
+module ProjectRoles
 
   # @return [Array<JIRA::ProjectRole>]
   def get_project_roles
@@ -44,6 +47,6 @@ module RemoteAPI
     JIRA::ProjectRole.new_with_xml jira_call( 'updateProjectRole', project_role )
   end
 
-  # @endgroup
+end
 end
 end
