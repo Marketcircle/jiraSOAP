@@ -87,7 +87,8 @@ TODO
   + Needs a lot of mock data
 - ActiveRecord-esque conveniences
   + ProjectRole.new( 'test role' ).unique? # => check uniqueness
- + Issue.new( args ).create! # => creates a new issue
+  + Issue.new( args ).create! # => creates a new issue
+    - Acheived by mixing RemoteAPI::Issues into JIRA::Issue
   + Issue.with_key( 'JIRA-123' ) # => returns result of issue lookup
   + Issue.new( args ).project # => returns a JIRA::Project
 
