@@ -13,6 +13,7 @@ require 'jiraSOAP/nokogiri_extensions'
 module JIRA
 end
 
+require 'jiraSOAP/version'
 require 'jiraSOAP/entities'
 require 'jiraSOAP/api'
 require 'jiraSOAP/JIRAservice'
