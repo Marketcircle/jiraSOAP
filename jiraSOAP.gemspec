@@ -1,6 +1,9 @@
+$LOAD_PATH.unshift File.join( File.dirname(__FILE__), 'lib')
+require 'jiraSOAP/version'
+
 Gem::Specification.new do |s|
   s.name    = 'jiraSOAP'
-  s.version = '0.7.1'
+  s.version = JIRA::VERSION
 
   s.required_rubygems_version = '>= 1.3.6'
   s.rubygems_version          = '1.5.0'
