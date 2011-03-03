@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.files            = Dir.glob('lib/**/*.rb')
   s.test_files       = Dir.glob('spec/**/*')
   s.extra_rdoc_files = [
+                        'Rakefile',
                         'ChangeLog',
                         'LICENSE.txt',
                         'README.markdown',
