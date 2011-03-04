@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rake'
 
 task :default => :test
+task :test    => :spec
 
 namespace :macruby do
   desc 'AOT compile for MacRuby'
