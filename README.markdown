@@ -43,7 +43,7 @@ Pick up where `jira4r` left off:
    * not including APIs that have been deprecated in JIRA 4.x
 - More natural interface; not adhering to the API when the API is weird
 - Speed; network latency is bad enough
-- Excellent documentation, since the documentation given by Atlassian can be terse (newer APIs are well documented)
+- Excellent documentation
 
 
 Getting Started
