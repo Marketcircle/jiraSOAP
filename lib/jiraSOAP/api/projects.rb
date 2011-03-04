@@ -28,6 +28,8 @@ module Projects
     JIRA::Project.new_with_xml jira_call( 'createProjectFromObject', project )
   end
 
+ # RemoteProject	createProject(java.lang.String token, java.lang.String key, java.lang.String name, java.lang.String description, java.lang.String url, java.lang.String lead, RemotePermissionScheme permissionScheme, RemoteScheme notificationScheme, RemoteScheme issueSecurityScheme)
+
   ##
   # The id of the project is the only field that you cannot update. Or, at
   # least the only field I know that you cannot update.
