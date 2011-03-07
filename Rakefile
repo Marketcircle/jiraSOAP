@@ -16,7 +16,7 @@ namespace :macruby do
 
   desc 'Clean MacRuby binaries'
   task :clean do
-    FileList["lib/**/*.rbo"].each do |bin|
+    FileList["lib/**/*.{o,rbo}"].each do |bin|
       rm bin
     end
   end
