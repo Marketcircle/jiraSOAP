@@ -2,7 +2,6 @@ require 'rubygems'
 require 'rake'
 
 task :default => :test
-task :test    => :spec
 
 namespace :macruby do
   desc 'AOT compile for MacRuby'
@@ -33,10 +32,11 @@ task :install => :build do
   puts `gem install #{Dir.glob('*.gem').sort.reverse.first}`
 end
 
-require 'rspec/core'
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = FileList['spec/**/*_spec.rb']
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
 end
 
 require 'yard'

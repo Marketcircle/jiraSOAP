@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.require_paths    = ['lib']
   s.files            = Dir.glob('lib/**/*.rb')
-  s.test_files       = Dir.glob('spec/**/*')
+  s.test_files       = Dir.glob('test/**/*')
   s.extra_rdoc_files = [
                         'Rakefile',
                         'ChangeLog',
@@ -34,7 +34,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'handsoap', ['~> 1.1.8']
 
   s.add_development_dependency 'rake',      ['>= 0.8.7']
-  s.add_development_dependency 'rspec',     ['~> 2.5']
   s.add_development_dependency 'yard',      ['~> 0.6.4']
   s.add_development_dependency 'bluecloth', ['~> 2.0.11']
+  if RUBY_ENGINE == 'macruby'
+    s.add_development_dependency 'minitest-macruby-pride',  ['~> 2.1.1']
+  elsif RUBY_VERSION == '1.9.2'
+    s.add_development_dependency 'minitest',                ['~> 2.0.2']
+  end
 end
