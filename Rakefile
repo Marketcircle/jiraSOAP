@@ -4,6 +4,7 @@ require 'rake'
 task :default => :test
 
 namespace :macruby do
+  # @todo compile to a single file
   desc 'AOT compile for MacRuby'
   task :compile do
     FileList["lib/**/*.rb"].each do |source|
