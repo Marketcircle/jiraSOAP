@@ -33,7 +33,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
   s.add_runtime_dependency 'handsoap', ['~> 1.1.8']
 
-  s.add_development_dependency 'rake',      ['>= 0.8.7']
   s.add_development_dependency 'yard',      ['~> 0.6.4']
   s.add_development_dependency 'bluecloth', ['~> 2.0.11']
   if RUBY_ENGINE == 'macruby'
