@@ -33,10 +33,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
   s.add_runtime_dependency 'handsoap', ['~> 1.1.8']
 
-  s.add_development_dependency 'yard',      ['~> 0.6.4']
+  s.add_development_dependency 'yard',      ['~> 0.6.7']
   s.add_development_dependency 'bluecloth', ['~> 2.0.11']
+  s.add_development_dependency 'yardstick', ['~> 0.3.0']
   if RUBY_ENGINE == 'macruby'
-    s.add_development_dependency 'minitest-macruby-pride',  ['~> 2.1.1']
+    s.add_development_dependency 'minitest-macruby-pride',  ['~> 2.1.2']
   elsif RUBY_VERSION == '1.9.2'
     s.add_development_dependency 'minitest',                ['~> 2.0.2']
   end
