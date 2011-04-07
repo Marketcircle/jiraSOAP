@@ -25,6 +25,7 @@ module JIRA
 # @todo monkey patch Array to include a #to_soap method
 module RemoteAPI
 
+  include RemoteAPIAdditions
 
   # @group Logging in/out
 
