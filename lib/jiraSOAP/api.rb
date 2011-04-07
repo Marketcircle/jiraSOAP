@@ -30,7 +30,6 @@ module RemoteAPI
   # @group Logging in/out
 
   ##
-  # @todo change method name to #login! since we are changing internal state?
   # @todo move the #build call down into a private method
   #
   # The first method to call; other methods will fail until you are logged in.
