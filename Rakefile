@@ -3,22 +3,23 @@ require 'rake'
 
 task :default => :test
 
-namespace :macruby do
-  # @todo compile to a single file
-  desc 'AOT compile for MacRuby'
-  task :compile do
-    FileList["lib/**/*.rb"].each do |source|
-      name = File.basename source
-      puts "#{name} => #{name}o"
-      `macrubyc --framework Foundation --arch x86_64 -C '#{source}' -o '#{source}o'`
-    end
-  end
+if RUBY_ENGINE == 'macruby'
+  namespace :macruby do
 
-  desc 'Clean MacRuby binaries'
-  task :clean do
-    FileList["lib/**/*.{o,rbo}"].each do |bin|
-      rm bin
+    require 'rake/compiletask'
+    Rake::CompileTask.new do |t|
+      t.files = FileList["lib/**/*.rb"]
+      t.verbose = true
     end
+
+    desc 'Clean MacRuby binaries'
+    task :clean do
+      FileList["lib/**/*.rbo"].each do |bin|
+        puts "Removing #{bin}"
+        rm bin
+      end
+    end
+
   end
 end
 
