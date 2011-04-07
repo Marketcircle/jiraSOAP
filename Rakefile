@@ -40,5 +40,16 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+
 require 'yard'
 YARD::Rake::YardocTask.new
+
+require 'yardstick/rake/measurement'
+Yardstick::Rake::Measurement.new(:yardstick_measure) do |measurement|
+  measurement.output = 'measurement/report.txt'
+end
+
+require 'yardstick/rake/verify'
+Yardstick::Rake::Verify.new do |verify|
+  verify.threshold = 100
+end
