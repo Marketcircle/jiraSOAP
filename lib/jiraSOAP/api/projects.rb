@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo Figure out what I haven't implemented yet
-module Projects
+  ##
+  # @todo Figure out what I haven't implemented yet
+  # @group Projects
 
   ##
   # You need to explicitly ask for schemes in order to get them. By
@@ -77,6 +77,5 @@ module Projects
     true
   end
 
-end
 end
 end

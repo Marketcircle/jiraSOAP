@@ -25,18 +25,6 @@ module JIRA
 # @todo monkey patch Array to include a #to_soap method
 module RemoteAPI
 
-  include Attachments
-  include Avatars
-  include Comments
-  include Filters
-  include IssueAttributes
-  include Issues
-  include Projects
-  include ProjectRoles
-  include Schemes
-  include ServerInfos
-  include Users
-  include Versions
 
   # @group Logging in/out
 

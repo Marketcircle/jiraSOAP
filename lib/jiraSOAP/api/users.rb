@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo Find out what still needs to be implemented.
-module Users
+  ##
+  # @todo Find out what still needs to be implemented.
+  # @group Users
 
   ##
   # @param [String] user_name
@@ -73,6 +73,5 @@ module Users
     true
   end
 
-end
 end
 end

@@ -1,10 +1,10 @@
 module JIRA
 module RemoteAPI
 
-##
-# @note {Issues#get_issues_from_filter_with_id} is implemented in
-# {JIRA::RemoteAPI::Issues}.
-module Filters
+  ##
+  # @note {Issues#get_issues_from_filter_with_id} is implemented in
+  # {JIRA::RemoteAPI::Issues}.
+  # @group Filters
 
   ##
   # Retrieves favourite filters for the currently logged in user.
@@ -22,6 +22,5 @@ module Filters
     jira_call( 'getIssueCountForFilter', id ).to_i
   end
 
-end
 end
 end

@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo Find out what still needs to be implemented.
-module Versions
+  ##
+  # @todo Find out what still needs to be implemented.
+  # @group Versions
 
   ##
   # @param [String] project_key
@@ -56,5 +56,3 @@ module Versions
 
 end
 end
-end
-

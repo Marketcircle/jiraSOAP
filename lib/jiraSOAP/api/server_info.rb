@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# This module has all relevant APIs as of JIRA 4.2
-module ServerInfos
+  ##
+  # This module has all relevant APIs as of JIRA 4.2
+  # @group ServerInfos
 
   ##
   # The @build_date attribute is a Time value, but does not include a time.
@@ -19,6 +19,5 @@ module ServerInfos
     JIRA::ServerConfiguration.new_with_xml jira_call( 'getConfiguration' )
   end
 
-end
 end
 end

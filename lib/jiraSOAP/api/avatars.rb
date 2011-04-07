@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# This module has implemented all relevant APIs as of JIRA 4.2.
-module Avatars
+  ##
+  # This module has implemented all relevant APIs as of JIRA 4.2.
+  # @group Avatars
 
   ##
   # Gets you the default avatar image for a project; if you want all
@@ -65,6 +65,5 @@ module Avatars
     true
   end
 
-end
 end
 end

@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# This module has implemented all relevant APIs as of JIRA 4.2.
-module Comments
+  ##
+  # This module has implemented all relevant APIs as of JIRA 4.2.
+  # @group Comments
 
   ##
   # @param [String] issue_key
@@ -43,6 +43,5 @@ module Comments
     jira_call( 'hasPermissionToEditComment', comment ).to_boolean
   end
 
-end
 end
 end

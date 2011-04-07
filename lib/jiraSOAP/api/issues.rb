@@ -1,10 +1,10 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo Find out what I haven't implemented yet
-# @todo  RemoteIssue createIssueWithSecurityLevel(String token, Issue rIssue, Long securityLevelId)
-module Issues
+  ##
+  # @todo Find out what I haven't implemented yet
+  # @todo  RemoteIssue createIssueWithSecurityLevel(String token, Issue rIssue, Long securityLevelId)
+  # @group Issues
 
   ##
   # This method is the equivalent of making an advanced search from the
@@ -117,6 +117,5 @@ module Issues
     true
   end
 
-end
 end
 end

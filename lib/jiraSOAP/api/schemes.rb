@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo Find out what still needs to be implemented
-module Schemes
+  ##
+  # @todo Find out what still needs to be implemented
+  # @group Schemes
 
   ##
   # @return [Array<JIRA::NotificationScheme>]
@@ -41,6 +41,7 @@ module Schemes
                                                    name, description
                                                    )
   end
-end
+
+
 end
 end

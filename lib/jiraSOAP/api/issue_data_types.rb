@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo find out what I haven't implemented yet
-module IssueAttributes
+  ##
+  # @todo find out what I haven't implemented yet
+  # @group IssueAttributes
 
   ##
   # @return [Array<JIRA::Priority>]
@@ -58,6 +58,5 @@ module IssueAttributes
     true
   end
 
-end
 end
 end

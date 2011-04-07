@@ -1,9 +1,9 @@
 module JIRA
 module RemoteAPI
 
-##
-# @todo documentatiton
-module ProjectRoles
+  ##
+  # @todo documentatiton
+  # @group ProjectRoles
 
   ##
   # @todo find out specifics of arguments
@@ -74,6 +74,5 @@ module ProjectRoles
     JIRA::ProjectRole.new_with_xml jira_call( 'updateProjectRole', project_role )
   end
 
-end
 end
 end
