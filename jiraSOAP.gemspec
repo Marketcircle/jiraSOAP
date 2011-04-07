@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Mark Rada']
   s.email       = ['mrada@marketcircle.com']
   s.homepage    = 'http://github.com/Marketcircle/jiraSOAP'
-  s.license     = ['MIT']
+  s.license     = 'MIT'
   s.has_rdoc    = 'yard'
 
   s.require_paths    = ['lib']
