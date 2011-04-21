@@ -4,9 +4,9 @@ require 'jiraSOAP'
 
 require 'rubygems'
 if RUBY_ENGINE == 'macruby'
-  gem 'minitest-macruby-pride', '>= 2.1.1'
+  gem 'minitest-macruby-pride', '>= 2.2.0'
 elsif RUBY_VERSION == '1.9.2'
-  gem 'minitest', '>= 2.0.2'
+  gem 'minitest', '>= 2.1.0'
 end
 
 require 'minitest/autorun'
