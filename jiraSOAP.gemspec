@@ -5,17 +5,12 @@ Gem::Specification.new do |s|
   s.name    = 'jiraSOAP'
   s.version = JIRA::VERSION
 
-  s.required_rubygems_version = Gem::Requirement.new '>= 1.3.6'
-  s.rubygems_version          = Gem::VERSION
-  s.required_ruby_version     = Gem::Requirement.new('~> 1.9.2')
-
   s.summary     = 'A Ruby client for the JIRA SOAP API'
   s.description = 'Written to run fast and work on Ruby 1.9 as well as MacRuby'
   s.authors     = ['Mark Rada']
   s.email       = ['mrada@marketcircle.com']
   s.homepage    = 'http://github.com/Marketcircle/jiraSOAP'
   s.license     = 'MIT'
-  s.has_rdoc    = 'yard'
 
   s.require_paths    = ['lib']
   s.files            = Dir.glob('lib/**/*.rb')
