@@ -1,5 +1,3 @@
-require 'helper'
-
 ##
 # Failed logins cause errors to be raised, which is handled by handsoap.
 class TestRemoteAPILogin < MiniTest::Unit::TestCase
