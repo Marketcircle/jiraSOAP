@@ -11,6 +11,7 @@ require 'jiraSOAP/api/schemes'
 require 'jiraSOAP/api/server_info'
 require 'jiraSOAP/api/users'
 require 'jiraSOAP/api/versions'
+require 'jiraSOAP/api/worklog'
 
 ##
 # @todo progressWorkflowAction and friends
