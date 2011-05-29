@@ -5,5 +5,5 @@
 lib/**/*.rb
 -
 docs/GettingStarted.markdown
-LICENSE.txt
 ChangeLog
+LICENSE.txt

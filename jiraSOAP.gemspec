@@ -16,12 +16,11 @@ Gem::Specification.new do |s|
   s.files            = Dir.glob('lib/**/*.rb')
   s.test_files       = Dir.glob('test/**/*') + [ 'Rakefile' ]
   s.extra_rdoc_files = [
+                        'README.markdown',
                         'ChangeLog',
                         'LICENSE.txt',
-                        'README.markdown',
                         '.yardopts',
-                        'docs/GettingStarted.markdown',
-                        'yard-jiraSOAP.rb'
+                        'docs/GettingStarted.markdown'
                        ]
 
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
