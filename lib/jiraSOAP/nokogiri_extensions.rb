@@ -1,6 +1,6 @@
 ##
 # Monkey (Freedom) patches to Nokogiri
-module Nokogiri::XML::Element
+class Nokogiri::XML::Element
 
   # @return [Fixnum]
   def to_i
