@@ -2,7 +2,6 @@
 --no-cache
 --markup markdown
 --readme README.markdown
---load './yard-jiraSOAP.rb'
 lib/**/*.rb
 -
 docs/GettingStarted.markdown
