@@ -31,7 +31,7 @@ end
 ##
 # Monkey patch to expose the underlying Nokogiri object as jiraSOAP
 # can parse much faster without the Handsoap layer in between.
-class XmlQueryFront::NokogiriDriver
+class Handsoap::XmlQueryFront::NokogiriDriver
   # @return [Nokogiri::XML::Element]
   attr_reader :element
 end

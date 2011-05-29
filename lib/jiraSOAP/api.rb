@@ -25,9 +25,7 @@ require 'jiraSOAP/api/worklog'
 # snake case for method names, default values, varargs, etc..
 module JIRA::RemoteAPI
 
-module RemoteAPI
-
-  include RemoteAPIAdditions
+  include JIRA::RemoteAPIAdditions
 
   # @group Logging in/out
 
@@ -122,5 +120,4 @@ module RemoteAPI
     }
   end
 
-end
 end
