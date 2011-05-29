@@ -6,5 +6,4 @@ doc
 Gemfile.lock
 *.rbo
 *.gem
-measurement/*
-examples/MacRuby Priority Slider
+pkg/
