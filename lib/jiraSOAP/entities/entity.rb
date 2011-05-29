@@ -44,7 +44,9 @@ class JIRA::Entity
     entity
   end
 
-  # @todo put debug message through the logger
+  ##
+  # @todo Put debug message through the logger
+  #
   # @param [Nokogiri::XML::Element] element
   def initialize_with_xml frag
     attributes = self.class.parse
@@ -55,7 +57,9 @@ class JIRA::Entity
     }
   end
 
+  ##
   # Generate a SOAP message fragment for the object.
+  #
   # @param [Handsoap::XmlMason::Node] msg
   def to_soap msg
     self.class.build.each_pair { |node_name, value|

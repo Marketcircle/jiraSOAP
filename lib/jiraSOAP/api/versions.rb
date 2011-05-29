@@ -1,11 +1,7 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @todo Find out what still needs to be implemented.
   # @group Versions
 
-  ##
   # @param [String] project_key
   # @return [Array<JIRA::Version>]
   def get_versions_for_project project_key
@@ -54,5 +50,4 @@ module RemoteAPI
     true
   end
 
-end
 end

@@ -1,4 +1,6 @@
+##
 # @todo find out what the id value of @owner relates to
+#
 # Contains a base64 encoded avatar image and metadata about the avatar.
 class JIRA::Avatar < JIRA::DynamicEntity
   add_attributes(

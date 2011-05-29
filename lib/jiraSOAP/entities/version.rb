@@ -1,4 +1,6 @@
+##
 # @todo find out why we don't get a description for this object
+#
 # Represents a version for a project. The description field is never
 # included when you retrieve versions from the server.
 class JIRA::Version < JIRA::NamedEntity
@@ -9,7 +11,6 @@ class JIRA::Version < JIRA::NamedEntity
     ['releaseDate', :release_date, :to_iso_date]
   )
 
-  # @todo make this method shorter
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]
   def soapify_for(msg)

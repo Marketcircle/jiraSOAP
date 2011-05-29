@@ -1,14 +1,14 @@
 ##
-# @todo add attributes for the comments and the attachment metadata
+# @note Issues with an UNRESOLVED status will have nil for the value for
+#       {#resolution_id}.
+# @todo Add attributes for the comments and the attachment metadata
+#
 # Contains most of the data and metadata for a JIRA issue, but does
 # not contain the {JIRA::Comment}s or {JIRA::AttachmentMetadata}.
 #
 # This class is easily the most convoluted structure in the API, and will
 # likely be the greatest source of bugs. The irony of the situation is that
 # this structure is also the most critical to have in working order.
-#
-# @note Issues with an UNRESOLVED status will have nil for the value for
-#  {#resolution_id}.
 class JIRA::Issue < JIRA::DynamicEntity
   add_attributes(
     ['key',               :key,                 :content],

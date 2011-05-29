@@ -1,9 +1,5 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @note {Issues#get_issues_from_filter_with_id} is implemented in
-  # {JIRA::RemoteAPI::Issues}.
   # @group Filters
 
   ##
@@ -15,12 +11,10 @@ module RemoteAPI
   end
   alias_method :get_favorite_filters, :get_favourite_filters
 
-  ##
   # @param [String] id
   # @return [Fixnum]
   def get_issue_count_for_filter_with_id id
     jira_call( 'getIssueCountForFilter', id ).to_i
   end
 
-end
 end

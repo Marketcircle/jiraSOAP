@@ -1,3 +1,4 @@
+##
 # Contains the data and metadata about a project and its configuration.
 class JIRA::Project < JIRA::DescribedEntity
   add_attributes(
@@ -10,11 +11,12 @@ class JIRA::Project < JIRA::DescribedEntity
     ['projectUrl',          :project_url,           :to_url]
   )
 
-  # @todo make this method shorter
-  # @todo encode the schemes
+  ##
+  # @todo Encode the schemes
+  #
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
+  def soapify_for msg
     msg.add 'id', @id
     msg.add 'name', @name
     msg.add 'key', @key

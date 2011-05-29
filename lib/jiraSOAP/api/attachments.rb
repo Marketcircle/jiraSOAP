@@ -1,12 +1,12 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
   ##
   # @note The JIRA SOAP API only works with the metadata for attachments,
-  #  you will have to look at your servers configuration to figure out the
-  #  proper URL to call to get attachment data.
+  #       you will have to look at your servers configuration to figure
+  #       out the proper URL to call to get attachment data.
   #
   # This module has implemented all relevant APIs as of JIRA 4.2.
+
   # @group Attachments
 
   ##
@@ -39,5 +39,4 @@ module RemoteAPI
     true
   end
 
-end
 end

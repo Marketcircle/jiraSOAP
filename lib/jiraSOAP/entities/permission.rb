@@ -1,3 +1,4 @@
+##
 # A permission id and the username that it is tied to.
 class JIRA::Permission < JIRA::Entity
   add_attributes(

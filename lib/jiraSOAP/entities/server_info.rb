@@ -1,3 +1,4 @@
+##
 # Only contains basic information about the endpoint server and only used
 # by {RemoteAPI#get_server_info}.
 class JIRA::ServerInfo < JIRA::Entity

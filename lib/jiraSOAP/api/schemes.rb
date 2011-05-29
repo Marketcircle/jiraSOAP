@@ -1,17 +1,12 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @todo Find out what still needs to be implemented
   # @group Schemes
 
-  ##
   # @return [Array<JIRA::NotificationScheme>]
   def get_notification_schemes
     array_jira_call JIRA::NotificationScheme, 'getNotificationSchemes'
   end
 
-  ##
   # @return [Array<JIRA::PermissionScheme>]
   def get_permission_schemes
     array_jira_call JIRA::PermissionScheme, 'getPermissionSchemes'
@@ -26,8 +21,7 @@ module RemoteAPI
   # @return [JIRA::PermissionScheme]
   def add_permission_for_user_to_scheme permission, user_name, scheme
     JIRA::PermissionScheme.new_with_xml jira_call( 'addPermissionTo',
-                                                   scheme, permission, user_name
-                                                   )
+                                                   scheme, permission, user_name )
   end
 
   ##
@@ -38,10 +32,11 @@ module RemoteAPI
   # @return [JIRA::PermissionScheme]
   def create_permission_scheme name, description
     JIRA::PermissionScheme.new_with_xml jira_call( 'createPermissionScheme',
-                                                   name, description
-                                                   )
+                                                   name, description )
   end
 
+  def delete_permission_scheme name, description
+    raise NotImplementedError
+  end
 
-end
 end

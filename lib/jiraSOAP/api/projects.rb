@@ -1,8 +1,5 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @todo Figure out what I haven't implemented yet
   # @group Projects
 
   ##
@@ -40,7 +37,6 @@ module RemoteAPI
     JIRA::Project.new_with_xml jira_call( 'updateProject', project )
   end
 
-  ##
   # @param [String] project_id
   # @return [JIRA::Project]
   def get_project_with_id project_id
@@ -56,20 +52,17 @@ module RemoteAPI
     JIRA::Project.new_with_xml jira_call( 'getProjectWithSchemesById', project_id )
   end
 
-  ##
   # @param [String] project_name
   # @return [Array<JIRA::IssueType>]
   def get_issue_types_for_project_with_id project_id
     array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id
   end
 
-  ##
   # @return [Array<JIRA::Project>]
   def get_projects_without_schemes
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
 
-  ##
   # @param [String] project_key
   # @return [Boolean] true if successful
   def delete_project_with_key project_key
@@ -77,5 +70,4 @@ module RemoteAPI
     true
   end
 
-end
 end

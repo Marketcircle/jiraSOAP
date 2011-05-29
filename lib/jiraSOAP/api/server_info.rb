@@ -1,8 +1,5 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # This module has all relevant APIs as of JIRA 4.2
   # @group ServerInfos
 
   ##
@@ -19,5 +16,4 @@ module RemoteAPI
     JIRA::ServerConfiguration.new_with_xml jira_call( 'getConfiguration' )
   end
 
-end
 end

@@ -1,28 +1,29 @@
-require 'jiraSOAP/api/users'
-require 'jiraSOAP/api/avatars'
-require 'jiraSOAP/api/versions'
-require 'jiraSOAP/api/projects'
-require 'jiraSOAP/api/project_roles'
-require 'jiraSOAP/api/schemes'
-require 'jiraSOAP/api/issues'
-require 'jiraSOAP/api/filters'
-require 'jiraSOAP/api/server_info'
-require 'jiraSOAP/api/attachments'
-require 'jiraSOAP/api/comments'
-require 'jiraSOAP/api/issue_data_types'
 require 'jiraSOAP/api/additions'
+require 'jiraSOAP/api/attachments'
+require 'jiraSOAP/api/avatars'
+require 'jiraSOAP/api/comments'
+require 'jiraSOAP/api/filters'
+require 'jiraSOAP/api/issue_data_types'
+require 'jiraSOAP/api/issues'
+require 'jiraSOAP/api/project_roles'
+require 'jiraSOAP/api/projects'
+require 'jiraSOAP/api/schemes'
+require 'jiraSOAP/api/server_info'
+require 'jiraSOAP/api/users'
+require 'jiraSOAP/api/versions'
 
-module JIRA
-
+##
+# @todo progressWorkflowAction and friends
+# @todo remove the get_ prefix from api methods that don't need them
+# @todo monkey patch Array to include a #to_soap method
+#
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
 # There are several cases where this API diverges from the one defined by
 # Atlassian; most notably, this API tries to be more idomatically Ruby by using
 # snake case for method names, default values, varargs, etc..
-# @todo logging
-# @todo progressWorkflowAction and friends [target v0.8]
-# @todo remove the get_ prefix from api methods that don't need them
-# @todo monkey patch Array to include a #to_soap method
+module JIRA::RemoteAPI
+
 module RemoteAPI
 
   include RemoteAPIAdditions

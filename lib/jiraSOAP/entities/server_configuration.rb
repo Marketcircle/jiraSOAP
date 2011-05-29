@@ -1,3 +1,4 @@
+##
 # A simple structure that is used by {RemoteAPI#get_server_configuration}.
 class JIRA::ServerConfiguration < JIRA::Entity
   add_attributes(

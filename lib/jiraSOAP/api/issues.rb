@@ -1,9 +1,5 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @todo Find out what I haven't implemented yet
-  # @todo  RemoteIssue createIssueWithSecurityLevel(String token, Issue rIssue, Long securityLevelId)
   # @group Issues
 
   ##
@@ -15,6 +11,7 @@ module RemoteAPI
   # feel free to override it, but be aware of the potential issues.
   #
   # The JIRA::Issue structure does not include any comments or attachments.
+  #
   # @param [String] jql_query JQL query as a string
   # @param [Fixnum] max_results limit on number of returned results;
   #  the value may be overridden by the server if max_results is too large
@@ -66,27 +63,25 @@ module RemoteAPI
   #  - status
   #  - due date - I think this is a bug in jiraSOAP or JIRA
   #  - environment - I think this is a bug in jiraSOAP or JIRA
+  #
   # @param [JIRA::Issue] issue
   # @return [JIRA::Issue]
   def create_issue_with_issue issue
     JIRA::Issue.new_with_xml jira_call( 'createIssue', issue )
   end
 
-  ##
   # @param [String] issue_key
   # @return [JIRA::Issue]
   def get_issue_with_key issue_key
     JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key )
   end
 
-  ##
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def get_issue_with_id issue_id
     JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id )
   end
 
-  ##
   # @param [String] id
   # @param [Fixnum] max_results
   # @param [Fixnum] offset
@@ -95,21 +90,18 @@ module RemoteAPI
     array_jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
 
-  ##
   # @param [String] issue_id
   # @return [Time]
   def get_resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
 
-  ##
   # @param [String] issue_key
   # @return [Time]
   def get_resolution_date_for_issue_with_key issue_key
     jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
 
-  ##
   # @param [String] issue_Key
   # @return [Boolean]
   def delete_issue_with_key issue_key
@@ -117,5 +109,6 @@ module RemoteAPI
     true
   end
 
-end
+  # @todo  RemoteIssue createIssueWithSecurityLevel(String token, Issue rIssue, Long securityLevelId)
+
 end

@@ -1,11 +1,7 @@
-module JIRA
-module RemoteAPI
+module JIRA::RemoteAPI
 
-  ##
-  # @todo Find out what still needs to be implemented.
   # @group Users
 
-  ##
   # @param [String] user_name
   # @return [JIRA::User]
   def get_user_with_name user_name
@@ -29,7 +25,6 @@ module RemoteAPI
     JIRA::User.new_with_xml fragment
   end
 
-  ##
   # @param [String] username
   # @return [Boolean] true if successful
   def delete_user_with_name username
@@ -73,5 +68,4 @@ module RemoteAPI
     true
   end
 
-end
 end

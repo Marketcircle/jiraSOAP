@@ -20,7 +20,9 @@ class JIRA::FieldValue
     end
   end
 
-  # @todo soapify properly for custom objects (JIRA module).
+  ##
+  # @todo Soapify properly for custom objects (JIRA module).
+  #
   # @param [Handsoap::XmlMason::Node] message the node to add the object to
   # @param [String] label name for the tags that wrap the message
   # @return [Handsoap::XmlMason::Element]
