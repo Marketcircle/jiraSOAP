@@ -1,5 +1,3 @@
-framework 'Foundation'
-
 # In the case of MacRuby, we extend NSURL to behave enough like a
 # URI::HTTP object that they can be interchanged.
 class NSURL
