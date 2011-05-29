@@ -14,9 +14,8 @@ Gem::Specification.new do |s|
 
   s.require_paths    = ['lib']
   s.files            = Dir.glob('lib/**/*.rb')
-  s.test_files       = Dir.glob('test/**/*')
+  s.test_files       = Dir.glob('test/**/*') + [ 'Rakefile' ]
   s.extra_rdoc_files = [
-                        'Rakefile',
                         'ChangeLog',
                         'LICENSE.txt',
                         'README.markdown',
