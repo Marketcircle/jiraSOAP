@@ -15,6 +15,7 @@ module JIRA::RemoteAPIAdditions
     }
     nil
   end
+  alias_method :custom_field_with_name, :get_custom_field_with_name
 
   # @todo a method for getting attachments
 end

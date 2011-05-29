@@ -6,11 +6,13 @@ module JIRA::RemoteAPI
   def get_notification_schemes
     array_jira_call JIRA::NotificationScheme, 'getNotificationSchemes'
   end
+  alias_method :notification_schemes, :get_notification_schemes
 
   # @return [Array<JIRA::PermissionScheme>]
   def get_permission_schemes
     array_jira_call JIRA::PermissionScheme, 'getPermissionSchemes'
   end
+  alias_method :permission_schemes, :get_permission_schemes
 
   ##
   # @todo test this method

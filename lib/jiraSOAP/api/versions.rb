@@ -2,11 +2,15 @@ module JIRA::RemoteAPI
 
   # @group Versions
 
+  ##
+  # @todo This method should be #get_versions_for_project_with_key
+  #
   # @param [String] project_key
   # @return [Array<JIRA::Version>]
   def get_versions_for_project project_key
     array_jira_call JIRA::Version, 'getVersions', project_key
   end
+  alias_method :versions_for_project, :get_versions_for_project
 
   ##
   # New versions cannot have the archived bit set and the release date

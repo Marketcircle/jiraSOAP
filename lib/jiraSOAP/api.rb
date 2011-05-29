@@ -43,6 +43,7 @@ module JIRA::RemoteAPI
     @user           = user
     self.auth_token
   end
+  alias_method :log_in, :login
 
   ##
   # @todo change method name to #logout! since we are changing internal state?
@@ -54,6 +55,7 @@ module JIRA::RemoteAPI
   def logout
     jira_call( 'logout' ).to_boolean
   end
+  alias_method :log_out, :logout
 
   # @endgroup
 
