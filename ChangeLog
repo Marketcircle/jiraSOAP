@@ -1,6 +1,9 @@
 Version 0.8
 
+	* Deprecated method names that start with 'get'
+	* Alias method names that start with 'get' to not start with 'get'
 	* Removed handsoap parsing abstraction
+
 	* Various documentation tweaks and enhancements
 
 Version 0.7.1
