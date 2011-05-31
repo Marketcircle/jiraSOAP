@@ -20,4 +20,10 @@ class JIRA::Comment < JIRA::DynamicEntity
   # a SOAP message to create a comment
   @build.delete 'created'
   @build.delete 'updated'
+
+  ##
+  # Add a created comment to an issue
+  def add_to issue_key
+    raise NotImplementedError
+  end
 end

@@ -44,9 +44,6 @@ class JIRA::Entity
     entity
   end
 
-  ##
-  # @todo Put debug message through the logger
-  #
   # @param [Nokogiri::XML::Element] element
   def initialize_with_xml frag
     attributes = self.class.parse
@@ -70,5 +67,4 @@ class JIRA::Entity
       msg.send builder, node_name, send(value)
     }
   end
-
 end

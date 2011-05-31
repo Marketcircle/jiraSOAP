@@ -1,8 +1,6 @@
 ##
-# @note This structure is really only used with {RemoteAPI#update_issue}.
-#
 # This class is a bit of a hack; it is really just a key-value pair and only
-# used with the above listed RemoteAPI method.
+# used with {RemoteAPI#update_issue}.
 class JIRA::FieldValue
 
   # @return [String] the name for regular fields, and the id for custom fields
