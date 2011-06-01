@@ -10,12 +10,17 @@ class JIRA::Entity
     # @return [Hash{String=>Symbol}] used for building XML SOAP messages
     attr_accessor :build
 
+    ##
+    # Define the callback to automatically initialize the build and parse
+    # tables when any subclass is defined.
+    def inherited
+      @build = superclass.build.dup
+      @parse = superclass.parse.dup
+    end
+
     # @param [Array<String,Symbol,Class>] attributes
     # @return [nil]
     def add_attributes *attributes
-      @build = superclass.build.dup unless @build
-      @parse = superclass.parse.dup unless @parse
-
       attributes.each { |attribute|
         jira_name, local_name = attribute[0..1]
 
