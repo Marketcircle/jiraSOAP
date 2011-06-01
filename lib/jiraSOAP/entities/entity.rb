@@ -13,7 +13,6 @@ class JIRA::Entity
     # @param [Array<String,Symbol,Class>] attributes
     # @return [nil]
     def add_attributes *attributes
-      superclass = ancestors[1] # this is fragile to mixins
       @build = superclass.build.dup unless @build
       @parse = superclass.parse.dup unless @parse
 
