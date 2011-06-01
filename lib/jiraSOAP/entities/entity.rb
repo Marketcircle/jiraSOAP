@@ -13,9 +13,9 @@ class JIRA::Entity
     ##
     # Define the callback to automatically initialize the build and parse
     # tables when any subclass is defined.
-    def inherited
-      @build = superclass.build.dup
-      @parse = superclass.parse.dup
+    def inherited subclass
+      subclass.build = @build.dup
+      subclass.parse = @parse.dup
     end
 
     ##
