@@ -2,10 +2,16 @@
 # A permission id and the username that it is tied to.
 class JIRA::Permission < JIRA::Entity
 
-  # @return [String] The permission type
+  ##
+  # The permission type
+  #
+  # @return [String]
   add_attribute :name, 'name', :content
 
-  # @return [Number] A unique id number
+  ##
+  # A unique id number
+  #
+  # @return [Number]
   add_attribute :permission, 'permission', :to_i
 
 end

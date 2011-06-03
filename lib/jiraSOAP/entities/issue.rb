@@ -53,7 +53,10 @@ class JIRA::Issue < JIRA::DynamicEntity
   # @return [Time]
   add_attribute :create_time, 'created', :to_iso_date
 
-  # @return [Time] This is actually a Time object with no time resolution.
+  ##
+  # This is actually a Time object with no time resolution.
+  #
+  # @return [Time]
   add_attribute :due_date, 'duedate', :to_iso_date
 
   # @return [Array<JIRA::Version>]

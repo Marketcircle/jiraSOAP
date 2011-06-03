@@ -82,4 +82,5 @@ class JIRA::Entity
       msg.send builder, node_name, send(value)
     }
   end
+
 end

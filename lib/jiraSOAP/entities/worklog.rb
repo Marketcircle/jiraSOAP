@@ -5,7 +5,12 @@ class JIRA::Worklog < JIRA::DescribedEntity
   # @return [String]
   add_attribute :comment, 'comment', :content
 
-  # @return [DateTime] Needs to be a DateTime. Why?
+  ##
+  # @todo Why does this need to be a DateTime?
+  #
+  # Needs to be a DateTime.
+  #
+  # @return [DateTime]
   add_attribute :start_data, 'startDate', :to_date
 
   # @return [String]

@@ -32,7 +32,11 @@ class JIRA::ServerConfiguration < JIRA::Entity
   # @return [Number]
   add_attribute :time_tracking_hours_per_day, 'timeTrackingHoursPerDay', :to_i
 
-  # @return [Boolean] In case we are using a version of JIRA that misspells 'management'
+  ##
+  # @note JIRA misspells 'management', so we define this attribute twice
+  #       to cover both cases.
+  #
+  # @return [Boolean]
   add_attribute :external_user_management_allowed, 'allowExternalUserManagment', :to_boolean
 
 end

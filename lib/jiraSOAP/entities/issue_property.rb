@@ -3,7 +3,10 @@
 #           also have an icon.
 class JIRA::IssueProperty < JIRA::DescribedEntity
 
-  # @return [URI::HTTP,NSURL] NSURL on MacRuby, URI::HTTP on CRuby
+  ##
+  # NSURL on MacRuby, URI::HTTP on CRuby
+  #
+  # @return [URI::HTTP,NSURL]
   add_attribute :icon, 'icon', :to_url
 
 end

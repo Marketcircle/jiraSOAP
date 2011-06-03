@@ -2,7 +2,10 @@
 # @abstract Most dynamic entities also have a name
 class JIRA::NamedEntity < JIRA::DynamicEntity
 
-  # @return [String] A plain language name
+  ##
+  # A plain language name
+  #
+  # @return [String]
   add_attribute :name, 'name', :content
 
 end

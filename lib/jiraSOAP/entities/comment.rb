@@ -2,7 +2,10 @@
 # Contains a comment's body and metadata.
 class JIRA::Comment < JIRA::DynamicEntity
 
-  # @return [String] A username
+  ##
+  # A username
+  #
+  # @return [String]
   add_attribute :author, 'author', :content
 
   # @return [String]
@@ -14,7 +17,10 @@ class JIRA::Comment < JIRA::DynamicEntity
   # @return [String]
   add_attribute :role_level, 'roleLevel', :content
 
-  # @return [String] A username
+  ##
+  # A username
+  #
+  # @return [String]
   add_attribute :update_author, 'updateAuthor', :content
 
   # @return [Time]
@@ -36,4 +42,5 @@ class JIRA::Comment < JIRA::DynamicEntity
   def add_to issue_key
     raise NotImplementedError
   end
+
 end

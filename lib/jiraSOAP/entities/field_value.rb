@@ -3,10 +3,16 @@
 # used with {RemoteAPI#update_issue}.
 class JIRA::FieldValue
 
-  # @return [String] the name for regular fields, and the id for custom fields
+  ##
+  # The name for regular fields, and the id for custom fields
+  #
+  # @return [String]
   attr_accessor :field_name
 
-  # @return [Array<#to_s>] an array for the values, usually a single
+  ##
+  # An array for the values, usually a single
+  #
+  # @return [Array<#to_s>]
   attr_accessor :values
 
   # @param [String] field_name

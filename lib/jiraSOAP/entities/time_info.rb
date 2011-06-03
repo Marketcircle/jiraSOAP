@@ -7,7 +7,11 @@ class JIRA::TimeInfo < JIRA::Entity
   # @return [Time]
   add_attribute :server_time, 'serverTime', :to_natural_date
 
-  # @return [String] in the form 'America/Toronto'
+  ##
+  # @example
+  #  'America/Toronto'
+  #
+  # @return [String]
   add_attribute :timezone, 'timeZoneId', :content
 
 end
