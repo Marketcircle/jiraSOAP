@@ -45,22 +45,6 @@ class JIRA::Entity
       @parse[jira_name] = [:"#{name}=", *transformer]
     end
 
-    # @param [Array<String,Symbol,Class>] attributes
-    # @return [nil]
-    def add_attributes *attributes
-      attributes.each { |attribute|
-        jira_name, local_name = attribute[0..1]
-
-        attr_accessor local_name
-
-        @build[jira_name] = local_name
-
-        @parse[jira_name] = [:"#{local_name}=", *attribute[2,2]]
-        alias_method :"#{local_name}?", local_name if attribute[2] == :to_boolean
-        #" ruby-mode parse fail
-      }
-    end
-
   end
 
   # they need to be initialized
