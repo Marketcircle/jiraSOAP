@@ -2,8 +2,8 @@
 # @abstract A common base for most issue properties; core issue properties
 #           also have an icon.
 class JIRA::IssueProperty < JIRA::DescribedEntity
-  add_attributes(
-    # NSURL on MacRuby and a URI::HTTP object on CRuby
-    ['icon', :icon, :to_url]
-  )
+
+  # @return [URI::HTTP,NSURL] NSURL on MacRuby, URI::HTTP on CRuby
+  add_attribute :icon, 'icon', :to_url
+
 end

@@ -10,29 +10,66 @@
 # likely be the greatest source of bugs. The irony of the situation is that
 # this structure is also the most critical to have in working order.
 class JIRA::Issue < JIRA::DynamicEntity
-  add_attributes(
-    ['key',               :key,                 :content],
-    ['summary',           :summary,             :content],
-    ['description',       :description,         :content],
-    ['type',              :type_id,             :content],
-    ['status',            :status_id,           :content],
-    ['assignee',          :assignee_username,   :content],
-    ['reporter',          :reporter_username,   :content],
-    ['priority',          :priority_id,         :content],
-    ['project',           :project_name,        :content],
-    ['resolution',        :resolution_id,       :content],
-    ['environment',       :environment,         :content],
-    ['votes',             :votes,               :to_i],
-    ['updated',           :last_updated_time,   :to_iso_date],
-    ['created',           :create_time,         :to_iso_date],
-    # This is actually a Time object with no time resolution.
-    ['duedate',           :due_date,            :to_iso_date],
-    ['affectsVersions',   :affects_versions,    :children_as_objects, JIRA::Version],
-    ['fixVersions',       :fix_versions,        :children_as_objects, JIRA::Version],
-    ['components',        :components,          :children_as_objects, JIRA::Component],
-    ['customFieldValues', :custom_field_values, :children_as_objects, JIRA::CustomFieldValue],
-    ['attachmentNames',   :attachment_names,    :contents_of_children]
-  )
+
+  # @return [String]
+  add_attribute :key, 'key', :content
+
+  # @return [String]
+  add_attribute :summary, 'summary', :content
+
+  # @return [String]
+  add_attribute :description, 'description', :content
+
+  # @return [String]
+  add_attribute :type_id, 'type', :content
+
+  # @return [String]
+  add_attribute :status_id, 'status', :content
+
+  # @return [String]
+  add_attribute :assignee_username, 'assignee', :content
+
+  # @return [String]
+  add_attribute :reporter_username, 'reporter', :content
+
+  # @return [String]
+  add_attribute :priority_id, 'priority', :content
+
+  # @return [String]
+  add_attribute :project_name, 'project', :content
+
+  # @return [String]
+  add_attribute :resolution_id, 'resolution', :content
+
+  # @return [String]
+  add_attribute :environment, 'environment', :content
+
+  # @return [Number]
+  add_attribute :votes, 'votes', :to_i
+
+  # @return [Time]
+  add_attribute :last_updated_time, 'updated', :to_iso_date
+
+  # @return [Time]
+  add_attribute :create_time, 'created', :to_iso_date
+
+  # @return [Time] This is actually a Time object with no time resolution.
+  add_attribute :due_date, 'duedate', :to_iso_date
+
+  # @return [Array<JIRA::Version>]
+  add_attribute :affects_versions, 'affectsVersions', [:children_as_objects, JIRA::Version]
+
+  # @return [Array<JIRA::Version>]
+  add_attribute :fix_versions, 'fixVersions', [:children_as_objects, JIRA::Version]
+
+  # @return [Array<JIRA::Component>]
+  add_attribute :components, 'components', [:children_as_objects, JIRA::Component]
+
+  # @return [Array<JIRA::CustomFieldValue>]
+  add_attribute :custom_field_values, 'customFieldValues', [:children_as_objects, JIRA::CustomFieldValue]
+
+  # @return [Array<String>]
+  add_attribute :attachment_names, 'attachmentNames', :contents_of_children
 
   # @todo see if we can use the simple and complex array builders
   # Generate the SOAP message fragment for an issue. Can you spot the oddities

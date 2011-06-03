@@ -1,8 +1,11 @@
 ##
 # @todo Make sure the xml names are correct (check the XML dump)
 class JIRA::PermissionMapping < JIRA::Entity
-  add_attributes(
-    ['permission', :permission, :children_as_object,  JIRA::Permission],
-    ['entities',   :users,      :children_as_objects, JIRA::UserName]
-  )
+
+  # @return [Array<JIRA::Permission>]
+  add_attribute :permission, 'permission', [:children_as_object,  JIRA::Permission]
+
+  # @return [Array<JIRA::UserName>]
+  add_attribute :users, 'entities', [:children_as_objects, JIRA::UserName]
+
 end

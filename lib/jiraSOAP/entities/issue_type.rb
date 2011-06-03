@@ -1,8 +1,9 @@
 ##
 # Contains all the metadata for an issue type.
 class JIRA::IssueType < JIRA::IssueProperty
-  add_attributes(
-    # True if the issue type is also a subtask
-    ['subTask', :subtask, :to_boolean]
-  )
+
+  # @return [Boolean] True if the issue type is also a subtask
+  add_attribute :subtask, 'subTask', :to_boolean
+  alias_method :sub_task, :subtask
+
 end

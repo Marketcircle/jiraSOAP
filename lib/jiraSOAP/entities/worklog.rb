@@ -2,12 +2,14 @@
 # Contains the data and metadata for a remote worklog.
 class JIRA::Worklog < JIRA::DescribedEntity
 
-  add_attributes(
-    ['comment',   :comment,    :to_s],
-    # Needs to be a DateTime. Why?
-    ['startDate', :start_date, :to_date],
-    ['timeSpent', :time_spent, :to_s]
-  )
+  # @return [String]
+  add_attribute :comment, 'comment', :content
+
+  # @return [DateTime] Needs to be a DateTime. Why?
+  add_attribute :start_data, 'startDate', :to_date
+
+  # @return [String]
+  add_attribute :time_spent, 'timeSpent', :content
 
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]
@@ -16,4 +18,5 @@ class JIRA::Worklog < JIRA::DescribedEntity
     msg.add 'startDate', @start_date
     msg.add 'timeSpent', @time_spent
   end
+
 end
