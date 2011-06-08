@@ -87,11 +87,6 @@ TODO
 Note on Patches/Pull Requests
 -----------------------------
 
-This project has a tendancy to change drastically between releases as it
-is still unstable, so patches may not cleanly apply.
-
-If you want to help by submitting patches:
-
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
