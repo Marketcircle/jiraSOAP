@@ -1,6 +1,8 @@
-Version 0.8
+Version 0.7.2
 
-	* Removed handsoap parsing abstraction
+	* FIx setting the assignee during Issue creation
+	* Backport RemoteAPI#add_worklog
+	* Removed handsoap parsing abstraction (mad perf hacks for parsing)
 
 Version 0.7.1
 
