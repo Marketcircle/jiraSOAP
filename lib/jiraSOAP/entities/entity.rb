@@ -7,12 +7,13 @@ class JIRA::Entity
     #  parsing XML
     attr_accessor :parse
 
+    def inherited klass
+      klass.parse = @parse.dup
+    end
+
     # @param [Array<String,Symbol,Class>] attributes
     # @return [Array<String,Symbol,Class>] returns what you gave it
     def add_attributes *attributes
-      superclass = ancestors[1]
-      @parse = superclass.parse.dup unless @parse
-
       attributes.each { |attribute|
         attr_accessor attribute[1]
         @parse[attribute[0]] = [:"#{attribute[1]}=", *attribute[2,2]]
