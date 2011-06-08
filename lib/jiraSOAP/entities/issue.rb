@@ -74,7 +74,13 @@ class JIRA::Issue < JIRA::DynamicEntity
   # @return [Array<String>]
   add_attribute :attachment_names, 'attachmentNames', :contents_of_children
 
+
+  [ 'id', 'key', 'status', 'resolution', 'votes', 'updated', 'created',
+    'attachmentNames' ].each { |attr| @build.delete(attr) }
+
+  ##
   # @todo see if we can use the simple and complex array builders
+  #
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
   # and inconsistencies? (hint: there are many).
   #
@@ -95,17 +101,16 @@ class JIRA::Issue < JIRA::DynamicEntity
   #
   # Passing an environment/due date field with a value of nil causes the
   # server to complain about the formatting of the message.
+  #
   # @param [Handsoap::XmlMason::Node] msg  message the node to add the object to
-  def soapify_for(msg)
-    # might be going away, since it appears to have no effect at creation time
-    msg.add 'reporter', @reporter_name unless @reporter.nil?
+  def soapify_for msg
+    super
 
-    msg.add 'priority', @priority_id
-    msg.add 'type', @type_id
-    msg.add 'project', @project_name
-
-    msg.add 'summary', @summary
-    msg.add 'description', @description
+    # requires hacks
+    msg.add 'assignee', (@assignee_name || '-1')
+    msg.add 'environment', @environment if @environment
+    msg.add_complex_array 'customFieldValues', (@custom_field_values || [])
+    msg.add 'duedate', @due_date.xmlschema if @due_date
 
     msg.add 'components' do |submsg|
       (@components || []).each { |component|
@@ -127,11 +132,5 @@ class JIRA::Issue < JIRA::DynamicEntity
           version_msg.add 'id', version.id end
       }
     end
-
-    msg.add 'assignee', (@assignee_name || '-1')
-    msg.add_complex_array 'customFieldValues', (@custom_field_values || [])
-
-    msg.add 'environment', @environment unless @environment.nil?
-    msg.add 'duedate', @due_date.xmlschema unless @due_date.nil?
   end
 end
