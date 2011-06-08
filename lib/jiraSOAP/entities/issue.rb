@@ -87,7 +87,7 @@ class JIRA::Issue < JIRA::DynamicEntity
       }
     end
 
-    msg.add 'assignee', (@assignee_name || '-1')
+    msg.add 'assignee', (@assignee_username || '-1')
     msg.add_complex_array 'customFieldValues', (@custom_field_values || [])
 
     msg.add 'environment', @environment unless @environment.nil?
