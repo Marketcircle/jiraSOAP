@@ -11,6 +11,7 @@ require 'jiraSOAP/api/attachments'
 require 'jiraSOAP/api/comments'
 require 'jiraSOAP/api/issue_data_types'
 require 'jiraSOAP/api/additions'
+require 'jiraSOAP/api/worklog'
 
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
