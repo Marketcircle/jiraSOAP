@@ -12,8 +12,6 @@ require 'jiraSOAP/api/comments'
 require 'jiraSOAP/api/issue_data_types'
 require 'jiraSOAP/api/additions'
 
-module JIRA
-
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
 # There are several cases where this API diverges from the one defined by
@@ -23,7 +21,7 @@ module JIRA
 # @todo progressWorkflowAction and friends [target v0.8]
 # @todo remove the get_ prefix from api methods that don't need them
 # @todo monkey patch Array to include a #to_soap method
-module RemoteAPI
+module JIRA::RemoteAPI
 
   # @group Logging in/out
 
@@ -103,7 +101,5 @@ module RemoteAPI
       type.new_with_xml frag
     }
   end
-
-end
 
 end
