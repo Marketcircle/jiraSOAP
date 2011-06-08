@@ -82,6 +82,7 @@ TODO
   + Using GCD/Threads for parsing arrays of results; a significant speed up for large types and large arrays (ie. creating issues from JQL searches)
 - Public test suite
   + Needs a lot of mock data
+- Swap out net/http for something better to get roflscale performance
 
 
 Note on Patches/Pull Requests
