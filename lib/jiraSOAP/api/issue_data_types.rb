@@ -26,6 +26,13 @@ module JIRA::RemoteAPI
   end
   alias_method :get_issue_types, :issue_types
 
+  # @param [String] project_name
+  # @return [Array<JIRA::IssueType>]
+  def issue_types_for_project_with_id project_id
+    array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id
+  end
+  alias_method :get_issue_types_for_project_with_id, :issue_types_for_project_with_id
+
   # @return [Array<JIRA::Status>]
   def statuses
     array_jira_call JIRA::Status, 'getStatuses'

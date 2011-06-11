@@ -54,13 +54,6 @@ module JIRA::RemoteAPI
   end
   alias_method :get_project_including_schemes_with_id, :project_including_schemes_with_id
 
-  # @param [String] project_name
-  # @return [Array<JIRA::IssueType>]
-  def issue_types_for_project_with_id project_id
-    array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id
-  end
-  alias_method :get_issue_types_for_project_with_id, :issue_types_for_project_with_id
-
   ##
   # @note This will not fill in {JIRA::Scheme} data for the projects.
   #
