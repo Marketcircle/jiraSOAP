@@ -8,3 +8,4 @@ Gemfile.lock
 *.rbo
 *.gem
 pkg/
+.rvmrc
