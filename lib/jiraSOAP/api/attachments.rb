@@ -1,15 +1,26 @@
-module JIRA
-module RemoteAPI
-  # @group Working with issue Attachments and their metadata
+module JIRA::RemoteAPI
 
+  ##
+  # @note The JIRA SOAP API only works with the metadata for attachments,
+  #       you will have to look at your servers configuration to figure
+  #       out the proper URL to call to get attachment data.
+  #
+  # This module has implemented all relevant APIs as of JIRA 4.2.
+
+  # @group Attachments
+
+  ##
   # @todo change method name to reflect that you only get metadata
+  #
   # @param [String] issue_key
   # @return [Array<JIRA::AttachmentMetadata>]
   def get_attachments_for_issue_with_key issue_key
     array_jira_call JIRA::AttachmentMetadata, 'getAttachmentsFromIssue', issue_key
   end
 
+  ##
   # Expect this method to be slow.
+  #
   # @param [String] issue_key
   # @param [Array<String>] filenames names to put on the files
   # @param [Array<String>] data base64 encoded data
@@ -28,6 +39,4 @@ module RemoteAPI
     true
   end
 
-  # @endgroup
-end
 end

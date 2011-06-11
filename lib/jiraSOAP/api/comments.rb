@@ -1,6 +1,6 @@
-module JIRA
-module RemoteAPI
-  # @group Working with Comments
+module JIRA::RemoteAPI
+
+  # @group Comments
 
   # @param [String] issue_key
   # @param [JIRA::Comment] comment
@@ -28,6 +28,4 @@ module RemoteAPI
     JIRA::Comment.new_with_xml jira_call( 'editComment', comment )
   end
 
-  # @endgroup
-end
 end

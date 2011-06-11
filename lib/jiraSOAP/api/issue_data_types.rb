@@ -1,6 +1,6 @@
-module JIRA
-module RemoteAPI
-  # @group Working with issue attributes
+module JIRA::RemoteAPI
+
+  # @group Issue attributes
 
   # @return [Array<JIRA::Priority>]
   def get_priorities
@@ -38,14 +38,15 @@ module RemoteAPI
     array_jira_call JIRA::IssueType, 'getSubTaskIssueTypesForProject', project_id
   end
 
-  # I have no idea what this method does.
+  ##
   # @todo find out what this method does
+  #
+  # I have no idea what this method does.
+  #
   # @return [Boolean] true if no exceptions were raised
   def refresh_custom_fields
     jira_call 'refreshCustomFields'
     true
   end
 
-  # @endgroup
-end
 end

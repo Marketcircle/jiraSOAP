@@ -1,7 +1,8 @@
 module JIRA::RemoteAPI
 
-  # @group Working with Worklogs
+  # @group Worklogs
 
+  ##
   # Adds a worklog to the given issue.
   #
   # @param [String] issue_key

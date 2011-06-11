@@ -1,8 +1,10 @@
-module JIRA
-module RemoteAPI
-  # @group Working with Filters
+module JIRA::RemoteAPI
 
+  # @group Filters
+
+  ##
   # Retrieves favourite filters for the currently logged in user.
+  #
   # @return [Array<JIRA::Filter>]
   def get_favourite_filters
     array_jira_call JIRA::Filter, 'getFavouriteFilters'
@@ -15,6 +17,4 @@ module RemoteAPI
     jira_call( 'getIssueCountForFilter', id ).to_i
   end
 
-  # @endgroup
-end
 end

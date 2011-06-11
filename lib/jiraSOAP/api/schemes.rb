@@ -1,6 +1,6 @@
-module JIRA
-module RemoteAPI
-  # @group Working with Schemes
+module JIRA::RemoteAPI
+
+  # @group Schemes
 
   # @return [Array<JIRA::NotificationScheme>]
   def get_notification_schemes
@@ -12,6 +12,4 @@ module RemoteAPI
     array_jira_call JIRA::PermissionScheme, 'getPermissionSchemes'
   end
 
-  # @endgroup
-end
 end

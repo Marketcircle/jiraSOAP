@@ -1,8 +1,10 @@
-module JIRA
-module RemoteAPI
-  # @group Getting information about the server
+module JIRA::RemoteAPI
 
+  # @group Server Information
+
+  ##
   # The @build_date attribute is a Time value, but does not include a time.
+  #
   # @return [JIRA::ServerInfo]
   def get_server_info
     JIRA::ServerInfo.new_with_xml jira_call( 'getServerInfo' )
@@ -13,6 +15,4 @@ module RemoteAPI
     JIRA::ServerConfiguration.new_with_xml jira_call( 'getConfiguration' )
   end
 
-  # @endgroup
-end
 end
