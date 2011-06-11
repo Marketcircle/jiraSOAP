@@ -38,6 +38,7 @@ module JIRA::RemoteAPI
     @user           = user
     self.auth_token
   end
+  alias_method :log_in, :login
 
   ##
   # You only need to call this to make an explicit logout; normally, a session
@@ -46,6 +47,7 @@ module JIRA::RemoteAPI
   def logout
     jira_call( 'logout' ).to_boolean
   end
+  alias_method :log_out, :logout
 
   # @endgroup
 
