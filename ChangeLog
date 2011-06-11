@@ -1,16 +1,27 @@
+Version 0.8.2
+
+	* Updated ChangeLog with changes from 0.8.1
+	* Updated ChangeLog with changes from 0.8.0 (sorry!)
+
+Version 0.8.1
+
+	* Updated README and GettingStarted guide
+
 Version 0.8.0
 
 	* Deprecated the #get_ from methods that start with #get_
 	* Alias #login to #log_in and #logout to #log_out
 	* Added RemoteAPI#permission_to_edit_comment?
 	* Added UserGroup and related RemoteAPI methods
-	* Added RemoteAPI#add_worklog
+	* Added RemoteAPI#add_worklog (thanks @FDj)
+	* Added ability to initialize JIRA::FieldValue without an array (thanks @knut)
+
 	* Various documentation updates and tweaks
 
 	* Removed handsoap parsing abstraction (roflscale for parsing)
 	* Removed the YARD plugin in favour of YARD 0.7 DSL documenting stuff
 
-	* FIx setting the assignee during Issue creation
+	* Fix setting the assignee during Issue creation (thanks @ssmiech)
 
 Version 0.7.1
 
