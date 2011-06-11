@@ -12,15 +12,17 @@ module JIRA::RemoteAPI
 
   # @param [String] id
   # @return [JIRA::Comment]
-  def get_comment_with_id id
+  def comment_with_id id
     JIRA::Comment.new_with_xml jira_call( 'getComment', id )
   end
+  alias_method :get_comment_with_id, :comment_with_id
 
   # @param [String] issue_key
   # @return [Array<JIRA::Comment>]
-  def get_comments_for_issue_with_key issue_key
+  def comments_for_issue_with_key issue_key
     array_jira_call JIRA::Comment, 'getComments', issue_key
   end
+  alias_method :get_comments_for_issue_with_key, :comments_for_issue_with_key
 
   # @param [JIRA::Comment] comment
   # @return [JIRA::Comment]

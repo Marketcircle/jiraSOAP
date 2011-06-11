@@ -4,9 +4,11 @@ module JIRA::RemoteAPI
 
   # @param [String] user_name
   # @return [JIRA::User]
-  def get_user_with_name user_name
+  def user_with_name user_name
     JIRA::User.new_with_xml jira_call( 'getUser', user_name )
   end
+  alias_method :get_user_with_name, :user_with_name
+
 
   ##
   # It seems that creating a user without any permission groups will trigger

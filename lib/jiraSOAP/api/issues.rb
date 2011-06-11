@@ -17,9 +17,10 @@ module JIRA::RemoteAPI
   # @param [Fixnum] max_results limit on number of returned results;
   #   the value may be overridden by the server if max_results is too large
   # @return [Array<JIRA::Issue>]
-  def get_issues_from_jql_search jql_query, max_results = 2000
+  def issues_from_jql_search jql_query, max_results = 2000
     array_jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
   end
+  alias_method :get_issues_from_jql_search, :issues_from_jql_search
 
   ##
   # This method can update most, but not all, issue fields. Some limitations
@@ -78,34 +79,39 @@ module JIRA::RemoteAPI
 
   # @param [String] issue_key
   # @return [JIRA::Issue]
-  def get_issue_with_key issue_key
+  def issue_with_key issue_key
     JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key )
   end
+  alias_method :get_issue_with_key, :issue_with_key
 
   # @param [String] issue_id
   # @return [JIRA::Issue]
-  def get_issue_with_id issue_id
+  def issue_with_id issue_id
     JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id )
   end
+  alias_method :get_issue_with_id, :issue_with_id
 
   # @param [String] id
   # @param [Fixnum] max_results
   # @param [Fixnum] offset
   # @return [Array<JIRA::Issue>]
-  def get_issues_from_filter_with_id id, max_results = 500, offset = 0
+  def issues_from_filter_with_id id, max_results = 500, offset = 0
     array_jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
+  alias_method :get_issues_from_filter_with_id, :issues_from_filter_with_id
 
   # @param [String] issue_id
   # @return [Time]
-  def get_resolution_date_for_issue_with_id issue_id
+  def resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
+  alias_method :get_resolution_date_for_issue_with_id, :resolution_date_for_issue_with_id issue_id
 
   # @param [String] issue_key
   # @return [Time]
-  def get_resolution_date_for_issue_with_key issue_key
+  def resolution_date_for_issue_with_key issue_key
     jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
+  alias_method :get_resolution_date_for_issue_with_key, :resolution_date_for_issue_with_key
 
 end

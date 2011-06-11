@@ -3,15 +3,17 @@ module JIRA::RemoteAPI
   # @group Project Roles
 
   # @return [Array<JIRA::ProjectRole>]
-  def get_project_roles
+  def project_roles
     array_jira_call JIRA::ProjectRole, 'getProjectRoles'
   end
+  alias_method :get_project_roles, :project_roles
 
   # @param [String] role_id
   # @return [JIRA::ProjectRole]
-  def get_project_role_with_id role_id
+  def project_role_with_id role_id
     JIRA::ProjectRole.new_with_xml jira_call( 'getProjectRole', role_id )
   end
+  alias_method :get_project_role_with_id, :project_role_with_id
 
   # @param [JIRA::ProjectRole] project_role
   # @return [JIRA::ProjectRole] the role that was created

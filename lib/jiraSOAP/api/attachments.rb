@@ -14,9 +14,10 @@ module JIRA::RemoteAPI
   #
   # @param [String] issue_key
   # @return [Array<JIRA::AttachmentMetadata>]
-  def get_attachments_for_issue_with_key issue_key
+  def attachments_for_issue_with_key issue_key
     array_jira_call JIRA::AttachmentMetadata, 'getAttachmentsFromIssue', issue_key
   end
+  alias_method :get_attachments_for_issue_with_key, :attachments_for_issue_with_key
 
   ##
   # Expect this method to be slow.

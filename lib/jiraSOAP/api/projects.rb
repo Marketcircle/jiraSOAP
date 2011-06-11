@@ -9,9 +9,10 @@ module JIRA::RemoteAPI
   #
   # @param [String] project_key
   # @return [JIRA::Project]
-  def get_project_with_key project_key
+  def project_with_key project_key
     JIRA::Project.new_with_xml jira_call( 'getProjectByKey', project_key )
   end
+  alias_method :get_project_with_key, :project_with_key
 
   ##
   # Requires you to set at least a project name, key, and lead.
@@ -37,9 +38,10 @@ module JIRA::RemoteAPI
 
   # @param [String] project_id
   # @return [JIRA::Project]
-  def get_project_with_id project_id
+  def project_with_id project_id
     JIRA::Project.new_with_xml jira_call( 'getProjectById', project_id )
   end
+  alias_method :get_project_with_id, :project_with_id
 
   ##
   # @todo Parse the permission scheme
@@ -47,23 +49,26 @@ module JIRA::RemoteAPI
   #
   # @param [String] project_id
   # @return [JIRA::Project]
-  def get_project_including_schemes_with_id project_id
+  def project_including_schemes_with_id project_id
     JIRA::Project.new_with_xml jira_call( 'getProjectWithSchemesById', project_id )
   end
+  alias_method :get_project_including_schemes_with_id, :project_including_schemes_with_id
 
   # @param [String] project_name
   # @return [Array<JIRA::IssueType>]
-  def get_issue_types_for_project_with_id project_id
+  def issue_types_for_project_with_id project_id
     array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id
   end
+  alias_method :get_issue_types_for_project_with_id, :issue_types_for_project_with_id
 
   ##
   # @note This will not fill in {JIRA::Scheme} data for the projects.
   #
   # @return [Array<JIRA::Project>]
-  def get_projects_without_schemes
+  def projects_without_schemes
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
+  alias_method :get_projects_without_schemes, :projects_without_schemes
 
   # @param [String] project_key
   # @return [Boolean] true if successful
