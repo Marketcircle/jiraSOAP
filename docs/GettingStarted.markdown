@@ -1,14 +1,15 @@
- Getting Started
-===============
+#  Getting Started
 
 `jiraSOAP` should run on Ruby 1.9.2+ and MacRuby 0.8+. It is available through rubygems or you can build from source:
 
+```bash
     # Using rubygems
     gem install jiraSOAP
 
     # Building from source
     git clone git://github.com/Marketcircle/jiraSOAP.git
-    rake build install
+    rake install
+```
 
 Once installed, you can run a quick demo (making appropriate substitutions):
 
@@ -24,13 +25,16 @@ Then you need to log in (a failed login will raise an exception):
 
 Once you are logged in, you can start querying the server for information:
 
-     issues = db.get_issues_from_jql_search 'reporter = currentUser()', 100
+     issues = db.issues_from_jql_search 'reporter = currentUser()', 100
      issues.each { |issue|
        #do something...
-       puts issue.key
+       puts issue.summary
      }
 
 Don't forget to log out when you are done:
 
     db.logout
 
+To find out what APIs are available, check out the {JIRA::RemoteAPI}
+module, as well as the {JIRA::RemoteAPIAdditions} module for
+conveniences that `jiraSOAP` has added.

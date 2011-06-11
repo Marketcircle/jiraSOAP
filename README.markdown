@@ -30,33 +30,7 @@ Pick up where `jira4r` left off:
 
 ## Getting Started
 
-`jiraSOAP` should run on Ruby 1.9.2 and MacRuby 0.8 or newer. It is available through rubygems or you can build from source:
-
-```bash
-# Using rubygems
-gem install jiraSOAP
-
-# Building from source
-git clone git://github.com/Marketcircle/jiraSOAP.git
-rake build install
-```
-
-Once installed, you can run a quick demo (making appropriate substitutions):
-
-```ruby
-require 'jiraSOAP'
-
-db = JIRA::JIRAService.new 'http://jira.yourSite.com:8080'
-db.login 'user', 'password'
-
-issues = db.get_issues_from_jql_search 'reporter = currentUser()', 100
-issues.each { |issue|
-  #do something...
-  puts issue.key
-}
-
-db.logout
-```
+See the {file:docs/GettingStarted.markdown Getting Started} guide.
 
 
 ## TODO
