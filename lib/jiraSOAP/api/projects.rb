@@ -14,28 +14,6 @@ module JIRA::RemoteAPI
   end
   alias_method :get_project_with_key, :project_with_key
 
-  ##
-  # Requires you to set at least a project name, key, and lead.
-  # However, it is also a good idea to set other project properties, such as
-  # the permission scheme as the default permission scheme can be too
-  # restrictive in most cases.
-  #
-  # @param [JIRA::Project] project
-  # @return [JIRA::Project]
-  def create_project_with_project project
-    JIRA::Project.new_with_xml jira_call( 'createProjectFromObject', project )
-  end
-
-  ##
-  # The id of the project is the only field that you cannot update. Or, at
-  # least the only field I know that you cannot update.
-  #
-  # @param [JIRA::Project] project
-  # @return [JIRA::Project]
-  def update_project_with_project project
-    JIRA::Project.new_with_xml jira_call( 'updateProject', project )
-  end
-
   # @param [String] project_id
   # @return [JIRA::Project]
   def project_with_id project_id
@@ -62,6 +40,28 @@ module JIRA::RemoteAPI
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
   alias_method :get_projects, :projects
+
+  ##
+  # Requires you to set at least a project name, key, and lead.
+  # However, it is also a good idea to set other project properties, such as
+  # the permission scheme as the default permission scheme can be too
+  # restrictive in most cases.
+  #
+  # @param [JIRA::Project] project
+  # @return [JIRA::Project]
+  def create_project_with_project project
+    JIRA::Project.new_with_xml jira_call( 'createProjectFromObject', project )
+  end
+
+  ##
+  # The id of the project is the only field that you cannot update. Or, at
+  # least the only field I know that you cannot update.
+  #
+  # @param [JIRA::Project] project
+  # @return [JIRA::Project]
+  def update_project_with_project project
+    JIRA::Project.new_with_xml jira_call( 'updateProject', project )
+  end
 
   # @param [String] project_key
   # @return [Boolean] true if successful
