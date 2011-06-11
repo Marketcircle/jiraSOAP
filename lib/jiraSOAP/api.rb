@@ -55,7 +55,7 @@ module JIRA::RemoteAPI
   private
 
   # XPath constant to get a node containing a response data.
-  RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'
+  RESPONSE_XPATH = '/node()[1]/node()[1]/node()[1]/node()[2]'.freeze
 
   ##
   # @todo make this method less ugly
