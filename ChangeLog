@@ -1,5 +1,6 @@
 Version 0.8.2
 
+	* Added a file of examples, ported from jira4r
 	* Add setters to attribute aliases
 	* Added a forgotten deprecation
 	* Updated ChangeLog with changes from 0.8.1
