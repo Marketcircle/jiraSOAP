@@ -45,6 +45,11 @@ Rake::TestTask.new(:test) do |t|
   t.verbose   = true
 end
 
+desc 'Startup irb with jiraSOAP loaded'
+task :console do
+  sh 'irb -Ilib -rubygems -rjiraSOAP'
+end
+
 
 ### DOCUMENTATION
 
