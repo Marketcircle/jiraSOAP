@@ -9,6 +9,41 @@ module JIRA::RemoteAPI
   end
   alias_method :get_user_with_name, :user_with_name
 
+  ##
+  # @todo test this method
+  #
+  # @param [JIRA::UserGroup] group
+  # @param [JIRA::User] user
+  # @return [Boolean] true if successful
+  def add_user_to_group group, user
+    jira_call 'addUserToGroup', group, user
+    true
+  end
+
+  ##
+  # @todo test this method
+  #
+  # Create a new user group. You can initialize the group
+  # with a user if you wish.
+  #
+  # @param [String] group_name
+  # @param [JIRA::User] user
+  # @return [JIRA::UserGroup]
+  def create_user_group group_name, user = nil
+    jira_call 'createGroup', group_name, user
+  end
+
+  ##
+  # @todo test this method
+  # @todo Find out the semantics of swap_group
+  #
+  # @param [String] group_name
+  # @param [String] swap_group
+  # @return [Boolean] true if successful
+  def delete_user_group group_name, swap_group
+    jira_call 'deleteGroup', group_name, swap_group
+    true
+  end
 
   ##
   # It seems that creating a user without any permission groups will trigger
