@@ -75,6 +75,16 @@ class JIRA::Issue < JIRA::DynamicEntity
   add_attribute :attachment_names, 'attachmentNames', :contents_of_children
 
   ##
+  # Get the value of a custom field given the custom field id, returns
+  # nil if the issue does not have a value for that field.
+  #
+  # @param [String] id the custom field id (e.g. 'customfield_10150')
+  # @return [JIRA::CustomFieldValue,nil]
+  def custom_field id
+    custom_field_values.find { |field_value| field_value.id == id }
+  end
+
+  ##
   # @todo see if we can use the simple and complex array builders
   #
   # Generate the SOAP message fragment for an issue. Can you spot the oddities
