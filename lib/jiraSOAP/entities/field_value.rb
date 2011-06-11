@@ -1,18 +1,25 @@
-# A structure that is a bit of a hack; it is just a key-value pair that
-# is used by {RemoteAPI#update_issue}.
+##
+# This class is a bit of a hack; it is really just a key-value pair and only
+# used with {RemoteAPI#update_issue}.
 class JIRA::FieldValue
 
-  # @return [String] the name for regular fields, and the id for custom fields
+  ##
+  # The name for regular fields, and the id for custom fields
+  #
+  # @return [String]
   attr_accessor :field_name
 
-  # @return [Array(#to_s)] an array for the values, usually a single
+  ##
+  # An array for the values, usually only has one object
+  #
+  # @return [Array<#to_s>]
   attr_accessor :values
 
   # @param [String] field_name
   # @param [Array] values
-  def initialize(field_name = nil, values = nil)
+  def initialize field_name = nil, values = nil
     @field_name = field_name
-    if values 
+    if values
       @values = values.is_a?( ::Array ) ? values : [values]
     end
   end
@@ -27,4 +34,5 @@ class JIRA::FieldValue
       message.add_simple_array 'values', @values unless @values.nil?
     end
   end
+
 end

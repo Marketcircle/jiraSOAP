@@ -14,15 +14,29 @@ class JIRA::Entity
       subclass.parse = @parse.dup
     end
 
-    # @param [Array<String,Symbol,Class>] attributes
-    # @return [Array<String,Symbol,Class>] returns what you gave it
-    def add_attributes *attributes
-      attributes.each { |attribute|
-        attr_accessor attribute[1]
-        @parse[attribute[0]] = [:"#{attribute[1]}=", *attribute[2,2]]
-        alias_method :"#{attribute[1]}?", attribute[1] if attribute[2] == :to_boolean
-        #" ruby-mode parse fail
-      }
+    ##
+    # @todo Add a way to signify if an attribute should not be used in
+    #       message building, as some attributes should never be included
+    #       in a SOAP message.
+    #
+    # Define a single instance attribute on the class including the
+    # specification on how to parse the XML output and how to build
+    # SOAP messages.
+    #
+    # Predicate methods will automatically be created if the transformer
+    # method is `:to_boolean`.
+    #
+    # @param [Symbol] name name of the attribute to create
+    # @param [String] jira_name name of the XML tag to look for when
+    #   parsing responses from the server
+    # @param [Symbol,Array(Symbol,Class)] transformer either the method
+    #   name to transform some XML contents, or the method name and the
+    #   class to build from the attribute
+    # @return [nil]
+    def add_attribute name, jira_name, transformer
+      attr_accessor name
+      alias_method "#{name}?", name if transformer == :to_boolean
+      @parse[jira_name] = [:"#{name}=", *transformer]
     end
 
   end
