@@ -1,5 +1,6 @@
 Version 0.8.2
 
+	* Add setters to attribute aliases
 	* Added a forgotten deprecation
 	* Updated ChangeLog with changes from 0.8.1
 	* Updated ChangeLog with changes from 0.8.0 (sorry!)

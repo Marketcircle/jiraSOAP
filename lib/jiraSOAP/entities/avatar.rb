@@ -19,10 +19,12 @@ class JIRA::Avatar < JIRA::DynamicEntity
   # @return [String]
   add_attribute :mime_type, 'contentType', :content
   alias_method :content_type, :mime_type
+  alias_method :content_type=, :mime_type=
 
   # @return [String]
   add_attribute :base64_data, 'base64Data', :content
   alias_method :data, :base64_data
+  alias_method :data=, :base64_data=
 
   ##
   # Indicates if the image is the system default
