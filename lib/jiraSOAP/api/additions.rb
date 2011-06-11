@@ -10,11 +10,12 @@ module JIRA::RemoteAPIAdditions
   #
   # @param [String] name
   # @return [JIRA::Field,nil]
-  def get_custom_field_with_name name
+  def custom_field_with_name name
     get_custom_fields.each { |cf|
       return cf if cf.name == name
     }
     nil
   end
+  alias_method :get_custom_field_with_name, :custom_field_with_name
 
 end
