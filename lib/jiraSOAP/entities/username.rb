@@ -6,5 +6,6 @@ class JIRA::UserName < JIRA::Entity
 
   # @return [String]
   add_attribute :username, 'name', :content
+  alias_method :name, :username
 
 end
