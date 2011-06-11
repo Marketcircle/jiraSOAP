@@ -38,9 +38,9 @@ module JIRA::RemoteAPI
   # update.
   #
   # @example Usage With A Normal Field
-  #  summary      = JIRA::FieldValue.new 'summary', ['My new summary']
+  #  summary      = JIRA::FieldValue.new 'summary', 'My new summary'
   # @example Usage With A Custom Field
-  #  custom_field = JIRA::FieldValue.new 'customfield_10060', ['123456']
+  #  custom_field = JIRA::FieldValue.new 'customfield_10060', '123456'
   # @example Setting a field to be blank/nil
   #  description  = JIRA::FieldValue.new 'description'
   # @example Calling the method to update an issue
