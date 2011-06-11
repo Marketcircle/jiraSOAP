@@ -1,14 +1,17 @@
+##
 # @abstract The base class for all JIRA objects that can given by the server.
 class JIRA::Entity
 
   class << self
 
-    # @return [Hash{String=>Array<Symbol,Symbol,Class*>}] used for
-    #  parsing XML
+    # @return [Hash{String=>Array(Symbol,Symbol,Class*)}] used for parsing XML
     attr_accessor :parse
 
-    def inherited klass
-      klass.parse = @parse.dup
+    ##
+    # Define the callback to automatically initialize the build and parse
+    # tables when any subclass is defined.
+    def inherited subclass
+      subclass.parse = @parse.dup
     end
 
     # @param [Array<String,Symbol,Class>] attributes
@@ -34,7 +37,6 @@ class JIRA::Entity
     entity
   end
 
-  # @todo put debug message through the logger
   # @param [Nokogiri::XML::Element] element
   def initialize_with_xml frag
     attributes = self.class.parse
