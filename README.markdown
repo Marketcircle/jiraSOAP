@@ -1,8 +1,7 @@
 # jiraSOAP - Ruby interface to the JIRA SOAP API
 
 Uses [handsoap](http://wiki.github.com/unwire/handsoap/) to build a
-client for the JIRA SOAP API that works on MacRuby as well as Ruby
-1.9.
+client for the JIRA SOAP API that works on Ruby 1.9 as well as MacRuby.
 
 You can read the documentation for the
 [latest release](http://rubydoc.info/gems/jiraSOAP/) or
@@ -62,13 +61,13 @@ db.logout
 
 ## TODO
 
-- Finish implementing all of the API
-- Stabilize API
-- Performance optimizations; there are a number of places that can be optimized
+
+- Finish implementing all of the JIRA API
+- Performance optimizations
   + Using GCD/Threads for parsing arrays of results; a significant
   speed up for large types and large arrays (ie. creating issues from
   JQL searches)
-  + Parsing can be done with array indexing instead of hash lookups
+  + Parsing might be doable with array indexing instead of hash lookups
   + Use a different web driver backend (net/http is slow under load)
 - Public test suite
   + Needs a lot of mock data
