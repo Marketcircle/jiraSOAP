@@ -65,10 +65,10 @@ module JIRA::RemoteAPI
   # @note This will not fill in {JIRA::Scheme} data for the projects.
   #
   # @return [Array<JIRA::Project>]
-  def projects_without_schemes
+  def projects
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
-  alias_method :get_projects_without_schemes, :projects_without_schemes
+  alias_method :get_projects, :projects
 
   # @param [String] project_key
   # @return [Boolean] true if successful
