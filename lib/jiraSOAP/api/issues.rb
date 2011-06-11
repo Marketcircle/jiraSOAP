@@ -105,7 +105,7 @@ module JIRA::RemoteAPI
   def resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
-  alias_method :get_resolution_date_for_issue_with_id, :resolution_date_for_issue_with_id issue_id
+  alias_method :get_resolution_date_for_issue_with_id, :resolution_date_for_issue_with_id
 
   # @param [String] issue_key
   # @return [Time]

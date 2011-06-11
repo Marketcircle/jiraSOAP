@@ -7,7 +7,7 @@
 class JIRA::CustomFieldValue < JIRA::DynamicEntity
 
   # @return [String]
-  add_attributes :id, 'customfieldId', :content
+  add_attribute :id, 'customfieldId', :content
 
   # @return [String]
   add_attribute :key, 'key', :content

@@ -7,7 +7,7 @@ module JIRA::RemoteAPI
   def versions_for_project project_key
     array_jira_call JIRA::Version, 'getVersions', project_key
   end
-  alias_method :get_versions_for_project, :get_versions_for_project
+  alias_method :get_versions_for_project, :versions_for_project
 
   ##
   # New versions cannot have the archived bit set and the release date

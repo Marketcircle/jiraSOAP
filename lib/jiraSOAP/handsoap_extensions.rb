@@ -11,7 +11,7 @@ class Handsoap::XmlMason::Node
   # @param [Hash] options
   def add_simple_array node_name, array = [], options = {}
     prefix, name = parse_ns(node_name)
-    node = append_child Element.new(self, prefix, name, nil, options)
+    node = append_child Handsoap::XmlMason::Element.new(self, prefix, name, nil, options)
     array.each { |element| node.add node_name, element }
   end
 
@@ -23,7 +23,7 @@ class Handsoap::XmlMason::Node
   # @param [Hash] options
   def add_complex_array node_name, array = [], options = {}
     prefix, name = parse_ns(node_name)
-    node = append_child Element.new(self, prefix, name, nil, options)
+    node = append_child Handsoap::XmlMason::Element.new(self, prefix, name, nil, options)
     array.each { |element| element.soapify_for node, name }
   end
 end
