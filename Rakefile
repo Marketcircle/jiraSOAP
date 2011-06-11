@@ -1,54 +1,52 @@
 require 'rubygems'
-require 'bundler'
-
-begin
-  Bundler.setup :default, :development
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
-
-require 'rake'
 
 task :default => :test
 
 
-namespace :macruby do
-  desc 'AOT compile for MacRuby'
-  task :compile do
-    FileList["lib/**/*.rb"].each do |source|
-      name = File.basename source
-      puts "#{name} => #{name}o"
-      `macrubyc --framework Foundation --arch x86_64 -C '#{source}' -o '#{source}o'`
-    end
+### MACRUBY BONUSES
+
+if RUBY_ENGINE == 'macruby' and MACRUBY_REVISION.match(/^git commit/)
+  require 'rake/compiletask'
+  Rake::CompileTask.new do |t|
+    t.files = FileList["lib/**/*.rb"]
+    t.verbose = true
   end
 
   desc 'Clean MacRuby binaries'
   task :clean do
-    FileList["lib/**/*.rbo"].each do |bin|
-      rm bin
-    end
+    FileList["lib/**/*.rbo"].each { |bin| rm bin }
   end
 end
 
 
-desc 'Build the gem'
-task :build do
-  puts `gem build -v jiraSOAP.gemspec`
+### GEM STUFF
+
+require 'rake/gempackagetask'
+spec = Gem::Specification.load('jiraSOAP.gemspec')
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.need_zip = false
+  pkg.need_tar = true
 end
 
-desc 'Install the gem in the current directory with the highest version number'
-task :install => :build do
-  puts `gem install #{Dir.glob('*.gem').sort.reverse.first}`
+require 'rubygems/dependency_installer'
+desc 'Build the gem and install it'
+task :install => :gem do
+  Gem::DependencyInstaller.new.install "pkg/#{spec.file_name}"
 end
+
+
+### TESTING
 
 require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs   << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+Rake::TestTask.new(:test) do |t|
+  t.libs     << 'test'
+  t.pattern   = 'test/**/test_*.rb'
+  t.ruby_opts = ['-rhelper']
+  t.verbose   = true
 end
+
+
+### DOCUMENTATION
 
 require 'yard'
 YARD::Rake::YardocTask.new
