@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
                         'LICENSE.txt',
                         '.yardopts',
                         'docs/GettingStarted.markdown',
-                        'docs/Examples.rb'
+                        'docs/Examples.markdown'
                        ]
 
   s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
