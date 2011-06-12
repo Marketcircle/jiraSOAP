@@ -1,3 +1,7 @@
+Version 0.8.3
+
+	* Fix a documentation link
+
 Version 0.8.2
 
 	* Added Issue#custom_field for getting custom field values

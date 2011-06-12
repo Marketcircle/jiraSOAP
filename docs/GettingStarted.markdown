@@ -33,7 +33,7 @@ Don't forget to log out when you are done:
 
    db.logout
 
-See {file:docs/Examples.rb} for more examples.
+See {file:docs/Examples.markdown} for more examples.
 
 To find out what APIs are available, check out the {JIRA::RemoteAPI}
 module, as well as the {JIRA::RemoteAPIAdditions} module for
