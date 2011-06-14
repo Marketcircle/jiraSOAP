@@ -11,7 +11,6 @@ module JIRA::RemoteAPI
   def project_avatar_for_key project_key
     JIRA::Avatar.new_with_xml jira_call( 'getProjectAvatar', project_key )
   end
-  alias_method :get_project_avatar_for_key, :project_avatar_for_key
 
   ##
   # Gets ALL avatars for a given project with this method; if you
@@ -23,7 +22,6 @@ module JIRA::RemoteAPI
   def project_avatars_for_key project_key, include_default_avatars = false
     array_jira_call JIRA::Avatar, 'getProjectAvatars', project_key, include_default_avatars
   end
-  alias_method :get_project_avatars_for_key, :project_avatars_for_key
 
   ##
   # @note You cannot delete system avatars, and you need project

@@ -1,3 +1,7 @@
+Version 0.9
+
+	* Removed aliases of #get_* from deprecated RemoteAPI#get_* methods
+
 Version 0.8.3
 
 	* Fix a documentation link

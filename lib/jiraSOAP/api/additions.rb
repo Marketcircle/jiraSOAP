@@ -16,6 +16,5 @@ module JIRA::RemoteAPIAdditions
     }
     nil
   end
-  alias_method :get_custom_field_with_name, :custom_field_with_name
 
 end
