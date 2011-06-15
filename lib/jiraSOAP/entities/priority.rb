@@ -7,7 +7,6 @@ class JIRA::Priority < JIRA::IssueProperty
   #
   # @return [Array(String,String,String)]
   add_attribute :color, 'color', :to_colour_triple
-  alias_method :colour, :color
-  alias_method :colour=, :color=
+  alias_attribute :colour, :color
 
 end

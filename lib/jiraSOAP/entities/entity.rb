@@ -39,6 +39,20 @@ class JIRA::Entity
       @parse[jira_name] = [:"#{name}=", *transformer]
     end
 
+    ##
+    # Alias an attribute's reader and writer methods
+    #
+    # @param [Symbol] new_name
+    # @param [Symbol] old_name
+    # @return [nil]
+    def alias_attribute new_name, old_name
+      alias_method new_name, old_name
+      alias_method "#{new_name}=", "#{old_name}="
+      if public_instance_methods.include?("#{old_name}?".to_sym)
+        alias_method "#{new_name}?", old_name
+      end
+    end
+
   end
 
   @parse = {} # needs to be initialized

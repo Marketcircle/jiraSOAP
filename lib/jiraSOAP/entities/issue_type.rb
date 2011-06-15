@@ -7,7 +7,6 @@ class JIRA::IssueType < JIRA::IssueProperty
   #
   # @return [Boolean]
   add_attribute :subtask, 'subTask', :to_boolean
-  alias_method :sub_task, :subtask
-  alias_method :sub_task=, :subtask=
+  alias_attribute :sub_task, :subtask
 
 end
