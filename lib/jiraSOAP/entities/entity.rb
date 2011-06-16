@@ -7,11 +7,15 @@ class JIRA::Entity
     # @return [Hash{String=>Array(Symbol,Symbol,Class*)}] used for parsing XML
     attr_accessor :parse
 
+    # @return [Hash{String=>Array(Symbol,Symbol,Class*)}] used for parsing XML
+    attr_accessor :build
+
     ##
     # Define the callback to automatically initialize the build and parse
     # tables when any subclass is defined.
     def inherited subclass
       subclass.parse = @parse.dup
+      subclass.build = @build.dup
     end
 
     ##
@@ -34,9 +38,11 @@ class JIRA::Entity
     #   class to build from the attribute
     # @return [nil]
     def add_attribute name, jira_name, transformer
+      @parse[jira_name] = [:"#{name}=", *transformer]
+      @build[jira_name] = name
+
       attr_accessor name
       alias_method "#{name}?", name if transformer == :to_boolean
-      @parse[jira_name] = [:"#{name}=", *transformer]
     end
 
     ##
@@ -55,7 +61,9 @@ class JIRA::Entity
 
   end
 
-  @parse = {} # needs to be initialized
+  # needs to be initialized
+  @parse = {}
+  @build = {}
 
   # @param [Handsoap::XmlQueryFront::NokogiriDriver] frag
   # @return [JIRA::Entity]
