@@ -24,10 +24,10 @@ Gem::Specification.new do |s|
                         'docs/Examples.markdown'
                        ]
 
-  s.add_runtime_dependency 'nokogiri', ['~> 1.4.4']
+  s.add_runtime_dependency 'nokogiri', ['~> 1.4.5']
   s.add_runtime_dependency 'handsoap', ['~> 1.1.8']
 
-  s.add_development_dependency 'yard',      ['~> 0.7.1']
-  s.add_development_dependency 'redcarpet', ['~> 1.15']
+  s.add_development_dependency 'yard',      ['~> 0.7.2']
+  s.add_development_dependency 'redcarpet', ['~> 1.17']
   s.add_development_dependency 'minitest',  ['>= 2.2.2']
 end
