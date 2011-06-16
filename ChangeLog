@@ -1,3 +1,11 @@
+Version 0.8.5
+
+	* Add missing alias for a predicate attribute (IssueProperty#sub_task?)
+
+Version 0.8.4
+
+	* Fix indentation of example code in documentation
+
 Version 0.8.3
 
 	* Fix a documentation link
