@@ -53,5 +53,9 @@ end
 
 ### DOCUMENTATION
 
-require 'yard'
-YARD::Rake::YardocTask.new
+begin
+  require 'yard'
+  YARD::Rake::YardocTask.new
+rescue LoadError => e
+  warn 'yard not available. Install it with: gem install yard'
+end
