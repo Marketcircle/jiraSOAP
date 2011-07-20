@@ -36,14 +36,24 @@ module JIRA::RemoteAPI
   # to be given id values. You must use the name of the field you wish to
   # update.
   #
+  # Updating nested fields can be trickyfields
+  #
   # @example Usage With A Normal Field
-  #  summary      = JIRA::FieldValue.new 'summary', 'My new summary'
+  #
+  #   summary      = JIRA::FieldValue.new 'summary', 'My new summary'
+  #
   # @example Usage With A Custom Field
-  #  custom_field = JIRA::FieldValue.new 'customfield_10060', '123456'
+  #
+  #   custom_field = JIRA::FieldValue.new 'customfield_10060', '123456'
+  #
   # @example Setting a field to be blank/nil
-  #  description  = JIRA::FieldValue.new 'description'
+  #
+  #   description  = JIRA::FieldValue.new 'description'
+  #
   # @example Calling the method to update an issue
-  #  jira_service_instance.update_issue 'PROJECT-1', description, custom_field
+  #
+  #   jira_service_instance.update_issue 'PROJECT-1', description, custom_field
+  #
   # @example Setting the value of a cascading select field
   #
   #   part1 = JIRA::FieldValue.new 'customfield_10285',   'Main Detail'
