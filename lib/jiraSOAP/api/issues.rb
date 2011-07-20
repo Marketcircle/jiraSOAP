@@ -44,6 +44,11 @@ module JIRA::RemoteAPI
   #  description  = JIRA::FieldValue.new 'description'
   # @example Calling the method to update an issue
   #  jira_service_instance.update_issue 'PROJECT-1', description, custom_field
+  # @example Setting the value of a cascading select field
+  #
+  #   part1 = JIRA::FieldValue.new 'customfield_10285',   'Main Detail'
+  #   part2 = JIRA::FieldValue.new 'customfield_10285:1', 'First Subdetail'
+  #   jira_service_instance.update_issue 'PROJECT-1', part1, part2
   #
   # @param [String] issue_key
   # @param [JIRA::FieldValue] *field_values
