@@ -83,4 +83,18 @@ class JIRA::Entity
     }
   end
 
+  ##
+  # Generate a SOAP message fragment for the object.
+  #
+  # @param [Handsoap::XmlMason::Node] msg
+  def to_soap msg
+    self.class.build.each_pair { |node_name, value|
+      builder = case value
+                when Array then :add_simple_array
+                else :add
+                end
+      msg.send builder, node_name, send(value)
+    }
+  end
+
 end
