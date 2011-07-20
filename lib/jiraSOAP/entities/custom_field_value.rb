@@ -9,7 +9,7 @@ class JIRA::CustomFieldValue < JIRA::DynamicEntity
   # @return [String]
   add_attribute :id, 'customfieldId', :content
 
-  # @return [String]
+  # @return [String] Used with cascading select fields
   add_attribute :key, 'key', :content
 
   # @return [Array<String>]

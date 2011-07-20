@@ -38,3 +38,7 @@ See {file:docs/Examples.markdown} for more examples.
 To find out what APIs are available, check out the {JIRA::RemoteAPI}
 module, as well as the {JIRA::RemoteAPIAdditions} module for
 conveniences that `jiraSOAP` has added.
+
+Some of the odder behaviours of the JIRA SOAP API are not documented
+here, though an answer might be available from the
+[JIRA FAQ](http://confluence.atlassian.com/display/JIRA/Frequently+Asked+RPC+Questions+and+Known+Issues).
