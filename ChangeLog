@@ -1,3 +1,7 @@
+Version 0.8.6
+
+	* Add extra documentation about updating cascading fields (thanks Lucas)
+
 Version 0.8.5
 
 	* Add missing alias for a predicate attribute (IssueProperty#sub_task?)
