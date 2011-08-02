@@ -19,7 +19,7 @@ class JIRA::Version < JIRA::NamedEntity
 
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
+  def soapify_for msg
     msg.add 'name', @name
     msg.add 'archived', @archived if @archived
     msg.add 'sequence', @sequence if @sequence

@@ -108,7 +108,7 @@ module JIRA::RemoteAPI
   # @return [Nokogiri::XML::NodeSet]
   def array_jira_call type, method, *args
     response = soap_call method, self.auth_token, *args
-    response.xpath("node()").map { |frag| type.new_with_xml(frag) }
+    response.xpath('node()').map { |frag| type.new_with_xml(frag) }
   end
 
 end

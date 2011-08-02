@@ -9,7 +9,7 @@ module JIRA::RemoteAPI
   # @param [String] project_key
   # @return [JIRA::Avatar]
   def project_avatar_for_key project_key
-    JIRA::Avatar.new_with_xml jira_call( 'getProjectAvatar', project_key )
+    JIRA::Avatar.new_with_xml jira_call('getProjectAvatar', project_key)
   end
   alias_method :get_project_avatar_for_key, :project_avatar_for_key
 

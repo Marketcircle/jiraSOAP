@@ -30,7 +30,7 @@ class JIRA::FieldValue
   # @param [Handsoap::XmlMason::Node] message the node to add the object to
   # @param [String] label name for the tags that wrap the message
   # @return [Handsoap::XmlMason::Element]
-  def soapify_for(message, label = 'fieldValue')
+  def soapify_for message, label = 'fieldValue'
     message.add label do |message|
       message.add 'id', @field_name
       message.add_simple_array 'values', @values unless @values.nil?

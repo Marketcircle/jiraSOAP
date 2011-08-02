@@ -40,7 +40,7 @@ class JIRA::Comment < JIRA::DynamicEntity
   #
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]
-  def soapify_for(msg)
+  def soapify_for msg
     msg.add 'id', @id
     msg.add 'author', @author
     msg.add 'body', @body

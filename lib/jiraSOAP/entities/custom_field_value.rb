@@ -21,7 +21,7 @@ class JIRA::CustomFieldValue < JIRA::DynamicEntity
   # @param [Handsoap::XmlMason::Node] msg SOAP message to add the object to
   # @param [String] label tag name used in wrapping tags
   # @return [Handsoap::XmlMason::Element]
-  def soapify_for(msg, label = 'customFieldValues')
+  def soapify_for msg, label = 'customFieldValues'
     msg.add label do |submsg|
       submsg.add 'customfieldId', @id
       submsg.add 'key', @key
