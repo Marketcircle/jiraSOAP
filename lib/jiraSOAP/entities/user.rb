@@ -4,9 +4,9 @@
 class JIRA::User < JIRA::UserName
 
   # @return [String]
-  add_attribute :full_name, 'fullname', :content
+  add_attribute :full_name, 'fullname', :to_s
 
   # @return [String]
-  add_attribute :email_address, 'email', :content
+  add_attribute :email_address, 'email', :to_s
 
 end

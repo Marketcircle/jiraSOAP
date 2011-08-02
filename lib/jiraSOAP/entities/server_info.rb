@@ -13,10 +13,10 @@ class JIRA::ServerInfo < JIRA::Entity
   add_attribute :build_number, 'buildNumber', :to_i
 
   # @return [String]
-  add_attribute :edition, 'edition', :content
+  add_attribute :edition, 'edition', :to_s
 
   # @return [String]
-  add_attribute :version, 'version', :content
+  add_attribute :version, 'version', :to_s
 
   # @return [Array<JIRA::TimeInfo>]
   add_attribute :server_time, 'serverTime', [:children_as_object, JIRA::TimeInfo]

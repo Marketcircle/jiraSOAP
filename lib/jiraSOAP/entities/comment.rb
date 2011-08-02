@@ -6,22 +6,22 @@ class JIRA::Comment < JIRA::DynamicEntity
   # A username
   #
   # @return [String]
-  add_attribute :author, 'author', :content
+  add_attribute :author, 'author', :to_s
 
   # @return [String]
-  add_attribute :body, 'body', :content
+  add_attribute :body, 'body', :to_s
 
   # @return [String]
-  add_attribute :group_level, 'groupLevel', :content
+  add_attribute :group_level, 'groupLevel', :to_s
 
   # @return [String]
-  add_attribute :role_level, 'roleLevel', :content
+  add_attribute :role_level, 'roleLevel', :to_s
 
   ##
   # A username
   #
   # @return [String]
-  add_attribute :update_author, 'updateAuthor', :content
+  add_attribute :update_author, 'updateAuthor', :to_s
 
   # @return [Time]
   add_attribute :create_time, 'created', :to_iso_date

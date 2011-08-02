@@ -3,10 +3,10 @@
 class JIRA::Project < JIRA::DescribedEntity
 
   # @return [String]
-  add_attribute :key, 'key', :content
+  add_attribute :key, 'key', :to_s
 
   # @return [String]
-  add_attribute :lead_username, 'lead', :content
+  add_attribute :lead_username, 'lead', :to_s
 
   # @return [String]
   add_attribute :issue_security_scheme, 'issueSecurityScheme', [:children_as_object, JIRA::IssueSecurityScheme]

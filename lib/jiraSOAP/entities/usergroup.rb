@@ -4,7 +4,7 @@
 class JIRA::UserGroup < JIRA::Entity
 
   # @return [String]
-  add_attribute :name, 'name', :content
+  add_attribute :name, 'name', :to_s
 
   ##
   # @todo I suspect that I will have to delete users from SOAPifying

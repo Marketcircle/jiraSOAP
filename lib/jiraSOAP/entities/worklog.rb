@@ -3,7 +3,7 @@
 class JIRA::Worklog < JIRA::DescribedEntity
 
   # @return [String]
-  add_attribute :comment, 'comment', :content
+  add_attribute :comment, 'comment', :to_s
 
   ##
   # @todo Why does this need to be a DateTime? It should be a Time object
@@ -15,7 +15,7 @@ class JIRA::Worklog < JIRA::DescribedEntity
   add_attribute :start_data, 'startDate', :to_date
 
   # @return [String]
-  add_attribute :time_spent, 'timeSpent', :content
+  add_attribute :time_spent, 'timeSpent', :to_s
 
   # @param [Handsoap::XmlMason::Node] msg
   # @return [Handsoap::XmlMason::Node]

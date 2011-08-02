@@ -12,6 +12,6 @@ class JIRA::TimeInfo < JIRA::Entity
   #  'America/Toronto'
   #
   # @return [String]
-  add_attribute :timezone, 'timeZoneId', :content
+  add_attribute :timezone, 'timeZoneId', :to_s
 
 end
