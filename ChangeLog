@@ -1,3 +1,7 @@
+Version 0.9.0
+
+	* Add extra documentation about updating fields (thanks Vincent Beau)
+
 Version 0.8.6
 
 	* Add extra documentation about updating cascading fields (thanks Lucas Jourdes)

@@ -34,10 +34,18 @@ module JIRA::RemoteAPI
   #  - attachments - use {#add_base64_encoded_attachments_to_issue_with_key}
   #
   # Though {JIRA::FieldValue} objects have an id field, they do not expect
-  # to be given id values. You must use the name of the field you wish to
-  # update.
+  # to be given id values. You must use the camel cased name of the field you
+  # wish to update, such as `'fixVersions'` to update the `fix_versions` for
+  # an issue.
   #
-  # Updating nested fields can be trickyfields
+  # However, there is at least one exception to the rule; when you wish to
+  # update the affected versions for an issue, you should use `'versions'`
+  # instead of `'affectsVersions'`. You need to be careful about these
+  # cases as it has been reported that JIRA will silently fail to update
+  # fields it does not know about.
+  #
+  # Updating nested fields can be tricky, see the example on cascading
+  # select field's to see how it would be done.
   #
   # @example Usage With A Normal Field
   #
