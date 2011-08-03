@@ -6,7 +6,7 @@ class JIRA::Permission < JIRA::Entity
   # The permission type
   #
   # @return [String]
-  add_attribute :name, 'name', :to_s
+  add_attribute :name, 'name', :content
 
   ##
   # A unique id number

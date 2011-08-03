@@ -12,37 +12,37 @@
 class JIRA::Issue < JIRA::DynamicEntity
 
   # @return [String]
-  add_attribute :key, 'key', :to_s
+  add_attribute :key, 'key', :content
 
   # @return [String]
-  add_attribute :summary, 'summary', :to_s
+  add_attribute :summary, 'summary', :content
 
   # @return [String]
-  add_attribute :description, 'description', :to_s
+  add_attribute :description, 'description', :content
 
   # @return [String]
-  add_attribute :type_id, 'type', :to_s
+  add_attribute :type_id, 'type', :content
 
   # @return [String]
-  add_attribute :status_id, 'status', :to_s
+  add_attribute :status_id, 'status', :content
 
   # @return [String]
-  add_attribute :assignee_username, 'assignee', :to_s
+  add_attribute :assignee_username, 'assignee', :content
 
   # @return [String]
-  add_attribute :reporter_username, 'reporter', :to_s
+  add_attribute :reporter_username, 'reporter', :content
 
   # @return [String]
-  add_attribute :priority_id, 'priority', :to_s
+  add_attribute :priority_id, 'priority', :content
 
   # @return [String]
-  add_attribute :project_name, 'project', :to_s
+  add_attribute :project_name, 'project', :content
 
   # @return [String]
-  add_attribute :resolution_id, 'resolution', :to_s
+  add_attribute :resolution_id, 'resolution', :content
 
   # @return [String]
-  add_attribute :environment, 'environment', :to_s
+  add_attribute :environment, 'environment', :content
 
   # @return [Number]
   add_attribute :votes, 'votes', :to_i

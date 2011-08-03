@@ -5,15 +5,15 @@
 class JIRA::AttachmentMetadata < JIRA::NamedEntity
 
   # @return [String]
-  add_attribute :author, 'author', :to_s
+  add_attribute :author, 'author', :content
 
   # @return [String]
-  add_attribute :file_name, 'filename', :to_s
+  add_attribute :file_name, 'filename', :content
   alias_method :filename, :file_name
   alias_method :filename=, :file_name=
 
   # @return [String]
-  add_attribute :mime_type, 'mimetype', :to_s
+  add_attribute :mime_type, 'mimetype', :content
   alias_method :content_type, :mime_type
   alias_method :content_type=, :mime_type=
 

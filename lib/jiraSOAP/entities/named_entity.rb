@@ -6,6 +6,6 @@ class JIRA::NamedEntity < JIRA::DynamicEntity
   # A plain language name
   #
   # @return [String]
-  add_attribute :name, 'name', :to_s
+  add_attribute :name, 'name', :content
 
 end

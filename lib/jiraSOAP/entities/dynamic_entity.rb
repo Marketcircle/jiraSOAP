@@ -10,6 +10,6 @@ class JIRA::DynamicEntity < JIRA::Entity
   #  'customfield_10000'
   #
   # @return [String]
-  add_attribute :id, 'id', :to_s
+  add_attribute :id, 'id', :content
 
 end

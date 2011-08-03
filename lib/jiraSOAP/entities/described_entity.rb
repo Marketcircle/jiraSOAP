@@ -6,6 +6,6 @@ class JIRA::DescribedEntity < JIRA::NamedEntity
   # A short blurb
   #
   # @return [String]
-  add_attribute :description, 'description', :to_s
+  add_attribute :description, 'description', :content
 
 end
