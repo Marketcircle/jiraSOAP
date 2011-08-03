@@ -73,7 +73,7 @@ module JIRA::RemoteAPI
       for i in 0...args.size
         case arg = args.shift
         when JIRA::Entity
-          msg.add "soap:in#{i}", do |submsg| arg.soapify_for submsg end
+          msg.add "soap:in#{i}" do |submsg| arg.soapify_for submsg end
         else
           msg.add "soap:in#{i}", arg
         end
