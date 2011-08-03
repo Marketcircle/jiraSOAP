@@ -137,4 +137,14 @@ module JIRA::RemoteAPI
   end
   alias_method :get_resolution_date_for_issue_with_key, :resolution_date_for_issue_with_key
 
+  ##
+  # Returns workflow actions available for an issue.
+  #
+  # @param [String] issue_key
+  # @return [Array<JIRA::NamedEntity>]
+  def available_actions issue_key
+    array_jira_call JIRA::NamedEntity, 'getAvailableActions', issue_key
+  end
+  alias_method :get_available_actions, :available_actions
+
 end

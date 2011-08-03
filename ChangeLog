@@ -1,5 +1,6 @@
 Version 0.9.0
 
+	* Add RemoteAPI#available_action (thanks Lucas Jourdes)
 	* Add extra documentation about updating fields (thanks Vincent Beau)
 
 Version 0.8.6
