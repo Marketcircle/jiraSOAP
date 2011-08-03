@@ -14,9 +14,6 @@ require 'jiraSOAP/api/versions'
 require 'jiraSOAP/api/worklog'
 
 ##
-# @todo progressWorkflowAction and friends
-# @todo monkey patch Array to include a #to_soap method
-#
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
 # There are several cases where this API diverges from the one defined by
