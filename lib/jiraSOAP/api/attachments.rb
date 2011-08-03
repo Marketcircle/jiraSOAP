@@ -27,16 +27,7 @@ module JIRA::RemoteAPI
   # @param [Array<String>] data base64 encoded data
   # @return [Boolean] true if successful
   def add_base64_encoded_attachments_to_issue_with_key issue_key, filenames, data
-    invoke('soap:addBase64EncodedAttachmentsToIssue') { |msg|
-      msg.add 'soap:in0', self.auth_token
-      msg.add 'soap:in1', issue_key
-      msg.add 'soap:in2' do |submsg|
-        filenames.each { |filename| submsg.add 'filenames', filename }
-      end
-      msg.add 'soap:in3' do |submsg|
-        data.each { |datum| submsg.add 'base64EncodedData', datum }
-      end
-    }
+    jira_call 'addBase64EncodedAttachmentsToIssue', issue_key, filenames, data
     true
   end
 

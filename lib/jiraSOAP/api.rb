@@ -59,7 +59,6 @@ module JIRA::RemoteAPI
 
   ##
   # @todo make this method less ugly
-  # @todo handle arrays of strings
   #
   # A generic method for calling a SOAP method and soapifying all
   # the arguments.
@@ -72,7 +71,7 @@ module JIRA::RemoteAPI
     invoke "soap:#{method}" do |msg|
       for i in 0...args.size
         case arg = args.shift
-        when JIRA::Entity
+        when JIRA::Entity, Array
           msg.add "soap:in#{i}" do |submsg| arg.soapify_for submsg end
         else
           msg.add "soap:in#{i}", arg

@@ -73,14 +73,7 @@ module JIRA::RemoteAPI
   # @param [JIRA::FieldValue] *field_values
   # @return [JIRA::Issue]
   def update_issue issue_key, *field_values
-    response = invoke('soap:updateIssue') { |msg|
-      msg.add 'soap:in0', self.auth_token
-      msg.add 'soap:in1', issue_key
-      msg.add 'soap:in2' do |submsg|
-        field_values.each { |fv| fv.soapify_for submsg }
-      end
-    }
-    JIRA::Issue.new_with_xml response.document.element.xpath('//updateIssueReturn').first
+    JIRA::Issue.new_with_xml jira_call('updateIssue', issue_key, field_values)
   end
 
   ##

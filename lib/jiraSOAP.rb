@@ -17,6 +17,7 @@ module JIRA
 end
 
 require 'jiraSOAP/version'
+require 'jiraSOAP/core_extensions'
 require 'jiraSOAP/entities'
 require 'jiraSOAP/api'
 require 'jiraSOAP/jira_service'
