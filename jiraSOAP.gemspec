@@ -12,14 +12,12 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/Marketcircle/jiraSOAP'
   s.license     = 'MIT'
 
-  s.require_paths    = ['lib']
-  s.files            = Dir.glob('lib/**/*.rb')
-  s.test_files       = Dir.glob('test/**/*') + [ 'Rakefile' ]
+  s.files            = Dir.glob('lib/**/*.rb') + ['.yardopts', 'Rakefile']
+  s.test_files       = Dir.glob('test/**/*')
   s.extra_rdoc_files = [
                         'README.markdown',
                         'ChangeLog',
                         'LICENSE.txt',
-                        '.yardopts',
                         'docs/GettingStarted.markdown',
                         'docs/Examples.markdown'
                        ]
