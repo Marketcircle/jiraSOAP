@@ -47,6 +47,9 @@ module JIRA::RemoteAPI
   # Updating nested fields can be tricky, see the example on cascading
   # select field's to see how it would be done.
   #
+  # A final note, some fields only should be passed the id in order to
+  # update them, as shown in the version updating example.
+  #
   # @example Usage With A Normal Field
   #
   #   summary      = JIRA::FieldValue.new 'summary', 'My new summary'
@@ -61,13 +64,19 @@ module JIRA::RemoteAPI
   #
   # @example Calling the method to update an issue
   #
-  #   jira_service_instance.update_issue 'PROJECT-1', description, custom_field
+  #   jira.update_issue 'PROJECT-1', description, custom_field
   #
   # @example Setting the value of a cascading select field
   #
   #   part1 = JIRA::FieldValue.new 'customfield_10285',   'Main Detail'
   #   part2 = JIRA::FieldValue.new 'customfield_10285:1', 'First Subdetail'
-  #   jira_service_instance.update_issue 'PROJECT-1', part1, part2
+  #   jira.update_issue 'PROJECT-1', part1, part2
+  #
+  # @example Changing the affected versions for an issue
+  #
+  #   version = jira.versions_for_project.find { |x| x.name = 'v1.0beta' }
+  #   field   = JIRA::FieldValue.new 'versions', version.id
+  #   jira.update_issue 'PROJECT-1', field
   #
   # @param [String] issue_key
   # @param [JIRA::FieldValue] *field_values
