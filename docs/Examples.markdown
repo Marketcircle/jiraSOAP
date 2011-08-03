@@ -88,6 +88,15 @@ documentation as well ({JIRA::RemoteAPI#update_issue}).
     jira.update_issue issue.key, summary
     puts "Updated issue #{issue.key}'s field #{summary.name}\n"
 
+One caveat is that some fields cannot be updated without also
+progressing the issue to a new status.
+
+    action = jira.available_actions('TST-14').find do |action|
+      action.name == 'Send To Test'
+    end
+
+    jira.progress_workflow_action 'TST-14', action.id
+
 ## User Information
 
 CRUD operations for user information are also available.

@@ -140,6 +140,23 @@ module JIRA::RemoteAPI
   alias_method :get_resolution_date_for_issue_with_key, :resolution_date_for_issue_with_key
 
   ##
+  # This method acts like {#update_issue} except that it also updates
+  # the status of the issue.
+  #
+  # The `action_id` parameter comes from the `id` of an available action.
+  # Normally you will use this method in conjunction with
+  # {#available_actions} to decide which action to take.
+  #
+  # @param [String] issue_key
+  # @param [String] action_id this is the id of workflow action
+  # @param [JIRA::FieldValue] *field_values
+  # @return [JIRA::Issue]
+  def progress_workflow_action issue_key, action_id, *field_values
+    JIRA::Issue.new_with_xml jira_call('progressWorkflowAction',
+                                       issue_key, action_id_string, field_values)
+  end
+
+  ##
   # Returns workflow actions available for an issue.
   #
   # @param [String] issue_key
