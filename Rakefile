@@ -22,11 +22,8 @@ end
 ### GEM STUFF
 
 require 'rake/gempackagetask'
-spec = Gem::Specification.load('jiraSOAP.gemspec')
-Rake::GemPackageTask.new(spec) do |pkg|
-  pkg.need_zip = false
-  pkg.need_tar = true
-end
+spec = Gem::Specification.load 'jiraSOAP.gemspec'
+Rake::GemPackageTask.new(spec) { }
 
 require 'rubygems/dependency_installer'
 desc 'Build the gem and install it'
