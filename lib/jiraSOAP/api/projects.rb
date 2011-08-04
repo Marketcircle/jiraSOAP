@@ -39,7 +39,9 @@ module JIRA::RemoteAPI
   def projects
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
+  alias_method :projects_without_schemes, :projects
   deprecate :projects
+  deprecate :projects_without_schemes
 
   ##
   # Requires you to set at least a project name, key, and lead.
