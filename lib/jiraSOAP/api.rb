@@ -1,18 +1,3 @@
-require 'jiraSOAP/api/additions'
-require 'jiraSOAP/api/attachments'
-require 'jiraSOAP/api/avatars'
-require 'jiraSOAP/api/comments'
-require 'jiraSOAP/api/filters'
-require 'jiraSOAP/api/issue_data_types'
-require 'jiraSOAP/api/issues'
-require 'jiraSOAP/api/project_roles'
-require 'jiraSOAP/api/projects'
-require 'jiraSOAP/api/schemes'
-require 'jiraSOAP/api/server_info'
-require 'jiraSOAP/api/users'
-require 'jiraSOAP/api/versions'
-require 'jiraSOAP/api/worklog'
-
 ##
 # Contains the API defined by Atlassian for the [JIRA SOAP service](http://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html).
 #
@@ -20,6 +5,8 @@ require 'jiraSOAP/api/worklog'
 # Atlassian; most notably, this API tries to be more idomatically Ruby by using
 # snake case for method names, default values, varargs, etc..
 module JIRA::RemoteAPI
+  extend JIRA::Deprecate
+
 
   # @group Logging in/out
 
@@ -108,3 +95,19 @@ module JIRA::RemoteAPI
   end
 
 end
+
+
+require 'jiraSOAP/api/additions'
+require 'jiraSOAP/api/attachments'
+require 'jiraSOAP/api/avatars'
+require 'jiraSOAP/api/comments'
+require 'jiraSOAP/api/filters'
+require 'jiraSOAP/api/issue_data_types'
+require 'jiraSOAP/api/issues'
+require 'jiraSOAP/api/project_roles'
+require 'jiraSOAP/api/projects'
+require 'jiraSOAP/api/schemes'
+require 'jiraSOAP/api/server_info'
+require 'jiraSOAP/api/users'
+require 'jiraSOAP/api/versions'
+require 'jiraSOAP/api/worklog'

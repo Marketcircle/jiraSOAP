@@ -6,51 +6,51 @@ module JIRA::RemoteAPI
   def priorities
     array_jira_call JIRA::Priority, 'getPriorities'
   end
-  alias_method :get_priorities, :priorities
+  deprecate :priorities
 
   # @return [Array<JIRA::Resolution>]
   def resolutions
     array_jira_call JIRA::Resolution, 'getResolutions'
   end
-  alias_method :get_resolutions, :resolutions
+  deprecate :resolutions
 
   # @return [Array<JIRA::Field>]
   def custom_fields
     array_jira_call JIRA::Field, 'getCustomFields'
   end
-  alias_method :get_custom_fields, :custom_fields
+  deprecate :custom_fields
 
   # @return [Array<JIRA::IssueType>]
   def issue_types
     array_jira_call JIRA::IssueType, 'getIssueTypes'
   end
-  alias_method :get_issue_types, :issue_types
+  deprecate :issue_types
 
   # @param [String] project_name
   # @return [Array<JIRA::IssueType>]
   def issue_types_for_project_with_id project_id
     array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id
   end
-  alias_method :get_issue_types_for_project_with_id, :issue_types_for_project_with_id
+  deprecate :issue_types_for_project_with_id
 
   # @return [Array<JIRA::Status>]
   def statuses
     array_jira_call JIRA::Status, 'getStatuses'
   end
-  alias_method :get_statuses, :statuses
+  deprecate :statuses
 
   # @return [Array<JIRA::IssueType>]
   def subtask_issue_types
     array_jira_call JIRA::IssueType, 'getSubTaskIssueTypes'
   end
-  alias_method :get_subtask_issue_types, :subtask_issue_types
+  deprecate :subtask_issue_types
 
   # @param [String] project_id
   # @return [Array<JIRA::IssueType>]
   def subtask_issue_types_for_project_with_id project_id
     array_jira_call JIRA::IssueType, 'getSubTaskIssueTypesForProject', project_id
   end
-  alias_method :get_subtask_issue_types_for_project_with_id, :subtask_issue_types_for_project_with_id
+  deprecate :subtask_issue_types_for_project_with_id
 
   ##
   # @todo find out what this method does

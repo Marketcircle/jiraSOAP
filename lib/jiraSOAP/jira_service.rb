@@ -43,18 +43,6 @@ class JIRA::JIRAService < Handsoap::Service
     })
   end
 
-  ##
-  # An extra note for users when things break.
-  #
-  # @deprecated This will be removed in v1.0 when the API is stable.
-  # @return [nil]
-  def method_missing method, *args
-    message  = "#{method} is not a valid method. Check the documentation; the "
-    message << 'API is not stabale yet and the method name likely changed.'
-    STDERR.puts message
-    super method, *args
-  end
-
 
   protected
 
