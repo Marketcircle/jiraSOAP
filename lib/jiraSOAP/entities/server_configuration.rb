@@ -1,5 +1,5 @@
 ##
-# A simple structure that is used by {RemoteAPI#get_server_configuration}.
+# A simple structure that is used by {RemoteAPI#server_configuration}.
 class JIRA::ServerConfiguration < JIRA::Entity
 
   # @return [Boolean]

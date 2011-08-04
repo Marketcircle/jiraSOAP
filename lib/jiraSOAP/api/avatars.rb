@@ -4,7 +4,7 @@ module JIRA::RemoteAPI
 
   ##
   # Gets you the default avatar image for a project; if you want all
-  # the avatars for a project, use {#get_project_avatars_for_key}.
+  # the avatars for a project, use {#project_avatars_for_key}.
   #
   # @param [String] project_key
   # @return [JIRA::Avatar]
@@ -15,7 +15,7 @@ module JIRA::RemoteAPI
 
   ##
   # Gets ALL avatars for a given project with this method; if you
-  # just want the project avatar, use {#get_project_avatar_for_key}.
+  # just want the project avatar, use {#project_avatar_for_key}.
   #
   # @param [String] project_key
   # @param [Boolean] include_default_avatars

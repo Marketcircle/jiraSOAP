@@ -82,7 +82,7 @@ module JIRA::RemoteAPI
   end
 
   ##
-  # A more complex form of {#call} that does a little more work for
+  # A more complex form of {#jira_call} that does a little more work for
   # you when you need to build an array of return values.
   #
   # @param [String] method name of the JIRA SOAP API method
