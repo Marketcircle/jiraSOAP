@@ -86,7 +86,7 @@ documentation as well ({JIRA::RemoteAPI#update_issue}).
 
     summary = JIRA::FieldValue.new('summary', 'new summary info from jiraSOAP')
     jira.update_issue issue.key, summary
-    puts "Updated issue #{issue.key}'s field #{summary.name}\n"
+    puts "Updated issue #{issue.key}'s field #{summary.field_name}\n"
 
 One caveat is that some fields cannot be updated without also
 progressing the issue to a new status.
@@ -96,6 +96,12 @@ progressing the issue to a new status.
     end
 
     jira.progress_workflow_action 'TST-14', action.id
+
+You can also update fields, when progressing an issue to a new
+workflow state.
+
+    assignee = JIRA::FieldValue.new 'assignee', 'mrada'
+    jira.progress_workflow_action 'TST-14', action.id, assignee
 
 ## User Information
 
