@@ -2,6 +2,7 @@ module JIRA
 
   class << self
 
+    ##
     # When running on MacRuby, a URL will be wrapped into an NSURL object;
     # but on all other Ruby implementations you will get a URI::HTTP object.
     # The NSURL class is monkey patched just enough to make NSURL and
@@ -12,10 +13,13 @@ module JIRA
     #     JIRA.url_class.send JIRA.url_init_method, 'http://marketcircle.com'
     #
     # will be working code.
+    #
     # @return [Class,Module]
     attr_accessor :url_class
 
+    ##
     # We also need a variable for the init method for a URL object
+    #
     # @return [Symbol]
     attr_accessor :url_init_method
 
