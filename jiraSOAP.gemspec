@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary     = 'A Ruby client for the JIRA SOAP API'
   s.description = 'Written to run fast and work on Ruby 1.9 as well as MacRuby'
   s.authors     = ['Mark Rada']
-  s.email       = ['mrada@marketcircle.com']
+  s.email       = ['markrada26@gmail.com']
   s.homepage    = 'http://github.com/Marketcircle/jiraSOAP'
   s.license     = 'MIT'
 
