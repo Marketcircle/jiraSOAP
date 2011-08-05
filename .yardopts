@@ -1,6 +1,7 @@
 --protected
 --no-cache
 --markup markdown
+--markup-provider redcarpet
 --readme README.markdown
 lib/**/*.rb
 -
