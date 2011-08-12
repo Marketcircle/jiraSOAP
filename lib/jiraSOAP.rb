@@ -5,7 +5,7 @@ require 'nokogiri'
 require 'jiraSOAP/nokogiri_extensions'
 
 require 'handsoap'
-Handsoap.http_driver = :net_http
+Handsoap.http_driver = :http_client
 require 'jiraSOAP/handsoap_extensions'
 
 require 'jiraSOAP/url'
