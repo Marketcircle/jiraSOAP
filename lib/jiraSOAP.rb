@@ -29,7 +29,7 @@ module JIRA::Deprecate
     define_method "get_#{name}" do |*args|
       $stderr.puts <<-EOM
 RemoteAPI#get_#{name} is deprecated and will be removed in the next release.
-Please use RemoteAPI#{name} instead.
+Please use RemoteAPI##{name} instead.
       EOM
       send name, *args
     end
