@@ -4,7 +4,10 @@ class JIRA::Entity
 
   class << self
 
-    # @return [Hash{String=>Array(Symbol,Symbol,Class*)}] used for parsing XML
+    ##
+    # Used for parsing XML
+    #
+    # @return [Hash{String=>Array(Symbol,Symbol,Class*)}]
     attr_accessor :parse
 
     ##
