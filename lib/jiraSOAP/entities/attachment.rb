@@ -18,15 +18,12 @@ class JIRA::Attachment < JIRA::NamedEntity
   ##
   # Content to be used for adding attachments, using #add_attachments_to_issue_with_key
   #
-  # Note that this method does not allow you to read the content of an existing attachment on the issue; only the
-  # metadata for the attachment may be read at this time.
+  # Note that this method does not allow you to read the content of an existing attachment on the issue;
+  # only the metadata for the attachment may be read at this time.
   #
   # @return [String]
   add_attribute :content, nil, :content
-  def content
-    raise NotImplementedError, "Content reading not currently supported.  Patches welcome."
-  end
-  
+
   # @return [String]
   add_attribute :mime_type, 'mimetype', :content
   alias_method :content_type, :mime_type
