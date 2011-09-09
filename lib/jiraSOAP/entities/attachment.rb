@@ -47,3 +47,5 @@ class JIRA::Attachment < JIRA::NamedEntity
     raise NotImplementedError, 'Please implement me. :('
   end
 end
+
+JIRA::AttachmentMetadata = JIRA::Attachment
