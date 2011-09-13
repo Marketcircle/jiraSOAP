@@ -28,7 +28,8 @@ module JIRA::RemoteAPI
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    jira_call( 'logout' ).to_boolean
+    @user = nil
+    jira_call( 'logout' ).to_boolean.tap { |_| self.auth_token = nil }
   end
   alias_method :log_out, :logout
 

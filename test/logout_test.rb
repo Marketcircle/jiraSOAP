@@ -11,6 +11,13 @@ class TestLogout < MiniTest::Unit::TestCase
     assert_equal false, db.logout
   end
 
+  def test_unsets_cached_attributes
+    db.login user, password
+    db.logout
+    assert_nil db.instance_variable_get(:@user)
+    assert_nil db.auth_token
+  end
+
   def test_aliased
     assert_equal db.method(:logout), db.method(:log_out)
   end
