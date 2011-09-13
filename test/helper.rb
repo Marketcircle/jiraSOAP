@@ -23,12 +23,10 @@ class MiniTest::Unit::TestCase
     @db ||= JIRA::JIRAService.new host
   end
 
-  def setup_usual
-    db.login user, password
-  end
-
   def self.setup_usual
-    define_method :setup do setup_usual end
+    define_method :setup do
+      db.login user, password
+    end
   end
 
   def teardown

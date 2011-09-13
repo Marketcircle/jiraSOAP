@@ -6,7 +6,7 @@ class TestLogin < MiniTest::Unit::TestCase
 
   def test_caches_the_token
     db.login(user, password)
-    assert_match /^[a-zA-Z0-9]+$/, db.instance_variable_get(:@auth_token)
+    assert_match /^[a-zA-Z0-9]+$/, db.auth_token
   end
 
   def test_caches_the_user
