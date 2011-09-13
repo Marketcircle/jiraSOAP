@@ -8,7 +8,7 @@ require 'minitest/pride'
 class MiniTest::Unit::TestCase
 
   def user
-    'mrada'
+    'marada'
   end
 
   def password
@@ -16,7 +16,7 @@ class MiniTest::Unit::TestCase
   end
 
   def host
-    'http://localhost:8808'
+    'http://169.254.199.62:8080'
   end
 
   def db

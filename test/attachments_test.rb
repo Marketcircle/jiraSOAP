@@ -3,7 +3,7 @@ class TestAddBase64EncodedAttachmentsToIssueWithKey < MiniTest::Unit::TestCase
   setup_usual
 
   def key
-    'JIRA-235'
+    'JIRA-1'
   end
 
   def image1

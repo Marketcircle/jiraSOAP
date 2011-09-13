@@ -8,6 +8,7 @@ class TestLogout < MiniTest::Unit::TestCase
 
   def test_no_session
     # strongly assert is false, not nil
+    db.logout
     assert_equal false, db.logout
   end
 
