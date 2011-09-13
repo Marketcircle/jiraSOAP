@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'yard',      '~> 0.7.2'
   s.add_development_dependency 'redcarpet', '~> 1.17'
-  s.add_development_dependency 'minitest',  '>= 2.3.1'
+  s.add_development_dependency 'minitest',  '>= 2.5'
 end
