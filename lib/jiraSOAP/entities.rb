@@ -18,7 +18,7 @@ require 'jiraSOAP/entities/custom_field_value'
 require 'jiraSOAP/entities/avatar'
 require 'jiraSOAP/entities/comment'
 require 'jiraSOAP/entities/version'
-require 'jiraSOAP/entities/attachment_metadata'
+require 'jiraSOAP/entities/attachment'
 
 require 'jiraSOAP/entities/scheme'
 require 'jiraSOAP/entities/notification_scheme'

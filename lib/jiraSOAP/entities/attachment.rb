@@ -2,7 +2,7 @@
 # Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
 # "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#file_name}"
-class JIRA::AttachmentMetadata < JIRA::NamedEntity
+class JIRA::Attachment < JIRA::NamedEntity
 
   # @return [String]
   add_attribute :author, 'author', :content
@@ -11,6 +11,18 @@ class JIRA::AttachmentMetadata < JIRA::NamedEntity
   add_attribute :file_name, 'filename', :content
   alias_method :filename, :file_name
   alias_method :filename=, :file_name=
+
+  # @return [String]
+  add_attribute :file_name, 'filename', :content
+
+  ##
+  # Content to be used for adding attachments, using #add_attachments_to_issue_with_key
+  #
+  # Note that this method does not allow you to read the content of an existing attachment on the issue;
+  # only the metadata for the attachment may be read at this time.
+  #
+  # @return [String]
+  add_attribute :content, nil, :content
 
   # @return [String]
   add_attribute :mime_type, 'mimetype', :content
@@ -31,5 +43,6 @@ class JIRA::AttachmentMetadata < JIRA::NamedEntity
   def attachment
     raise NotImplementedError, 'Please implement me. :('
   end
-
 end
+
+JIRA::AttachmentMetadata = JIRA::Attachment
