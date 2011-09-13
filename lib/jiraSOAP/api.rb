@@ -18,9 +18,8 @@ module JIRA::RemoteAPI
   # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
     response        = soap_call 'login', username, password
+    @user           = username
     self.auth_token = response.first.content
-    @user           = user
-    self.auth_token
   end
   alias_method :log_in, :login
 
