@@ -4,7 +4,7 @@
 # @todo Add attributes for the comments and the attachment metadata
 #
 # Contains most of the data and metadata for a JIRA issue, but does
-# not contain the {JIRA::Comment}s or {JIRA::AttachmentMetadata}.
+# not contain the {JIRA::Comment}s or {JIRA::Attachment}s.
 #
 # This class is easily the most convoluted structure in the API, and will
 # likely be the greatest source of bugs. The irony of the situation is that
