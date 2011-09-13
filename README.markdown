@@ -43,14 +43,19 @@ See the {file:docs/GettingStarted.markdown Getting Started} guide.
   JQL searches)
   + Parsing might be doable with array indexing instead of hash lookups
   + Use a different web driver backend (net/http is slow under load)
-- Public test suite
-  + Needs a lot of mock data
 - ActiveRecord inspired conveniences
   + ProjectRole.new( 'test role' ).unique? # => check uniqueness
   + Issue.new( args ).create! # => creates a new issue
   + Issue.with_key( 'JIRA-123' ) # => returns result of issue lookup
   + Issue.new( args ).project # => returns a JIRA::Project
 
+
+## Test Suite
+
+The test suite relies on a specific JIRA server being available. Every
+thing that might need to be configured has been abstracted to its own
+method so that the values can easily be changed, but I will try to
+provide a database backup in the near future if the licensing works out.
 
 ## Note on Patches/Pull Requests
 
