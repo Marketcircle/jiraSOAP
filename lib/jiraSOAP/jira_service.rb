@@ -13,7 +13,7 @@ class JIRA::JIRAService < Handsoap::Service
   include JIRA::RemoteAPIAdditions
 
   # @return [String]
-  attr_accessor :auth_token
+  attr_reader :auth_token
 
   # @return [String]
   attr_reader :user

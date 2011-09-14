@@ -15,9 +15,9 @@ module JIRA::RemoteAPI
   # @param [String] password
   # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
-    response        = soap_call 'login', username, password
-    @user           = username
-    self.auth_token = response.first.content
+    response    = soap_call 'login', username, password
+    @user       = username
+    @auth_token = response.first.content
   end
   alias_method :log_in, :login
 
@@ -26,8 +26,10 @@ module JIRA::RemoteAPI
   # will automatically expire after a set time (configured on the server).
   # @return [Boolean] true if successful, otherwise false
   def logout
-    @user = nil
-    jira_call( 'logout' ).to_boolean.tap { |_| self.auth_token = nil }
+    jira_call( 'logout' ).to_boolean.tap do |_|
+      @user       = nil
+      @auth_token = nil
+    end
   end
   alias_method :log_out, :logout
 
