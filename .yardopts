@@ -7,5 +7,6 @@ lib/**/*.rb
 -
 docs/GettingStarted.markdown
 docs/Examples.markdown
+docs/SwitchingHTTPDriver.markdown
 ChangeLog
 LICENSE.txt
