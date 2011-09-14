@@ -26,7 +26,7 @@ module JIRA::RemoteAPI
   #
   # The metadata is not automatically refreshed by this method.  To get the
   # updated metadata (e.g., `file_size` and `content_type`), call
-  # `attachments_for_issue_with_key`.
+  # {RemoteAPI#attachments_for_issue_with_key}.
   #
   # @param [String] issue_key
   # @param [Array<JIRA::Attachment>] attachments files to be uploaded;
