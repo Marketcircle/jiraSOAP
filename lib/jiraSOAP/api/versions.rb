@@ -7,7 +7,6 @@ module JIRA::RemoteAPI
   def versions_for_project project_key
     array_jira_call JIRA::Version, 'getVersions', project_key
   end
-  deprecate :versions_for_project
 
   ##
   # New versions cannot have the archived bit set and the release date

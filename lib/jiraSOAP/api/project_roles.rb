@@ -6,14 +6,12 @@ module JIRA::RemoteAPI
   def project_roles
     array_jira_call JIRA::ProjectRole, 'getProjectRoles'
   end
-  deprecate :project_roles
 
   # @param [String] role_id
   # @return [JIRA::ProjectRole]
   def project_role_with_id role_id
     JIRA::ProjectRole.new_with_xml jira_call( 'getProjectRole', role_id )
   end
-  deprecate :project_role_with_id
 
   # @param [JIRA::ProjectRole] project_role
   # @return [JIRA::ProjectRole] the role that was created

@@ -12,14 +12,12 @@ module JIRA::RemoteAPI
   def project_with_key project_key
     JIRA::Project.new_with_xml jira_call( 'getProjectByKey', project_key )
   end
-  deprecate :project_with_key
 
   # @param [String] project_id
   # @return [JIRA::Project]
   def project_with_id project_id
     JIRA::Project.new_with_xml jira_call( 'getProjectById', project_id )
   end
-  deprecate :project_with_id
 
   ##
   # @todo Parse the permission scheme
@@ -30,7 +28,6 @@ module JIRA::RemoteAPI
   def project_including_schemes_with_id project_id
     JIRA::Project.new_with_xml jira_call( 'getProjectWithSchemesById', project_id )
   end
-  deprecate :project_including_schemes_with_id
 
   ##
   # @note This will not fill in {JIRA::Scheme} data for the projects.
@@ -40,8 +37,6 @@ module JIRA::RemoteAPI
     array_jira_call JIRA::Project, 'getProjectsNoSchemes'
   end
   alias_method :projects_without_schemes, :projects
-  deprecate :projects
-  deprecate :projects_without_schemes
 
   ##
   # Requires you to set at least a project name, key, and lead.

@@ -5,8 +5,6 @@
 # Atlassian; most notably, this API tries to be more idomatically Ruby by using
 # snake case for method names, default values, varargs, etc..
 module JIRA::RemoteAPI
-  extend JIRA::Deprecate
-
 
   # @group Logging in/out
 

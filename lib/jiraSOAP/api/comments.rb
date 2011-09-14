@@ -15,14 +15,12 @@ module JIRA::RemoteAPI
   def comment_with_id id
     JIRA::Comment.new_with_xml jira_call( 'getComment', id )
   end
-  deprecate :comment_with_id
 
   # @param [String] issue_key
   # @return [Array<JIRA::Comment>]
   def comments_for_issue_with_key issue_key
     array_jira_call JIRA::Comment, 'getComments', issue_key
   end
-  deprecate :comments_for_issue_with_key
 
   # @param [JIRA::Comment] comment
   # @return [JIRA::Comment]

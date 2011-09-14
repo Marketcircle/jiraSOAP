@@ -3,7 +3,6 @@
 # SOAP API javadoc. They are generally close to something from the javadoc
 # but with some extra conveniences.
 module JIRA::RemoteAPIAdditions
-  extend JIRA::Deprecate
 
   ##
   # Returns the first field that exactly matches the given
@@ -14,6 +13,5 @@ module JIRA::RemoteAPIAdditions
   def custom_field_with_name name
     get_custom_fields.find { |cf| cf.name == name }
   end
-  deprecate :custom_field_with_name
 
 end

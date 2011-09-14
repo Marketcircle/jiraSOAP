@@ -20,7 +20,6 @@ module JIRA::RemoteAPI
   def issues_from_jql_search jql_query, max_results = 2000
     array_jira_call JIRA::Issue, 'getIssuesFromJqlSearch', jql_query, max_results
   end
-  deprecate :issues_from_jql_search
 
   ##
   # This method can update most, but not all, issue fields. Some limitations
@@ -107,14 +106,12 @@ module JIRA::RemoteAPI
   def issue_with_key issue_key
     JIRA::Issue.new_with_xml jira_call( 'getIssue', issue_key )
   end
-  deprecate :issue_with_key
 
   # @param [String] issue_id
   # @return [JIRA::Issue]
   def issue_with_id issue_id
     JIRA::Issue.new_with_xml jira_call( 'getIssueById', issue_id )
   end
-  deprecate :issue_with_id
 
   # @param [String] id
   # @param [Fixnum] max_results
@@ -123,21 +120,18 @@ module JIRA::RemoteAPI
   def issues_from_filter_with_id id, max_results = 500, offset = 0
     array_jira_call JIRA::Issue, 'getIssuesFromFilterWithLimit', id, offset, max_results
   end
-  deprecate :issues_from_filter_with_id
 
   # @param [String] issue_id
   # @return [Time]
   def resolution_date_for_issue_with_id issue_id
     jira_call( 'getResolutionDateById', issue_id ).to_iso_date
   end
-  deprecate :resolution_date_for_issue_with_id
 
   # @param [String] issue_key
   # @return [Time]
   def resolution_date_for_issue_with_key issue_key
     jira_call( 'getResolutionDateByKey', issue_key ).to_iso_date
   end
-  deprecate :resolution_date_for_issue_with_key
 
   ##
   # This method acts like {#update_issue} except that it also updates
@@ -164,6 +158,5 @@ module JIRA::RemoteAPI
   def available_actions issue_key
     array_jira_call JIRA::NamedEntity, 'getAvailableActions', issue_key
   end
-  deprecate :available_actions
 
 end

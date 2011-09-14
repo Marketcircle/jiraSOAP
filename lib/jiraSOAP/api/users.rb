@@ -7,7 +7,6 @@ module JIRA::RemoteAPI
   def user_with_name user_name
     JIRA::User.new_with_xml jira_call( 'getUser', user_name )
   end
-  deprecate :user_with_name
 
   ##
   # It seems that creating a user without any permission groups will trigger
@@ -39,7 +38,6 @@ module JIRA::RemoteAPI
     frag = jira_call 'getGroup', group_name
     JIRA::UserGroup.new_with_xml frag
   end
-  deprecate :group_with_name
 
   # @param [JIRA::UserGroup] group
   # @param [JIRA::User] user
