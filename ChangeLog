@@ -1,7 +1,9 @@
 Version 0.10.0
 
+	* Add RemoteAPI#add_attachments_to_issue_with_key (thanks @rjharmon)
 	* Add RemoteAPI#components_for_project_with_key (thanks @rjharmon)
 
+	* Deprecate RemoteAPI#add_base64_encoded_attachments_to_issue_with_key (thanks @rjharmon)
 Version 0.9.2
 
 	* Remove unneeded httpclient dependency

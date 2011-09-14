@@ -16,13 +16,19 @@ class JIRA::Attachment < JIRA::NamedEntity
   add_attribute :file_name, 'filename', :content
 
   ##
-  # Content to be used for adding attachments, using #add_attachments_to_issue_with_key
+  # @note This method does not allow you to read the content of an existing
+  #       attachment on the issue; only the metadata for the attachment may
+  #       be read at this time.
   #
-  # Note that this method does not allow you to read the content of an existing attachment on the issue;
-  # only the metadata for the attachment may be read at this time.
+  # Content to be used for adding attachments, using
+  # {#add_attachments_to_issue_with_key}. Do _not_ base64 encode the data
+  # yourself, it will be done for you when the attachment is uploaded.
+  #
+  # However, attachment data coming from the server will come down in base64
+  # encoded format...
   #
   # @return [String]
-  add_attribute :content, nil, :content
+  attr_accessor :content
 
   # @return [String]
   add_attribute :mime_type, 'mimetype', :content

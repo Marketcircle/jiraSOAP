@@ -20,15 +20,20 @@ module JIRA::RemoteAPI
   deprecate :attachments_for_issue_with_key
 
   ##
-  # Uploads attachments to an issue using the addBase64EncodedAttachmentsToIssue SOAP method
-  # Expect this method to be slow.  Also, the metadata is not automatically refreshed by this
-  # method.  To get the updated metadata (e.g., file_size and content_type), call
-  # attachments_for_issue_with_key.
+  # @note Expect this method to be slow.
+  #
+  # Uploads attachments to an issue using the `addBase64EncodedAttachmentsToIssue`
+  # SOAP method.
+  #
+  # The metadata is not automatically refreshed by this method.  To get the
+  # updated metadata (e.g., `file_size` and `content_type`), call
+  # `attachments_for_issue_with_key`.
   #
   # @param [String] issue_key
-  # @param [Array<JIRA::Attachment>] attachments files to be uploaded.  Their :content attributes should populated with the data
+  # @param [Array<JIRA::Attachment>] attachments files to be uploaded;
+  #   their `content` attributes should populated with the data
   # @return [Boolean] true if successful
-  def add_attachments_to_issue_with_key issue_key,*attachments
+  def add_attachments_to_issue_with_key issue_key, *attachments
     invoke('soap:addBase64EncodedAttachmentsToIssue') { |msg|
       msg.add 'soap:in0', self.auth_token
       msg.add 'soap:in1', issue_key
@@ -36,12 +41,21 @@ module JIRA::RemoteAPI
         attachments.each { |attachment| submsg.add 'filenames', attachment.filename }
       end
       msg.add 'soap:in3' do |submsg|
-        attachments.each { |attachment| submsg.add 'base64EncodedData', [attachment.content].pack("m0") }
+        attachments.each { |attachment| submsg.add 'base64EncodedData', [attachment.content].pack('m0') }
       end
     }
     true
   end
 
+  ##
+  # @deprecated This will be removed in the next release (either 0.11 or 1.0)
+  #
+  # (see #add_attachments_to_issue_with_key)
+  #
+  # @param [String] issue_key
+  # @param [Array<String>] filenames array of names for attachments
+  # @param [Array<String>] data base64 encoded data for upload
+  # @return [Boolean] true if successful, otherwise an exception is raised
   def add_base64_encoded_attachments_to_issue_with_key issue_key, filenames, data
     $stderr.puts <<-EOM
 RemoteAPI#add_base64_encoded_attachments_to_issue_with_key is deprecated and will be removed in the next release.
@@ -60,6 +74,5 @@ Please use RemoteAPI#add_attachments_to_issue_with_key instead.
     }
     true
   end
-
 
 end

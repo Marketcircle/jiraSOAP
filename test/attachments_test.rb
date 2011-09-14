@@ -1,5 +1,7 @@
+require 'base64'
+
 # @note These tests will bloat up your server after a while
-class TestAddBase64EncodedAttachmentsToIssueWithKey < MiniTest::Unit::TestCase
+class TestAddAttachmentsToIssueWithKey < MiniTest::Unit::TestCase
   setup_usual
 
   def key
