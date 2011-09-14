@@ -62,7 +62,8 @@ provide a database backup in the near future if the licensing works out.
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
+  future version unintentionally. If it is difficult for you to run
+  the tests then let me know.
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but
   bump version in a commit by itself I can ignore when I pull)
