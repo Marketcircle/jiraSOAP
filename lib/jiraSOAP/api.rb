@@ -67,7 +67,7 @@ module JIRA::RemoteAPI
   # @return [Nokogiri::XML::NodeSet]
   def soap_call method, *args
     response = build method, *args
-    response .document.element/RESPONSE_XPATH
+    response .document.native_element/RESPONSE_XPATH
   end
 
   ##
