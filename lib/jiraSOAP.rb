@@ -10,7 +10,6 @@ Handsoap.http_driver = :net_http
 require 'jiraSOAP/handsoap_extensions'
 
 require 'jiraSOAP/url'
-require 'jiraSOAP/macruby_extensions' if RUBY_ENGINE == 'macruby'
 
 ##
 # All the remote entities as well as the SOAP service client.
@@ -21,3 +20,7 @@ require 'jiraSOAP/core_extensions'
 require 'jiraSOAP/entities'
 require 'jiraSOAP/api'
 require 'jiraSOAP/jira_service'
+
+if RUBY_ENGINE == 'macruby'
+  require 'jiraSOAP/macruby_extensions'
+end
