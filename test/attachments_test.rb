@@ -16,14 +16,50 @@ class TestAddAttachmentsToIssueWithKey < MiniTest::Unit::TestCase
     @image2 ||= "colemak-#{Time.now.to_f}.png"
   end
 
+  def attachment1
+    @attachment ||= JIRA::Attachment.new.tap do |x|
+      x.content   = File.read(File.join(File.dirname(__FILE__), '..', 'Rakefile'))
+      x.file_name = "Rakefile-#{Time.now.to_f}"
+    end
+  end
+
+  def attachment2
+    @attachment ||= JIRA::Attachment.new.tap do |x|
+      x.content   = File.read(File.join(File.dirname(__FILE__), '..', 'jiraSOAP.gemspec'))
+      x.file_name = "Rakefile-#{Time.now.to_f}"
+    end
+  end
+
   def test_returns_true
+    assert_equal true,
+     db.add_attachments_to_issue_with_key(key, attachment1)
+  end
+
+  def test_attachment_data_is_unaltered # for some definition of unaltered
+    skip 'Need to implement the method for getting attachments first'
+  end
+
+  def test_add_one_attachment
+    db.add_attachments_to_issue_with_key key, attachment1
+    issue = db.issue_with_key key
+    refute_nil issue.attachment_names.find { |x| x == attachment1.file_name }
+  end
+
+  def test_add_two_attachments
+    db.add_attachments_to_issue_with_key key, attachment1, attachment2
+    issue = db.issue_with_key key
+    refute_nil issue.attachment_names.find { |x| x == attachment1.file_name }
+    refute_nil issue.attachment_names.find { |x| x == attachment2.file_name }
+  end
+
+  def test_returns_true_base64
     assert_equal true,
       db.add_base64_encoded_attachments_to_issue_with_key(key,
                                                           [image1],
                                                           [switcheroo])
   end
 
-  def test_add_one_attachment
+  def test_add_one_attachment_base64
     db.add_base64_encoded_attachments_to_issue_with_key(key,
                                                         [image1],
                                                         [switcheroo])
@@ -31,11 +67,11 @@ class TestAddAttachmentsToIssueWithKey < MiniTest::Unit::TestCase
     refute_nil issue.attachment_names.find { |x| x == image1 }
   end
 
-  def test_add_two_attachments
+  def test_add_two_attachments_base64
     db.add_base64_encoded_attachments_to_issue_with_key(key,
                                                         [image1, image2],
                                                         [switcheroo, colemak])
-    issue = db.get_issue_with_key key
+    issue = db.issue_with_key key
     refute_nil issue.attachment_names.find { |x| x == image1 }
     refute_nil issue.attachment_names.find { |x| x == image2 }
   end

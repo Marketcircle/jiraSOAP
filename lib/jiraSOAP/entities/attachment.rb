@@ -1,7 +1,7 @@
 ##
 # Only contains the metadata for an attachment. The URI for an attachment
 # appears to be of the form
-# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#file_name}"
+# "{JIRA::JIRAService.endpoint_url}/secure/attachment/{#id}/{#file_name}".
 class JIRA::Attachment < JIRA::NamedEntity
 
   # @return [String]
