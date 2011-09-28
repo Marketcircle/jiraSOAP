@@ -3,8 +3,11 @@ Version 0.10.0
 	* Add RemoteAPI#add_attachments_to_issue_with_key (thanks @rjharmon)
 	* Add RemoteAPI#components_for_project_with_key (thanks @rjharmon)
 
+	* Fix a typo in RemoteAPI#progress_workflow_action (thanks Vincent Beau)
+
 	* Deprecate RemoteAPI#add_base64_encoded_attachments_to_issue_with_key (thanks @rjharmon)
 	* Remove deprecated methods from previous release
+	* Begin making the test suite public
 
 Version 0.9.2
 
