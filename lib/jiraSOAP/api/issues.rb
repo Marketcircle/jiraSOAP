@@ -147,7 +147,7 @@ module JIRA::RemoteAPI
   # @return [JIRA::Issue]
   def progress_workflow_action issue_key, action_id, *field_values
     JIRA::Issue.new_with_xml jira_call('progressWorkflowAction',
-                                       issue_key, action_id_string, field_values)
+                                       issue_key, action_id, field_values)
   end
 
   ##
