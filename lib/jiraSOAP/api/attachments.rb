@@ -29,7 +29,7 @@ module JIRA::RemoteAPI
   # {RemoteAPI#attachments_for_issue_with_key}.
   #
   # @param [String] issue_key
-  # @param [Array<JIRA::Attachment>] attachments files to be uploaded;
+  # @param [JIRA::Attachment] attachments files to be uploaded;
   #   their `content` attributes should populated with the data
   # @return [Boolean] true if successful
   def add_attachments_to_issue_with_key issue_key, *attachments
