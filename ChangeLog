@@ -1,3 +1,7 @@
+Version 0.10.1
+
+	* Fix a documentation error with the new attachments API (thanks Vincent Beau)
+
 Version 0.10.0
 
 	* Add RemoteAPI#add_attachments_to_issue_with_key (thanks @rjharmon)
