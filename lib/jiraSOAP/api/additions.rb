@@ -11,7 +11,7 @@ module JIRA::RemoteAPIAdditions
   # @param [String] name
   # @return [JIRA::Field,nil]
   def custom_field_with_name name
-    get_custom_fields.find { |cf| cf.name == name }
+    custom_fields.find { |cf| cf.name == name }
   end
 
 end
