@@ -1,3 +1,7 @@
+Version 0.10.2
+
+	* Fix RemoteAPIAdditions#custom_field_with_name (thanks @mpaclark)
+
 Version 0.10.1
 
 	* Fix a documentation error with the new attachments API (thanks Vincent Beau)
