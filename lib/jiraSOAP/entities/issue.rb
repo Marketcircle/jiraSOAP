@@ -111,7 +111,7 @@ class JIRA::Issue < JIRA::DynamicEntity
   # @param [Handsoap::XmlMason::Node] msg  message the node to add the object to
   def soapify_for msg
     # might be going away, since it appears to have no effect at creation time
-    msg.add 'reporter', @reporter_name unless @reporter.nil?
+    msg.add 'reporter', @reporter_username unless @reporter_username.nil?
 
     msg.add 'priority', @priority_id
     msg.add 'type', @type_id
