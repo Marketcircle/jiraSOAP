@@ -1,3 +1,7 @@
+Version 0.10.3
+
+	* Fix RemoteAPI#create_issue problem with setting a non-default reporter (thanks @toddtomkinson)
+
 Version 0.10.2
 
 	* Fix RemoteAPIAdditions#custom_field_with_name (thanks @mpaclark)
