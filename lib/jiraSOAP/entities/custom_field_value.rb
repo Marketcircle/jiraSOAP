@@ -16,6 +16,15 @@ class JIRA::CustomFieldValue < JIRA::DynamicEntity
   add_attribute :values, 'values', :contents_of_children
 
   ##
+  # You can optionally initialize a custom field value with new
+  #
+  # @param [String] custom_field_id
+  def initialize custom_field_id = nil, *custom_values
+    @id     = custom_field_id
+    @values = custom_values
+  end
+
+  ##
   # Generate a SOAP message fragment for the object.
   #
   # @param [Handsoap::XmlMason::Node] msg SOAP message to add the object to

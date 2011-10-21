@@ -45,7 +45,7 @@ class MiniTest::Unit::TestCase
 end
 
 
-basic  = ['login_test', 'logout_test']
+basic  = ['login_test', 'logout_test', 'custom_field_values_test']
 create = ['attachments_test']
 read   = basic + []
 update = []
