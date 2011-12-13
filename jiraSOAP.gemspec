@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'handsoap',   '~> 1.1.8'
 #  s.add_runtime_dependency 'httpclient', '~> 2.2.1'
 
-  s.add_development_dependency 'yard',      '~> 0.7.2'
+  s.add_development_dependency 'yard',      '~> 0.7.4'
   s.add_development_dependency 'redcarpet', '~> 1.17'
-  s.add_development_dependency 'minitest',  '>= 2.5'
+  s.add_development_dependency 'minitest',  '>= 2.9'
 end
