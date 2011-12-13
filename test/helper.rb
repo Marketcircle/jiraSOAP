@@ -45,21 +45,23 @@ class MiniTest::Unit::TestCase
 end
 
 
-basic  = ['login_test', 'logout_test', 'custom_field_values_test']
-create = ['attachments_test']
-read   = basic + []
-update = []
-delete = []
-all    = basic + create + read + update + delete
+offline = ['worklog_test']
+basic   = ['login_test', 'logout_test', 'custom_field_values_test', 'worklog_test']
+create  = ['attachments_test']
+read    = basic + []
+update  = []
+delete  = []
+all     = basic + create + read + update + delete
 
 # Look at environment variables to decide which tests to run
 tests = case ENV['JIRASOAP']
-when 'all'    then all
-when 'basic'  then basic
-when 'create' then create
-when 'read'   then read
-when 'update' then update
-when 'delete' then delete
+when 'all'     then all
+when 'basic'   then basic
+when 'create'  then create
+when 'read'    then read
+when 'update'  then update
+when 'delete'  then delete
+when 'offline' then offline
 else read # hmm, for safeties sake, but maybe it should be all...
 end
 tests.each do |test| require test end
