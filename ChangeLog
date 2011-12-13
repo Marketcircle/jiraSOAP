@@ -1,3 +1,7 @@
+Version 0.10.4
+
+	* Fix JIRA::Worklog#start_date typo (was start_data) (thanks @FDj)
+
 Version 0.10.3
 
 	* Fix RemoteAPI#create_issue problem with setting a non-default reporter (thanks @toddtomkinson)
