@@ -5,17 +5,9 @@ task :default => :test
 
 ### MACRUBY BONUSES
 
-if RUBY_ENGINE == 'macruby' and MACRUBY_REVISION.match(/^git commit/)
+if RUBY_ENGINE == 'macruby'
   require 'rake/compiletask'
-  Rake::CompileTask.new do |t|
-    t.files = FileList["lib/**/*.rb"]
-    t.verbose = true
-  end
-
-  desc 'Clean MacRuby binaries'
-  task :clean do
-    FileList["lib/**/*.rbo"].each { |bin| rm bin }
-  end
+  Rake::CompileTask.new
 end
 
 
