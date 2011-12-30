@@ -48,8 +48,8 @@ class JIRA::JIRAService < Handsoap::Service
   def initialize endpoint
     @@endpoint_url = @endpoint_url = endpoint.to_s
     self.class.endpoint({
-      uri:"#{endpoint_url}/rpc/soap/jirasoapservice-v2",
-      version:2
+      :uri => "#{endpoint_url}/rpc/soap/jirasoapservice-v2",
+      :version => 2
     })
   end
 
