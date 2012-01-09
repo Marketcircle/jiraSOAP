@@ -1,3 +1,7 @@
+Version 0.10.5
+
+	* Make jiraSOAP compatible with Ruby 1.8.7+ (thanks @wapcaplet)
+
 Version 0.10.4
 
 	* Fix JIRA::Worklog#start_date typo (was start_data) (thanks @FDj)
