@@ -51,7 +51,7 @@ create  = ['attachments_test']
 read    = basic + []
 update  = []
 delete  = []
-all     = basic + create + read + update + delete
+all     = basic + create + read + update + delete + offline
 
 # Look at environment variables to decide which tests to run
 tests = case ENV['JIRASOAP']
