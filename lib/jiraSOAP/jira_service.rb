@@ -34,7 +34,7 @@ class JIRA::JIRAService < Handsoap::Service
   ##
   # Initialize _and_ log in. Fancy.
   #
-  # @param [String,URL] url URL for the JIRA server
+  # @param [String,URI::HTTP,NSURL] url URL for the JIRA server
   # @param [String] user JIRA user name to login with
   # @param [String] password
   # @return [JIRA::JIRAService]
