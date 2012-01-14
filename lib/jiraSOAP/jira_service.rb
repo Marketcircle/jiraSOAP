@@ -55,7 +55,7 @@ class JIRA::JIRAService < Handsoap::Service
   # @return [JIRA::JIRAService]
   def self.instance_with_token url, user, token
     obj = allocate
-    obj.initialize_with_token url, token
+    obj.initialize_with_token url, user, token
     obj
   end
 

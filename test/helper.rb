@@ -45,7 +45,7 @@ class MiniTest::Unit::TestCase
 end
 
 
-offline = ['worklog_test']
+offline = ['worklog_test', 'service_test']
 basic   = ['login_test', 'logout_test', 'custom_field_values_test', 'worklog_test']
 create  = ['attachments_test']
 read    = basic + []
