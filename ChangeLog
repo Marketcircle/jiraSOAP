@@ -1,3 +1,7 @@
+Version 0.10.6
+
+	* Add JIRAService.instance_with_token
+
 Version 0.10.5
 
 	* Make jiraSOAP compatible with Ruby 1.8.7+ (thanks @wapcaplet)
