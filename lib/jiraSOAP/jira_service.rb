@@ -44,6 +44,21 @@ class JIRA::JIRAService < Handsoap::Service
     jira
   end
 
+  ##
+  # Create an instance with an existing authorization token. In cases
+  # where you have cached the auth token elsewhere, you can avoid having
+  # to login again by initializing the instance with the token.
+  #
+  # @param [String,URI::HTTP,NSURL]
+  # @param [String]
+  # @param [String]
+  # @return [JIRA::JIRAService]
+  def self.instance_with_token url, user, token
+    obj = allocate
+    obj.initialize_with_token url, token
+    obj
+  end
+
   # @param [String,URI::HTTP,NSURL] endpoint for the JIRA server
   def initialize endpoint
     @@endpoint_url = @endpoint_url = endpoint.to_s
@@ -51,6 +66,18 @@ class JIRA::JIRAService < Handsoap::Service
       :uri => "#{endpoint_url}/rpc/soap/jirasoapservice-v2",
       :version => 2
     })
+  end
+
+  ##
+  # Special constructor meant for
+  #
+  # @param [String,URI::HTTP,NSURL]
+  # @param [String]
+  # @param [String]
+  def initialize_with_token endpoint, user, token
+    initialize endpoint
+    @user       = user
+    @auth_token = token
   end
 
 
