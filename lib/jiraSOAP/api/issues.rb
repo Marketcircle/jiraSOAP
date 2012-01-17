@@ -100,6 +100,14 @@ module JIRA::RemoteAPI
   def create_issue_with_issue issue
     JIRA::Issue.new_with_xml jira_call( 'createIssue', issue )
   end
+  
+  # @param [JIRA::Issue] issue
+  # @param [String] parent id
+  # @return [JIRA:Issue]
+
+  def create_issue_with_parent issue, parent
+    JIRA::Issue.new_with_xml jira_call('createIssueWithParent', issue, parent)
+  end
 
   # @param [String] issue_key
   # @return [JIRA::Issue]
