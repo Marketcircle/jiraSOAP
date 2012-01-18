@@ -3,13 +3,13 @@ module JIRA::RemoteAPI
   # @group Issues
 
   ##
-  # This method is the equivalent of making an advanced search from the
-  # web interface.
+  # @note During my own testing, I found that HTTP requests could timeout
+  #       for really large requests (~2500 results) if you are not on the
+  #       same network. So I set a more reasonable upper limit; feel free
+  #       to override it, but be aware of the potential issues.
   #
-  # During my own testing, I found that HTTP requests could timeout for really
-  # large requests (~2500 results) if you are not on the same network. So I set
-  # a more reasonable upper limit; feel free to override it, but be aware of
-  # the potential issues.
+  # This method is the equivalent of making an advanced search from the web
+  # interface.
   #
   # The {JIRA::Issue} structure does not include any comments or attachments.
   #
