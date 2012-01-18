@@ -72,6 +72,6 @@ provide a database backup in the near future if the licensing works out.
 
 ## License
 
-Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010-2011
+Copyright: [Marketcircle Inc.](http://www.marketcircle.com/), 2010-2012
 
 See LICENSE.txt for details.
