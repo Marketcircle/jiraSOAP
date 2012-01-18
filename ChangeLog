@@ -1,3 +1,7 @@
+Version 0.10.7
+
+	* Add RemoteAPI#issue_with_parent (thanks @softwarealliesadmin)
+
 Version 0.10.6
 
 	* Add JIRAService.instance_with_token
