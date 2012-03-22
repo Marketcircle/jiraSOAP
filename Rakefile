@@ -17,9 +17,9 @@ require 'rake/gempackagetask'
 spec = Gem::Specification.load 'jiraSOAP.gemspec'
 Rake::GemPackageTask.new(spec) { }
 
-require 'rubygems/dependency_installer'
 desc 'Build the gem and install it'
 task :install => :gem do
+  require 'rubygems/dependency_installer'
   Gem::DependencyInstaller.new.install "pkg/#{spec.file_name}"
 end
 
