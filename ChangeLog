@@ -1,3 +1,8 @@
+Version 0.10.8
+
+	* Fix RemoteAPI#add_worklog_and_auto_adjust_remaining_estimate (thanks @justfalter)
+	* Make JIRA::Worklog#start_date return a Time object instead of a DateTime object (thanks @justfalter)
+
 Version 0.10.7
 
 	* Add RemoteAPI#issue_with_parent (thanks @softwarealliesadmin)
