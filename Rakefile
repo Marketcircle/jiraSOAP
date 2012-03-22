@@ -13,9 +13,9 @@ end
 
 ### GEM STUFF
 
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 spec = Gem::Specification.load 'jiraSOAP.gemspec'
-Rake::GemPackageTask.new(spec) { }
+Gem::PackageTask.new(spec) { }
 
 desc 'Build the gem and install it'
 task :install => :gem do
