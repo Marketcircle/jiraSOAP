@@ -5,12 +5,6 @@ class JIRA::Worklog < JIRA::DescribedEntity
   # @return [String]
   add_attribute :comment, 'comment', :content
 
-  ##
-  # @todo Why does this need to be a DateTime? It should be a Time object
-  #       so that it can be compatible with Cocoa's NSDate on MacRuby.
-  #
-  # Needs to be a DateTime.
-  #
   # @return [Time]
   add_attribute :start_date, 'startDate', :to_iso_date
 
