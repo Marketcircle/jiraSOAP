@@ -1,5 +1,4 @@
-$LOAD_PATH.unshift File.join( File.dirname(__FILE__), 'lib')
-require 'jiraSOAP/version'
+require './lib/jiraSOAP/version'
 
 Gem::Specification.new do |s|
   s.name    = 'jiraSOAP'
@@ -26,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'handsoap',   '~> 1.1.8'
 #  s.add_runtime_dependency 'httpclient', '~> 2.2.1'
 
-  s.add_development_dependency 'yard',      '~> 0.7.4'
+  s.add_development_dependency 'yard',      '~> 0.7.5'
   s.add_development_dependency 'redcarpet', '~> 1.17'
-  s.add_development_dependency 'minitest',  '>= 2.10'
+  s.add_development_dependency 'minitest',  '~> 2.11'
 end
