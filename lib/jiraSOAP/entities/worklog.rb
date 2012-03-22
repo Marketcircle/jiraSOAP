@@ -11,7 +11,7 @@ class JIRA::Worklog < JIRA::DescribedEntity
   #
   # Needs to be a DateTime.
   #
-  # @return [DateTime]
+  # @return [Time]
   add_attribute :start_date, 'startDate', :to_iso_date
 
   # @return [String]
