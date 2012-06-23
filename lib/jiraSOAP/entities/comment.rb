@@ -44,9 +44,9 @@ class JIRA::Comment < JIRA::DynamicEntity
     msg.add 'id', @id
     msg.add 'author', @author
     msg.add 'body', @body
-    msg.add 'groupLevel', @group_level
-    msg.add 'roleLevel', @role_level
-    msg.add 'updateAuthor', @update_author
+    msg.add 'groupLevel', @group_level if @group_level
+    msg.add 'roleLevel', @role_level if @role_level
+    msg.add 'updateAuthor', @update_author if @update_author
   end
 
 end
