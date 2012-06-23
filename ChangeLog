@@ -1,3 +1,7 @@
+Version 0.10.9
+
+	* Fix including nil comment fields in new comments [GH-19] (thanks @idris)
+
 Version 0.10.8
 
 	* Fix RemoteAPI#add_worklog_and_auto_adjust_remaining_estimate (thanks @justfalter)
