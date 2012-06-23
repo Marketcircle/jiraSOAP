@@ -55,9 +55,9 @@ class JIRA::Entity
   end
 
   # @param [Nokogiri::XML::Element] element
-  def initialize_with_xml frag
+  def initialize_with_xml element
     attributes = self.class.parse
-    frag.children.each { |node|
+    element.children.each { |node|
       action = attributes[node.name]
       self.send action[0], (node.send *action[1..-1]) if action
       #puts "Action is #{action.inspect} for #{node.node_name}"

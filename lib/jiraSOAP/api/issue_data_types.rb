@@ -22,7 +22,7 @@ module JIRA::RemoteAPI
     array_jira_call JIRA::IssueType, 'getIssueTypes'
   end
 
-  # @param [String] project_name
+  # @param [String] project_id
   # @return [Array<JIRA::IssueType>]
   def issue_types_for_project_with_id project_id
     array_jira_call JIRA::IssueType, 'getIssueTypesForProject', project_id

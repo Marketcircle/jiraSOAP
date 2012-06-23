@@ -78,7 +78,7 @@ module JIRA::RemoteAPI
   #   jira.update_issue 'PROJECT-1', field
   #
   # @param [String] issue_key
-  # @param [JIRA::FieldValue] *field_values
+  # @param [JIRA::FieldValue] field_values
   # @return [JIRA::Issue]
   def update_issue issue_key, *field_values
     JIRA::Issue.new_with_xml jira_call('updateIssue', issue_key, field_values)
@@ -151,7 +151,7 @@ module JIRA::RemoteAPI
   #
   # @param [String] issue_key
   # @param [String] action_id this is the id of workflow action
-  # @param [JIRA::FieldValue] *field_values
+  # @param [JIRA::FieldValue] field_values
   # @return [JIRA::Issue]
   def progress_workflow_action issue_key, action_id, *field_values
     JIRA::Issue.new_with_xml jira_call('progressWorkflowAction',

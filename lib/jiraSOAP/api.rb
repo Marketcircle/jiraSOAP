@@ -11,7 +11,7 @@ module JIRA::RemoteAPI
   ##
   # The first method to call; other methods will fail until you are logged in.
   #
-  # @param [String] user JIRA user name to login with
+  # @param [String] username JIRA user name to login with
   # @param [String] password
   # @return [String] auth_token if successful, otherwise raises an exception
   def login username, password
@@ -48,7 +48,7 @@ module JIRA::RemoteAPI
   # the arguments.
   #
   # @param [String] method name of the JIRA SOAP API method
-  # @param [Object] *args the arguments for the method, excluding the
+  # @param [Object] args the arguments for the method, excluding the
   #   authentication token
   # @return [Handsoap::Response]
   def build method, *args
@@ -74,7 +74,7 @@ module JIRA::RemoteAPI
   # A simple call, for methods that will return a single object.
   #
   # @param [String] method
-  # @param [Object] *args
+  # @param [Object] args
   # @return [Nokogiri::XML::Element]
   def jira_call method, *args
     response = soap_call method, self.auth_token, *args
@@ -85,8 +85,9 @@ module JIRA::RemoteAPI
   # A more complex form of {#jira_call} that does a little more work for
   # you when you need to build an array of return values.
   #
+  # @param [#new_with_xml] type a {JIRA::Entity} subclass
   # @param [String] method name of the JIRA SOAP API method
-  # @param [Object] *args the arguments for the method, excluding the
+  # @param [Object] args the arguments for the method, excluding the
   #   authentication token
   # @return [Nokogiri::XML::NodeSet]
   def array_jira_call type, method, *args

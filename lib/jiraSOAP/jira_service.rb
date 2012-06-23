@@ -49,9 +49,9 @@ class JIRA::JIRAService < Handsoap::Service
   # where you have cached the auth token elsewhere, you can avoid having
   # to login again by initializing the instance with the token.
   #
-  # @param [String,URI::HTTP,NSURL]
-  # @param [String]
-  # @param [String]
+  # @param [String,URI::HTTP,NSURL] url
+  # @param [String] user
+  # @param [String] token
   # @return [JIRA::JIRAService]
   def self.instance_with_token url, user, token
     obj = allocate
@@ -71,9 +71,9 @@ class JIRA::JIRAService < Handsoap::Service
   ##
   # Special constructor meant for
   #
-  # @param [String,URI::HTTP,NSURL]
-  # @param [String]
-  # @param [String]
+  # @param [String,URI::HTTP,NSURL] endpoint
+  # @param [String] user
+  # @param [String] token
   def initialize_with_token endpoint, user, token
     initialize endpoint
     @user       = user

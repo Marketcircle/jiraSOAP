@@ -28,7 +28,7 @@ module JIRA::RemoteAPI
     JIRA::Comment.new_with_xml jira_call( 'editComment', comment )
   end
 
-  # @param [JIRA::Comment]
+  # @param [JIRA::Comment] comment
   def permission_to_edit_comment? comment
     jira_call( 'hasPermissionToEditComment', comment ).to_boolean
   end
