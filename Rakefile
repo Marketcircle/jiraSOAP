@@ -5,7 +5,7 @@ task :default => :test
 
 ### MACRUBY BONUSES
 
-if RUBY_ENGINE == 'macruby'
+if defined? RUBY_ENGINE && RUBY_ENGINE == 'macruby'
   require 'rake/compiletask'
   Rake::CompileTask.new
 end

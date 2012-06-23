@@ -21,6 +21,6 @@ require 'jiraSOAP/entities'
 require 'jiraSOAP/api'
 require 'jiraSOAP/jira_service'
 
-if RUBY_ENGINE == 'macruby'
+if defined? RUBY_ENGINE && RUBY_ENGINE == 'macruby'
   require 'jiraSOAP/macruby_extensions'
 end
